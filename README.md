@@ -2,9 +2,13 @@
 Projet long de Technologie Objetc et de méthodes agiles.
 
 
-
-
 ## Tutoriels
+
+### checkstyle 
+Script bash : 
+```
+./checkstyle.sh
+```
 
 ### Git
 
