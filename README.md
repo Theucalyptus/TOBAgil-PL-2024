@@ -9,6 +9,10 @@ Script bash :
 ```
 ./checkstyle.sh
 ```
+Script bash pour générer / raffraichir la documentation javadoc du projet
+```
+./generateur_doc_java.sh
+```
 
 ### Git
 
