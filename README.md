@@ -1,10 +1,13 @@
 # TOBAgil-PL-2024
 Projet long de Technologie Objetc et de méthodes agiles.
 
+Pour lancer le projet, utiliser le script suivant:
+```./build_and_run.sh```
+Si vous avez des erreurs, contacter Antoine.
 
 ## Tutoriels
 
-### checkstyle 
+### checkstyle & Documentation
 Script bash : 
 ```
 ./checkstyle.sh
