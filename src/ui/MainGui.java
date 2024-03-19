@@ -1,3 +1,5 @@
+package ui;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.*;
@@ -6,28 +8,18 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-
 public class MainGui {
 
     private static final String NOM = "SmallWorld";
 
-    public MainGui() throws IOException {
+    public MainGui() {
         JFrame fenetre = new JFrame(NOM);
         Container contenu = fenetre.getContentPane();
         contenu.setLayout(new BorderLayout());
 
-        
-        // MENU DU HAUT
-        JPanel haut = new JPanel(new FlowLayout());
-        contenu.add(haut, BorderLayout.NORTH);
-        JLabel txt1 = new JLabel("Information 1");
-        haut.add(txt1);
-        JLabel txt2 = new JLabel("Information 2");
-        txt2.setFont(txt2.getFont().deriveFont(18f));
-        haut.add(txt2);
-        JLabel txt3 = new JLabel("Information 3");
-        haut.add(txt3);
-        
+        TexteIcon test = new TexteIcon(new File("../assets/icon.png"), "Texte demo");
+        contenu.add(test, BorderLayout.NORTH);
+
         // MENU DU BAS
         JPanel bas = new JPanel(new FlowLayout());
         contenu.add(bas, BorderLayout.SOUTH);
@@ -45,9 +37,13 @@ public class MainGui {
 
 
         // CENTRE
-        BufferedImage myPicture = ImageIO.read(new File("../assets/board.jpg"));
-        JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-        contenu.add(picLabel, BorderLayout.CENTER);
+        try {
+            BufferedImage myPicture = ImageIO.read(new File("../assets/board.jpg"));
+            JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+            contenu.add(picLabel, BorderLayout.CENTER);
+        } catch (IOException e) {
+            throw new RuntimeException("Unhandled IOException MainGUI");
+        }
     
         fenetre.pack();
         fenetre.setVisible(true);
