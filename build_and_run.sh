@@ -3,7 +3,9 @@
 cd src/
 
 echo "BUILD"
-javac MainGui.java
+cd ui
+javac *.java
+cd ..
 javac Smallworld.java
 echo "BUILD DONE"
 

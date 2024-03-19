@@ -1,15 +1,12 @@
-import java.io.IOException;
+import ui.MainGui;
 
 public class Smallworld {
 
     public static void main(String[] args) {
 
-        System.out.println("Hello, World!");
-        try {
-            new MainGui();
-        } catch (IOException e) {
-            System.out.println("Une erreur d'IO est survenue.");
-        }
+        System.out.println("Lancement GUI");
+        new MainGui();
+        System.out.println("GUI lancée");
 
     }
 }
