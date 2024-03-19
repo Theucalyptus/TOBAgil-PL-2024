@@ -6,7 +6,10 @@ echo "BUILD"
 cd ui
 javac *.java
 cd ..
-javac Smallworld.java
+cd jeu
+javac *.java
+cd ..
+javac *.java
 echo "BUILD DONE"
 
 echo "RUN"

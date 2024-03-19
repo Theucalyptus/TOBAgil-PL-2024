@@ -14,36 +14,18 @@ public class MainGui {
 
     public MainGui() {
         JFrame fenetre = new JFrame(NOM);
+
+        //JMenuBar monMenu = new JMenuBar();
+
         Container contenu = fenetre.getContentPane();
         contenu.setLayout(new BorderLayout());
 
-        TexteIcon test = new TexteIcon(new File("../assets/icon.png"), "Texte demo");
-        contenu.add(test, BorderLayout.NORTH);
+        contenu.add(new MainBotttomBar(), BorderLayout.SOUTH);
+        contenu.add(new MainTopBar(), BorderLayout.NORTH);
 
-        // MENU DU BAS
-        JPanel bas = new JPanel(new FlowLayout());
-        contenu.add(bas, BorderLayout.SOUTH);
-        JButton btn1 = new JButton("Bouton 1");
-        btn1.addActionListener(ev -> {
-            actionBouton();
-        });
-        bas.add(btn1);
-        JButton btn2 = new JButton("Bouton 2");
-        bas.add(btn2);
-        JButton btn3 = new JButton("Bouton 3");
-        bas.add(btn3);
+        MainMondeView mondeView = new MainMondeView();
+        contenu.add(mondeView, BorderLayout.CENTER);
 
-
-
-
-        // CENTRE
-        try {
-            BufferedImage myPicture = ImageIO.read(new File("../assets/board.jpg"));
-            JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-            contenu.add(picLabel, BorderLayout.CENTER);
-        } catch (IOException e) {
-            throw new RuntimeException("Unhandled IOException MainGUI");
-        }
     
         fenetre.pack();
         fenetre.setVisible(true);

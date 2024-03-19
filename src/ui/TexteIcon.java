@@ -15,6 +15,7 @@ public class TexteIcon extends JPanel {
     private JLabel imgLabel;
 
     public TexteIcon(File iconFile, String texte) {
+        super();
         super.setLayout(this.layout);
 
         this.textLabel = new JLabel(texte);
