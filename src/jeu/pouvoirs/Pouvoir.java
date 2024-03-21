@@ -1,11 +1,11 @@
-package jeu;
+package jeu.pouvoirs;
 
 /**
  * Classe abstraite représentant un pouvoir.
  * Abstraite car non instantiable
  * mais mutualisation de code
  */
-abstract class Pouvoir {
+public abstract class Pouvoir {
 
     private String nom;
     private String description;

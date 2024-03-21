@@ -1,4 +1,4 @@
-package jeu;
+package jeu.peuples;
 
 public enum TypesPeuples {
     AMAZONES,

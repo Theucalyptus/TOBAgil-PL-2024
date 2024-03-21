@@ -1,19 +1,19 @@
-package jeu;
+package jeu.pouvoirs;
 
 public enum TypesPouvoirs {
     ALCHIMISTES,
     ANCESTRAUX,
     ARMES,
-    AUXDEUXHEROS,
+    AUX_DEUX_HEROS,
     BATISSEURS,
     BERSERKS,
-    DESCAVERNES,
-    DESCOLINES,
-    DESFORETS,
-    DESMARAIS,
+    DES_CAVERNES,
+    DES_COLINES,
+    DES_FORETS,
+    DES_MARAIS,
     DIPLOMATES,
-    DURSACUIRE,
-    ETLEURDRAGON,
+    DURS_A_CUIRE,
+    ET_LEUR_DRAGON,
     FORTUNES,
     MARCHANDS,
     MARINS,

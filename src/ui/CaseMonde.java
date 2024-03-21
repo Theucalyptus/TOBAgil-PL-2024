@@ -13,14 +13,14 @@ import java.awt.event.ComponentEvent;
 public class CaseMonde extends JPanel {
     private Image bgImage;
     private JLabel bgLabel;
-    private Image ovImage;
+    //private Image ovImage;
     private JLabel ovLabel;
 
     public CaseMonde(TypesRegions typeCase, int x, int y) {
         super();
         super.setLayout(new OverlayLayout(this));;
         
-        super.setBorder(BorderFactory.createMatteBorder(5, 4, 3, 0, Color.WHITE));
+        super.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.WHITE));
 
 
         this.bgImage = ImageFactory.regionImage(typeCase);
@@ -29,7 +29,6 @@ public class CaseMonde extends JPanel {
         //this.ovImage = ...;
         this.ovLabel = new JLabel();
         if(true) {
-            System.out.println("TEST");
             this.ovLabel.setText("Overlay");
         }
         super.add(this.ovLabel);

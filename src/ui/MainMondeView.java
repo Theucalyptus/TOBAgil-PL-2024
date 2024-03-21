@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +13,8 @@ import jeu.TypesRegions;
 
 public class MainMondeView extends JPanel {
 
-    public final static int NbLignes = 4;
-    public final static int NbColonnes = 8;
+    public final static int NbLignes = 5;
+    public final static int NbColonnes = 9;
 
     private GridLayout layout;
     private List<CaseMonde> cases;

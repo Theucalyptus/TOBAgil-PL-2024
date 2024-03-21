@@ -10,8 +10,6 @@ public class MainGui {
     public MainGui() {
         JFrame fenetre = new JFrame(NOM);
 
-        //JMenuBar monMenu = new JMenuBar();
-
         Container contenu = fenetre.getContentPane();
         contenu.setLayout(new BorderLayout());
 
@@ -25,10 +23,6 @@ public class MainGui {
         fenetre.pack();
         fenetre.setVisible(true);
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
-    public void actionBouton() {
-        System.out.println("Bouton 1 cliqué !");
     }
 
 }

@@ -1,18 +1,18 @@
-package jeu;
+package jeu.peuples;
 
 /**
- * Classe abstraite représentant un pouvoir.
+ * Classe abstraite représentant un peuple.
  * Abstraite car non instantiable
  * mais mutualisation de code
  */
-abstract class Peuple {
+public abstract class Peuple {
 
     private String nom;
     private String description;
     private final TypesPeuples type;
 
-    public Peuple(TypesPeuples pouv, String nom, String description) {
-        this.type = pouv;
+    public Peuple(TypesPeuples peuple, String nom, String description) {
+        this.type = peuple;
         this.nom = nom;
         this.description = description;
     }
