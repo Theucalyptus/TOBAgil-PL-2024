@@ -6,6 +6,8 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -14,18 +16,34 @@ public class MainMondeView extends JPanel {
     public class CaseMonde extends JLabel {
         private int coordX;
         private int coordY;
+        private Image image;
 
-        private CaseMonde(BufferedImage image, int x, int y) {
+        private CaseMonde(Image image, int x, int y) {
             super(new ImageIcon(image));
+            this.image = image;
             this.coordX = x;
             this.coordY = y;
+
+            super.addComponentListener(new ComponentAdapter() {
+                public void componentResized(ComponentEvent ev) {
+                    CaseMonde maCase = (CaseMonde)ev.getSource();
+                    maCase.resizeIcon();
+                    
+                }
+            });
+        }
+
+        private void resizeIcon() {
+            System.out.println("RESIZE CALLED");
+            this.image = this.image.getScaledInstance(this.getWidth(), this.getHeight(), java.awt.Image.SCALE_SMOOTH);
+            super.setIcon(new ImageIcon(this.image));
         }
     }
 
     public CaseMonde creerCase(int x, int y, Boolean isTerre) {
         String path = "../assets/" + (isTerre ? "soil.png" : "water.png");
         try {
-            BufferedImage myPicture = ImageIO.read(new File(path));
+            Image myPicture = new ImageIcon(path).getImage();
             return new CaseMonde(myPicture, x, y);
         } catch (Exception e) {
             System.out.println("zehjfozjfez");
