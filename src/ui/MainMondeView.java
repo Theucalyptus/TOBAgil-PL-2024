@@ -3,13 +3,10 @@ package ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 
 public class MainMondeView extends JPanel {
     
@@ -34,9 +31,9 @@ public class MainMondeView extends JPanel {
         }
 
         private void resizeIcon() {
-            System.out.println("RESIZE CALLED");
-            this.image = this.image.getScaledInstance(this.getWidth(), this.getHeight(), java.awt.Image.SCALE_SMOOTH);
-            super.setIcon(new ImageIcon(this.image));
+            //System.out.println("RESIZE CALLED");
+            Image imageTemp = this.image.getScaledInstance(this.getWidth(), this.getHeight(), java.awt.Image.SCALE_FAST);
+            super.setIcon(new ImageIcon(imageTemp));
         }
     }
 
@@ -46,7 +43,7 @@ public class MainMondeView extends JPanel {
             Image myPicture = new ImageIcon(path).getImage();
             return new CaseMonde(myPicture, x, y);
         } catch (Exception e) {
-            System.out.println("zehjfozjfez");
+            System.out.println("io err creerCase");
             throw new RuntimeException();
         }
     }    

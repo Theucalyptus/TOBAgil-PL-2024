@@ -1,18 +1,25 @@
 #!/usr/bin/bash
 
-cd src/
 
-echo "BUILD"
-cd ui
-javac *.java
-cd ..
-cd jeu
-javac *.java
-cd ..
-javac *.java
-echo "BUILD DONE"
+function clean() {
+    cd src/
+    echo "NETTOYAGE"
+    find . | grep .class | xargs -r rm
+    cd ..
+}
 
-echo "RUN"
-java Smallworld
-cd ..
-echo "DONE"
+function build() {
+    cd src/
+    javac Smallworld.java
+    cd ..
+}
+
+function run() {
+    cd src/
+    java Smallworld
+    cd ..
+}
+
+clean
+build && 
+run
