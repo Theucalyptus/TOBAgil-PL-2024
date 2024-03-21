@@ -1,0 +1,24 @@
+package jeu;
+
+public enum TypesPouvoirs {
+    ALCHIMISTES,
+    ANCESTRAUX,
+    ARMES,
+    AUXDEUXHEROS,
+    BATISSEURS,
+    BERSERKS,
+    DESCAVERNES,
+    DESCOLINES,
+    DESFORETS,
+    DESMARAIS,
+    DIPLOMATES,
+    DURSACUIRE,
+    ETLEURDRAGON,
+    FORTUNES,
+    MARCHANDS,
+    MARINS,
+    MONTES,
+    PILLARDS,
+    SCOUTS,
+    VOLANTS
+}
