@@ -1,21 +1,5 @@
 #!/usr/bin/bash
 
-<<<<<<< HEAD
-cd src/
-
-echo "BUILD"
-cd ui
-javac *.java
-cd ..
-javac Smallworld.java
-echo "BUILD DONE"
-
-echo "RUN"
-java Smallworld
-cd ..
-echo "DONE"
-=======
-
 function clean() {
     cd src/
     echo "NETTOYAGE"
@@ -44,4 +28,3 @@ function run() {
 clean
 build && 
 run
->>>>>>> 12e12bec36e8acd8033a3612fddb48cada3d5c59
