@@ -1,4 +1,4 @@
-package jeu.SWException;
+package jeu.exceptions;
 
 /**Exception qui est levé si les mouvements proposés par le Joueurs ne sont pas
  * valable.

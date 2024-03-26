@@ -1,4 +1,4 @@
-package jeu.SWException;
+package jeu.exceptions;
 
 /**Exception qui est levé quand le joueur tente de tricher. */
 public class OperationInterditeException extends RuntimeException {

@@ -3,5 +3,6 @@ package jeu;
 public enum TypesSymboles {
     CAVERNES,
     MINE,
-    SOURCE_EMAGIQUE
+    SOURCE_EMAGIQUE,
+    AUCUN
 }
