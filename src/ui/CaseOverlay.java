@@ -16,11 +16,14 @@ public class CaseOverlay extends JPanel {
     private final JLabel pionsLbl;
     private final JLabel constructionLbl;
 
-    private final static GridLayout layout  = new GridLayout(2, 1);
+    private final static GridLayout layout = new GridLayout(2, 2);
 
     public CaseOverlay(CaseMonde parent) {
         super();
-        
+        // pour que l'overlay ne soit pas en cascade mais bien juste au dessus
+        super.setAlignmentX(0);
+        super.setLayout(layout);
+    
         
         this.pionsLbl = new JLabel();
         this.pionsLbl.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -33,8 +36,9 @@ public class CaseOverlay extends JPanel {
 
         super.add(this.pionsLbl);
         super.add(this.constructionLbl);
-        super.setOpaque(false);
 
+
+        super.setOpaque(false);
     }
 
 
@@ -42,8 +46,6 @@ public class CaseOverlay extends JPanel {
      * Met à jour l'overlay d'une case en fonction des caractéristiques de la case sous-jacante.
      */
     public void updateOverlay() {
-
-        System.out.println("Update overlay");
 
         // @TODO à changer par un truc qui récup les infos depuis la case
         int numberPions = new Random().nextInt(15);
