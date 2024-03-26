@@ -6,20 +6,20 @@ import java.util.List;
 /**
  * Classe représentant une partie de jeu.
  */
-public class SWGame implements SWJeuInterface {
+public class JeuReel implements Jeu {
 
-    private List<SWJoueur> joueurs;
-    private SWMonde monde;              // Le plateau du monde
+    private List<Joueur> joueurs;
+    private Monde monde;              // Le plateau du monde
 
     // Indique si la partie est encore (pas commencée ou pas finies).
     private Boolean enCours = false;
 
-    public SWGame() {
+    public JeuReel() {
         this.joueurs = new ArrayList<>();
-        this.monde = new SWMonde();
+        this.monde = new Monde();
     }
 
-    public void ajouterJoueur(SWJoueur joueur) {
+    public void ajouterJoueur(Joueur joueur) {
         this.joueurs.add(joueur);
     }
 

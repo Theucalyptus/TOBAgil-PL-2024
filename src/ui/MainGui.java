@@ -3,11 +3,13 @@ package ui;
 import java.awt.*;
 import javax.swing.*;
 
+import jeu.Jeu;
+
 public class MainGui {
 
     private static final String NOM = "SmallWorld";
 
-    public MainGui() {
+    public MainGui(Jeu jeu) {
         JFrame fenetre = new JFrame(NOM);
 
         Container contenu = fenetre.getContentPane();

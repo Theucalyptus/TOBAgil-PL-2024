@@ -1,14 +1,18 @@
 package jeu;
 
-import SWexception.OperationInterditeException;
+import exceptions.OperationInterditeException;
 
 /**Le proxy du jeu pour éviter toute tentative de triche de la part des joueurs */
-public class SWProxy implements SWJeuInterface {
+public class JeuProxy implements Jeu {
     
     /**L'implématation du jeu */
-    final private SWGame impl = new SWGame();
+    final private Jeu impl;
 
-    public void ajouterJoueur(SWJoueur joueur) {
+    public JeuProxy(Jeu jeu) {
+        this.impl = jeu;
+    }
+
+    public void ajouterJoueur(Joueur joueur) {
         throw new OperationInterditeException(
             "Un joueur n'a pas le droit d'ajouter un joueur à la partie");
     }

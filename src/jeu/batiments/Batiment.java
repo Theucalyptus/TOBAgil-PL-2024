@@ -1,6 +1,6 @@
-package jeu.batiment;
+package jeu.batiments;
 
-public interface SWBatiment {
+public interface Batiment {
     /**
      * Renvoie l'action que génére le batiment sur le revenue de la Tuile.
      * @return Le nombre de pièce a ajouter afin de réaliser 

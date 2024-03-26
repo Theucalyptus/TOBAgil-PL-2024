@@ -1,4 +1,5 @@
 import ui.MainGui;
+import jeu.JeuReel;
 import ui.ClasseSelectionMenu;;
 
 public class Smallworld {
@@ -7,7 +8,7 @@ public class Smallworld {
 
         System.out.println("Lancement GUI");
         new ClasseSelectionMenu();
-        new MainGui();
+        new MainGui(new JeuReel());
         System.out.println("GUI lancée");
 
     }

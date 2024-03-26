@@ -1,6 +1,6 @@
 package jeu;
 
-public class SWJoueur {
+public class Joueur {
     private final String nom = "Nom Joueur";
     // classe
     // ...
