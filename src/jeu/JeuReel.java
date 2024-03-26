@@ -23,4 +23,8 @@ public class JeuReel implements Jeu {
         this.joueurs.add(joueur);
     }
 
+    public Monde getMonde() {
+        return this.monde;
+    }
+
 }

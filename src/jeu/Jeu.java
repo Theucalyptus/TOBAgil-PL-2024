@@ -8,4 +8,10 @@ public interface Jeu {
      * @param joueur Le joueur qui rentre dans le jeu.
      */
     void ajouterJoueur(Joueur joueur);
+
+    /**
+     * Renvoie le monde de la partie (la grille)
+     * @return le monde de la partie
+     */
+    Monde getMonde();
 }

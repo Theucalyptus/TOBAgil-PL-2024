@@ -16,4 +16,8 @@ public class JeuProxy implements Jeu {
         throw new OperationInterditeException(
             "Un joueur n'a pas le droit d'ajouter un joueur à la partie");
     }
+
+    public Monde getMonde() {
+        return this.impl.getMonde();
+    }
 }
