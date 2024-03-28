@@ -1,5 +1,8 @@
 package jeu.peuples;
 
+/**Classe d'implémantation du peuple de la tribu oubliée, la tribu
+ * présente sur la carte au début de la partie.
+ */
 public class TribuOubliee extends Peuple {
     
     /** Le nom des TribuOubliee. */

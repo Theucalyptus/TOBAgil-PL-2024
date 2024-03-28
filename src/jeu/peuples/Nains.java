@@ -1,5 +1,6 @@
 package jeu.peuples;
 
+/**Classe d'implémantation du peuple des Nains. */
 public class Nains extends Peuple {
     
         

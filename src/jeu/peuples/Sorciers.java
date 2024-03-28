@@ -1,5 +1,6 @@
 package jeu.peuples;
 
+/**Classe d'implémantation du peuple des Sorciers. */
 public class Sorciers extends Peuple {
     
     /** Le nom des Sorciers. */

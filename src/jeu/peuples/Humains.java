@@ -1,5 +1,6 @@
 package jeu.peuples;
 
+/**Classe d'implémantation du peuple des Humains */
 public class Humains extends Peuple {
     
     /** Le nom des Humains. */

@@ -1,5 +1,8 @@
 package jeu.peuples;
 
+/**
+ * Classe d'implémantation du peuple des Géants. 
+ */
 public class Geants extends Peuple {
     
     /** Le nom des Geants. */
