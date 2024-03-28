@@ -1,5 +1,6 @@
 package jeu.peuples;
 
+/**Enumération des différents types de peuple. */
 public enum TypesPeuples {
     AMAZONES,
     ELFES,

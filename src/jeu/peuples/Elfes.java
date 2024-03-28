@@ -1,5 +1,8 @@
 package jeu.peuples;
 
+/**
+ * Classe d'implémantation du peuple des Elfes.
+ */
 public class Elfes extends Peuple {
     
     /** Le nom des Elfes. */

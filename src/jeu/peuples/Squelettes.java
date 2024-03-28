@@ -1,5 +1,6 @@
 package jeu.peuples;
 
+/**Classe d'implémantation du peuple des Squelettes. */
 public class Squelettes extends Peuple {
     
     /** Le nom des Squelettes. */

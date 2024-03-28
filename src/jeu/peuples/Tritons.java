@@ -1,5 +1,6 @@
 package jeu.peuples;
 
+/**Classe d'implémantation du peuple des Tritons. */
 public class Tritons extends Peuple {
     
     /** Le nom des Tritons. */

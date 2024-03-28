@@ -1,5 +1,6 @@
 package jeu.peuples;
 
+/**Classe d'implémantation du peuples des Mi-Portions. */
 public class MiPortions extends Peuple {
     
         

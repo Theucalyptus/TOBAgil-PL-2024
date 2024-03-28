@@ -1,5 +1,6 @@
 package jeu.peuples;
 
+/**Classe d'implémantation du peuples des Orcs. */
 public class Orcs extends Peuple {
     
     /** Le nom des Orcs. */
