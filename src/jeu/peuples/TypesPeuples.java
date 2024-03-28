@@ -14,5 +14,6 @@ public enum TypesPeuples {
     SQUELETTES,
     TRITONS,
     TROLLS,
-    ZOMBIES
+    ZOMBIES,
+    TRIBU_OUBLIEE
 }
