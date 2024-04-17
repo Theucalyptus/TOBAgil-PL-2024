@@ -8,7 +8,7 @@ public enum TypesPouvoirs {
     BATISSEURS,
     BERSERKS,
     DES_CAVERNES,
-    DES_COLINES,
+    DES_COLLINES,
     DES_FORETS,
     DES_MARAIS,
     DIPLOMATES,
