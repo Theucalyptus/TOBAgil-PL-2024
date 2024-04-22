@@ -81,7 +81,11 @@ public class Case {
         this.batiment = new HashMap<>();
         this.pions = pions;
         this.ressource = ressource;
-        this.prenable = true;
+        if (region == TypesRegions.MER_ET_LAC) {
+            this.prenable = false;
+        } else {
+            this.prenable = true;
+        }
     }
 
     // getteurs
@@ -156,7 +160,7 @@ public class Case {
     /**Donner les voisins de la case
      * @return liste des cases voisines
     */
-    public List<Case> ajoutVoisins() {
+    public List<Case> getVoisins() {
         return this.voisins;
     }
 
