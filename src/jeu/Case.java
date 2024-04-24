@@ -1,6 +1,7 @@
 package jeu;
 
 import java.util.Map;
+import java.util.Observable;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +26,8 @@ import jeu.peuples.Peuple;
  *      - sans ressource
  *      - etat prenable
  */
-public class Case {
+@SuppressWarnings("deprecation")
+public class Case extends Observable {
 
     // Attributs
     /**Liste des voisins */

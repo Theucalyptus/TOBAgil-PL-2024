@@ -1,17 +1,20 @@
-import ui.MainGui;
+import ui.MainJoueurFenetre;
+import ui.MainMondeFenetre;
+
+import ui.CombinaisonSelectionFenetre;
+
+
 import jeu.JeuReel;
-import ui.ClasseSelectionMenu;;
 
 public class Smallworld {
 
     public static void main(String[] args) {
 
-        System.out.println("Lancement GUI");
-        new ClasseSelectionMenu();
+        new CombinaisonSelectionFenetre();
        
         JeuReel jeu = new JeuReel();
-        new MainGui(jeu);
-        System.out.println("GUI lancée");
+        new MainMondeFenetre(jeu);
+        new MainJoueurFenetre(jeu);
 
     }
 }

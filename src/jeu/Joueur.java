@@ -3,10 +3,10 @@ package jeu;
 public class Joueur {
     
     private String nom;
-    private Ensemble<Combinaison> combinaison;
+    //private Ensemble<Combinaison> combinaison;
     private int pts_victoire;
 
-    public Joueur(String name, Ensemble<Combinaison> combinaison, int pts_vitoire) {
+    public Joueur(String name, int pts_vitoire) {
         this.nom = name;
         this.pts_victoire = pts_vitoire;
     }
@@ -43,7 +43,7 @@ public class Joueur {
     /**Changer de combinaison
      *@param nouvelle_combinaison du joueur 
     */
-    public void setCombinaisons(Ensemble<Combinaison> nouvelle_combinaison) {
+    /* public void setCombinaisons(Ensemble<Combinaison> nouvelle_combinaison) {
         this.combinaison = nouvelle_combinaison;
-    }
+    } */
 }

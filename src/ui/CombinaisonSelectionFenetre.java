@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 
-public class ClasseSelectionMenu {
+public class CombinaisonSelectionFenetre {
 
     public class ClasseEntry extends JPanel {
 
@@ -28,7 +28,7 @@ public class ClasseSelectionMenu {
     private ClasseEntry selectedClass = null;
     private JFrame fenetre;
 
-    public ClasseSelectionMenu() {
+    public CombinaisonSelectionFenetre() {
         this.fenetre = new JFrame("Selection d'une classe");
         this.fenetre.setMinimumSize(new Dimension(800, 600));
         Container contentPane = this.fenetre.getContentPane();
