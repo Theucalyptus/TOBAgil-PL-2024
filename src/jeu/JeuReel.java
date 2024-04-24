@@ -29,6 +29,7 @@ public class JeuReel implements Jeu {
     public JeuReel() {
         this.joueurs = new ArrayList<>();
         this.monde = new Monde();
+        this.finDuTour = true;
     }
 
     public void setNombreTour() {
@@ -55,12 +56,24 @@ public class JeuReel implements Jeu {
         return this.joueurCourant;
     }
 
+    public int getNombreTour() {
+        return this.nbTours;
+    }
+
     public int getNombreJoueur() {
         return this.joueurs.size();
     }
 
+    public List<Joueur> getJoueurs() {
+        return this.joueurs;
+    }
+
     public void setFinDuTour() {
-        this.finDuTour = false;
+        this.finDuTour = true;
+    }
+
+    public boolean estFinDeTour() {
+        return this.finDuTour;
     }
 
     // move to controller
