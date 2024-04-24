@@ -8,7 +8,19 @@ import java.util.List;
  */
 public class JeuReel implements Jeu {
 
+    /** La liste de joueurs. */
     private List<Joueur> joueurs;
+
+    /** Le joueur courant. */
+    private Joueur joueurCourant;
+
+    /** Le nombre de tour dans la partie. */
+    private int nbTours;
+
+    /** Indicateur de fin de tour du joueur */
+    private boolean finDuTour;
+
+    /** Le plateau */
     private Monde monde;              // Le plateau du monde
 
     // Indique si la partie est encore (pas commencée ou pas finies).
@@ -19,6 +31,18 @@ public class JeuReel implements Jeu {
         this.monde = new Monde();
     }
 
+    public void setNombreTour() {
+        switch (this.getNombreJoueur()) {
+            case 2:
+                this.nbTours = 10;
+                break;
+            case 3:
+                this.nbTours = 9;
+            default:
+                this.nbTours = 8;
+        }
+    }
+
     public void ajouterJoueur(Joueur joueur) {
         this.joueurs.add(joueur);
     }
@@ -27,4 +51,40 @@ public class JeuReel implements Jeu {
         return this.monde;
     }
 
+    public Joueur getJoueurCourant() {
+        return this.joueurCourant;
+    }
+
+    public int getNombreJoueur() {
+        return this.joueurs.size();
+    }
+
+    public void setFinDuTour() {
+        this.finDuTour = false;
+    }
+
+    // move to controller
+    public void jouerPartie() {
+        if (enCours) {
+            throw new IllegalCallerException();
+        }
+        enCours = true;
+        this.setNombreTour();
+        // Pour chaque tour
+        for (int i = 0; i < this.nbTours; i++) {
+            // faire joeur chaque joueur
+            for (Joueur joueur : joueurs) {
+                // mettre a jour le joueur courant
+                this.joueurCourant = joueur;
+                
+                // initialisé la fin du tour
+                this.finDuTour = false;
+
+                // attendre la fin du tour
+                while (!finDuTour) {  }
+
+            }
+        }
+        enCours = false;
+    }
 }

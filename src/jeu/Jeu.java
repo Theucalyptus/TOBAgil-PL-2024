@@ -14,4 +14,15 @@ public interface Jeu {
      * @return le monde de la partie
      */
     Monde getMonde();
+
+    /**
+     * Renvoie la poigné vers le joueur courant.
+     * @return Le joueur courant.
+     */
+    Joueur getJoueurCourant();
+
+    /**
+     * Détermine le nombre de tour en fonction du nombre de joueur dans le 
+     */
+    void setNombreTour();
 }
