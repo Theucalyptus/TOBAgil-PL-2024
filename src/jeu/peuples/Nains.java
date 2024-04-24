@@ -1,9 +1,11 @@
 package jeu.peuples;
 
+import jeu.Case;
+import jeu.TypesSymboles;
+
 /**Classe d'implémantation du peuple des Nains. */
 public class Nains extends Peuple {
     
-        
     /** Le nom des Nains. */
     private static final String NOM = "Nains";
 
@@ -19,7 +21,7 @@ public class Nains extends Peuple {
     private static final int PIONSSUP = 3;
 
     /** Le nombre de régions comportant une Mine contrôlé par ce peuple.*/
-    private static int nbMines = 0;
+    private int nbMines = 0;
     
     // Constructeur
 
@@ -28,20 +30,23 @@ public class Nains extends Peuple {
         super(NOM, DESCRIPTION, PIONSSUP);
     }
     
+    @Override
     public void apresConquete(Case regionConquise) {
-    	if(regionConquise.ressource == MINE) {
-    		nbMines ++;
+    	if(regionConquise.getTypeRessource() == TypesSymboles.MINE) {
+    		this.nbMines ++;
     	}
     }
     
+    @Override
     public void apresConqueteAdverse(Case regionConquise) {
-    	if(regionAConquerir.ressource == MINE) {
-    		nbMines --;
+    	if(regionConquise.getTypeRessource() == TypesSymboles.MINE) {
+    		this.nbMines --;
     	}
     }
     
+    @Override
     public void finTour(boolean enDeclin) {
-    	nbJetons ++;
+    	this.nbJetons = this.nbMines;
     }
 
 }

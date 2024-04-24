@@ -1,5 +1,8 @@
 package jeu.peuples;
 
+import jeu.Case;
+import jeu.TypesSymboles;
+
 /**Classe d'implémantation du peuples des Mages. */
 public class Mages extends Peuple {
     
@@ -15,6 +18,9 @@ public class Mages extends Peuple {
 
     /** Le nombre de Mages sans le nombre associé au pouvoir */
     private static final int PIONSSUP = 5;
+    
+    /** Le nombre de régions comportant une Source Magique contrôlée par ce peuple.*/
+    private int nbSources = 0;
 
     // Constructeur
 
@@ -22,4 +28,26 @@ public class Mages extends Peuple {
     public Mages() {
         super(NOM, DESCRIPTION, PIONSSUP);
     }
+    
+    @Override
+    public void apresConquete(Case regionConquise) {
+    	if(regionConquise.getTypeRessource() == TypesSymboles.SOURCE_MAGIQUE) {
+    		this.nbSources ++;
+    	}
+    }
+    
+    @Override
+    public void apresConqueteAdverse(Case regionConquise) {
+    	if(regionConquise.getTypeRessource() == TypesSymboles.SOURCE_MAGIQUE) {
+    		this.nbSources --;
+    	}
+    }
+    
+    @Override
+    public void finTour(boolean enDeclin) {
+    	if(!enDeclin) {
+        	this.nbJetons = this.nbSources;
+    	}
+    }
+    
 }
