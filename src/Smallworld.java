@@ -8,7 +8,9 @@ public class Smallworld {
 
         System.out.println("Lancement GUI");
         new ClasseSelectionMenu();
-        new MainGui(new JeuReel());
+       
+        JeuReel jeu = new JeuReel();
+        new MainGui(jeu);
         System.out.println("GUI lancée");
 
     }

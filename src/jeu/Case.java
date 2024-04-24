@@ -1,11 +1,15 @@
 package jeu;
 
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Collection;
 
 import jeu.batiments.Batiment;
 import jeu.batiments.TypesBatiments;
+import jeu.TypesRegions;
+import jeu.peuples.Peuple;
 
 /**Case du jeu. Une case possède :
  * type de région
@@ -31,7 +35,7 @@ public class Case {
     private List<Integer> coordonnees;
 
     /** Le type de région de la Case. */
-    private TypesRegion typeRegion;
+    private TypesRegions typeRegion;
 
     /** Le batiment s'il éxiste. */
     private Map<TypesBatiments,Integer> batiments; //dictionnaire qui associe un type de batiment au nombre de batiment associée à ce type
@@ -53,11 +57,11 @@ public class Case {
     public Case() {
         this.voisins = new ArrayList<>();
         this.coordonnees = new ArrayList<>();
-        (this.coordonnees).add(0);
-        (this.coordonnees).add(0);
-        this.region = TypesRegions.CHAMP;
-        this.batiment = new HashMap<>();
-        this.pions = 0;
+        this.coordonnees.add(0);
+        this.coordonnees.add(0);
+        this.typeRegion = TypesRegions.CHAMP;
+        this.batiments = new HashMap<>();
+        this.pions = null;
         this.ressource = TypesSymboles.AUCUN;
         this.prenable = true;
     }
@@ -75,10 +79,10 @@ public class Case {
     public Case(int i, int j, TypesRegions region, EnsemblePions pions,TypesSymboles ressource) {
         this.voisins = new ArrayList<>();
         this.coordonnees = new ArrayList<>();
-        (this.coordonnees).add(i);
-        (this.coordonnees).add(j);
-        this.region = region;
-        this.batiment = new HashMap<>();
+        this.coordonnees.add(i);
+        this.coordonnees.add(j);
+        this.typeRegion = region;
+        this.batiments = new HashMap<>();
         this.pions = pions;
         this.ressource = ressource;
         if (region == TypesRegions.MER_ET_LAC) {
@@ -111,7 +115,7 @@ public class Case {
      * @return Le type de region de la case.
      */
     public TypesRegions getTypeRegion() {
-        return this.region;
+        return this.typeRegion;
     }
 
     /**
@@ -171,7 +175,7 @@ public class Case {
      * Modifie l'ensemble de pions placées sur la Case.
      * @param new_pions ensemble de pions placées sur la Case.
      */
-    public setNewpions(EnsemblePions new_pions) {
+    public void setNewpions(EnsemblePions new_pions) {
         this.pions = new_pions;
     }
 
@@ -185,7 +189,7 @@ public class Case {
      * 2 types de batiments max possible par case
      * @param new_batiment nouveau batiment à placé sur la Case.
      */
-    public setTypeBatiment(TypesBatiments new_batiment,Integer nb_batiments_sup ) {
+    public void setTypeBatiment(TypesBatiments new_batiment,Integer nb_batiments_sup ) {
         //On regarde si le type de batiment est déjà présent sur la case
         if ((this.batiments).containsKey(new_batiment)) {
             int ancienne_val = (this.batiments).get(new_batiment);
@@ -207,7 +211,7 @@ public class Case {
      * Modifie le status de la Case.
      * @param new_prenable nouveau status de la Case.
      */
-    public setPrenable(Boolean new_prenable) {
+    public void setPrenable(Boolean new_prenable) {
         this.prenable = new_prenable;
     }
 
@@ -218,21 +222,21 @@ public class Case {
      * @return Vrai si la case ne possède pas de batiment.s.
      */
     public boolean abscenceBatiment() {
-        return (this.batiments).isEmpty();
+        return this.batiments.isEmpty();
     }
 
     /**
      * Retirer un batiment placé sur la Case.
      * @param batiment batiment à retiré de la Case.
      */
-    public removeBatiment(TypesBatiments batiment) {
-        (this.batiments).remove(batiment);
+    public void removeBatiment(TypesBatiments batiment) {
+        this.batiments.remove(batiment);
     }
 
     /**Ajoute un voisin de la Case dans sa liste voisins
      * @param case_voisine case voisine
     */
-    public ajoutVoisins(Case case_voisine) {
+    public void ajoutVoisins(Case case_voisine) {
         this.voisins.add(case_voisine);
     }
 
