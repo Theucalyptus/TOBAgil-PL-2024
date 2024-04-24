@@ -19,6 +19,9 @@ public abstract class Specialite {
     /**Le nombre de jetons de victoire qu'apporte la spécialité en fin de tour.*/
     protected int nbJetons = 0;
     
+    /**La réduction du coût en pions d'attaque d'une case.*/
+    protected int reductionAttaque = 0;
+    
     /**Construire une spécialité à partir de son nom, de sa description et de son nombre de pions supplémentaires.
      * @param nom Le nom de la spécialité.
      * @param description La description de la spécialité.

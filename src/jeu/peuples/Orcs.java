@@ -52,6 +52,8 @@ public class Orcs extends Peuple {
     
     @Override
     public void finTour(boolean enDeclin) {
-    	this.nbJetons = this.nbRegionsConquises;
+    	if(!enDeclin) {
+        	this.nbJetons = this.nbRegionsConquises;	
+    	}
     }
 }
