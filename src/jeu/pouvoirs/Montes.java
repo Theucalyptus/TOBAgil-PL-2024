@@ -15,11 +15,11 @@ public class Montes extends Pouvoir {
 
 
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
-    private static final int UNITESUP = 5;
+    private static final int PIONSSUP = 5;
 
     /**Construire un Montes. */
     public Montes() {
-        super(TypesPouvoirs.MONTES, NOM, DESCRIPTION, UNITESUP);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

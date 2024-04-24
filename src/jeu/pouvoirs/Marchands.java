@@ -13,11 +13,11 @@ public class Marchands extends Pouvoir {
 
 
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
-    private static final int UNITESUP = 2;
+    private static final int PIONSSUP = 2;
 
     /**Construire un Marchands. */
     public Marchands() {
-        super(TypesPouvoirs.MARCHANDS, NOM, DESCRIPTION, UNITESUP);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

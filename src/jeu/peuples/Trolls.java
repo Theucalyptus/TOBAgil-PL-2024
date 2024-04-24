@@ -22,6 +22,6 @@ public class Trolls extends Peuple {
 
     /** Construire les Trolls */
     public Trolls() {
-        super(TypesPeuples.TROLLS, NOM, DESCRIPTION, UNITECLASSE);
+        super(NOM, DESCRIPTION, UNITECLASSE);
     }
 }

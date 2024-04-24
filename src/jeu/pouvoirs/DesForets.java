@@ -12,11 +12,11 @@ public class DesForets extends Pouvoir {
 
 
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
-    private static final int UNITESUP = 4;
+    private static final int PIONSSUP = 4;
 
     /**Construire un DesForets. */
     public DesForets() {
-        super(TypesPouvoirs.DES_FORETS, NOM, DESCRIPTION, UNITESUP);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

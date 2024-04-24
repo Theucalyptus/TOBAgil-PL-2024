@@ -19,13 +19,13 @@ public class MiPortions extends Peuple {
             "retirée du plateau. En déclin, les deux Tanières disparaissent.";
 
     /** Le nombre de Mi-Portions sans le nombre associé au pouvoir */
-    private static final int UNITECLASSE = 6;
+    private static final int PIONSSUP = 6;
 
     // Constructeur
 
     /** Construire les Mi-Portions */
     public MiPortions() {
-        super(TypesPeuples.MIPORTIONS, NOM, DESCRIPTION, UNITECLASSE);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

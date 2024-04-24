@@ -19,12 +19,12 @@ public class Zombies extends Peuple {
             "avec ses Zombies en déclin.";
 
     /** Le nombre de Zombies sans le nombre associé au pouvoir */
-    private static final int UNITECLASSE = 6;
+    private static final int PIONSSUP = 6;
 
     // Constructeur
 
     /** Construire les Zombies */
     public Zombies() {
-        super(TypesPeuples.ZOMBIES, NOM, DESCRIPTION, UNITECLASSE);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 }

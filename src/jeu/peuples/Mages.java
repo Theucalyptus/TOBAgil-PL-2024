@@ -14,12 +14,12 @@ public class Mages extends Peuple {
             "de tour.";
 
     /** Le nombre de Mages sans le nombre associé au pouvoir */
-    private static final int UNITECLASSE = 5;
+    private static final int PIONSSUP = 5;
 
     // Constructeur
 
     /** Construire les Mages */
     public Mages() {
-        super(TypesPeuples.MAGES, NOM, DESCRIPTION, UNITECLASSE);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 }

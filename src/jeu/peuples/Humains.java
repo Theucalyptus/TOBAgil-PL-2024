@@ -13,12 +13,12 @@ public class Humains extends Peuple {
             "en fin de tour.";
 
     /** Le nombre d'Humains sans le nombre associé au pouvoir */
-    private static final int UNITECLASSE = 5;
+    private static final int PIONSSUP = 5;
 
     // Constructeur
 
     /** Construire les Humains */
     public Humains() {
-        super(TypesPeuples.HUMAINS, NOM, DESCRIPTION, UNITECLASSE);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 }

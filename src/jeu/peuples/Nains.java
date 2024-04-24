@@ -16,13 +16,32 @@ public class Nains extends Peuple {
             "de s'appliquer même s'ils sont en déclin.";
 
     /** Le nombre de nains sans le nombre associé au pouvoir */
-    private static final int UNITECLASSE = 3;
+    private static final int PIONSSUP = 3;
 
+    /** Le nombre de régions comportant une Mine contrôlé par ce peuple.*/
+    private static int nbMines = 0;
+    
     // Constructeur
 
     /** Construire les nains */
     public Nains() {
-        super(TypesPeuples.NAINS, NOM, DESCRIPTION, UNITECLASSE);
+        super(NOM, DESCRIPTION, PIONSSUP);
+    }
+    
+    public void apresConquete(Case regionConquise) {
+    	if(regionConquise.ressource == MINE) {
+    		nbMines ++;
+    	}
+    }
+    
+    public void apresConqueteAdverse(Case regionConquise) {
+    	if(regionAConquerir.ressource == MINE) {
+    		nbMines --;
+    	}
+    }
+    
+    public void finTour(boolean enDeclin) {
+    	nbJetons ++;
     }
 
 }

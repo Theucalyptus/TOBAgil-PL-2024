@@ -16,11 +16,11 @@ public class AuxDeuxHeros extends Pouvoir {
 
 
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
-    private static final int UNITESUP = 5;
+    private static final int PIONSSUP = 5;
 
     /**Construire une instance de Aux Deux Héros. */
     public AuxDeuxHeros() {
-        super(TypesPouvoirs.AUX_DEUX_HEROS, NOM, DESCRIPTION, UNITESUP);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 
 }
