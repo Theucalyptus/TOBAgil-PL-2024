@@ -2,15 +2,18 @@ package jeu;
 
 import java.util.Map;
 import java.util.Observable;
+
+import jeu.batiments.TypesBatiments;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Collection;
 
-import jeu.batiments.Batiment;
-import jeu.batiments.TypesBatiments;
-import jeu.TypesRegions;
-import jeu.peuples.Peuple;
+//import jeu.batiments.Batiment;
+//import jeu.batiments.TypesBatiments;
+//import jeu.TypesRegions;
+//import jeu.peuples.Peuple;
 
 /**Case du jeu. Une case possède :
  * type de région
@@ -87,7 +90,7 @@ public class Case extends Observable {
         this.coordonnees.add(i);
         this.coordonnees.add(j);
         this.typeRegion = region;
-        this.batiments = new HashMap<>();
+        this.batiments = new HashMap<TypesBatiments, Integer>();
         this.pions = pions;
         this.ressource = ressource;
         if (region == TypesRegions.MER_ET_LAC) {
@@ -132,6 +135,14 @@ public class Case extends Observable {
     }
 
     /**
+     * Donner les coordonnées de la case.
+     * @return coordonnées de la case.
+     */
+    public List<Integer> getCoordonnees() {
+        return this.coordonnees;
+    }
+
+    /**
      * Indique si la case est prenable.
      * @return Status de la case.
      */
@@ -155,8 +166,10 @@ public class Case extends Observable {
         if (!this.abscenceBatiment()) {
             // Récupération des valeurs du dictionnaire
             Collection<Integer> valeurs = (this.batiments).values();
-            // Calcul de la somme des valeurs en utilisant Stream API
-            nombreAttaquants += (valeurs.stream().mapToInt(Integer::intValue)).sum();
+            // Calcul de la somme des valeurs
+            for (int valeur : valeurs) {
+                nb_attaquants += valeur;
+            }
         }
         return nombreAttaquants;
     }
