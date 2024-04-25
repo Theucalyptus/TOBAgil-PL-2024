@@ -76,7 +76,6 @@ public class Case extends Observable {
      * @param region Le type de région de la Case.
      * @param pions La liste d'unité à l'initialisation. //tribus oubliées
      * @param ressource type de ressource sur la Case.
-     * @param status Le status de la case à la creation.
      */
     public Case(int i, int j, TypesRegions region, EnsemblePions pions,TypesSymboles ressource) {
         this.voisins = new ArrayList<>();
