@@ -7,7 +7,7 @@ public enum TypesSymboles {
     /**Modélise une mine. */
     MINE,
     /**Modélise une source magique. */
-    SOURCE_EMAGIQUE,
+    SOURCE_MAGIQUE,
     /**Modélise l'absence d'élement spécial. */
     AUCUN
 }

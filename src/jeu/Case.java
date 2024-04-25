@@ -13,7 +13,7 @@ import java.util.Collection;
 //import jeu.batiments.Batiment;
 //import jeu.batiments.TypesBatiments;
 //import jeu.TypesRegions;
-//import jeu.peuples.Peuple;
+import jeu.peuples.Peuple;
 
 /**Case du jeu. Une case possède :
  * type de région
@@ -168,7 +168,7 @@ public class Case extends Observable {
             Collection<Integer> valeurs = (this.batiments).values();
             // Calcul de la somme des valeurs
             for (int valeur : valeurs) {
-                nb_attaquants += valeur;
+                nombreAttaquants += valeur;
             }
         }
         return nombreAttaquants;
