@@ -27,9 +27,10 @@ public class JeuReel implements Jeu {
     private Boolean enCours = false;
 
     /**Construire un Jeu Réel. */
-    public JeuReel() {
+    public JeuReel(int nb_joueurs) {
         this.joueurs = new ArrayList<>();
-        this.monde = new Monde();
+        Monde monde_vide = new Monde();
+        this.monde = monde_vide.CreerMonde(nb_joueurs);
         this.finDuTour = true;
     }
 
@@ -141,7 +142,6 @@ public class JeuReel implements Jeu {
                 while (!finDuTour) {
                     int a = 0; a = - a;
                 }
-
             }
         }
         enCours = false;

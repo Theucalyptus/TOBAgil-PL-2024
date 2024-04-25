@@ -17,9 +17,9 @@ public class Monde {
     private int dimY;                       // Le nombre de tuiles en hauteur
     private List<Case> grille;            // La grille avec l'ensemble des tuiles
 
-    public Monde (int dimX, int dimY) {
-        this.dimX = dimX;
-        this.dimY = dimY;
+    public Monde () {
+        this.dimX = 0;
+        this.dimY = 0;
         this.grille = new ArrayList<>();
     }
 
@@ -55,8 +55,9 @@ public class Monde {
                 nb_max_region = 5;
                 nb_max_symboles = 5;
         } 
-
-        Monde newMonde = new Monde(dimX, dimY); //creation du monde vide
+        this.dimX = dimX;
+        this.dimY = dimY;
+        Monde newMonde = new Monde(); //creation du monde vide
         //on associe a chaque type de region, le nombre de cases de ce type qui sont déjà sur la grille
         HashMap<TypesRegions, Integer> nombreRegions = new HashMap<TypesRegions, Integer>();
         nombreRegions.put(TypesRegions.CHAMP, 0);
