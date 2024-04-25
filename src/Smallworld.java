@@ -16,8 +16,8 @@ public class Smallworld {
     public static void main(String[] args) {
 
         new CombinaisonSelectionFenetre();
-
-        JeuReel jeu = new JeuReel();
+        int nb_joueurs = 3; //nombre arbitraire pour l'instant en attendant un moyen d'obtenir le vrai nombre de joueurs
+        JeuReel jeu = new JeuReel(nb_joueurs);
         new MainMondeFenetre(jeu);
         new MainJoueurFenetre(jeu);
 
