@@ -1,18 +1,19 @@
 package jeu.peuples;
 
 public enum TypesPeuples {
-    AMAZONES,
-    ELFES,
-    GEANTS,
-    HOMME_RATS,
-    HUMAINS,
-    MAGES,
-    MIPORTIONS,
-    NAINS,
-    ORCS,
-    SORCIERS,
-    SQUELETTES,
-    TRITONS,
-    TROLLS,
-    ZOMBIES
+    Amazones,
+    Elfes,
+    Geants,
+    HommeRats,
+    Humains,
+    Mages,
+    MiPortions,
+    Nains,
+    Orcs,
+    Sorciers,
+    Squelettes,
+    Tritons,
+    Trolls,
+    Zombies,
+    TribuOubliee
 }
