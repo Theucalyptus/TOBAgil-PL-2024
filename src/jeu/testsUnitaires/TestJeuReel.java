@@ -101,7 +101,7 @@ public class TestJeuReel {
             this.unJeuA4Joueurs.getNombreTour(), 8, PRECISION);
     }
 
-    @test
+    @Test
     void testerSetNombreTourJeu5Joueurs() {
         this.unJeuA5Joueurs.setNombreTour();
         assertEquals("Le jeu à 5 Joueurs doit avoir 8 tours.",
