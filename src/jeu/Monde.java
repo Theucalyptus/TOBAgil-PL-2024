@@ -52,6 +52,7 @@ public class Monde {
                 break;
             default:
                 dimX = dimY = 6;
+                nb_max_region = 5;
                 nb_max_symboles = 5;
         } 
 
