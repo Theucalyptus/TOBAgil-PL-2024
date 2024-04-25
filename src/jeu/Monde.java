@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.HashMap;
 
 import java.util.Random;
+import jeu.peuples.Peuple;
+import jeu.peuples.TribuOubliee;
 
 public class Monde {
 
@@ -92,7 +94,7 @@ public class Monde {
                 TypesSymboles[] symbolesArray = symbolesSet.toArray(new TypesSymboles[0]);                
                 random = new Random();
                 TypesSymboles newsymbole;
-                if (random.nextDouble() < p) {
+                if (random.nextDouble() < p) { //on ajoute un symbole à la case avec une probabilité p
                     int randomIndexSymbole = random.nextInt(nombreSymboles.size());
                     newsymbole = symbolesArray[randomIndexSymbole]; 
                 } else {
@@ -104,9 +106,9 @@ public class Monde {
                 } else {
                     nombreSymboles.put(newsymbole, nombreSymboles.get(newsymbole) + 1);
                 } 
-                
-
-                Case newcase = new Case(x, y, newregion, 0, newsymbole);    //creation de la nouvelle case
+                Peuple monPeuple = new TribuOubliee();  //on pose une tribu oubliée sur la case
+                EnsemblePions newEnsemblePions = new EnsemblePionsImpl(monPeuple, 1);  
+                Case newcase = new Case(x, y, newregion, newEnsemblePions, newsymbole);    //creation de la nouvelle case
                 newMonde.grille.add(newcase);  //ajout de la nouvelle case à la grille
             } 
         } 
