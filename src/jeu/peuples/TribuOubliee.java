@@ -9,10 +9,10 @@ public class TribuOubliee extends Peuple {
     private static final String NOM = "TribuOubliee";
 
     /** La Description des TribuOubliee et de leur capacité. */
-    private static final String DESCRIPTION = "Les Tribus\n" +
-            "oubliées sont d'anciennes civilisations tombées en\n" +
-            "déclin mais dont les derniers survivants occupent\n" +
-            "encore quelques régions... enfin, pour l'instant !";
+    private static final String DESCRIPTION = "Les Tribus "
+                + "oubliées sont d'anciennes civilisations tombées en "
+                + "déclin mais dont les derniers survivants occupent "
+                + "encore quelques régions... enfin, pour l'instant !";
 
     /** Le nombre de TribuOubliee sans le nombre associé au pouvoir */
     private static final int PIONSSUP = 10;

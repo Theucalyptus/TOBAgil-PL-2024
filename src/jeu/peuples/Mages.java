@@ -10,11 +10,9 @@ public class Mages extends Peuple {
     private static final String NOM = "Mages";
 
     /** La Description des Mages et de leur capacité. */
-    private static final String DESCRIPTION = "oute région qui comporte une\n" + //
-            "Source magique occupée par\n" +
-            "vos Mages rapporte 1 jeton de\n" +
-            "victoire supplémentaire en fin\n" +
-            "de tour.";
+    private static final String DESCRIPTION = "Toute région qui comporte une Source "
+                + "magique occupée par vos Mages rapporte 1 jeton de victoire "
+                + "supplémentaire en fin de tour.";
 
     /** Le nombre de Mages sans le nombre associé au pouvoir */
     private static final int PIONSSUP = 5;

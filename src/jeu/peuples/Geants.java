@@ -9,10 +9,10 @@ public class Geants extends Peuple {
     private static final String NOM = "Geants";
 
     /** La Description des Geants et de leur capacité. */
-    private static final String DESCRIPTION = "Vos Géants peuvent conquérir toute\n" +
-            "région adjacente à une Montagne\n" +
-            "qu'ils occupent avec 1 pion de moins que\n" +
-            "nécessaire, avec un minimum de 1 pion.";
+    private static final String DESCRIPTION = "Vos Géants peuvent conquérir toute "
+                + "région adjacente à une Montagne "
+                + "qu'ils occupent avec 1 pion de moins que "
+                + "nécessaire, avec un minimum de 1 pion.";
 
     /** Le nombre de Geants sans le nombre associé au pouvoir */
     private static final int PIONSSUP = 6;

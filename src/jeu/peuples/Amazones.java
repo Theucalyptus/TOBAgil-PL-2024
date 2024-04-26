@@ -9,18 +9,15 @@ public class Amazones extends Peuple {
     private static final String NOM = "Amazones";
 
     /** La Description des Amazones et de leur capacité. */
-    private static final String DESCRIPTION = "La valeur +4 indiquée sur la tuile Amazones\n" +
-            "signifie que vous prenez 4 pions supplémen-\n" +
-            "taires (donc 10 en tout, auxquels il faut\n" +
-            "encore ajouter ceux du Pouvoir Spécial),\n" +
-            "mais ces 4 pions sont réservés à l'attaque\n" +
-            "uniquement et ne servent pas en défense. Après avoir\n" +
-            "redéployé vos troupes, retirez donc\n" +
-            "quatre pions Amazones du plateau et mettez-les de côté, en\n" +
-            "prenant soin de laisser tout de même 1 pion Amazone dans\n" +
-            "chaque région occupée, dans la mesure du possible. Reprenez\n" +
-            "vos 4 pions en main au début du prochain tour, au moment de\n" +
-            "préparer ses troupes.";
+    private static final String DESCRIPTION = "La valeur +4 indiquée sur la tuile Amazones "
+            + "signifie que vous prenez 4 pions supplémentaires (donc 10 en tout, auxquels "
+            + "il faut encore ajouter ceux du Pouvoir Spécial), mais ces 4 pions sont "
+            + "réservés à l'attaque uniquement et ne servent pas en défense. Après avoir "
+            + "redéployé vos troupes, retirez donc quatre pions Amazones du plateau et "
+            + "mettez-les de côté, en prenant soin de laisser tout de même 1 pion "
+            + "Amazone dans chaque région occupée, dans la mesure du possible. Reprenez "
+            + "vos 4 pions en main au début du prochain tour, au moment de préparer ses "
+            + "troupes.";
 
     /** Le nombre d'Amazone sans le nombre associé au pouvoir */
     private static final int PIONSSUP = 6;

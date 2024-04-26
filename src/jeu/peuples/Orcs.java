@@ -9,9 +9,9 @@ public class Orcs extends Peuple {
     private static final String NOM = "Orcs";
 
     /** La Description des Orcs et de leur capacité. */
-    private static final String DESCRIPTION = "Toute région non-vide conquise par vos Orcs\n" +
-            "durant ce tour rapporte 1 jeton de victoire\n" +
-            "supplémentaire en fin de tour.";
+    private static final String DESCRIPTION = "Toute région non-vide conquise par vos Orcs "
+                + "durant ce tour rapporte 1 jeton de victoire "
+                + "supplémentaire en fin de tour.";
 
     /** Le nombre d'Orcs sans le nombre associé au pouvoir */
     private static final int PIONSSUP = 5;
