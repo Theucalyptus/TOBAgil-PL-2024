@@ -9,4 +9,5 @@ if [ ! -f $FILEPATH ]; then
     wget $URL
 fi
 
-java -jar $FILEPATH -c checkstyle.xml src/**.java
+# java -jar $FILEPATH -c checkstyle.xml src/**.java
+find -name "*.java" -print -exec java -jar $FILEPATH -c checkstyle.xml {} \; | grep "[ERROR]" >erreursCheckStyle.log

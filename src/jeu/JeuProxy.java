@@ -1,6 +1,6 @@
 package jeu;
 
-import exceptions.OperationInterditeException;
+import jeu.exceptions.OperationInterditeException;
 
 /**Le proxy du jeu pour éviter toute tentative de triche de la part des joueurs */
 public class JeuProxy implements Jeu {
@@ -19,5 +19,14 @@ public class JeuProxy implements Jeu {
 
     public Monde getMonde() {
         return this.impl.getMonde();
+    }
+
+    public Joueur getJoueurCourant() {
+        return this.impl.getJoueurCourant();
+    }
+
+    public void setNombreTour() {
+        throw new OperationInterditeException(
+            "Un joueur n'a pas le droit d'actualiser le nombre de tour");
     }
 }

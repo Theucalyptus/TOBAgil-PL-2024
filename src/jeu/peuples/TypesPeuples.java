@@ -1,19 +1,20 @@
 package jeu.peuples;
 
+/**Enumération des différents types de peuple. */
 public enum TypesPeuples {
-    Amazones,
-    Elfes,
-    Geants,
-    HommeRats,
-    Humains,
-    Mages,
-    MiPortions,
-    Nains,
-    Orcs,
-    Sorciers,
-    Squelettes,
-    Tritons,
-    Trolls,
-    Zombies,
-    TribuOubliee
+    AMAZONES,
+    ELFES,
+    GEANTS,
+    HOMME_RATS,
+    HUMAINS,
+    MAGES,
+    MIPORTIONS,
+    NAINS,
+    ORCS,
+    SORCIERS,
+    SQUELETTES,
+    TRITONS,
+    TROLLS,
+    ZOMBIES,
+    TRIBU_OUBLIEE
 }

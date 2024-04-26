@@ -4,7 +4,7 @@ package jeu.exceptions;
  * valable.
  */
 public class CoupInvalideException extends Exception {
-    
+
     /**Constructeur de l'éxception.
      * @param message Le message du Problème
     */

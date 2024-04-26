@@ -1,4 +1,4 @@
-package ui;
+package ui.views;
 
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import javax.swing.*;
 
 import jeu.Monde;
 import jeu.TypesRegions;
-
+import ui.CaseMonde;
 
 public class MainMondeView extends JPanel {
 
@@ -35,6 +35,7 @@ public class MainMondeView extends JPanel {
                 super.add(temp);
             }
         }
+
     }
 
 

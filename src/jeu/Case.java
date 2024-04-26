@@ -1,62 +1,103 @@
 package jeu;
 
-import jeu.batiments.Batiment;
+import java.util.Map;
+import java.util.Observable;
 
-/**Case du jeu. Une case possède une liste d'unité d'un peuple,
- * un état, un type de région et peut posséder un batiment.
- * Elle possède un nombre d'unité nécessaire pour l'attaquer.
+import jeu.batiments.TypesBatiments;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Collection;
+
+//import jeu.batiments.Batiment;
+//import jeu.batiments.TypesBatiments;
+//import jeu.TypesRegions;
+import jeu.peuples.Peuple;
+
+/**Case du jeu. Une case possède :
+ * type de région
+ * batiment
+ * ensemble de pions
+ * ressource (mine,...)
+ * status (prenable ou non)
+ *
  * Par défaut, une case est :
  *      - un Champ
- *      - sans unité
  *      - sans Batiment
- *      - etat Normal
+ *      - sans unité
+ *      - sans ressource
+ *      - etat prenable
  */
-public class Case {
+@SuppressWarnings("deprecation")
+public class Case extends Observable {
 
     // Attributs
-    /** L'ensemble des unités posées sur une cases. */
-    private EnsemblePions pions;
-    
-    /** Le batiment s'il éxiste. */
-    private Batiment batiment;
+    /**Liste des voisins. */
+    private List<Case> voisins;
 
-    /** Le type de régions de la Case. */
+    /**Coordonnes de la case. */
+    private List<Integer> coordonnees;
+
+    /** Le type de région de la Case. */
     private TypesRegions typeRegion;
+
+    /** Le batiment s'il éxiste. */
+    // dictionnaire qui associe un type de batiment au nombre de batiment associée à ce
+    // type
+    private Map<TypesBatiments, Integer> batiments;
+
+    /** L'ensemble des unités posées sur une case. */
+    private EnsemblePions pions;
+
+    /**Ressource de la case. */
+    private TypesSymboles ressource;
+
+    /** Status de la case (prenable ou non). */
+    private Boolean prenable;
+
 
     // Constructeurs
 
     /**Constructeur de la Classe Case avec tous les attributs par défaut.
     */
     public Case() {
-        this(null,
-            null, 
-            TypesRegions.CHAMP);
+        this.voisins = new ArrayList<>();
+        this.coordonnees = new ArrayList<>();
+        this.coordonnees.add(0);
+        this.coordonnees.add(0);
+        this.typeRegion = TypesRegions.CHAMP;
+        this.batiments = new HashMap<>();
+        this.pions = null;
+        this.ressource = TypesSymboles.AUCUN;
+        this.prenable = true;
     }
-    
-    /**
-     * Construire une Case à partir d'une unité, d'un état et d'une région.
-     * @param pion Le pion sur la Case.
-     * @param region La région de la case.
-     */
-    public Case(EnsemblePions pion, TypesRegions region) {
-        this(pion, null, region);
-    }
-    
 
     /**
-     * Constructeur d'une Case avec une Liste d'unité, un etat de base,
-     * un batiment et un type de region.
-     * @param pions La liste d'unité à l'initialisation.
-     * @param etat L'état de la case à la création.
-     * @param batiment Le batiment construit sur la case s'il éxiste.
-     * @param typeTegion Le type de region de la Case
+     * Construire une Case à partir d'un type de région, d'un batiment, d'un ensemble de
+     * pions, d'une ressource, d'un status. Pas de parametre batiment car à
+     * l'initialisation d'une case il n'y a jamais de batiment.
+     * @param i Coordonnee i de la Case
+     * @param j Coordonnee j de la Case
+     * @param region Le type de région de la Case.
+     * @param pions La liste d'unité à l'initialisation. //tribus oubliées
+     * @param ressource type de ressource sur la Case.
      */
-    public Case(EnsemblePions pions, 
-                   Batiment batiment, 
-                   TypesRegions region) {
-        this.pions = pions;
-        this.batiment = batiment;
+    public Case(int i, int j, TypesRegions region,
+                EnsemblePions pions, TypesSymboles ressource) {
+        this.voisins = new ArrayList<>();
+        this.coordonnees = new ArrayList<>();
+        this.coordonnees.add(i);
+        this.coordonnees.add(j);
         this.typeRegion = region;
+        this.batiments = new HashMap<TypesBatiments, Integer>();
+        this.pions = pions;
+        this.ressource = ressource;
+        if (region == TypesRegions.MER_ET_LAC) {
+            this.prenable = false;
+        } else {
+            this.prenable = true;
+        }
     }
 
     // getteurs
@@ -69,21 +110,12 @@ public class Case {
         return this.pions.getNombre();
     }
 
-    /**Donner le nombre d'unités nécessaire pour attaquer la Case.
-     * @return Le nombre d'unités nécessaire pour attaquer la Case.
-    */
-    public int getNombreAttaquantNecessaire() {
-        return 2 + getNombrepions() + (aUnBatiment() ? 1 : 0)
-            + (this.typeRegion == TypesRegions.MONTAGNE ? 1 : 0);
-    }
-
     /**
-     * Donner le batiment qui se trouve sur la case.
-     * Renvoie null s'il s'y a pas de batiment sur la case.
-     * @return Le batiment qui est sur la case.
+     * Donner le type des batiments qui se trouvent sur la case et le nombre associé.
+     * @return Le type de batiment qui est sur la case.
      */
-    public Batiment getBatiment() {
-        return this.batiment;
+    public Map<TypesBatiments, Integer> getBatiment() {
+        return this.batiments;
     }
 
     /**
@@ -95,14 +127,139 @@ public class Case {
     }
 
     /**
-     * Donner si la case possède un batiment.
-     * @return Si la case possède un batiment.
+     * Donner le type de ressource de la case.
+     * @return Le type de ressource de la case.
      */
-    public boolean aUnBatiment() {
-        return this.batiment == null;
+    public TypesSymboles getTypeRessource() {
+        return this.ressource;
+    }
+
+    /**
+     * Donner les coordonnées de la case.
+     * @return coordonnées de la case.
+     */
+    public List<Integer> getCoordonnees() {
+        return this.coordonnees;
+    }
+
+    /**
+     * Indique si la case est prenable.
+     * @return Status de la case.
+     */
+    public Boolean getPrenable() {
+        return this.prenable;
+    }
+
+    /* Pour s'emparer d'une région, un joueur doit déployer 2 pions de Peuple + 1 pion de
+     * Peuple supplémentaire par Campement, Forteresse, Montagne ou Antre de Troll + 1
+     * pion de Peuple supplémentaire par Tribu oubliée ou par pion de Peuple ennemi
+     * présent dans cette région. Les mers et le lac ne peuvent pas être conquis.
+     */
+    /**Donner le nombre d'unités nécessaire pour attaquer la Case, sans pouvoir
+     * spécifique du peuple attaquant et du peuple defenseur.
+     * @return Le nombre d'unités nécessaires pour attaquer la Case.
+    */
+    public int getNombreAttaquantNecessaire() {
+        int nombreAttaquants = 2 + getNombrepions()
+                + (this.typeRegion == TypesRegions.MONTAGNE ? 1 : 0);
+
+        if (!this.abscenceBatiment()) {
+            // Récupération des valeurs du dictionnaire
+            Collection<Integer> valeurs = (this.batiments).values();
+            // Calcul de la somme des valeurs
+            for (int valeur : valeurs) {
+                nombreAttaquants += valeur;
+            }
+        }
+        return nombreAttaquants;
+    }
+
+    /**
+     * Obtenir le peuple qui occupe la case.
+     * @return peuple qui occupe la Case.
+     */
+    public Peuple getPeuple() {
+        return this.pions.getPeuple();
+    }
+
+    /**Donner les voisins de la case.
+     * @return La liste des cases voisines.
+    */
+    public List<Case> getVoisins() {
+        return this.voisins;
+    }
+
+
+    // Set
+
+    /**
+     * Modifie l'ensemble de pions placées sur la Case.
+     * @param newPions ensemble de pions placées sur la Case.
+     */
+    public void setNewpions(EnsemblePions newPions) {
+        this.pions = newPions;
+    }
+
+    //1 forteresse par region max
+    //plusieur campement par region possible
+    // 1 antre de troll possible
+    //1 taniere par region
+
+    /**
+     * Modifie le batiment placé sur la Case.
+     * 2 types de batiments max possible par case
+     * @param newBatiment nouveau batiment à placé sur la Case.
+     * @param nombreBatimentSup Le nombre de batiment supplémentaire.
+     */
+    public void setTypeBatiment(TypesBatiments newBatiment, Integer nombreBatimentSup) {
+        //On regarde si le type de batiment est déjà présent sur la case
+        if ((this.batiments).containsKey(newBatiment)) {
+            int ancienneVal = (this.batiments).get(newBatiment);
+            (this.batiments).put(newBatiment, ancienneVal + nombreBatimentSup);
+        } else {
+            (this.batiments).put(newBatiment, nombreBatimentSup);
+        }
+        //Si une tanière est posé sur la Case elle devient imprenable
+        if (newBatiment == TypesBatiments.TANIERE) {
+            this.prenable = false;
+        }
+    }
+
+    //Pas de setRegion car on ne peut modifier une region
+
+    //Pas de setRessource car on ne peut modifier le type de ressource sur une case
+
+    /**
+     * Modifie le status de la Case.
+     * @param newPrenable nouveau status de la Case.
+     */
+    public void setPrenable(Boolean newPrenable) {
+        this.prenable = newPrenable;
     }
 
     // commandes
 
+    /**
+     * Donne si la case possède des batiment.s ou non.
+     * @return Vrai si la case ne possède pas de batiment.s.
+     */
+    public boolean abscenceBatiment() {
+        return this.batiments.isEmpty();
+    }
+
+    /**
+     * Retirer un batiment placé sur la Case.
+     * @param batiment batiment à retiré de la Case.
+     */
+    public void removeBatiment(TypesBatiments batiment) {
+        this.batiments.remove(batiment);
+    }
+
+    /**Ajoute un voisin de la Case dans sa liste voisins.
+     * @param caseVoisine case voisine
+    */
+    public void ajoutVoisins(Case caseVoisine) {
+        this.voisins.add(caseVoisine);
+    }
 
 }
