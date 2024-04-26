@@ -1,5 +1,7 @@
 package jeu.pouvoirs;
 
+import jeu.peuples.TypesPeuples;
+
 /**Classe Alchimistes. L'Alchimiste est un pouvoir qui rend plus riche sur le long terme. */
 public class Alchimistes extends Pouvoir {
     
@@ -15,7 +17,7 @@ public class Alchimistes extends Pouvoir {
 
     /**Construire un Alchimiste. */
     public Alchimistes() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.ALCHIMISTES, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

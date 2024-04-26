@@ -24,7 +24,7 @@ public class Batisseurs extends Pouvoir {
 
     /**Construire un Batisseur. */
     public Batisseurs() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.BATISSEURS, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

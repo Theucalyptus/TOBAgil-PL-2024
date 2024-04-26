@@ -21,7 +21,7 @@ public class Marins extends Pouvoir {
 
     /**Construire un Marins. */
     public Marins() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.MARINS, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

@@ -22,7 +22,7 @@ public class DesCollines extends Pouvoir {
 
     /**Construire un Des Collines. */
     public DesCollines() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.DES_COLLINES, NOM, DESCRIPTION, PIONSSUP);
     }
 
     @Override

@@ -19,7 +19,7 @@ public class Montes extends Pouvoir {
 
     /**Construire un Montes. */
     public Montes() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.MONTES, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

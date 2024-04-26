@@ -22,7 +22,7 @@ public class Diplomates extends Pouvoir {
 
     /**Construire un Diplomates. */
     public Diplomates() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.DIPLOMATES, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

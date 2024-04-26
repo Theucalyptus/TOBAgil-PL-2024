@@ -17,7 +17,7 @@ public class Marchands extends Pouvoir {
 
     /**Construire un Marchands. */
     public Marchands() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.MARCHANDS, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

@@ -18,7 +18,7 @@ public class Volants extends Pouvoir {
 
     /**Construire un Volants. */
     public Volants() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.VOLANTS, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

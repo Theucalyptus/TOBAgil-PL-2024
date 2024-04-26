@@ -18,7 +18,7 @@ public class DurACuire extends Pouvoir {
 
     /**Construire un Alchimiste. */
     public DurACuire() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.DURS_A_CUIRE, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

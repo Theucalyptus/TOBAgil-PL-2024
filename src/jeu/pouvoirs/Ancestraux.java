@@ -24,7 +24,7 @@ public class Ancestraux extends Pouvoir {
 
     /**Construire un Ancestral. */
     public Ancestraux() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.ANCESTRAUX, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }
