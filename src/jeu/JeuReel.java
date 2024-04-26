@@ -3,7 +3,9 @@ package jeu;
 import java.util.ArrayList;
 import java.util.List;
 
+import jeu.exceptions.JoueurDejaDansLaPartieException;
 import jeu.exceptions.PartieEnCoursException;
+import jeu.exceptions.PartiePleineException;
 
 /**
  * Classe représentant une partie de jeu.
@@ -65,6 +67,13 @@ public class JeuReel implements Jeu {
      * @throws IllegalArgumentException Quand le Joueur est une poignée null.
      */
     public void ajouterJoueur(Joueur joueur) {
+        if (joueur == null) {
+            throw new IllegalArgumentException("Le joueur ne doit pas être nul.");
+        } else if (this.joueurs.contains(joueur)) {
+            throw new JoueurDejaDansLaPartieException();
+        } else if (this.getNombreJoueur() == 5) {
+            throw new PartiePleineException();
+        }
         this.joueurs.add(joueur);
     }
 
@@ -82,8 +91,8 @@ public class JeuReel implements Jeu {
         return this.joueurCourant;
     }
 
-    public void setJoueurCourant(Joueur j) {
-        this.joueurCourant = j;
+    public void setJoueurCourant(Joueur joueurCourant) {
+        this.joueurCourant = joueurCourant;
     }
 
     /**
