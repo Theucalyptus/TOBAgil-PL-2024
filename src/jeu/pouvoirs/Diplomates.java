@@ -18,11 +18,11 @@ public class Diplomates extends Pouvoir {
 
 
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
-    private static final int UNITESUP = 5;
+    private static final int PIONSSUP = 5;
 
     /**Construire un Diplomates. */
     public Diplomates() {
-        super(TypesPouvoirs.DIPLOMATES, NOM, DESCRIPTION, UNITESUP);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

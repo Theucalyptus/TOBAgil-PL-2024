@@ -23,12 +23,12 @@ public class Amazones extends Peuple {
             "préparer ses troupes.";
 
     /** Le nombre d'Amazone sans le nombre associé au pouvoir */
-    private static final int UNITECLASSE = 6;
+    private static final int PIONSSUP = 6;
 
     // Constructeur
 
     /** Construire les Amazones */
     public Amazones() {
-        super(TypesPeuples.AMAZONES, NOM, DESCRIPTION, UNITECLASSE);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 }

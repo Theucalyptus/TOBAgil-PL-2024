@@ -19,12 +19,12 @@ public class Sorciers extends Peuple {
             "remplacé est remis dans le casier de rangement.";
 
     /** Le nombre de Sorciers sans le nombre associé au pouvoir */
-    private static final int UNITECLASSE = 6;
+    private static final int PIONSSUP = 6;
 
     // Constructeur
 
     /** Construire les Sorciers */
     public Sorciers() {
-        super(TypesPeuples.SORCIERS, NOM, DESCRIPTION, UNITECLASSE);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 }

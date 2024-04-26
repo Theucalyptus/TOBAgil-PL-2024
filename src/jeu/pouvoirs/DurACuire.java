@@ -14,11 +14,11 @@ public class DurACuire extends Pouvoir {
 
 
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
-    private static final int UNITESUP = 4;
+    private static final int PIONSSUP = 4;
 
     /**Construire un Alchimiste. */
     public DurACuire() {
-        super(TypesPouvoirs.DURS_A_CUIRE, NOM, DESCRIPTION, UNITESUP);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

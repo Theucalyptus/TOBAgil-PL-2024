@@ -20,11 +20,11 @@ public class Batisseurs extends Pouvoir {
 
 
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
-    private static final int UNITESUP = 3;
+    private static final int PIONSSUP = 3;
 
     /**Construire un Batisseur. */
     public Batisseurs() {
-        super(TypesPouvoirs.BATISSEURS, NOM, DESCRIPTION, UNITESUP);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

@@ -1,5 +1,7 @@
 package jeu.peuples;
 
+import jeu.Case;
+
 /**Classe d'implémantation du peuples des Orcs. */
 public class Orcs extends Peuple {
     
@@ -12,12 +14,46 @@ public class Orcs extends Peuple {
             "supplémentaire en fin de tour.";
 
     /** Le nombre d'Orcs sans le nombre associé au pouvoir */
-    private static final int UNITECLASSE = 5;
+    private static final int PIONSSUP = 5;
 
+    /** Le nombre de régions non-vides conquises par les Orcs dans ce tour.*/
+    private int nbRegionsConquises = 0;
+    
+    /** Indicateur du caractère vide d'une région pendant sa conquête.*/
+    private boolean estNonVide;
+    
     // Constructeur
 
     /** Construire les Orcs */
     public Orcs() {
-        super(TypesPeuples.ORCS, NOM, DESCRIPTION, UNITECLASSE);
+        super(NOM, DESCRIPTION, PIONSSUP);
+    }
+    
+    @Override
+    public void debutTour() {
+    	this.nbRegionsConquises = 0;
+    }
+    
+    @Override
+    public void avantConquete(Case regionAConquerir) {
+    	if(regionAConquerir.getNombrepions() != 0) {
+    		this.estNonVide = true;
+    	} else {
+    		this.estNonVide = false;
+    	}
+    }
+    
+    @Override
+    public void apresConquete(Case regionConquise) {
+    	if(estNonVide) {
+    		this.nbRegionsConquises ++;
+    	}
+    }
+    
+    @Override
+    public void finTour(boolean enDeclin) {
+    	if(!enDeclin) {
+        	this.nbJetons = this.nbRegionsConquises;	
+    	}
     }
 }

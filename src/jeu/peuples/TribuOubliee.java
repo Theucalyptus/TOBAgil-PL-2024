@@ -15,12 +15,12 @@ public class TribuOubliee extends Peuple {
             "encore quelques régions... enfin, pour l'instant !";
 
     /** Le nombre de TribuOubliee sans le nombre associé au pouvoir */
-    private static final int UNITECLASSE = 10;
+    private static final int PIONSSUP = 10;
 
     // Constructeur
 
     /** Construire les TribuOubliee */
     public TribuOubliee() {
-        super(TypesPeuples.TRIBU_OUBLIEE, NOM, DESCRIPTION, UNITECLASSE);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 }

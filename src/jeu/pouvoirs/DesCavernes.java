@@ -14,11 +14,11 @@ public class DesCavernes extends Pouvoir {
             + "minimum de 1 pion. De plus, pour vos conquètes, toutes les régions qui "
             + "comportent une caverne sont considérées comme adjacentes entre-elles.";
 
-    private static final int UNITESUP = 5;
+    private static final int PIONSSUP = 5;
 
     /**Construire un DesCavernes. */
     public DesCavernes() {
-        super(TypesPouvoirs.DES_CAVERNES, NOM, DESCRIPTION, UNITESUP);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

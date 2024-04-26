@@ -13,11 +13,11 @@ public class Pillards extends Pouvoir {
 
 
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
-    private static final int UNITESUP = 5;
+    private static final int PIONSSUP = 5;
 
     /**Construire un Pillards. */
     public Pillards() {
-        super(TypesPouvoirs.PILLARDS, NOM, DESCRIPTION, UNITESUP);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

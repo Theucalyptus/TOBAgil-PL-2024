@@ -13,11 +13,11 @@ public class Fortunes extends Pouvoir {
 
 
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
-    private static final int UNITESUP = 4;
+    private static final int PIONSSUP = 4;
 
     /**Construire un Fortunes. */
     public Fortunes() {
-        super(TypesPouvoirs.FORTUNES, NOM, DESCRIPTION, UNITESUP);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

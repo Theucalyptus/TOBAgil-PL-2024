@@ -1,5 +1,8 @@
 package jeu.pouvoirs;
 
+import jeu.Case;
+import jeu.TypesRegions;
+
 /**Classe Des Collines. Les Collines est un pouvoir qui rend plus riche.*/
 public class DesCollines extends Pouvoir {
     
@@ -12,11 +15,35 @@ public class DesCollines extends Pouvoir {
 
 
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
-    private static final int UNITESUP = 4;
+    private static final int PIONSSUP = 4;
+
+    /**Le nombre de collines conquises */
+    private int nbCollines = 4;
 
     /**Construire un Des Collines. */
     public DesCollines() {
-        super(TypesPouvoirs.DES_COLLINES, NOM, DESCRIPTION, UNITESUP);
+        super(NOM, DESCRIPTION, PIONSSUP);
+    }
+
+    @Override
+    public void apresConquete(Case regionConquise) {
+        if (regionConquise.getTypeRegion() == TypesRegions.COLLINE) {
+            this.nbCollines++;
+        }
+    }
+
+    @Override
+    public void apresConqueteAdverse(Case regionConquise) {
+        if (regionConquise.getTypeRegion() == TypesRegions.COLLINE) {
+            this.nbCollines--;
+        }
+    }
+
+    @Override
+    public void finTour(boolean enDeclin) {
+        if (!enDeclin) {
+            this.nbJetons = this.nbCollines;
+        }
     }
 
 }

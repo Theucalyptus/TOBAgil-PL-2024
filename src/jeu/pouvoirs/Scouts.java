@@ -29,11 +29,11 @@ public class Scouts extends Pouvoir {
 
 
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
-    private static final int UNITESUP = 5;
+    private static final int PIONSSUP = 5;
 
     /**Construire un Scouts. */
     public Scouts() {
-        super(TypesPouvoirs.SCOUTS, NOM, DESCRIPTION, UNITESUP);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 
 }
