@@ -139,7 +139,7 @@ public class Combinaison {
         this.peuple.finTour(this.declin);
         this.pouvoir.finTour(this.declin);
         this.premierTour = false;
-        return (this.peuple.nbJetons() + this.pouvoir.nbJetons());
+        return (this.peuple.getNbJetons() + this.pouvoir.getNbJetons());
     }
 
 }

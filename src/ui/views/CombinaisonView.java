@@ -24,28 +24,26 @@ public class CombinaisonView extends JPanel {
     private JLabel pouvoir = new JLabel();
     private JLabel enDeclin = new JLabel();
 
-    public CombinaisonView() {
+    public CombinaisonView(Combinaison comb) {
         super();
         super.add(this.peuple);
         super.add(this.pouvoir);
         super.add(this.enDeclin);
-    }
 
-    public void setCombinaison(Combinaison comb) {
-        
         if(comb.getDeclin()) {
             super.setBackground(Color.GRAY);
         } else {
             super.setBackground(Color.WHITE);
         }
 
-        System.out.println("TODO : CombinaisonView : setCombinaison doit utiliser la Combinaison");
-        this.peuple.setIcon(new ImageIcon(ImageFactory.peupleLogoImage(comb.getPeuple())))));
-        this.peuple.setText(JoueurDebug.peuple.getNom() + " : " + JoueurDebug.peuple.getDescription());
-        this.pouvoir.setIcon(new ImageIcon(ImageFactory.pouvoirLogoImage(JoueurDebug.pouvoir.getTypePouvoir())));
-        this.pouvoir.setText(JoueurDebug.pouvoir.getNom() + " : " + JoueurDebug.pouvoir.getDescription());
+        Peuple peuple = comb.getPeuple();
+        Pouvoir pouvoir = comb.getPouvoir();
+
+        this.peuple.setIcon(new ImageIcon(ImageFactory.peupleLogoImage(peuple.getType())));
+        this.peuple.setText(peuple.getNom() + " : " + peuple.getDescription());
+        this.pouvoir.setIcon(new ImageIcon(ImageFactory.pouvoirLogoImage(pouvoir.getType())));
+        this.pouvoir.setText(pouvoir.getNom() + " : " + pouvoir.getDescription());
         this.peuple.setForeground(Color.WHITE);
         this.pouvoir.setForeground(Color.WHITE);
     }
-
 }

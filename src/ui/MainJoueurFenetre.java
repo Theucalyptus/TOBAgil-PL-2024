@@ -31,7 +31,7 @@ public class MainJoueurFenetre {
     }
 
     public void update() {
-        //this.view.setJoueur(jeu.getJoueurCourant());
+        this.view.setJoueur(jeu.getJoueurCourant());
         System.out.println("TODO : MainJoueurFenetre.update()");
     }
 

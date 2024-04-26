@@ -8,6 +8,8 @@ public class Joueur {
     private String nom;
 
     //private Ensemble<Combinaison> combinaison;
+    private Combinaison combinaison;
+    
     /** Le Nombre de point de victoire du joueur. */
     private int pointsVictoire;
 
@@ -53,7 +55,12 @@ public class Joueur {
     /* Changer de combinaison.
      *@param nouvelle_combinaison du joueur.
     */
-    /* public void setCombinaisons(Ensemble<Combinaison> nouvelle_combinaison) {
+    //public void setCombinaisons(Ensemble<Combinaison> nouvelle_combinaison) {
+    public void setCombinaison(Combinaison nouvelle_combinaison) {
         this.combinaison = nouvelle_combinaison;
-    } */
+    }
+
+    public Combinaison getCombinaison() {
+        return this.combinaison;
+    }
 }

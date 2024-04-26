@@ -2,9 +2,11 @@ import ui.MainJoueurFenetre;
 import ui.MainMondeFenetre;
 
 import ui.CombinaisonSelectionFenetre;
-
-
+import jeu.Combinaison;
 import jeu.JeuReel;
+import jeu.Joueur;
+import jeu.peuples.Amazones;
+import jeu.pouvoirs.Volants;
 
 /**Classe principale de l'application.*/
 public class Smallworld {
@@ -15,11 +17,21 @@ public class Smallworld {
      */
     public static void main(String[] args) {
 
-        new CombinaisonSelectionFenetre();
+        // MODELE
         int nb_joueurs = 3; //nombre arbitraire pour l'instant en attendant un moyen d'obtenir le vrai nombre de joueurs
         JeuReel jeu = new JeuReel(nb_joueurs);
+        jeu.ajouterJoueur(new Joueur("Xavier", 0));
+        jeu.jouerPartie();
+        
+        // CONTROLLEURS
+        
+        // VUES
+        new CombinaisonSelectionFenetre();
         new MainMondeFenetre(jeu);
-        new MainJoueurFenetre(jeu);
+        MainJoueurFenetre jf = new MainJoueurFenetre(jeu);
+        jeu.getJoueurCourant().setCombinaison(new Combinaison(new Amazones(), new Volants()));
+        jf.update();
+
 
     }
 }
