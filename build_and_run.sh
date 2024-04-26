@@ -28,3 +28,4 @@ function run() {
 clean
 build && 
 run
+clean
