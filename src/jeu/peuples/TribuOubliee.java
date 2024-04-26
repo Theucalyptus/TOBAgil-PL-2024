@@ -4,7 +4,7 @@ package jeu.peuples;
  * présente sur la carte au début de la partie.
  */
 public class TribuOubliee extends Peuple {
-    
+
     /** Le nom des TribuOubliee. */
     private static final String NOM = "TribuOubliee";
 

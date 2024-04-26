@@ -3,7 +3,7 @@ package jeu.pouvoirs;
 /**Classe AuxDeuxHeros. Les deux héros est un pouvoir qui défend et rend 
  * imprenable 2 tuiles du peuple.*/
 public class AuxDeuxHeros extends Pouvoir {
-    
+
     /**Le nom de la classe. */
     private static final String NOM = "Aux Deux Héros";
 

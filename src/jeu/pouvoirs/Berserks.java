@@ -4,7 +4,7 @@ package jeu.pouvoirs;
  * pour chaque tuile que
  * l'on attaque.*/
 public class Berserks extends Pouvoir {
-    
+
     /**Le nom de la classe. */
     private static final String NOM = "Berserks";
 

@@ -2,7 +2,7 @@ package jeu.peuples;
 
 /**Classe d'implémantation de la Classe des Trolls. */
 public class Trolls extends Peuple {
-    
+
     /** Le nom des Trolls. */
     private static final String NOM = "Trolls";
 
