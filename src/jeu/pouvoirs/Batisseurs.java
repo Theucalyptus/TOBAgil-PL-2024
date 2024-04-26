@@ -10,13 +10,13 @@ public class Batisseurs extends Pouvoir {
 
     /**La description du pouvoir. */
     private static final String DESCRIPTION = "Une fois par tour, placez une Forteresse "
-            + "dans une région que vous occupez. Elle vous rapporte 1 jetons de victoires "
-            + "supplémentaire à la fin de chacun de vos tours, à moins que vous ne soyez "
-            + "ou passez en déclin. Toute Forteresse augmente la défense de la région d'un "
-            + "point (comme s'il vous aviez un Pion de Peuple supplémentaire), même si "
-            + "vous êtes ou passez en déclin. Lorsqu'un ennemi s'empare de votre région, "
-            + "retirer la Forteresse. Il ne peut y avoir qu'une seule Forteresse par "
-            + "région, et un maximum de 6 Forteresses sur le plateau.";
+        + "dans une région que vous occupez. Elle vous rapporte 1 jetons de victoires "
+        + "supplémentaire à la fin de chacun de vos tours, à moins que vous ne soyez "
+        + "ou passez en déclin. Toute Forteresse augmente la défense de la région d'un "
+        + "point (comme s'il vous aviez un Pion de Peuple supplémentaire), même si "
+        + "vous êtes ou passez en déclin. Lorsqu'un ennemi s'empare de votre région, "
+        + "retirer la Forteresse. Il ne peut y avoir qu'une seule Forteresse par "
+        + "région, et un maximum de 6 Forteresses sur le plateau.";
 
 
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */

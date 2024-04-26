@@ -7,7 +7,8 @@ public class Marins extends Pouvoir {
     private static final String NOM = "Marins";
 
     /**La description du pouvoir. */
-    private static final String DESCRIPTION = "Vous pouvez considérer les mers et le lac "
+    private static final String DESCRIPTION = "Vous pouvez considérer les mers et le "
+        + "lac "
         + "comme trois régions vides et les conquérir. "
         + "Vous conservez ces régions même en déclin. "
         + "Elles vous rapportent des jetons de victoire "

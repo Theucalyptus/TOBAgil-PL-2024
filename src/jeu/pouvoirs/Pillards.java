@@ -7,8 +7,8 @@ public class Pillards extends Pouvoir {
     private static final String NOM = "Pillards";
 
     /**La description du pouvoir. */
-    private static final String DESCRIPTION = "Toute région non-vide conquise durant ce tour "
-            + "rapporte 1 jeton de victoire supplémentaire "
+    private static final String DESCRIPTION = "Toute région non-vide conquise durant "
+            + "ce tour rapporte 1 jeton de victoire supplémentaire "
             + "en fin de tour.";
 
 

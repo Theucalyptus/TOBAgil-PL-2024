@@ -7,8 +7,8 @@ public class Fortunes extends Pouvoir {
     private static final String NOM = "Fortunes";
 
     /**La description du pouvoir. */
-    private static final String DESCRIPTION = "Prenez 7 jetons de victoire supplémentaires"
-            + "à la fin de votre premier tour d'expansion "
+    private static final String DESCRIPTION = "Prenez 7 jetons de victoire "
+            + "supplémentaires à la fin de votre premier tour d'expansion "
             + "(donc une seule fois).";
 
 

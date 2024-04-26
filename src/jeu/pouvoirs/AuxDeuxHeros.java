@@ -9,10 +9,10 @@ public class AuxDeuxHeros extends Pouvoir {
 
     /**La description du pouvoir. */
     private static final String DESCRIPTION = "A la fin de chacun de vos tours, "
-            + "choisissez deux régions que vous occupez et placez un Héros dans "
-            + "chacune d'entre elles. Tant qu'ils y restent, ces régions sont "
-            + "imprenables et immunisées aux capacités spécifique et Pouvoirs spéciaux des "
-            + "Peuples adverses. Les Héros disparaissent lorsque vous passez en déclin.";
+        + "choisissez deux régions que vous occupez et placez un Héros dans "
+        + "chacune d'entre elles. Tant qu'ils y restent, ces régions sont "
+        + "imprenables et immunisées aux capacités spécifique et Pouvoirs spéciaux des "
+        + "Peuples adverses. Les Héros disparaissent lorsque vous passez en déclin.";
 
 
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */

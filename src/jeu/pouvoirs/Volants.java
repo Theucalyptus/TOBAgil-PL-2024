@@ -7,8 +7,8 @@ public class Volants extends Pouvoir {
     private static final String NOM = "Volants";
 
     /**La description du pouvoir. */
-    private static final String DESCRIPTION = "Vous  pouvez  conquérir  n'importe  quelle "
-            + "région de la carte, même si elle n'est pas "
+    private static final String DESCRIPTION = "Vous  pouvez  conquérir  n'importe  "
+            + "quelle région de la carte, même si elle n'est pas "
             + "adjacente à une des vôtres. Les mers et le "
             + "lac  ne peuvent pas être conquis. ";
 
