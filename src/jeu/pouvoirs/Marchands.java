@@ -7,8 +7,8 @@ public class Marchands extends Pouvoir {
     private static final String NOM = "Marchands";
 
     /**La description du pouvoir. */
-    private static final String DESCRIPTION = "Prenez 1 jeton de victoire supplémentaire "
-        + "pour chaque région que vous occupez en fin "
+    private static final String DESCRIPTION = "Prenez 1 jeton de victoire "
+        + "supplémentaire pour chaque région que vous occupez en fin "
         + "de tour.";
 
 

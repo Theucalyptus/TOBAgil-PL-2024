@@ -7,8 +7,8 @@ public class EtLeurDragon extends Pouvoir {
     private static final String NOM = "Et Leur Dragon";
 
     /**La description du pouvoir. */
-    private static final String DESCRIPTION = "Une fois par tour, vous pouvez conquérir une "
-            + "région adjacente en utilisant un seul pion "
+    private static final String DESCRIPTION = "Une fois par tour, vous pouvez "
+            + "conquérir une région adjacente en utilisant un seul pion "
             + "de Peuple, indépendamment du nombre de "
             + "pions  ennemis  qui  s'y  trouve.  Une  fois "
             + "conquise,  placez  votre  Dragon  dans  cette "

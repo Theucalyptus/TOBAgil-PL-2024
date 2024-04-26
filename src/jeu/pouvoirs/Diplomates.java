@@ -8,8 +8,10 @@ public class Diplomates extends Pouvoir {
 
     /**La description du pouvoir. */
     private static final String DESCRIPTION = "A la fin de votre tour, vous pouvez "
-            + "choisir un autre joueur qui devient aussitôt votre allié, à condition que "
-            + "vous ne l'ayez pas attaqueé son Peuple actif pendant ce tour. Vous êtes à "
+            + "choisir un autre joueur qui devient aussitôt votre allié, à condition "
+            + "que "
+            + "vous ne l'ayez pas attaqueé son Peuple actif pendant ce tour. Vous êtes "
+            + "à "
             + "présent en paix avec lui. Il ne pourra pas attaquer votre Peuple actif "
             + "avant votre prochain tour. Vous pouvez changer d'allié à chaque tour ou "
             + "rester en paix avec le même joueur. Les pions  en déclin ne sont pas "

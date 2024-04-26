@@ -10,8 +10,10 @@ public class Berserks extends Pouvoir {
 
     /**La description du pouvoir. */
     private static final String DESCRIPTION = "Vous pouvez utiliser le dé de renforts "
-            + "avant chaque conquète. pas seulement avant le ma dernière de votre tour ! "
-            + "A la différence d'un jet de renfort normal, lancez le dé, puis choisissez "
+            + "avant chaque conquète. pas seulement avant le ma dernière de votre "
+            + "tour ! "
+            + "A la différence d'un jet de renfort normal, lancez le dé, puis "
+            + "choisissez "
             + "la région que vous voulez prendre et placez les pions de Peuple, il "
             + "s'agissait de votre dernière conquète ce tour-ci. Comme d'habitude, "
             + "un minimum de 1 pion de Peuple est requis pour chaque conquète.";
