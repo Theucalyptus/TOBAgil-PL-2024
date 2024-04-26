@@ -18,7 +18,7 @@ public class DesCavernes extends Pouvoir {
 
     /**Construire un DesCavernes. */
     public DesCavernes() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.DES_CAVERNES, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

@@ -17,7 +17,7 @@ public class Fortunes extends Pouvoir {
 
     /**Construire un Fortunes. */
     public Fortunes() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.FORTUNES, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

@@ -17,7 +17,7 @@ public class Pillards extends Pouvoir {
 
     /**Construire un Pillards. */
     public Pillards() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.PILLARDS, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

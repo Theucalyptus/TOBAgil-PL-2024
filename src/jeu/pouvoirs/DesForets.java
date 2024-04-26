@@ -22,7 +22,7 @@ public class DesForets extends Pouvoir {
 
     /**Construire un DesForets. */
     public DesForets() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.DES_FORETS, NOM, DESCRIPTION, PIONSSUP);
     }
 
     @Override

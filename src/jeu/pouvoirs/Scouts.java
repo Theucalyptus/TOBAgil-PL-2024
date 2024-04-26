@@ -33,7 +33,7 @@ public class Scouts extends Pouvoir {
 
     /**Construire un Scouts. */
     public Scouts() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.SCOUTS, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

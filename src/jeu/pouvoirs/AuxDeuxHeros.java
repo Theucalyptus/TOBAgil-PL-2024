@@ -20,7 +20,7 @@ public class AuxDeuxHeros extends Pouvoir {
 
     /**Construire une instance de Aux Deux Héros. */
     public AuxDeuxHeros() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.AUX_DEUX_HEROS, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

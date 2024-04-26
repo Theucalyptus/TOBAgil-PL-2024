@@ -17,7 +17,7 @@ public class DesMarais extends Pouvoir {
 
     /**Construire un DesMarais. */
     public DesMarais() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.DES_MARAIS, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

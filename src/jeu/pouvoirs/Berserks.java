@@ -22,7 +22,7 @@ public class Berserks extends Pouvoir {
 
     /**Construire un Berserks. */
     public Berserks() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.BERSERKS, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

@@ -26,7 +26,7 @@ public class EtLeurDragon extends Pouvoir {
 
     /**Construire un EtLeurDragon. */
     public EtLeurDragon() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPouvoirs.ET_LEUR_DRAGON, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }
