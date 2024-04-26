@@ -1,5 +1,8 @@
 package jeu.pouvoirs;
 
+import jeu.Case;
+import jeu.TypesRegions;
+
 /**Classe DesForets. L'DesForets est un pouvoir qui rend plus riche.*/
 public class DesForets extends Pouvoir {
     
@@ -14,9 +17,33 @@ public class DesForets extends Pouvoir {
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
     private static final int PIONSSUP = 4;
 
+    /**Le nombre de forêts conquises */
+    private int nbForets = 4;
+
     /**Construire un DesForets. */
     public DesForets() {
         super(NOM, DESCRIPTION, PIONSSUP);
+    }
+
+    @Override
+    public void apresConquete(Case regionConquise) {
+        if (regionConquise.getTypeRegion() == TypesRegions.FORET) {
+            this.nbForets++;
+        }
+    }
+
+    @Override
+    public void apresConqueteAdverse(Case regionConquise) {
+        if (regionConquise.getTypeRegion() == TypesRegions.FORET) {
+            this.nbForets--;
+        }
+    }
+
+    @Override
+    public void finTour(boolean enDeclin) {
+        if (!enDeclin) {
+            this.nbJetons = this.nbForets;
+        }
     }
 
 }
