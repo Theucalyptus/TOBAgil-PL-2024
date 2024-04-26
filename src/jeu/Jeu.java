@@ -10,10 +10,6 @@ public interface Jeu {
     void ajouterJoueur(Joueur joueur);
 
 
-    /**Retirer tous les Joueurs de la listes des joueurs. */
-    void reinitialiserJoueurs();
-
-
     /**Obtenir le monde.
      * @return Le monde de la partie.
      */
