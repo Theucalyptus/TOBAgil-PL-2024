@@ -25,7 +25,7 @@ public class Humains extends Peuple {
 
     /** Construire les Humains */
     public Humains() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPeuples.HUMAINS, NOM, DESCRIPTION, PIONSSUP);
     }
     
     @Override

@@ -21,6 +21,6 @@ public class TribuOubliee extends Peuple {
 
     /** Construire les TribuOubliee */
     public TribuOubliee() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPeuples.TRIBU_OUBLIEE, NOM, DESCRIPTION, PIONSSUP);
     }
 }

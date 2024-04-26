@@ -21,6 +21,6 @@ public class Geants extends Peuple {
 
     /** Construire les Geants */
     public Geants() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPeuples.GEANTS, NOM, DESCRIPTION, PIONSSUP);
     }
 }

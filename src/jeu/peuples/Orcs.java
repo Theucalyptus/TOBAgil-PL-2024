@@ -26,7 +26,7 @@ public class Orcs extends Peuple {
 
     /** Construire les Orcs */
     public Orcs() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPeuples.ORCS, NOM, DESCRIPTION, PIONSSUP);
     }
     
     @Override

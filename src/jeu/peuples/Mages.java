@@ -26,7 +26,7 @@ public class Mages extends Peuple {
 
     /** Construire les Mages */
     public Mages() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPeuples.MAGES, NOM, DESCRIPTION, PIONSSUP);
     }
     
     @Override

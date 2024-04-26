@@ -19,6 +19,6 @@ public class Tritons extends Peuple {
 
     /** Construire les Tritons */
     public Tritons() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPeuples.TRITONS, NOM, DESCRIPTION, PIONSSUP);
     }
 }

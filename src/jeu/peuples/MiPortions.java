@@ -25,7 +25,7 @@ public class MiPortions extends Peuple {
 
     /** Construire les Mi-Portions */
     public MiPortions() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPeuples.MIPORTIONS, NOM, DESCRIPTION, PIONSSUP);
     }
 
 }

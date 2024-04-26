@@ -27,7 +27,7 @@ public class Nains extends Peuple {
 
     /** Construire les nains */
     public Nains() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPeuples.NAINS, NOM, DESCRIPTION, PIONSSUP);
     }
     
     @Override

@@ -25,6 +25,6 @@ public class Zombies extends Peuple {
 
     /** Construire les Zombies */
     public Zombies() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPeuples.ZOMBIES, NOM, DESCRIPTION, PIONSSUP);
     }
 }

@@ -25,6 +25,6 @@ public class Sorciers extends Peuple {
 
     /** Construire les Sorciers */
     public Sorciers() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPeuples.SORCIERS, NOM, DESCRIPTION, PIONSSUP);
     }
 }

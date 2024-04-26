@@ -22,6 +22,6 @@ public class Squelettes extends Peuple {
 
     /** Construire les Squelettes */
     public Squelettes() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPeuples.SQUELETTES, NOM, DESCRIPTION, PIONSSUP);
     }
 }

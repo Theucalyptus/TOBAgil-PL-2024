@@ -17,6 +17,6 @@ public class HommesRats extends Peuple {
 
     /** Construire les Hommes-Rats */
     public HommesRats() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPeuples.HOMME_RATS, NOM, DESCRIPTION, PIONSSUP);
     }
 }

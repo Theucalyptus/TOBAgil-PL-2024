@@ -24,7 +24,7 @@ public class Elfes extends Peuple {
     
     /** Construire le peuple des elfes. */
     public Elfes() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPeuples.ELFES, NOM, DESCRIPTION, PIONSSUP);
     }
     
 }

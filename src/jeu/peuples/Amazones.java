@@ -29,6 +29,6 @@ public class Amazones extends Peuple {
 
     /** Construire les Amazones */
     public Amazones() {
-        super(NOM, DESCRIPTION, PIONSSUP);
+        super(TypesPeuples.AMAZONES, NOM, DESCRIPTION, PIONSSUP);
     }
 }
