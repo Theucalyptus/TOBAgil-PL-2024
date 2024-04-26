@@ -29,4 +29,9 @@ public class JeuProxy implements Jeu {
         throw new OperationInterditeException(
             "Un joueur n'a pas le droit d'actualiser le nombre de tour");
     }
+
+    public void reinitialiserJoueurs() {
+        throw new OperationInterditeException("Un joueur ne peut pas demander a vider "
+            + "la liste de Joueur.");
+    }
 }
