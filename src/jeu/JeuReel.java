@@ -91,6 +91,13 @@ public class JeuReel implements Jeu {
         return this.joueurCourant;
     }
 
+    /**
+     * Permet de mettre à jour le joueur Courant.
+     * @param joueurCourant le joueur qui sera le nouveau joueur courant.
+     * @throws IllegalArgumentException Quand le joueur Courant est un pointeur null.
+     * @throws JoeurExterieurException Quand le joueur n'est pas dans la liste des 
+     * joueurs de la partie.
+     */
     public void setJoueurCourant(Joueur joueurCourant) {
         this.joueurCourant = joueurCourant;
     }
@@ -154,7 +161,9 @@ public class JeuReel implements Jeu {
                 this.finDuTour = false;
 
                 // attendre la fin du tour
+                //while (!finDuTour) {
                 while (finDuTour) {
+
                     int a = 0; a = - a;
                 }
             }

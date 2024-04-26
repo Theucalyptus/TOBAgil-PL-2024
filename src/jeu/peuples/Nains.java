@@ -10,12 +10,9 @@ public class Nains extends Peuple {
     private static final String NOM = "Nains";
 
     /** La Description des nains et de leur capacité. */
-    private static final String DESCRIPTION = "Toute région qui comporte\n" +
-            "une Mine occupée par vos\n" +
-            "Nains rapporte 1 jeton de\n" +
-            "victoire supplémentaire en fin\n" +
-            "de tour. Ce pouvoir continue\n" +
-            "de s'appliquer même s'ils sont en déclin.";
+    private static final String DESCRIPTION = "Toute région qui comporte une Mine "
+            + "occupée par vos Nains rapporte 1 jeton de victoire supplémentaire en fin "
+            + "de tour. Ce pouvoir continue de s'appliquer même s'ils sont en déclin.";
 
     /** Le nombre de nains sans le nombre associé au pouvoir */
     private static final int PIONSSUP = 3;
