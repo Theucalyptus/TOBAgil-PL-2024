@@ -39,17 +39,17 @@ public class JeuReel implements Jeu {
      */
     public void setNombreTour() {
         switch (this.getNombreJoueur()) {
-            case PARTIE2JOUEURS:
-                this.nbTours = NOMBRETOUR2JOUEURS;
+            case 2:
+                this.nbTours = 10;
                 break;
-            case PARTIE3JOUEURS:
-                this.nbTours = NOMBRETOUR3JOUEURS;
+            case 3:
+                this.nbTours = 9;
                 break;
-            case PARTIE4JOUEURS | PARTIE5JOUEURS:
-                this.nbTours = NOMBRETOUR45JOUEURS;
+            case 4 | 5:
+                this.nbTours = 8;
                 break;
             default:
-                this.nbTours = NOMBRETOUR45JOUEURS;
+                this.nbTours = 8;
         }
     }
 

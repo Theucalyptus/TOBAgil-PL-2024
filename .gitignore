@@ -1,5 +1,7 @@
 # VSCODE
 .vscode 
+# ECLIPSE
+.project
 
 
 # Compiled class file

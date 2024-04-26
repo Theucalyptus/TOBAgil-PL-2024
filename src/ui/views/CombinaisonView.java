@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import jeu.Combinaison;
 import jeu.Joueur;
 import jeu.peuples.*;
 import jeu.pouvoirs.*;
@@ -32,14 +33,14 @@ public class CombinaisonView extends JPanel {
 
     public void setCombinaison(Combinaison comb) {
         
-        if(comb.estEnDeclin()) {
+        if(comb.getDeclin()) {
             super.setBackground(Color.GRAY);
         } else {
             super.setBackground(Color.WHITE);
         }
 
         System.out.println("TODO : CombinaisonView : setCombinaison doit utiliser la Combinaison");
-        this.peuple.setIcon(new ImageIcon(ImageFactory.peupleLogoImage(JoueurDebug.peuple.getTypePeuple())));
+        this.peuple.setIcon(new ImageIcon(ImageFactory.peupleLogoImage(comb.getPeuple())))));
         this.peuple.setText(JoueurDebug.peuple.getNom() + " : " + JoueurDebug.peuple.getDescription());
         this.pouvoir.setIcon(new ImageIcon(ImageFactory.pouvoirLogoImage(JoueurDebug.pouvoir.getTypePouvoir())));
         this.pouvoir.setText(JoueurDebug.pouvoir.getNom() + " : " + JoueurDebug.pouvoir.getDescription());
