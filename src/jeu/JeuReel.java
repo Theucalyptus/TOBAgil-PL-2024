@@ -3,6 +3,8 @@ package jeu;
 import java.util.ArrayList;
 import java.util.List;
 
+import jeu.exceptions.PartieEnCoursException;
+
 /**
  * Classe représentant une partie de jeu.
  */
@@ -80,6 +82,10 @@ public class JeuReel implements Jeu {
         return this.joueurCourant;
     }
 
+    public void setJoueurCourant(Joueur j) {
+        this.joueurCourant = j;
+    }
+
     /**
      * Obtenir le numéro du tour en train d'être joué.
      * @return Le numéro du tour qui est en train d'être joué.
@@ -124,7 +130,7 @@ public class JeuReel implements Jeu {
      */
     public void jouerPartie() {
         if (enCours) {
-            throw new IllegalCallerException();
+            throw new PartieEnCoursException();
         }
         enCours = true;
         this.setNombreTour();
@@ -139,7 +145,7 @@ public class JeuReel implements Jeu {
                 this.finDuTour = false;
 
                 // attendre la fin du tour
-                while (!finDuTour) {
+                while (finDuTour) {
                     int a = 0; a = - a;
                 }
             }
