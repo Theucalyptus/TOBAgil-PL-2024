@@ -29,21 +29,21 @@ public class Mages extends Peuple {
     
     @Override
     public void apresConquete(Case regionConquise) {
-    	if(regionConquise.getTypeRessource() == TypesSymboles.SOURCE_MAGIQUE) {
+    	if (regionConquise.getTypeRessource() == TypesSymboles.SOURCE_MAGIQUE) {
     		this.nbSources ++;
     	}
     }
     
     @Override
     public void apresConqueteAdverse(Case regionConquise) {
-    	if(regionConquise.getTypeRessource() == TypesSymboles.SOURCE_MAGIQUE) {
+    	if (regionConquise.getTypeRessource() == TypesSymboles.SOURCE_MAGIQUE) {
     		this.nbSources --;
     	}
     }
     
     @Override
     public void finTour(boolean enDeclin) {
-    	if(!enDeclin) {
+    	if (!enDeclin) {
         	this.nbJetons = this.nbSources;
     	}
     }

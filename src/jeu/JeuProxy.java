@@ -4,10 +4,14 @@ import jeu.exceptions.OperationInterditeException;
 
 /**Le proxy du jeu pour éviter toute tentative de triche de la part des joueurs. */
 public class JeuProxy implements Jeu {
-    
-    /**L'implématation du jeu */
-    final private Jeu impl;
 
+    /**L'implématation du jeu */
+    private Jeu impl;
+
+    /**
+     * Construire un proxy
+     * @param jeu le jeu sur lequel on fait un proxy.
+     */
     public JeuProxy(Jeu jeu) {
         this.impl = jeu;
     }

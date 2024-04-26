@@ -2,7 +2,7 @@ package jeu.pouvoirs;
 
 /**Classe Armé. Les Armés est un pouvoir qui rend permet d'économiser des pions d'attaques.*/
 public class Armes extends Pouvoir {
-    
+
     /**Le nom de la classe. */
     private static final String NOM = "Armés";
 

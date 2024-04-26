@@ -30,21 +30,21 @@ public class Humains extends Peuple {
     
     @Override
     public void apresConquete(Case regionConquise) {
-    	if(regionConquise.getTypeRegion() == TypesRegions.CHAMP) {
+    	if (regionConquise.getTypeRegion() == TypesRegions.CHAMP) {
     		this.nbChamps ++;
     	}
     }
     
     @Override
     public void apresConqueteAdverse(Case regionConquise) {
-    	if(regionConquise.getTypeRegion() == TypesRegions.CHAMP) {
+    	if (regionConquise.getTypeRegion() == TypesRegions.CHAMP) {
     		this.nbChamps --;
     	}
     }
     
     @Override
     public void finTour(boolean enDeclin) {
-    	if(!enDeclin) {
+    	if (!enDeclin) {
         	this.nbJetons = this.nbChamps;
     	}
     }

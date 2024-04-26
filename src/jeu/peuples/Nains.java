@@ -5,7 +5,7 @@ import jeu.TypesSymboles;
 
 /**Classe d'implémantation du peuple des Nains. */
 public class Nains extends Peuple {
-    
+
     /** Le nom des Nains. */
     private static final String NOM = "Nains";
 
@@ -29,14 +29,14 @@ public class Nains extends Peuple {
     
     @Override
     public void apresConquete(Case regionConquise) {
-    	if(regionConquise.getTypeRessource() == TypesSymboles.MINE) {
+    	if (regionConquise.getTypeRessource() == TypesSymboles.MINE) {
     		this.nbMines ++;
     	}
     }
     
     @Override
     public void apresConqueteAdverse(Case regionConquise) {
-    	if(regionConquise.getTypeRessource() == TypesSymboles.MINE) {
+    	if (regionConquise.getTypeRessource() == TypesSymboles.MINE) {
     		this.nbMines --;
     	}
     }

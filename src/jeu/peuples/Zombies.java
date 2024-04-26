@@ -2,7 +2,7 @@ package jeu.peuples;
 
 /**Classe d'implémantation du peuple des zombies. */
 public class Zombies extends Peuple {
-    
+
     /** Le nom des Zombies. */
     private static final String NOM = "Zombies";
 
