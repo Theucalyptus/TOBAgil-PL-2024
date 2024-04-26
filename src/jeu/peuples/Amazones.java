@@ -4,7 +4,7 @@ package jeu.peuples;
  * Classe d'implémantation du peuple des Amazones.
  */
 public class Amazones extends Peuple {
-    
+
     /** Le nom des Amazones. */
     private static final String NOM = "Amazones";
 

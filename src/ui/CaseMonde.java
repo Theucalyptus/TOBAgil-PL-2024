@@ -2,15 +2,19 @@ package ui;
 
 import javax.swing.*;
 
+import jeu.Case;
 import jeu.TypesRegions;
 import ui.utils.ImageFactory;
 
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.Observable;
+import java.util.Observer;
 
 
-public class CaseMonde extends JPanel {
+@SuppressWarnings("deprecation")
+public class CaseMonde extends JPanel implements Observer {
     private Image bgImage;
     private JLabel bgLabel;
 
@@ -39,5 +43,11 @@ public class CaseMonde extends JPanel {
     private void resizeIcon() {
         Image imageTemp = this.bgImage.getScaledInstance(this.getWidth(), this.getHeight(), java.awt.Image.SCALE_FAST);
         this.bgLabel.setIcon(new ImageIcon(imageTemp));
+    }
+
+    public void update(Observable arg0, Object arg1) {
+        Case maCase = (Case)arg0;
+        this.overlay.updateOverlay();
+
     }
 }

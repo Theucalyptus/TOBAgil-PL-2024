@@ -2,15 +2,14 @@
 # Script qui génére la doc java du projet
 # ----------------------------------------------------------------
 
-src=src/
-
+function clean() {
+    find -name "*.class" -print -exec rm {} \;
+}
 
 if [ -d doc ] ; then
     rm -rf doc
 fi
 
-
-for i in `find $src -name "*.java" -print`
-do
-    javadoc -d doc $i
-done
+clean
+find -name "*.java" -print | grep -v "test" | grep -v "Test" | xargs -r javadoc -d doc
+clean

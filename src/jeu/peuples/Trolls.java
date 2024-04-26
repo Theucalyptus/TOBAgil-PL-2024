@@ -16,12 +16,12 @@ public class Trolls extends Peuple {
             "ou qu'un adversaire vous en chasse, retirez l'Antre de Troll.";
 
     /** Le nombre de Trolls sans le nombre associé au pouvoir */
-    private static final int UNITECLASSE = 6;
+    private static final int PIONSSUP = 6;
 
     // Constructeur
 
     /** Construire les Trolls */
     public Trolls() {
-        super(NOM, DESCRIPTION, UNITECLASSE);
+        super(NOM, DESCRIPTION, PIONSSUP);
     }
 }

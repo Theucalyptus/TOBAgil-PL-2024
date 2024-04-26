@@ -2,12 +2,18 @@ package jeu;
 
 import jeu.peuples.Peuple;
 
+/**interface qui représente un pion. */
 public interface EnsemblePions {
-    
+
+    /** Donner le peuple du pion.
+     *
+     * @return Le peuple.
+     */
     Peuple getPeuple();
 
-    /**Donner l'état de l'unité
-     * @return L'état de l'unité : VIVANT, ENDECLIN, MORT
+    /** Donner le Nombre de pion.
+     *
+     * @return le Nombre.
      */
     int getNombre();
 
