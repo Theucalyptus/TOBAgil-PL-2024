@@ -9,21 +9,7 @@ public interface Jeu {
      */
     void ajouterJoueur(Joueur joueur);
 
-    /**
-     * Renvoie le monde de la partie (la grille).
-     * @return le monde de la partie
-     */
-    Monde getMonde();
 
-    /**
-     * Renvoie la poigné vers le joueur courant.
-     * @return Le joueur courant.
-     */
-    Joueur getJoueurCourant();
-
-    /**
-     * Détermine le nombre de tour en fonction du nombre de
-     * joueur dans le jeu.
-     */
-    void setNombreTour();
+    /**Retirer tous les Joueurs de la listes des joueurs. */
+    void reinitialiserJoueurs();
 }
