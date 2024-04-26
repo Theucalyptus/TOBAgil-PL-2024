@@ -30,6 +30,10 @@ public class MainJoueurView extends JPanel {
         Combinaison comb = joueur.getCombinaison();
         this.combViews.add(new CombinaisonView(comb));
         //}
+
+        for(CombinaisonView cbw : this.combViews) {
+            super.add(cbw);
+        }
     }
 
 }

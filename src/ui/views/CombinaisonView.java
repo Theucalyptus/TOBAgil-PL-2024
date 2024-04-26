@@ -1,6 +1,7 @@
 package ui.views;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -13,12 +14,6 @@ import jeu.pouvoirs.*;
 import ui.utils.ImageFactory;
 
 public class CombinaisonView extends JPanel {
- 
-    public static class JoueurDebug {
-        public static final Peuple peuple = new Elfes();    
-        public static final Pouvoir pouvoir = new Alchimistes(); 
-    }
-
 
     private JLabel peuple = new JLabel();
     private JLabel pouvoir = new JLabel();
@@ -26,9 +21,7 @@ public class CombinaisonView extends JPanel {
 
     public CombinaisonView(Combinaison comb) {
         super();
-        super.add(this.peuple);
-        super.add(this.pouvoir);
-        super.add(this.enDeclin);
+        super.setLayout(new FlowLayout());
 
         if(comb.getDeclin()) {
             super.setBackground(Color.GRAY);
@@ -36,14 +29,18 @@ public class CombinaisonView extends JPanel {
             super.setBackground(Color.WHITE);
         }
 
-        Peuple peuple = comb.getPeuple();
-        Pouvoir pouvoir = comb.getPouvoir();
+        Peuple peupleC = comb.getPeuple();
+        Pouvoir pouvoirC = comb.getPouvoir();
 
-        this.peuple.setIcon(new ImageIcon(ImageFactory.peupleLogoImage(peuple.getType())));
-        this.peuple.setText(peuple.getNom() + " : " + peuple.getDescription());
-        this.pouvoir.setIcon(new ImageIcon(ImageFactory.pouvoirLogoImage(pouvoir.getType())));
-        this.pouvoir.setText(pouvoir.getNom() + " : " + pouvoir.getDescription());
+        this.peuple.setIcon(new ImageIcon(ImageFactory.peupleLogoImage(peupleC.getType())));
+        this.peuple.setText(peupleC.getNom() + " : " + peupleC.getDescription());
+        this.pouvoir.setIcon(new ImageIcon(ImageFactory.pouvoirLogoImage(pouvoirC.getType())));
+        this.pouvoir.setText(pouvoirC.getNom() + " : " + pouvoirC.getDescription());
         this.peuple.setForeground(Color.WHITE);
         this.pouvoir.setForeground(Color.WHITE);
+
+        super.add(this.peuple);
+        super.add(this.pouvoir);
+        super.add(this.enDeclin);
     }
 }

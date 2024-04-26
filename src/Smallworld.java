@@ -6,6 +6,7 @@ import jeu.Combinaison;
 import jeu.JeuReel;
 import jeu.Joueur;
 import jeu.peuples.Amazones;
+import jeu.pouvoirs.Alchimistes;
 import jeu.pouvoirs.Volants;
 
 /**Classe principale de l'application.*/
@@ -29,7 +30,7 @@ public class Smallworld {
         new CombinaisonSelectionFenetre();
         new MainMondeFenetre(jeu);
         MainJoueurFenetre jf = new MainJoueurFenetre(jeu);
-        jeu.getJoueurCourant().setCombinaison(new Combinaison(new Amazones(), new Volants()));
+        jeu.getJoueurCourant().setCombinaison(new Combinaison(new Amazones(), new Alchimistes()));
         jf.update();
 
 

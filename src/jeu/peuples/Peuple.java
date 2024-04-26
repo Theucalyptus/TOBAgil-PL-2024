@@ -18,6 +18,7 @@ public abstract class Peuple extends Specialite {
     */
     public Peuple(TypesPeuples type, String nom, String description, int pions_sup) {
     	super(nom, description, pions_sup);
+        this.typePeuple = type;
     }
 
     public TypesPeuples getType() {
