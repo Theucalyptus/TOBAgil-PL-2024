@@ -56,11 +56,7 @@ public class CaseOverlay extends JPanel {
             Boolean enDeclin = (new Random().nextInt(999) % 2) == 0;
              
             ImageIcon icon;
-            if(!enDeclin) {
-                icon = new ImageIcon(ImageFactory.peupleTroupeImage(peupleType));
-            }  else {
-                icon = new ImageIcon(ImageFactory.peupleTroupeDeclinImage(peupleType));
-            }
+            icon = new ImageIcon(ImageFactory.peupleTroupeImage(peupleType, enDeclin));
             this.pionsLbl.setIcon(icon);
             this.pionsLbl.setText(Integer.toString(numberPions));
         } else {

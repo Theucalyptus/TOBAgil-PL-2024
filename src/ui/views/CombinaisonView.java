@@ -15,9 +15,8 @@ import ui.utils.ImageFactory;
 
 public class CombinaisonView extends JPanel {
 
-    private JLabel peuple = new JLabel();
-    private JLabel pouvoir = new JLabel();
-    private JLabel enDeclin = new JLabel();
+    private JLabel peupleLbl = new JLabel();
+    private JLabel pouvoirLbl = new JLabel();
 
     public CombinaisonView(Combinaison comb) {
         super();
@@ -32,15 +31,12 @@ public class CombinaisonView extends JPanel {
         Peuple peupleC = comb.getPeuple();
         Pouvoir pouvoirC = comb.getPouvoir();
 
-        this.peuple.setIcon(new ImageIcon(ImageFactory.peupleLogoImage(peupleC.getType())));
-        this.peuple.setText(peupleC.getNom() + " : " + peupleC.getDescription());
-        this.pouvoir.setIcon(new ImageIcon(ImageFactory.pouvoirLogoImage(pouvoirC.getType())));
-        this.pouvoir.setText(pouvoirC.getNom() + " : " + pouvoirC.getDescription());
-        this.peuple.setForeground(Color.WHITE);
-        this.pouvoir.setForeground(Color.WHITE);
+        this.peupleLbl.setIcon(new ImageIcon(ImageFactory.peupleLogoImage(peupleC.getType())));
+        this.peupleLbl.setText(peupleC.getNom());
+        this.pouvoirLbl.setIcon(new ImageIcon(ImageFactory.pouvoirLogoImage(pouvoirC.getType())));
+        this.pouvoirLbl.setText(pouvoirC.getNom());
 
-        super.add(this.peuple);
-        super.add(this.pouvoir);
-        super.add(this.enDeclin);
+        super.add(this.peupleLbl);
+        super.add(this.pouvoirLbl);
     }
 }

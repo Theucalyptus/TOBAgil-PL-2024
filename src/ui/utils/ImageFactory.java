@@ -24,28 +24,23 @@ public class ImageFactory {
 
 
     public static final Image regionImage(TypesRegions type) {
-        String path = "../assets/" + type.name().toLowerCase() + ".png";
+        String path = "../assets/regions/" + type.name().toLowerCase() + ".png";
         return readImage(path);
         
     }
     
     public static final Image peupleLogoImage(TypesPeuples type) {
-        String path = "../assets/" + type.name().toLowerCase() + ".png"; 
+        String path = "../assets/peuples/" + type.name().toLowerCase() +  ".png"; 
         return readImage(path);
     }
 
-    public static final Image peupleTroupeImage(TypesPeuples type) {
-        String path = "../assets/" + type.name().toLowerCase() + "_troupe.png"; 
-        return readImage(path);
-    }
-
-    public static final Image peupleTroupeDeclinImage(TypesPeuples type) {
-        String path = "../assets/" + type.name().toLowerCase() + "_troupe_declin.png"; 
+    public static final Image peupleTroupeImage(TypesPeuples type, Boolean enDeclin) {
+        String path = "../assets/troupes/" + type.name().toLowerCase() + (enDeclin ? "_declin" : "") + ".png"; 
         return readImage(path);
     }
     
     public static final Image pouvoirLogoImage(TypesPouvoirs type) {
-        String path = "../assets/" + type.name().toLowerCase() + ".png"; 
+        String path = "../assets/pouvoirs/" + type.name().toLowerCase() + ".png"; 
         return readImage(path);
     }
 }
