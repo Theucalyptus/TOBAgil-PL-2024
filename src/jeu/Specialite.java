@@ -1,7 +1,5 @@
 package jeu;
 
-import jeu.Case;
-
 /**
  * Classe abstraite représentant une spécialité.
  * Elle peut être étendue en pouvoir ou en peuple.

@@ -2,19 +2,36 @@ package jeu;
 
 import jeu.peuples.Peuple;
 
-/**interface qui représente un pion. */
-public interface EnsemblePions {
+public class EnsemblePions {
+    /** Type de Peuple. */
+    private Peuple peuple;
 
-    /** Donner le peuple du pion.
-     *
-     * @return Le peuple.
-     */
-    Peuple getPeuple();
+    /** Nombre de pions. */
+    private int nombre_pions;
 
-    /** Donner le Nombre de pion.
-     *
-     * @return le Nombre.
+    /** Constructeur à partir d'un peuple et d'un nombre de pions. */
+    public EnsemblePions(Peuple peuple, int nombre_pions) {
+        this.peuple = peuple;
+        this.nombre_pions = nombre_pions;
+    } 
+
+    /** Obtenir le type de peuple de l'ensemble.
+     * @return le peuple 
      */
-    int getNombre();
+    public Peuple getPeuple() {
+        return this.peuple;
+    } 
+
+    /**Donner l'état de l'unité
+     * @return L'état de l'unité : VIVANT, ENDECLIN, MORT
+     */
+
+
+    /** Obtenir le nombre de pions de l'ensemble.
+     * @return le nombre de pions de l'ensemble 
+     */
+    public int getNombre() {
+        return this.nombre_pions;
+    } 
 
 }

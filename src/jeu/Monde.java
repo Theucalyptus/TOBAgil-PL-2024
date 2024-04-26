@@ -124,7 +124,7 @@ public class Monde {
                 }  
 
                 Peuple monPeuple = new TribuOubliee();  //on pose une tribu oubliée sur la case
-                EnsemblePions newEnsemblePions = new EnsemblePionsImpl(monPeuple, 1); 
+                EnsemblePions newEnsemblePions = new EnsemblePions(monPeuple, 1); 
                 Case newcase = new Case(x, y, newregion, newEnsemblePions, newsymbole);    //creation de la nouvelle case
                 newMonde.grille.add(newcase);  //ajout de la nouvelle case à la grille
             } 
