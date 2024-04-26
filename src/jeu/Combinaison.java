@@ -1,5 +1,7 @@
 package jeu;
 import jeu.Specialite;
+import jeu.peuples.Peuple;
+import jeu.pouvoirs.Pouvoir;
 
 
 public class Combinaison {
@@ -55,7 +57,7 @@ public class Combinaison {
      * @return Le pouvoir constituant la combinaison.
      */
     public Pouvoir getPouvoir() {
-        return this.peuple;
+        return this.pouvoir;
     }
 
     /**
