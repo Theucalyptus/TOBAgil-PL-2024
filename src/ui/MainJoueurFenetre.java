@@ -9,7 +9,7 @@ import ui.views.MainJoueurView;
 public class MainJoueurFenetre {
 
     // constantes de classe
-    private static final String NOM = "SmallWorld - Joueurs";
+    private static final String NOM = "SmallWorld - Joueur Courant";
     
     // composants de la gui
     private final MainJoueurView view = new MainJoueurView();

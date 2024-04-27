@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 
+rm SmallWorld.jar
 cd src
 classes=$(find . -name "*.class")
 sources=$(find . -name "*.java")
