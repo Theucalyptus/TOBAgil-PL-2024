@@ -12,6 +12,8 @@ import jeu.pouvoirs.*;
 
 public class ImageFactory {
 
+    private static final String ROOT_ASSETS_PATH="./assets/";
+
     private static final Image readImage(String path) {
         Image img = null;
         try {
@@ -25,28 +27,28 @@ public class ImageFactory {
 
 
     public static final Image regionImage(TypesRegions type) {
-        String path = "../assets/regions/" + type.name().toLowerCase() + ".png";
+        String path = ROOT_ASSETS_PATH + "regions/" + type.name().toLowerCase() + ".png";
         return readImage(path);
         
     }
     
     public static final Image peupleLogoImage(TypesPeuples type) {
-        String path = "../assets/peuples/" + type.name().toLowerCase() +  ".png"; 
+        String path = ROOT_ASSETS_PATH + "peuples/" + type.name().toLowerCase() +  ".png"; 
         return readImage(path);
     }
 
     public static final Image peupleTroupeImage(TypesPeuples type, Boolean enDeclin) {
-        String path = "../assets/troupes/" + type.name().toLowerCase() + (enDeclin ? "_declin" : "") + ".png"; 
+        String path = ROOT_ASSETS_PATH + "troupes/" + type.name().toLowerCase() + (enDeclin ? "_declin" : "") + ".png"; 
         return readImage(path);
     }
     
     public static final Image pouvoirLogoImage(TypesPouvoirs type) {
-        String path = "../assets/pouvoirs/" + type.name().toLowerCase() + ".png"; 
+        String path = ROOT_ASSETS_PATH + "pouvoirs/" + type.name().toLowerCase() + ".png"; 
         return readImage(path);
     }
 
     public static final Image batimentsImage(TypesBatiments type) {
-        String path = "../assets/batiments/" + type.name().toLowerCase() + ".png"; 
+        String path = ROOT_ASSETS_PATH + "batiments/" + type.name().toLowerCase() + ".png"; 
         return readImage(path);
     }
 }

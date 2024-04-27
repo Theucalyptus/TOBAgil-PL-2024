@@ -18,9 +18,8 @@ function build() {
 }
 
 function run() {
-    cd src/
     echo "EXECUTION"
-    java Smallworld
+    java -classpath src Smallworld
     echo "EXITED"
     cd ..
 }
@@ -28,4 +27,3 @@ function run() {
 clean
 build && 
 run
-clean
