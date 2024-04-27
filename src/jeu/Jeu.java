@@ -19,4 +19,16 @@ public interface Jeu {
      * @return Le Joueur courant.
      */
     Joueur getJoueurCourant();
+
+    /**
+     * Obtenir le numéro du tour en train d'être joué.
+     * @return Le numéro du tour qui est en train d'être joué.
+     */
+    public int getNumeroTour();
+
+    /**Obtenir le Nombre de tour totale de la partie.
+     * @return Le nombre de tour totale que durera la partie.
+     */
+    public int getNombreTourTotal();
+    
 }

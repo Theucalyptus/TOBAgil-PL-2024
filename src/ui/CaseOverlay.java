@@ -3,11 +3,13 @@ package ui;
 import java.awt.GridLayout;
 import java.util.Random;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import jeu.batiments.TypesBatiments;
 import jeu.peuples.TypesPeuples;
 import ui.utils.ImageFactory;
 
@@ -23,21 +25,25 @@ public class CaseOverlay extends JPanel {
         // pour que l'overlay ne soit pas en cascade mais bien juste au dessus
         super.setAlignmentX(0);
         super.setLayout(layout);
+        // marge de l'overlay par rapport au bord de la case
+        super.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4)); 
     
         
         this.pionsLbl = new JLabel();
         this.pionsLbl.setHorizontalTextPosition(SwingConstants.RIGHT);
         this.pionsLbl.setVerticalTextPosition(SwingConstants.BOTTOM);
         this.pionsLbl.setIconTextGap(2);
-        this.updateOverlay();
 
-        this.constructionLbl = new JLabel("Cons");
+        this.constructionLbl = new JLabel();
+        this.constructionLbl.setHorizontalTextPosition(SwingConstants.RIGHT);
+        this.constructionLbl.setVerticalTextPosition(SwingConstants.BOTTOM);
+        this.constructionLbl.setIconTextGap(2);
+
+        this.updateOverlay();
 
 
         super.add(this.pionsLbl);
         super.add(this.constructionLbl);
-
-
         super.setOpaque(false);
     }
 
@@ -52,7 +58,7 @@ public class CaseOverlay extends JPanel {
         
         // si il y a des pions sur la case
         if(numberPions > 0) {
-            TypesPeuples peupleType = TypesPeuples.AMAZONES;
+            TypesPeuples peupleType = (numberPions%2 == 0 ? TypesPeuples.AMAZONES : TypesPeuples.ELFES);
             Boolean enDeclin = (new Random().nextInt(999) % 2) == 0;
              
             ImageIcon icon;
@@ -63,7 +69,19 @@ public class CaseOverlay extends JPanel {
             this.pionsLbl.setText("");
             this.pionsLbl.setIcon(null);
         }
-        
+
+        // TODO : à connecter au modèle !
+        int temp = TypesBatiments.values().length;
+        TypesBatiments batT = TypesBatiments.values()[new Random().nextInt(temp)];
+        if(batT != TypesBatiments.AUCUN) {
+            int nbBatiments = new Random().nextInt(2) + 1;
+            ImageIcon icon = new ImageIcon(ImageFactory.batimentsImage(batT));
+            this.constructionLbl.setIcon(icon);
+            this.constructionLbl.setText(Integer.toString(nbBatiments));
+        } else {
+            this.constructionLbl.setText((""));
+            this.constructionLbl.setIcon(null);
+        }
 
     }
 

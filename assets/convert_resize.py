@@ -9,7 +9,7 @@ for filename in os.listdir(directory):
         im = Image.open(filename)
         name=filename+'.png'
         name = name.replace(".jpg", "")
-        rgb_im = im.convert('RGB')
+        rgb_im = im.convert('RGB').resize([32, 32])
         rgb_im.save(name)
         print(os.path.join(directory, filename))
         continue

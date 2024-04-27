@@ -9,27 +9,47 @@ import ui.views.MainMondeView;
 public class MainMondeFenetre {
 
     // constantes de classe
-    private static final String NOM = "SmallWorld";
+    private static final String NOM = "SmallWorld - Tour ";
+    private static final int DEFAULT_LARGEUR = 600;
+    private static final int DEFAULT_HAUTEUR = 600;
+
     
     // composants de la gui
     private final MainMondeView view;
 
+    // modèle
     private final Jeu jeu;
+
+    // fenetre
+    private JFrame fenetre;
 
     //public MainGui(Jeu jeu) {
     public MainMondeFenetre(Jeu jeu) {
         this.jeu = jeu;
         this.view = new MainMondeView(jeu.getMonde());
 
-        JFrame fenetre = new JFrame(NOM);
-        Container contenu = fenetre.getContentPane();
+        this.fenetre = new JFrame(NOM);
+        Container contenu = this.fenetre.getContentPane();
         contenu.setLayout(new BorderLayout());
         contenu.add(this.view, BorderLayout.CENTER);
 
 
-        fenetre.pack();
-        fenetre.setVisible(true);
-        fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.fenetre.pack();
+        this.fenetre.setVisible(true);
+        this.fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        this.fenetre.setSize(DEFAULT_LARGEUR, DEFAULT_HAUTEUR);
+    }
+
+
+    private void updateTitre() {
+        int nbTour = this.jeu.getNumeroTour();
+        int nbTotalTour = this.jeu.getNombreTourTotal();
+        this.fenetre.setTitle(NOM + nbTour + "/ " + nbTotalTour);
+    }
+
+    public void update() {
+        this.updateTitre();
     }
 
 }

@@ -4,32 +4,24 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import jeu.Combinaison;
+import jeu.peuples.Amazones;
+import jeu.peuples.Elfes;
+import jeu.pouvoirs.Alchimistes;
+import jeu.pouvoirs.Volants;
+import ui.views.CombinaisonView;
 
-public class CombinaisonSelectionFenetre {
 
-    public class ClasseEntry extends JPanel {
+public class PiocheFenetre {
 
-        private int numero;
-
-        public ClasseEntry(int i) {
-            super();
-            this.numero = i;
-            super.add(new JLabel("Icon de la classe " + i));
-            super.add(new JLabel("Nom de la classe " + i));
-            super.add((new JLabel("Descripton de la classe " + i)));
-        }
-
-        public int getNumero() {
-            return this.numero;
-        }
-    }
-
-    public static final int NBCLASSE = 5;
-    private ClasseEntry selectedClass = null;
+    // TODO : à exporter dans jeu.pioche;
+    public static final int NBCLASSE = 2;
+    
+    private CombinaisonView selectedClass = null;
     private JFrame fenetre;
 
-    public CombinaisonSelectionFenetre() {
-        this.fenetre = new JFrame("Selection d'une classe");
+    public PiocheFenetre() {
+        this.fenetre = new JFrame("SmallWorld - Pioche");
         this.fenetre.setMinimumSize(new Dimension(800, 600));
         Container contentPane = this.fenetre.getContentPane();
         
@@ -39,11 +31,16 @@ public class CombinaisonSelectionFenetre {
 
 		MouseEventHandler trace = new MouseEventHandler();
 
-        for(int i=0;i<NBCLASSE;i++){
-           ClasseEntry entree = new ClasseEntry(i+1);
+        // à refactor pour utiliser pioche quand dispo
+        //for(int i=0;i<NBCLASSE;i++){
+           CombinaisonView entree = new CombinaisonView(new Combinaison(new Elfes(), new Volants()));
            entree.addMouseListener(trace);
            mainPanel.add(entree);
-        }
+
+           entree = new CombinaisonView(new Combinaison(new Amazones(), new Alchimistes()));
+           entree.addMouseListener(trace);
+           mainPanel.add(entree);
+        //}
 
         JButton selectButton = new JButton("Selectionner");
         selectButton.addActionListener(new ActionQuitter());
@@ -60,9 +57,9 @@ public class CombinaisonSelectionFenetre {
         @Override
         public void actionPerformed(ActionEvent evt) {
 			if(selectedClass == null) {
-                System.out.println("AUCUNE CLASSE SELECTIONNE");
+                System.out.println("AUCUNE CLASSE SELECTIONNE - REESSAYER !");
             } else {
-                System.out.println("OK");
+                System.out.println("OK - combinaison selectionne");
                 fenetre.dispose();
             }
 		}
@@ -72,7 +69,7 @@ public class CombinaisonSelectionFenetre {
         
         @Override
         public void mouseEntered(MouseEvent e) {
-            ClasseEntry entree = (ClasseEntry) e.getSource();
+            CombinaisonView entree = (CombinaisonView) e.getSource();
             if(selectedClass != entree) {
                 entree.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.BLUE));
             }
@@ -80,7 +77,7 @@ public class CombinaisonSelectionFenetre {
         
         @Override
         public void mouseExited(MouseEvent e) {
-            ClasseEntry entree = (ClasseEntry) e.getSource();
+            CombinaisonView entree = (CombinaisonView) e.getSource();
             if(selectedClass != entree) {
                 entree.setBorder(BorderFactory.createEmptyBorder());
             }
@@ -88,7 +85,7 @@ public class CombinaisonSelectionFenetre {
     
         @Override
         public void mouseClicked(MouseEvent e) {
-            ClasseEntry entree = (ClasseEntry) e.getSource();
+            CombinaisonView entree = (CombinaisonView) e.getSource();
             if(selectedClass != null) {
                 selectedClass.setBorder(BorderFactory.createEmptyBorder());
             }

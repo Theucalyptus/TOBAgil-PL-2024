@@ -1,13 +1,12 @@
 import ui.MainJoueurFenetre;
 import ui.MainMondeFenetre;
 
-import ui.CombinaisonSelectionFenetre;
+import ui.PiocheFenetre;
 import jeu.Combinaison;
 import jeu.JeuReel;
 import jeu.Joueur;
 import jeu.peuples.Amazones;
 import jeu.pouvoirs.Alchimistes;
-import jeu.pouvoirs.Volants;
 
 /**Classe principale de l'application.*/
 public class Smallworld {
@@ -23,15 +22,17 @@ public class Smallworld {
         JeuReel jeu = new JeuReel(nb_joueurs);
         jeu.ajouterJoueur(new Joueur("Xavier", 0));
         jeu.jouerPartie();
+        jeu.getJoueurCourant().setCombinaison(new Combinaison(new Amazones(), new Alchimistes()));
         
         // CONTROLLEURS
         
         // VUES
-        new CombinaisonSelectionFenetre();
-        new MainMondeFenetre(jeu);
-        MainJoueurFenetre jf = new MainJoueurFenetre(jeu);
-        jeu.getJoueurCourant().setCombinaison(new Combinaison(new Amazones(), new Alchimistes()));
-        jf.update();
+        PiocheFenetre piocheF = new PiocheFenetre();
+        MainMondeFenetre mondeF = new MainMondeFenetre(jeu);
+        MainJoueurFenetre joueurF = new MainJoueurFenetre(jeu);
+        joueurF.update();
+        mondeF.update();
+
 
 
     }
