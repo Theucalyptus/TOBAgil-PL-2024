@@ -1,4 +1,4 @@
-package ui;
+package ui.views;
 
 import javax.swing.*;
 
@@ -14,13 +14,13 @@ import java.util.Observer;
 
 
 @SuppressWarnings("deprecation")
-public class CaseMonde extends JPanel implements Observer {
+public class CaseView extends JPanel implements Observer {
     private Image bgImage;
     private JLabel bgLabel;
 
     private CaseOverlay overlay;
 
-    public CaseMonde(TypesRegions typeCase, int x, int y) {
+    public CaseView(TypesRegions typeCase, int x, int y) {
         super();
         super.setLayout(new OverlayLayout(this));
         super.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.WHITE));
@@ -34,7 +34,7 @@ public class CaseMonde extends JPanel implements Observer {
 
         super.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent ev) {
-                CaseMonde maCase = (CaseMonde)ev.getSource();
+                CaseView maCase = (CaseView)ev.getSource();
                 maCase.resizeIcon();
             }
         });

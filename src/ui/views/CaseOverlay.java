@@ -1,4 +1,4 @@
-package ui;
+package ui.views;
 
 import java.awt.GridLayout;
 import java.util.Random;
@@ -20,7 +20,7 @@ public class CaseOverlay extends JPanel {
 
     private final static GridLayout layout = new GridLayout(2, 2);
 
-    public CaseOverlay(CaseMonde parent) {
+    public CaseOverlay(CaseView parent) {
         super();
         // pour que l'overlay ne soit pas en cascade mais bien juste au dessus
         super.setAlignmentX(0);
