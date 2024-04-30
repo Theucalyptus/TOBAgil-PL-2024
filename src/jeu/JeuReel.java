@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Observer;
 
 import jeu.exceptions.JoueurDejaDansLaPartieException;
-import jeu.exceptions.NombreJoeurIncorrectException;
+import jeu.exceptions.NombreJoueurIncorrectException;
 import jeu.exceptions.PartieEnCoursException;
 import jeu.exceptions.PartiePleineException;
 
@@ -216,7 +216,7 @@ public class JeuReel implements Jeu {
                 this.nbToursTotals = 8;
                 break;
             default:
-                throw new NombreJoeurIncorrectException();
+                throw new NombreJoueurIncorrectException();
         }
     }
 
