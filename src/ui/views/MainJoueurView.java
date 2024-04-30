@@ -26,6 +26,8 @@ public class MainJoueurView extends JPanel {
         }
         this.combViews.clear();
 
+        this.nom.setText(joueur.getNom());
+
         //for(Combinaison comb : joueur.getCombinaisonList()) {
         Combinaison comb = joueur.getCombinaison();
         this.combViews.add(new CombinaisonView(comb));

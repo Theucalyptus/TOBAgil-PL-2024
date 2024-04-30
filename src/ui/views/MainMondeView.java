@@ -9,7 +9,7 @@ import javax.swing.*;
 
 import jeu.Monde;
 import jeu.TypesRegions;
-import ui.CaseMonde;
+import ui.views.CaseView;
 
 public class MainMondeView extends JPanel {
 
@@ -17,7 +17,7 @@ public class MainMondeView extends JPanel {
     public final static int NbColonnes = 4;
 
     private GridLayout layout;
-    private List<CaseMonde> cases;
+    private List<CaseView> cases;
 
     public MainMondeView(Monde monde) {
         super();
@@ -26,11 +26,11 @@ public class MainMondeView extends JPanel {
 
 
         // CODE TEMPORAIRE DE TEST
-        this.cases = new ArrayList<CaseMonde>();
+        this.cases = new ArrayList<CaseView>();
         Random rng = new Random();
         for(int i=0;i<NbLignes;i++) {
             for(int j=0;j<NbColonnes; j++) {
-                CaseMonde temp = new CaseMonde(TypesRegions.values()[rng.nextInt(TypesRegions.values().length)], i, j);
+                CaseView temp = new CaseView(TypesRegions.values()[rng.nextInt(TypesRegions.values().length)], i, j);
                 cases.add(temp);
                 super.add(temp);
             }

@@ -3,9 +3,12 @@ package jeu;
 import java.util.ArrayList;
 import java.util.List;
 
+import jeu.Monde;
 import jeu.exceptions.JoueurDejaDansLaPartieException;
 import jeu.exceptions.PartieEnCoursException;
 import jeu.exceptions.PartiePleineException;
+
+import observables.JoueurCourant;
 
 /**
  * Classe représentant une partie de jeu.
@@ -42,26 +45,24 @@ public class JeuReel implements Jeu {
      * @param nb_joueurs Le nombre de Joueur de la partie.
     */
     public JeuReel(int nb_joueurs) {
-        this.joueurs = new ArrayList<>();
-        Monde monde_vide = new Monde().CreerMonde(nb_joueurs);
-        this.finDuTour = true;
-        this.enCours = false;
-        this.nbToursTotals = 0;
-        this.noTour = 1;
-        this.joueurCourant = null;
+        this(new Monde().CreerMonde(nb_joueurs));
     }
 
+    
     /**Construire un Jeu Reel. */
     public JeuReel() {
+        this(new Monde());
+    }
+    /**Construire un Jeu Reel. */
+    private JeuReel(Monde m) {
         this.joueurs = new ArrayList<>();
-        this.monde = new Monde();
+        Monde monde_vide = m;
         this.finDuTour = true;
         this.enCours = false;
         this.nbToursTotals = 0;
         this.noTour = 1;
         this.joueurCourant = null;
     }
-
 
     // requetes
 
@@ -235,7 +236,7 @@ public class JeuReel implements Jeu {
 
                 // attendre la fin du tour
                 //while (!finDuTour) {
-                while (finDuTour) {
+                while (this.finDuTour) {
 
                     int a = 0; a = - a;
                 }
