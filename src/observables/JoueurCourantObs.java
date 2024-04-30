@@ -3,16 +3,16 @@ package observables;
 import java.util.Observable;
 
 @SuppressWarnings("deprecation")
-public class NombreTour extends Observable {
+public class JoueurCourantObs extends Observable {
     
-    public NombreTour() {
+    public JoueurCourantObs() {
         super();
     }
 
     /**
-     * Notifie les observateurs que le numéro de tour a changé.
+     * Notifie les observateurs que le joueur courant à changer.
      */
-    public void notifyNombreTour() {
+    public void notifyJoueurCourant() {
         super.setChanged();
         super.notifyObservers();
         super.clearChanged();

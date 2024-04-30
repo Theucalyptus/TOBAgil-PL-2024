@@ -62,6 +62,7 @@ public class Case extends Observable {
     /**Constructeur de la Classe Case avec tous les attributs par défaut.
     */
     public Case() {
+        System.out.println("NE DEVRAIT PAS EXISTER !!");
         this.voisins = new ArrayList<>();
         this.coordonnees = new ArrayList<>();
         this.coordonnees.add(0);

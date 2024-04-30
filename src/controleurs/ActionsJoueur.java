@@ -35,8 +35,7 @@ public class ActionsJoueur extends JPanel {
 	private class ActionFinirTour implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
-			System.out.println("ActionFinirTour déclanchée");
-			jeu.setFinDuTour(true);
+			jeu.passerTour();
 		}
 	}
 

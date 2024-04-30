@@ -41,10 +41,12 @@ public class CaseView extends JPanel implements Observer {
         });
 
         caseAffichee.addObserver(this);
+
+        this.update(caseAffichee, null);
     }
 
     private void resizeIcon() {
-        Image imageTemp = this.bgImage.getScaledInstance(this.getWidth(), this.getHeight(), java.awt.Image.SCALE_FAST);
+        Image imageTemp = this.bgImage.getScaledInstance(this.getWidth(), this.getHeight(), java.awt.Image.SCALE_SMOOTH);
         this.bgLabel.setIcon(new ImageIcon(imageTemp));
     }
 

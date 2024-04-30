@@ -5,6 +5,7 @@ import java.util.Observer;
 import jeu.exceptions.PartieEnCoursException;
 
 /**Interface de modélisation du jeu SmallWorld. */
+@SuppressWarnings("deprecation")
 public interface Jeu {
 
     /**
@@ -36,12 +37,6 @@ public interface Jeu {
     int getNombreTourTotal();
 
     /**
-     * Changer la valeur de finduTour pour la valeur donné en argument.
-     * @param finDuTour si le tour est finie.
-     */
-    void setFinDuTour(boolean finDuTour);
-
-    /**
      * Changer le numéro du tour par une nouvelle valeur.
      * @param numero La nouvelle valeur.
      */
@@ -64,10 +59,15 @@ public interface Jeu {
      */
     void setMonde(Monde leNouveauMonde);
 
-    /**Simuler une partie.
+    /** Lance une partie.
      * @throws PartieEnCoursException Quand on essaye de lancer une
      * partie alors qu'il y en a une déjà en cours.
      */
-    public void jouerPartie();
+    public void lancerPartie();
+
+    /**
+     * Passe au tour suivant.
+     */
+    void passerTour();
     
 }

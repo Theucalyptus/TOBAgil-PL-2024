@@ -2,8 +2,11 @@ package jeu;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Observer;
 
 import jeu.exceptions.JoueurDejaDansLaPartieException;
@@ -11,8 +14,8 @@ import jeu.exceptions.NombreJoueurIncorrectException;
 import jeu.exceptions.PartieEnCoursException;
 import jeu.exceptions.PartiePleineException;
 
-import observables.JoueurCourant;
-import observables.NombreTour;
+import observables.JoueurCourantObs;
+import observables.NombreTourObs;
 
 /**
  * Classe représentant une partie de jeu.
@@ -28,6 +31,9 @@ public class JeuReel implements Jeu {
 
     /** Le joueur courant. */
     private Joueur joueurCourant;
+
+    /** Iterateur sur les joueurs. */
+    private ListIterator<Joueur> joueursIter;
 
     /** Le numéro du tour actuel dans la partie. */
     private int noTour;
@@ -48,10 +54,10 @@ public class JeuReel implements Jeu {
     private Boolean enCours = false;
 
     /** Permet de notifier lorsque le joueur courant change. */
-    private JoueurCourant joueurCourantObs;
+    private JoueurCourantObs joueurCourantObs;
 
     /** Permet de notifier lorsque le numero du tour change. */
-    private NombreTour nbTourObs;
+    private NombreTourObs nbTourObs;
 
     // Constructeur
 
@@ -60,7 +66,6 @@ public class JeuReel implements Jeu {
     */
     public JeuReel(int nbJoueurs) {
         this(nbJoueurs, new Monde(nbJoueurs));
-        this.majNombreToursTotals();
     }
 
     /**Construire un Jeu Reel. */
@@ -77,8 +82,9 @@ public class JeuReel implements Jeu {
         this.nbToursTotals = 0;
         this.noTour = 1;
         this.joueurCourant = null;
-        this.joueurCourantObs = new JoueurCourant();
-        this.nbTourObs = new NombreTour();
+        this.joueursIter = null;
+        this.joueurCourantObs = new JoueurCourantObs();
+        this.nbTourObs = new NombreTourObs();
         this.nombreJoueurs = nbJoueurs;
     }
 
@@ -120,9 +126,9 @@ public class JeuReel implements Jeu {
      * Obtenir la liste des Joueurs.
      * @return La liste des Joueurs.
      */
-    public List<Joueur> getJoueurs() {
+    /* public List<Joueur> getJoueurs() {
         return this.joueurs;
-    }
+    } */
 
     /**
      * Ajoute un observateur à l'observable du joueur courant.
@@ -136,14 +142,6 @@ public class JeuReel implements Jeu {
      */
     public void addNbTourObserver(Observer obs) {
         this.nbTourObs.addObserver(obs);
-    }
-
-    /**
-     * Détermine si le joueur Courant à fini de jouer.
-     * @return Si  le joueur Courant à fini de jouer.
-     */
-    public boolean estFinDeTour() {
-        return this.finDuTour;
     }
 
 
@@ -167,19 +165,6 @@ public class JeuReel implements Jeu {
     public void setNumeroTour(int noTour) {
         this.noTour = noTour;
         this.nbTourObs.notifyObservers();
-    }
-
-    /**Signaler la fin du tour à l'application. */
-    public void setFinDuTour() {
-        this.finDuTour = true;
-    }
-
-    /**
-     * Changer la valeur de finduTour pour la valeur donné en argument.
-     * @param finDuTour si le tour est finie.
-     */
-    public void setFinDuTour(boolean finDuTour) {
-        this.finDuTour = finDuTour;
     }
 
     /**
@@ -260,41 +245,30 @@ public class JeuReel implements Jeu {
      * @throws PartieEnCoursException Quand on essaye de lancer une
      * partie alors qu'il y en a une déjà en cours.
      */
-    public void jouerPartie() {
+    public void lancerPartie() {
         if (enCours) {
             throw new PartieEnCoursException();
         }
         enCours = true;
         this.majNombreToursTotals();
-        // Pour chaque tour
-        for (int i = 1; i <= this.getNombreTourTotal(); i++) {
-            // mettre à jour le numéro du tour actuelle
-            this.setNumeroTour(i);
-            this.nbTourObs.notifyNombreTour();
+        this.joueursIter = this.joueurs.listIterator();
+        this.setJoueurCourant(this.joueursIter.next()); // unsafe si appelé alors que pas de joueur ?
+    }
 
-            // faire joeur chaque joueur
-            for (Joueur joueur : joueurs) {
-                // mettre a jour le joueur courant
-                this.joueurCourant = joueur;
-                this.joueurCourantObs.notifyJoueurCourant();
-
-                // initialisé la fin du tour
-                this.finDuTour = false;
-
-                // attendre la fin du tour
-                while (!finDuTour) {
-                    System.out.println("Je prends une chips, que je mange...");
-                    try {
-                        TimeUnit.SECONDS.sleep(1);   
-                    } catch (InterruptedException e) {
-                        // rien
-                    }
-                }
-
-                System.out.println("Fin du tour du joueur courant");
-            }
-            System.out.println("FIN DU TOUR " + i + "sur " + this.getNombreTourTotal());
+    /**
+     * Permet de passer au tour suivant
+     */
+    public void passerTour() {
+        System.out.println("Tour " + this.getNumeroTour() + " sur " + this.getNombreTourTotal());
+        if(this.joueursIter.hasNext()) {
+            this.setJoueurCourant(this.joueursIter.next());
+        } else {
+            this.joueursIter = this.joueurs.listIterator();
+            this.setNumeroTour(this.getNumeroTour() + 1);
+            this.setJoueurCourant(this.joueursIter.next());
         }
-        enCours = false;
+        if(this.getNumeroTour() > this.getNombreTourTotal()) {
+            this.enCours = false;
+        }
     }
 }

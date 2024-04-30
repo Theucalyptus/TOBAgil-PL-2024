@@ -14,7 +14,7 @@ public class JeuProxy implements Jeu {
     }
 
     @Override
-    public void jouerPartie() {
+    public void lancerPartie() {
         throw new OperationInterditeException(
             "Un joueur n'a pas le droit de lancer une partie");
     }

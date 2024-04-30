@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import jeu.Jeu;
+import jeu.exceptions.PartieEnCoursException;
 
 public class ActionsJeu extends JPanel {
     
@@ -36,9 +37,11 @@ public class ActionsJeu extends JPanel {
 	private class ActionLancerPartie implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
-			System.out.println("ActionDebutPartie déclanchée");
-			//jeu.jouerPartie();
-			System.out.println("BUGGE donc fait rien");
+			try {
+				jeu.lancerPartie();
+			} catch (PartieEnCoursException e) {
+				System.out.println("Partie déjà en cours !");
+			}
 		}
 	}
 }
