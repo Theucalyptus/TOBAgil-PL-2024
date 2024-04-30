@@ -9,6 +9,7 @@ import javax.swing.*;
 import jeu.Jeu;
 import ui.views.MainMondeView;
 
+@SuppressWarnings("deprecation")
 public class MainMondeFenetre implements Observer {
 
     // constantes de classe
@@ -54,7 +55,6 @@ public class MainMondeFenetre implements Observer {
 
     @Override
     public void update(Observable arg0, Object arg1) {
-        System.out.println("TEST");
         this.updateTitre();
     }
 

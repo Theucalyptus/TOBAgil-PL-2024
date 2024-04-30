@@ -32,7 +32,6 @@ public class Smallworld {
         jeu.ajouterJoueur(j1);
         jeu.ajouterJoueur(j2);
         jeu.ajouterJoueur(j3);
-        System.out.println(jeu.getNombreJoueur());
         jeu.setMonde(new Monde(jeu.getNombreJoueur()));
                 
         // VUES
@@ -41,6 +40,5 @@ public class Smallworld {
         MainJoueurFenetre joueurF = new MainJoueurFenetre(jeu);
         ActionsFenetre actionsF = new ActionsFenetre(jeu);
 
-        jeu.jouerPartie();
     }
 }

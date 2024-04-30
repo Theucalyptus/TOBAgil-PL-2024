@@ -81,7 +81,7 @@ public class Monde {
                 if (coins || centre) { //on traite les cas où on veut la mer ou un lac
                     newregion = TypesRegions.MER_ET_LAC;
                     newsymbole = TypesSymboles.AUCUN;
-                } else {
+                } else {               
                     //choix d'une region aleatoire de la liste des regions possibles
                     Set<TypesRegions> regionsSet = nombreRegions.keySet();  //on recupere les cles du dictionnaire
                     TypesRegions[] regionsArray = regionsSet.toArray(new TypesRegions[0]);    //on transforme le set en array            

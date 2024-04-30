@@ -52,6 +52,7 @@ public class CaseOverlay extends JPanel {
         super.add(this.constructionLbl);
         super.add(this.symboleLbl);
         super.setOpaque(false);
+
     }
 
 
