@@ -40,8 +40,6 @@ public class Smallworld {
         MainMondeFenetre mondeF = new MainMondeFenetre(jeu);
         MainJoueurFenetre joueurF = new MainJoueurFenetre(jeu);
         ActionsFenetre actionsF = new ActionsFenetre(jeu);
-        mondeF.update();
-
 
         jeu.jouerPartie();
     }

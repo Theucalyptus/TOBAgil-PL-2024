@@ -1,12 +1,15 @@
 package ui;
 
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.*;
 
 import jeu.Jeu;
 import ui.views.MainMondeView;
 
-public class MainMondeFenetre {
+public class MainMondeFenetre implements Observer {
 
     // constantes de classe
     private static final String NOM = "SmallWorld - Tour ";
@@ -26,6 +29,7 @@ public class MainMondeFenetre {
     //public MainGui(Jeu jeu) {
     public MainMondeFenetre(Jeu jeu) {
         this.jeu = jeu;
+        this.jeu.addNbTourObserver(this);
         this.view = new MainMondeView(jeu.getMonde());
 
         this.fenetre = new JFrame(NOM);
@@ -48,7 +52,9 @@ public class MainMondeFenetre {
         this.fenetre.setTitle(NOM + nbTour + "/ " + nbTotalTour);
     }
 
-    public void update() {
+    @Override
+    public void update(Observable arg0, Object arg1) {
+        System.out.println("TEST");
         this.updateTitre();
     }
 

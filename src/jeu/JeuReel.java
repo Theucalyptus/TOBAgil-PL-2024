@@ -12,6 +12,7 @@ import jeu.exceptions.PartieEnCoursException;
 import jeu.exceptions.PartiePleineException;
 
 import observables.JoueurCourant;
+import observables.NombreTour;
 
 /**
  * Classe représentant une partie de jeu.
@@ -49,6 +50,9 @@ public class JeuReel implements Jeu {
     /** Permet de notifier lorsque le joueur courant change. */
     private JoueurCourant joueurCourantObs;
 
+    /** Permet de notifier lorsque le numero du tour change. */
+    private NombreTour nbTourObs;
+
     // Constructeur
 
     /**Construire un Jeu Réel.
@@ -74,6 +78,7 @@ public class JeuReel implements Jeu {
         this.noTour = 1;
         this.joueurCourant = null;
         this.joueurCourantObs = new JoueurCourant();
+        this.nbTourObs = new NombreTour();
         this.nombreJoueurs = nbJoueurs;
     }
 
@@ -127,6 +132,13 @@ public class JeuReel implements Jeu {
     }
 
     /**
+     * Ajoute un observateur au nombre de tour.
+     */
+    public void addNbTourObserver(Observer obs) {
+        this.nbTourObs.addObserver(obs);
+    }
+
+    /**
      * Détermine si le joueur Courant à fini de jouer.
      * @return Si  le joueur Courant à fini de jouer.
      */
@@ -154,6 +166,7 @@ public class JeuReel implements Jeu {
      */
     public void setNumeroTour(int noTour) {
         this.noTour = noTour;
+        this.nbTourObs.notifyObservers();
     }
 
     /**Signaler la fin du tour à l'application. */
@@ -257,6 +270,7 @@ public class JeuReel implements Jeu {
         for (int i = 1; i <= this.getNombreTourTotal(); i++) {
             // mettre à jour le numéro du tour actuelle
             this.setNumeroTour(i);
+            this.nbTourObs.notifyNombreTour();
 
             // faire joeur chaque joueur
             for (Joueur joueur : joueurs) {

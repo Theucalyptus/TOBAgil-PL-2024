@@ -53,6 +53,12 @@ public interface Jeu {
     @SuppressWarnings("deprecation")
     void addJoueurCourantObserver(Observer obs);
 
+    /**
+     * Ajoute un observateur au nombre de tour.
+     */
+    @SuppressWarnings("deprecation")
+    void addNbTourObserver(Observer obs);
+
     /**changer la valeur du monde par une nouvelle.
      * @param leNouveauMonde la nouvelle valeur.
      */

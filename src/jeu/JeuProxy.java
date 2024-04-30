@@ -1,9 +1,39 @@
 package jeu;
 
+import java.util.Observer;
+
 import jeu.exceptions.OperationInterditeException;
 
 /**Le proxy du jeu pour éviter toute tentative de triche de la part des joueurs. */
+@SuppressWarnings("deprecation")
 public class JeuProxy implements Jeu {
+
+    @Override
+    public void addJoueurCourantObserver(Observer obs) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void jouerPartie() {
+        throw new OperationInterditeException(
+            "Un joueur n'a pas le droit de lancer une partie");
+    }
+
+    @Override
+    public void setFinDuTour(boolean finDuTour) {
+        
+    }
+
+    @Override
+    public void setMonde(Monde leNouveauMonde) {
+        throw new OperationInterditeException(
+            "Un joueur n'a pas le droit de changer le monde");    }
+
+    @Override
+    public void setNumeroTour(int numero) {
+        throw new OperationInterditeException(
+            "Un joueur n'a pas le droit de modifier le numéro du tour");
+    }
 
     /**L'implématation du jeu */
     private Jeu impl;
