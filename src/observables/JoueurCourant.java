@@ -12,7 +12,7 @@ public class JoueurCourant extends Observable {
     /**
      * Notifie les observateurs que le joueur courant à changer.
      */
-    public void updateJoueurCourant() {
+    public void notifyJoueurCourant() {
         super.setChanged();
         super.notifyObservers();
         super.clearChanged();

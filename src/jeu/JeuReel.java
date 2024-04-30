@@ -55,13 +55,13 @@ public class JeuReel implements Jeu {
      * @param nbJoueurs Le nombre de Joueur de la partie.
     */
     public JeuReel(int nbJoueurs) {
-        this(nbJoueurs, Monde.CreerMonde(nbJoueurs));
+        this(nbJoueurs, new Monde(nbJoueurs));
         this.majNombreToursTotals();
     }
 
     /**Construire un Jeu Reel. */
     public JeuReel() {
-        this(0, new Monde());
+        this(0, null);
     }
     
 
@@ -178,7 +178,7 @@ public class JeuReel implements Jeu {
      */
     public void setJoueurCourant(Joueur joueurCourant) {
         this.joueurCourant = joueurCourant;
-        this.joueurCourantObs.updateJoueurCourant();
+        this.joueurCourantObs.notifyJoueurCourant();
     }
 
     /**Changer la valeur de monde par une nouvelle.
@@ -239,6 +239,7 @@ public class JeuReel implements Jeu {
             throw new PartiePleineException();
         }
         this.joueurs.add(joueur);
+        this.nombreJoueurs++;
     }
 
 
@@ -261,7 +262,7 @@ public class JeuReel implements Jeu {
             for (Joueur joueur : joueurs) {
                 // mettre a jour le joueur courant
                 this.joueurCourant = joueur;
-                this.joueurCourantObs.updateJoueurCourant();
+                this.joueurCourantObs.notifyJoueurCourant();
 
                 // initialisé la fin du tour
                 this.finDuTour = false;

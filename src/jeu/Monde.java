@@ -17,37 +17,29 @@ public class Monde {
     private int dimY;                       // Le nombre de tuiles en hauteur
     private List<Case> grille;            // La grille avec l'ensemble des tuiles
 
-    public Monde () {
-        this.dimX = 0;
-        this.dimY = 0;
+    public Monde (int nbJoueurs) {
         this.grille = new ArrayList<>();
-    }
-
-    /** Creer un nouveau monde.
-     * @param nbJoueurs le nombre de joueurs dans le jeu 
-     * @return le monde créé
-     */
-    public static Monde CreerMonde(int nbJoueurs) {
-        int dimX, dimY, nb_max_region, nb_max_symboles;
-        int nb_types_regions = 5;
+        
+        int nb_max_region, nb_max_symboles;
+        int nb_types_regions = TypesRegions.values().length - 1;
         switch (nbJoueurs) {   //on choisit les dimensions du monde et le nombre maximal par region selon le nombre de joueurs
             case 2: 
-                dimX = dimY = 5;
+                this.dimX = this.dimY = 5;
                 nb_max_region = Math.round(((float)(dimX*dimY))/nb_types_regions);
                 nb_max_symboles = 4;
                 break;
             case 3:
-                dimX = dimY = 6;
+                this.dimX = this.dimY = 6;
                 nb_max_region = Math.round((float)(dimX*dimY)/nb_types_regions);
                 nb_max_symboles = 5;
                 break;
             case 4:
-                dimX = dimY = 7;
+                this.dimX = this.dimY = 7;
                 nb_max_region = Math.round((float)(dimX*dimY)/nb_types_regions);
                 nb_max_symboles = 7;
                 break;
             case 5: 
-                dimX = dimY = 8;
+                this.dimX = this.dimY = 8;
                 nb_max_region = Math.round((float)(dimX*dimY)/(nb_types_regions));
                 nb_max_symboles = 9;
                 break;
@@ -56,7 +48,7 @@ public class Monde {
                 nb_max_region = Math.round((float)(dimX*dimY)/nb_types_regions);
                 nb_max_symboles = 5;
         } 
-        Monde newMonde = new Monde(); //creation du monde vide
+
         //on associe a chaque type de region, le nombre de cases de ce type qui sont déjà sur la grille
         HashMap<TypesRegions, Integer> nombreRegions = new HashMap<TypesRegions, Integer>();
         nombreRegions.put(TypesRegions.CHAMP, 0);
@@ -72,14 +64,14 @@ public class Monde {
         nombreSymboles.put(TypesSymboles.CAVERNES, 0);
         nombreSymboles.put(TypesSymboles.MINE, 0);
         nombreSymboles.put(TypesSymboles.SOURCE_MAGIQUE, 0);
+        //nombreSymboles.put(TypesSymboles.AUCUN, 0);
 
         //on parcourt la grille pour associer a chaque case ses coordonnees, sa region et sa ressource
-        for (int x = 0; x < newMonde.getDimX(); x++) {
-            for (int y = 0; y < newMonde.getDimY(); y++) {
+        for (int x = 0; x < this.getDimX(); x++) {
+            for (int y = 0; y < this.getDimY(); y++) {
                 TypesSymboles newsymbole;
                 TypesRegions newregion;
-                dimX = newMonde.getDimX();
-                dimY = newMonde.getDimY();
+
                 //on verifie si on veut une mer ou un lac
                 boolean coins, centre;
 
@@ -104,31 +96,32 @@ public class Monde {
 
                     //choix d'un symbole aleatoire
                     int nb_total_symboles = 3*nb_max_symboles;
-                    double p = nb_total_symboles/(newMonde.getDimX() * newMonde.getDimY()); //probabilite de mettre un symbole sur la case
+                    double p = nb_total_symboles/(this.getDimX() * this.getDimY()); //probabilite de mettre un symbole sur la case
                     Set<TypesSymboles> symbolesSet = nombreSymboles.keySet();
                     TypesSymboles[] symbolesArray = symbolesSet.toArray(new TypesSymboles[0]);                
                     random = new Random();
                     if (random.nextDouble() < p) { //on ajoute un symbole à la case avec une probabilité p
                         int randomIndexSymbole = random.nextInt(nombreSymboles.size());
                         newsymbole = symbolesArray[randomIndexSymbole]; 
-                    } else {
+                    
+                        if (nombreSymboles.get(newsymbole) >= nb_max_symboles) { //si on atteint le max de case pour ce symbole, on le retire des symboles possible
+                            nombreSymboles.remove(newsymbole);
+                        } else {
+                            nombreSymboles.put(newsymbole, nombreSymboles.get(newsymbole) + 1);
+                        }
+                    }  else {
                         newsymbole = TypesSymboles.AUCUN;
-                    } 
-                    if (nombreSymboles.get(newsymbole) >= nb_max_symboles) { //si on atteint le max de case pour ce symbole, on le retire des symboles possible
-                        nombreSymboles.remove(newsymbole);
-                    } else {
-                        nombreSymboles.put(newsymbole, nombreSymboles.get(newsymbole) + 1);
                     }
+                    
                 }  
 
                 Peuple monPeuple = new TribuOubliee();  //on pose une tribu oubliée sur la case
                 EnsemblePions newEnsemblePions = new EnsemblePions(monPeuple, 1); 
                 Case newcase = new Case(x, y, newregion, newEnsemblePions, newsymbole);    //creation de la nouvelle case
-                newMonde.grille.add(newcase);  //ajout de la nouvelle case à la grille
+                this.grille.add(newcase);  //ajout de la nouvelle case à la grille
             } 
-        } 
-        return newMonde;
-    } 
+        }
+    }
 
     /** Obtenir le nombre de tuiles en largeur.
      * @return le nombre de tuiles en largeur  

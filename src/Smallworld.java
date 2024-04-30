@@ -6,6 +6,7 @@ import ui.PiocheFenetre;
 import jeu.Combinaison;
 import jeu.JeuReel;
 import jeu.Joueur;
+import jeu.Monde;
 import jeu.peuples.Amazones;
 import jeu.peuples.Elfes;
 import jeu.pouvoirs.Alchimistes;
@@ -21,8 +22,7 @@ public class Smallworld {
     public static void main(String[] args) {
 
         // MODELE
-        int nb_joueurs = 3; //nombre arbitraire pour l'instant en attendant un moyen d'obtenir le vrai nombre de joueurs
-        JeuReel jeu = new JeuReel(nb_joueurs);
+        JeuReel jeu = new JeuReel();
         Joueur j1 = new Joueur("Fraise", 0);
         j1.setCombinaison(new Combinaison(new Amazones(), new Alchimistes()));
         Joueur j2 = new Joueur("Framboise", 0);
@@ -32,6 +32,8 @@ public class Smallworld {
         jeu.ajouterJoueur(j1);
         jeu.ajouterJoueur(j2);
         jeu.ajouterJoueur(j3);
+        System.out.println(jeu.getNombreJoueur());
+        jeu.setMonde(new Monde(jeu.getNombreJoueur()));
                 
         // VUES
         PiocheFenetre piocheF = new PiocheFenetre();
