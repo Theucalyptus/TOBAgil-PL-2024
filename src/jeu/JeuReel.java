@@ -218,10 +218,10 @@ public class JeuReel implements Jeu {
      * partie alors qu'il y en a une déjà en cours.
      */
     public void jouerPartie() {
-        if (enCours) {
+        if (this.enCours) {
             throw new PartieEnCoursException();
         }
-        enCours = true;
+        this.enCours = true;
         this.majNombreToursTotals();
         // Pour chaque tour
         for (int i = 0; i < this.noTour; i++) {
@@ -241,6 +241,6 @@ public class JeuReel implements Jeu {
                 }
             }
         }
-        enCours = false;
+        this.enCours = false;
     }
 }

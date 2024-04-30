@@ -264,14 +264,14 @@ public class TestJeuReel {
     /**Tester le setteurs du joueur courant. */
     @Test
     void testerSetJoueurCourant() {
-        try {
-            this.aJeu.ajouterJoueur(unJoueur);
-        } catch (JoueurDejaDansLaPartieException e) {
-            // Ne rien faire
-        }
-        this.aJeu.setJoueurCourant(unJoueur);
+        this.unJeuA2Joueurs.setJoueurCourant(this.j1);
         assertTrue("Le joueur mis en argument doit devenir le joueur courant s'il"
-            + " fait partie de la partie.", this.aJeu.getJoueurCourant() == unJoueur);
+            + " fait partie de la partie.", this.unJeuA2Joueurs.getJoueurCourant() == this.j1);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    void testerRobustesseSetJoueurCourant() {
+        this.unJeuA2Joueurs.setJoueurCourant(null);
     }
 
     @Test
@@ -280,5 +280,4 @@ public class TestJeuReel {
         assertEquals("Le jeu ne devrait plus contenir de joueur.", 
             this.unJeuA5Joueurs.getNombreJoueur(), 0);
     }
-
 }
