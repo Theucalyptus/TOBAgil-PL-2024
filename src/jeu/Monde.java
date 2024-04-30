@@ -24,13 +24,13 @@ public class Monde {
     }
 
     /** Creer un nouveau monde.
-     * @param nb_joueurs le nombre de joueurs dans le jeu 
+     * @param nbJoueurs le nombre de joueurs dans le jeu 
      * @return le monde créé
      */
-    public Monde CreerMonde(int nb_joueurs) {
+    public static Monde CreerMonde(int nbJoueurs) {
         int dimX, dimY, nb_max_region, nb_max_symboles;
         int nb_types_regions = 5;
-        switch (nb_joueurs) {   //on choisit les dimensions du monde et le nombre maximal par region selon le nombre de joueurs
+        switch (nbJoueurs) {   //on choisit les dimensions du monde et le nombre maximal par region selon le nombre de joueurs
             case 2: 
                 dimX = dimY = 5;
                 nb_max_region = Math.round(((float)(dimX*dimY))/nb_types_regions);
@@ -56,8 +56,6 @@ public class Monde {
                 nb_max_region = Math.round((float)(dimX*dimY)/nb_types_regions);
                 nb_max_symboles = 5;
         } 
-        this.dimX = dimX;
-        this.dimY = dimY;
         Monde newMonde = new Monde(); //creation du monde vide
         //on associe a chaque type de region, le nombre de cases de ce type qui sont déjà sur la grille
         HashMap<TypesRegions, Integer> nombreRegions = new HashMap<TypesRegions, Integer>();
