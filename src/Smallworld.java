@@ -42,9 +42,6 @@ public class Smallworld {
         mondeF.update();
 
 
-        // MAIN
         jeu.jouerPartie();
-
-
     }
 }

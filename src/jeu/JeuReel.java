@@ -226,7 +226,6 @@ public class JeuReel implements Jeu {
     }
 
 
-    // move to controller
     /**Simuler une partie.
      * @throws PartieEnCoursException Quand on essaye de lancer une
      * partie alors qu'il y en a une déjà en cours.

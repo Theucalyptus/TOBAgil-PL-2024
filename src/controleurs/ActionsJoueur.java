@@ -14,6 +14,7 @@ public class ActionsJoueur extends JPanel {
 		super();
 		this.jeu = jeu;
 		super.setLayout(new FlowLayout());
+		super.setBorder(BorderFactory.createTitledBorder("Actions du Joueur"));
 
 		JButton finTourBtn = new JButton("Fin du Tour");
 		finTourBtn.addActionListener(new ActionFinirTour());

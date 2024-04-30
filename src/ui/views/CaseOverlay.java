@@ -9,16 +9,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import jeu.Case;
+import jeu.TypesSymboles;
 import jeu.batiments.TypesBatiments;
+import jeu.peuples.Peuple;
 import jeu.peuples.TypesPeuples;
 import ui.utils.ImageFactory;
 
 public class CaseOverlay extends JPanel {
 
+    private final static GridLayout layout = new GridLayout(2, 2);
+
     private final JLabel pionsLbl;
     private final JLabel constructionLbl;
-
-    private final static GridLayout layout = new GridLayout(2, 2);
+    private final JLabel symboleLbl;
 
     public CaseOverlay(CaseView parent) {
         super();
@@ -39,11 +43,14 @@ public class CaseOverlay extends JPanel {
         this.constructionLbl.setVerticalTextPosition(SwingConstants.BOTTOM);
         this.constructionLbl.setIconTextGap(2);
 
-        this.updateOverlay();
-
+        this.symboleLbl = new JLabel();
+        this.symboleLbl.setHorizontalTextPosition(SwingConstants.RIGHT);
+        this.symboleLbl.setVerticalTextPosition(SwingConstants.BOTTOM);
+        this.symboleLbl.setIconTextGap(2);
 
         super.add(this.pionsLbl);
         super.add(this.constructionLbl);
+        super.add(this.symboleLbl);
         super.setOpaque(false);
     }
 
@@ -51,18 +58,17 @@ public class CaseOverlay extends JPanel {
     /**
      * Met à jour l'overlay d'une case en fonction des caractéristiques de la case sous-jacante.
      */
-    public void updateOverlay() {
+    public void updateOverlay(Case maCase) {
 
-        // @TODO à changer par un truc qui récup les infos depuis la case
-        int numberPions = new Random().nextInt(15);
         
-        // si il y a des pions sur la case
+        // Affichages des pions
+        int numberPions = maCase.getNombrepions();
         if(numberPions > 0) {
-            TypesPeuples peupleType = (numberPions%2 == 0 ? TypesPeuples.AMAZONES : TypesPeuples.ELFES);
-            Boolean enDeclin = (new Random().nextInt(999) % 2) == 0;
+            Peuple peuple = maCase.getPeuple();
+            Boolean enDeclin = false;
              
             ImageIcon icon;
-            icon = new ImageIcon(ImageFactory.peupleTroupeImage(peupleType, enDeclin));
+            icon = new ImageIcon(ImageFactory.peupleTroupeImage(peuple.getType(), enDeclin));
             this.pionsLbl.setIcon(icon);
             this.pionsLbl.setText(Integer.toString(numberPions));
         } else {
@@ -70,9 +76,9 @@ public class CaseOverlay extends JPanel {
             this.pionsLbl.setIcon(null);
         }
 
-        // TODO : à connecter au modèle !
-        int temp = TypesBatiments.values().length;
-        TypesBatiments batT = TypesBatiments.values()[new Random().nextInt(temp)];
+
+        // Affichages des batiments
+        TypesBatiments batT = TypesBatiments.AUCUN;
         if(batT != TypesBatiments.AUCUN) {
             int nbBatiments = new Random().nextInt(2) + 1;
             ImageIcon icon = new ImageIcon(ImageFactory.batimentsImage(batT));
@@ -81,6 +87,15 @@ public class CaseOverlay extends JPanel {
         } else {
             this.constructionLbl.setText((""));
             this.constructionLbl.setIcon(null);
+        }
+
+
+        // Affichages des ressources
+        TypesSymboles symT = maCase.getTypeRessource();
+        if(symT != TypesSymboles.AUCUN) {
+            this.symboleLbl.setIcon(new ImageIcon(ImageFactory.symboleImage(symT)));
+        } else {
+            this.symboleLbl.setIcon(null);
         }
 
     }

@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import jeu.TypesRegions;
+import jeu.TypesSymboles;
 import jeu.batiments.TypesBatiments;
 import jeu.peuples.*;
 import jeu.pouvoirs.*;
@@ -49,6 +50,11 @@ public class ImageFactory {
 
     public static final Image batimentsImage(TypesBatiments type) {
         String path = ROOT_ASSETS_PATH + "batiments/" + type.name().toLowerCase() + ".png"; 
+        return readImage(path);
+    }
+
+    public static final Image symboleImage(TypesSymboles type) {
+        String path = ROOT_ASSETS_PATH + "symboles/" + type.name().toLowerCase() + ".png"; 
         return readImage(path);
     }
 }

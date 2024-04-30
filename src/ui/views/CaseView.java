@@ -20,11 +20,11 @@ public class CaseView extends JPanel implements Observer {
 
     private CaseOverlay overlay;
 
-    public CaseView(TypesRegions typeCase, int x, int y) {
+    public CaseView(Case caseAffichee) {
         super();
         super.setLayout(new OverlayLayout(this));
         super.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.WHITE));
-        this.bgImage = ImageFactory.regionImage(typeCase);
+        this.bgImage = ImageFactory.regionImage(caseAffichee.getTypeRegion());
         
         this.overlay = new CaseOverlay(this);
         super.add(this.overlay);
@@ -32,12 +32,15 @@ public class CaseView extends JPanel implements Observer {
         this.bgLabel = new JLabel(new ImageIcon(this.bgImage));
         super.add(this.bgLabel);
 
+        // Ajout gestion redimensionnement image dynamique
         super.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent ev) {
                 CaseView maCase = (CaseView)ev.getSource();
                 maCase.resizeIcon();
             }
         });
+
+        caseAffichee.addObserver(this);
     }
 
     private void resizeIcon() {
@@ -47,7 +50,7 @@ public class CaseView extends JPanel implements Observer {
 
     public void update(Observable arg0, Object arg1) {
         Case maCase = (Case)arg0;
-        this.overlay.updateOverlay();
+        this.overlay.updateOverlay(maCase);
 
     }
 }
