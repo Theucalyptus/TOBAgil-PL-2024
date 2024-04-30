@@ -32,7 +32,6 @@ public class Smallworld {
         jeu.ajouterJoueur(j1);
         jeu.ajouterJoueur(j2);
         jeu.ajouterJoueur(j3);
-        jeu.getMonde().CreerMonde(jeu.getNombreJoueur());
                 
         // VUES
         PiocheFenetre piocheF = new PiocheFenetre();

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Observer;
 
 import jeu.exceptions.JoueurDejaDansLaPartieException;
+import jeu.exceptions.NombreJoeurIncorrectException;
 import jeu.exceptions.PartieEnCoursException;
 import jeu.exceptions.PartiePleineException;
 
@@ -15,6 +16,8 @@ import observables.JoueurCourant;
 /**
  * Classe représentant une partie de jeu.
  */
+
+@SuppressWarnings("deprecation")
 public class JeuReel implements Jeu {
 
     // atributs
@@ -34,6 +37,9 @@ public class JeuReel implements Jeu {
     /** Indicateur de fin de tour du joueur. */
     private boolean finDuTour;
 
+    /** Le nombre de Joueur de la partie. */
+    private int nombreJoueurs;
+
     /** Le plateau. */
     private Monde monde;              // Le plateau du monde
 
@@ -46,25 +52,29 @@ public class JeuReel implements Jeu {
     // Constructeur
 
     /**Construire un Jeu Réel.
-     * @param nb_joueurs Le nombre de Joueur de la partie.
+     * @param nbJoueurs Le nombre de Joueur de la partie.
     */
-    public JeuReel(int nb_joueurs) {
+    public JeuReel(int nbJoueurs) {
+        this(nbJoueurs, Monde.CreerMonde(nbJoueurs));
+        this.majNombreToursTotals();
+    }
+
+    /**Construire un Jeu Reel. */
+    public JeuReel() {
+        this(0, new Monde());
+    }
+    
+
+    private JeuReel(int nbJoueurs, Monde leMonde) {
         this.joueurs = new ArrayList<>();
-        Monde monde_vide = new Monde();
-        if(nb_joueurs != 0) {
-            this.monde = monde_vide.CreerMonde(nb_joueurs);
-        }
+        this.monde = leMonde;
         this.finDuTour = true;
         this.enCours = false;
         this.nbToursTotals = 0;
         this.noTour = 1;
         this.joueurCourant = null;
         this.joueurCourantObs = new JoueurCourant();
-    }
-
-    /**Construire un Jeu Reel. */
-    public JeuReel() {
-        this(0);
+        this.nombreJoueurs = nbJoueurs;
     }
 
 
@@ -98,7 +108,7 @@ public class JeuReel implements Jeu {
      * @return Le nombre de Joueur.
      */
     public int getNombreJoueur() {
-        return this.joueurs.size();
+        return this.nombreJoueurs;
     }
 
     /**
@@ -112,7 +122,6 @@ public class JeuReel implements Jeu {
     /**
      * Ajoute un observateur à l'observable du joueur courant.
      */
-    @SuppressWarnings("deprecation")
     public void addJoueurCourantObserver(Observer obs) {
         this.joueurCourantObs.addObserver(obs);
     }
@@ -172,6 +181,13 @@ public class JeuReel implements Jeu {
         this.joueurCourantObs.updateJoueurCourant();
     }
 
+    /**Changer la valeur de monde par une nouvelle.
+     * @param leNouveauMonde Le nouveau Monde.
+     */
+    public void setMonde(Monde leNouveauMonde) {
+        this.monde = leNouveauMonde;
+    }
+
     /**Retirer tous les Joueurs de la listes des joueurs. */
     public void reinitialiserJoueurs() {
         this.joueurs = new ArrayList<>();
@@ -189,7 +205,7 @@ public class JeuReel implements Jeu {
      * nombre de joueur dans la partie.
      */
     private void majNombreToursTotals() {
-        switch (this.getNombreJoueur()) {
+        switch (this.nombreJoueurs) {
             case 2:
                 this.nbToursTotals = 10;
                 break;
@@ -200,7 +216,7 @@ public class JeuReel implements Jeu {
                 this.nbToursTotals = 8;
                 break;
             default:
-                this.nbToursTotals = 8;
+                throw new NombreJoeurIncorrectException();
         }
     }
 
@@ -237,7 +253,10 @@ public class JeuReel implements Jeu {
         enCours = true;
         this.majNombreToursTotals();
         // Pour chaque tour
-        for (int i = 0; i < this.getNombreTourTotal(); i++) {
+        for (int i = 1; i <= this.getNombreTourTotal(); i++) {
+            // mettre à jour le numéro du tour actuelle
+            this.setNumeroTour(i);
+
             // faire joeur chaque joueur
             for (Joueur joueur : joueurs) {
                 // mettre a jour le joueur courant

@@ -15,7 +15,7 @@ public class ActionsJeu extends JPanel {
 		super.setName("Actions du Jeu");
 		this.jeu = jeu;
 		super.setLayout(new FlowLayout());
-		super.setBorder(BorderFactory.createTitledBorder("Actions du Joueur"));
+		super.setBorder(BorderFactory.createTitledBorder("Actions du Jeu"));
 
 		JButton debutPartieBtn = new JButton("Lancer la partie");
 		debutPartieBtn.addActionListener(new ActionLancerPartie());
