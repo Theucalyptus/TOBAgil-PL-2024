@@ -43,8 +43,7 @@ public class JeuReel implements Jeu {
     */
     public JeuReel(int nb_joueurs) {
         this.joueurs = new ArrayList<>();
-        Monde monde_vide = new Monde();
-        this.monde = monde_vide.CreerMonde(nb_joueurs);
+        Monde monde_vide = new Monde().CreerMonde(nb_joueurs);
         this.finDuTour = true;
         this.enCours = false;
         this.nbToursTotals = 0;
