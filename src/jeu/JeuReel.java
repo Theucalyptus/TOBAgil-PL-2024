@@ -244,7 +244,6 @@ public class JeuReel implements Jeu {
      * partie alors qu'il y en a une déjà en cours.
      */
     public void lancerPartie() {
-    public void lancerPartie() {
         if (enCours) {
             throw new PartieEnCoursException();
         }
