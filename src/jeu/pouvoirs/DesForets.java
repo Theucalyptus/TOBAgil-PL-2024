@@ -17,7 +17,7 @@ public class DesForets extends Pouvoir {
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
     private static final int PIONSSUP = 4;
 
-    /**Le nombre de forêts conquises */
+    /**Le nombre de forêts conquises. */
     private int nbForets = 4;
 
     /**Construire un DesForets. */

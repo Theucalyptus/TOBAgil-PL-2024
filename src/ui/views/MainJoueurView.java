@@ -68,7 +68,7 @@ public class MainJoueurView extends JPanel {
     public class PointsView extends JPanel {
 
         private class JetonView extends JLabel {
-            
+
             public JetonView(int nombre) {
                 super();
                 assert(nombre == 1 || nombre == 3 || nombre == 5 || nombre == 10);

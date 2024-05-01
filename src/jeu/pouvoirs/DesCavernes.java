@@ -14,6 +14,7 @@ public class DesCavernes extends Pouvoir {
             + "minimum de 1 pion. De plus, pour vos conquètes, toutes les régions qui "
             + "comportent une caverne sont considérées comme adjacentes entre-elles.";
 
+    /**Le nombre de pions supplémentaire ajouté par le pouvoir. */
     private static final int PIONSSUP = 5;
 
     /**Construire un DesCavernes. */

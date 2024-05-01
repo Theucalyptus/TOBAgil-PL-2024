@@ -7,7 +7,8 @@ public class Scouts extends Pouvoir {
     private static final String NOM = "Scouts";
 
     /**La description du pouvoir. */
-    private static final String DESCRIPTION = "Placez les 5 jetons de Campement dans la ou "
+    private static final String DESCRIPTION = "Placez les 5 jetons de Campement "
+            + "dans la ou "
             + "les  régions  que  vous  occupez,  pendant la "
             + "phase de Redéploiement. Tout Campement "
             + "compte comme un pion de Peuple supplémentaire "
