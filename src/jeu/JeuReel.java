@@ -252,7 +252,7 @@ public class JeuReel implements Jeu {
         enCours = true;
         this.majNombreToursTotals();
         this.joueursIter = this.joueurs.listIterator();
-        this.setJoueurCourant(this.joueursIter.next()); // unsafe si appelé alors que pas de joueur ?
+        this.setJoueurCourant(this.joueursIter.next());
     }
 
     /**
