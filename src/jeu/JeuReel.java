@@ -2,6 +2,8 @@ package jeu;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
