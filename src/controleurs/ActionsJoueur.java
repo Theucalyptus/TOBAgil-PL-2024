@@ -18,8 +18,12 @@ public class ActionsJoueur extends JPanel {
 
 		JButton finTourBtn = new JButton("Fin du Tour");
 		finTourBtn.addActionListener(new ActionFinirTour());
-
 		super.add(finTourBtn);
+
+		JButton declinBtn = new JButton("Passer en déclin");
+		declinBtn.addActionListener(new ActionDeclin());
+		super.add(declinBtn);
+
 
 	}
 
@@ -69,5 +73,12 @@ public class ActionsJoueur extends JPanel {
 					+ source.getText());
 		}
 
+	}
+
+	private class ActionDeclin implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent evt) {
+			jeu.getJoueurCourant().getCombinaison().passageDeclin();
+		}
 	}
 }
