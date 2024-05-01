@@ -10,13 +10,13 @@ import static org.junit.Assert.*;
 public class TestJoueur {
 
     /**Donne la précisions des test d'égalité. */
-    private static double PRECISION = 0.00001;
+    public static final double PRECISION = 0.00001;
 
     /**Nombre de point à ajouter durant le test. */
-    private static int POINTAAJOUTER = 10;
+    private static final int POINTAAJOUTER = 10;
 
     /**Nombre de point à retirer durant le test. */
-    private static int POINTARETIRER = 5;
+    private static final int POINTARETIRER = 5;
 
     /**Instance testé de Joueur. */
     private Joueur unJoueur;
@@ -62,7 +62,6 @@ public class TestJoueur {
     @Test
     void testerAddPointsPositif() {
         int av = this.unJoueur.getPoints();
-        int POINTAAJOUTER = 10;
         this.unJoueur.addPoints(POINTAAJOUTER);
         int resultat = POINTAAJOUTER + av;
         assertEquals("Le nombre de points devrait être " + resultat,
@@ -88,7 +87,7 @@ public class TestJoueur {
     }
 
     /**Test la robustesse de la soustraction de point. */
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     void testerRubustesseSubPoints() {
         this.unJoueur.subPoints(-17);
     }

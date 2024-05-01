@@ -10,12 +10,12 @@ public class HommesRats extends Peuple {
     private static final String DESCRIPTION = "Pas de Capacité spécifique, ils sont "
             + "déjà bien assez nombreux !";
 
-    /** Le nombre d'Homme-Rats sans le nombre associé au pouvoir */
+    /** Le nombre d'Homme-Rats sans le nombre associé au pouvoir. */
     private static final int PIONSSUP = 8;
 
     // Constructeur
 
-    /** Construire les Hommes-Rats */
+    /** Construire les Hommes-Rats. */
     public HommesRats() {
         super(TypesPeuples.HOMME_RATS, NOM, DESCRIPTION, PIONSSUP);
     }

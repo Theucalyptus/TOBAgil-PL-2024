@@ -18,12 +18,12 @@ public class Sorciers extends Peuple {
             + "à une région appartenant aux Sorciers. Le pion adverse "
             + "remplacé est remis dans le casier de rangement.";
 
-    /** Le nombre de Sorciers sans le nombre associé au pouvoir */
+    /** Le nombre de Sorciers sans le nombre associé au pouvoir. */
     private static final int PIONSSUP = 6;
 
     // Constructeur
 
-    /** Construire les Sorciers */
+    /** Construire les Sorciers. */
     public Sorciers() {
         super(TypesPeuples.SORCIERS, NOM, DESCRIPTION, PIONSSUP);
     }

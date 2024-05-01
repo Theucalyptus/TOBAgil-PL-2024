@@ -10,8 +10,8 @@ import jeu.Monde;
  */
 public class TestMonde {
 
-    /** La précision des Comparaisons */
-    public static double PRECISION = 0.0001;
+    /** La précision des Comparaisons. */
+    public static final double PRECISION = 0.0001;
 
     /**Le monde testé. */
     private Monde unMonde;
@@ -37,22 +37,22 @@ public class TestMonde {
         new Monde(3, 21);
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     void testerRobustesseConstructeurDimensionPremierNegatif() {
         new Monde(-3, 5);
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     void testerRobustesseConstructeurDimensionDeuxiemeNegatif() {
         new Monde(4, -1);
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     void testerRobustesseConstructeurDimensionPremierNull() {
         new Monde(0, 12);
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     void testerRobustesseConstructeurDimensionDeuxiemeNull() {
         new Monde(2, 0);
     }
@@ -60,42 +60,54 @@ public class TestMonde {
     @Test
     void testerCreerMonde2Joueurs() {
         Monde unAutreMonde = CreerMonde(2);
-        int dimX = 5, dimY = 5;
-        assertEquals("Le nombre de colonne doit être " + dimX, unAutreMonde.getDimX(), 5, PRECISION);
-        assertEquals("Le nombre de ligne doit être " + dimY, unAutreMonde.getDimY(), 5, PRECISION);
+        int dimX = 5;
+        int dimY = 5;
+        assertEquals("Le nombre de colonne doit être " + dimX,
+            unAutreMonde.getDimX(), 5, PRECISION);
+        assertEquals("Le nombre de ligne doit être " + dimY,
+            unAutreMonde.getDimY(), 5, PRECISION);
     }
 
     @Test
     void testerCreerMonde3Joueurs() {
         Monde unAutreMonde = CreerMonde(3);
-        int dimX = 6, dimY = 6;
-        assertEquals("Le nombre de colonne doit être " + dimX, unAutreMonde.getDimX(), 6, PRECISION);
-        assertEquals("Le nombre de ligne doit être " + dimY, unAutreMonde.getDimY(), 6, PRECISION);
+        int dimX = 6;
+        int dimY = 6;
+        assertEquals("Le nombre de colonne doit être " + dimX,
+            unAutreMonde.getDimX(), 6, PRECISION);
+        assertEquals("Le nombre de ligne doit être " + dimY,
+            unAutreMonde.getDimY(), 6, PRECISION);
     }
 
     @Test
     void testerCreerMonde4Joueurs() {
         Monde unAutreMonde = CreerMonde(4);
-        int dimX = 7, dimY = 7;
-        assertEquals("Le nombre de colonne doit être " + dimX, unAutreMonde.getDimX(), 6, PRECISION);
-        assertEquals("Le nombre de ligne doit être " + dimY, unAutreMonde.getDimY(), 6, PRECISION);
+        int dimX = 7;
+        int dimY = 7;
+        assertEquals("Le nombre de colonne doit être " + dimX,
+            unAutreMonde.getDimX(), 6, PRECISION);
+        assertEquals("Le nombre de ligne doit être " + dimY,
+            unAutreMonde.getDimY(), 6, PRECISION);
     }
 
     @Test
     void testerCreerMonde5Joueurs() {
         Monde unAutreMonde = CreerMonde(5);
-        int dimX = 8, dimY = 8;
-        assertEquals("Le nombre de colonne doit être " + dimX, unAutreMonde.getDimX(), 6, PRECISION);
-        assertEquals("Le nombre de ligne doit être " + dimY, unAutreMonde.getDimY(), 6, PRECISION);
+        int dimX = 8;
+        int dimY = 8;
+        assertEquals("Le nombre de colonne doit être " + dimX,
+            unAutreMonde.getDimX(), 6, PRECISION);
+        assertEquals("Le nombre de ligne doit être " + dimY,
+            unAutreMonde.getDimY(), 6, PRECISION);
     }
 
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     void testerRobustesseCreerMondeZero() {
         CreerMonde(0);
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     void testerRobustesseCreerMondePlusQueCinq() {
         CreerMonde(6);
     }
@@ -115,35 +127,38 @@ public class TestMonde {
 
     @Test
     void testerGetCaseUnDeux() {
-        int x = 1, y = 2, dim = 2;
+        int x = 1;
+        int y = 2;
+        int dim = 2;
         Case uneCase = this.unMonde.getCase(x, y);
         List<Integer> co = uneCase.getCoordonnees();
-        assertEquals("La listes des coordonnée doit avoir une dimension de " + dim, co.size(), 2, PRECISION);
+        assertEquals("La listes des coordonnée doit avoir une dimension de " + dim,
+            co.size(), 2, PRECISION);
         assertEquals("La première coordonnée doit être " + x, co.get(0), x, PRECISION);
         assertEquals("La deuxième coordonnée doit être " + y, co.get(1), y, PRECISION);
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     void testerRobustesseGetCaseXNegatif() {
         this.unMonde.getCase(-1, 1);
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     void testerRobustesseGetCaseYNegatif() {
         this.unMonde.getCase(1, -1);
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     void testerRobustesseGetCaseXTropGrand() {
         this.unMonde.getCase(1000, 1);
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     void testerRobustesseGetCaseYTropGrand() {
         this.unMonde.getCase(1, 1000);
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     void testerRobustesseGetCaseXZero() {
         this.unMonde.getCase(0, 1);
     }

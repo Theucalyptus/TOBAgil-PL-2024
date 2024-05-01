@@ -15,8 +15,9 @@ public class Elfes extends Peuple {
                 + "défausser un . Redéployez ces pions comme d'habitude "
                 + "lorsque l'adversaire a fini son tour.";
 
-    /** Le nombre d'unité que le joueur obtient pour le peuple des Elfes. Il faut y ajouter
-     * le nombre donné par le pouvoir pour savoir le nombre d'unité de ce peuple possède. */
+    /** Le nombre d'unité que le joueur obtient pour le peuple des Elfes. Il faut y
+     * ajouter le nombre donné par le pouvoir pour savoir le nombre d'unité de ce
+     * peuple possède. */
     private static final int PIONSSUP = 6;
 
 

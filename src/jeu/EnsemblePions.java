@@ -7,31 +7,30 @@ public class EnsemblePions {
     private Peuple peuple;
 
     /** Nombre de pions. */
-    private int nombre_pions;
+    private int nombrePions;
 
-    /** Constructeur à partir d'un peuple et d'un nombre de pions. */
-    public EnsemblePions(Peuple peuple, int nombre_pions) {
+    /** Constructeur à partir d'un peuple et d'un nombre de pions.
+     * @param peuple Le Peuple dont fait partie l'ensemble de pions.
+     * @param nombrePions Le nombre de pions dont l'ensemble de pions fait partie.
+     */
+    public EnsemblePions(Peuple peuple, int nombrePions) {
         this.peuple = peuple;
-        this.nombre_pions = nombre_pions;
+        this.nombrePions = nombrePions;
     }
 
     /** Obtenir le type de peuple de l'ensemble.
-     * @return le peuple
+     * @return le peuple.
      */
     public Peuple getPeuple() {
         return this.peuple;
     }
 
-    /**Donner l'état de l'unité
-     * @return L'état de l'unité : VIVANT, ENDECLIN, MORT
-     */
-
 
     /** Obtenir le nombre de pions de l'ensemble.
-     * @return le nombre de pions de l'ensemble
+     * @return le nombre de pions de l'ensemble.
      */
     public int getNombre() {
-        return this.nombre_pions;
+        return this.nombrePions;
     }
 
 }

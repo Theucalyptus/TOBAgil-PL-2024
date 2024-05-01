@@ -9,22 +9,23 @@ public class Orcs extends Peuple {
     private static final String NOM = "Orcs";
 
     /** La Description des Orcs et de leur capacité. */
-    private static final String DESCRIPTION = "Toute région non-vide conquise par vos Orcs "
+    private static final String DESCRIPTION = "Toute région non-vide conquise par vos "
+                + "Orcs "
                 + "durant ce tour rapporte 1 jeton de victoire "
                 + "supplémentaire en fin de tour.";
 
-    /** Le nombre d'Orcs sans le nombre associé au pouvoir */
+    /** Le nombre d'Orcs sans le nombre associé au pouvoir. */
     private static final int PIONSSUP = 5;
 
-    /** Le nombre de régions non-vides conquises par les Orcs dans ce tour.*/
+    /** Le nombre de régions non-vides conquises par les Orcs dans ce tour. */
     private int nbRegionsConquises = 0;
 
-    /** Indicateur du caractère vide d'une région pendant sa conquête.*/
+    /** Indicateur du caractère vide d'une région pendant sa conquête. */
     private boolean estNonVide;
 
     // Constructeur
 
-    /** Construire les Orcs */
+    /** Construire les Orcs. */
     public Orcs() {
         super(TypesPeuples.ORCS, NOM, DESCRIPTION, PIONSSUP);
     }
@@ -36,7 +37,7 @@ public class Orcs extends Peuple {
 
     @Override
     public void avantConquete(Case regionAConquerir) {
-    	if(regionAConquerir.getNombrepions() != 0) {
+    	if (regionAConquerir.getNombrepions() != 0) {
     		this.estNonVide = true;
     	} else {
     		this.estNonVide = false;
@@ -45,15 +46,15 @@ public class Orcs extends Peuple {
 
     @Override
     public void apresConquete(Case regionConquise) {
-    	if(estNonVide) {
-    		this.nbRegionsConquises ++;
+    	if (estNonVide) {
+    		this.nbRegionsConquises++;
     	}
     }
 
     @Override
     public void finTour(boolean enDeclin) {
     	if (!enDeclin) {
-        	this.nbJetons = this.nbRegionsConquises;	
+        	this.nbJetons = this.nbRegionsConquises;
     	}
     }
 }

@@ -14,7 +14,7 @@ public class Mages extends Peuple {
                 + "magique occupée par vos Mages rapporte 1 jeton de victoire "
                 + "supplémentaire en fin de tour.";
 
-    /** Le nombre de Mages sans le nombre associé au pouvoir */
+    /** Le nombre de Mages sans le nombre associé au pouvoir. */
     private static final int PIONSSUP = 5;
 
     /** Le nombre de régions comportant une Source Magique contrôlée par ce peuple.*/
@@ -22,7 +22,7 @@ public class Mages extends Peuple {
 
     // Constructeur
 
-    /** Construire les Mages */
+    /** Construire les Mages. */
     public Mages() {
         super(TypesPeuples.MAGES, NOM, DESCRIPTION, PIONSSUP);
     }
@@ -30,14 +30,14 @@ public class Mages extends Peuple {
     @Override
     public void apresConquete(Case regionConquise) {
     	if (regionConquise.getTypeRessource() == TypesSymboles.SOURCE_MAGIQUE) {
-    		this.nbSources ++;
+    		this.nbSources++;
     	}
     }
 
     @Override
     public void apresConqueteAdverse(Case regionConquise) {
     	if (regionConquise.getTypeRessource() == TypesSymboles.SOURCE_MAGIQUE) {
-    		this.nbSources --;
+    		this.nbSources--;
     	}
     }
 
