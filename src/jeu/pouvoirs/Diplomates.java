@@ -2,7 +2,7 @@ package jeu.pouvoirs;
 
 /**Classe Diplomates. L'Diplomates est un pouvoir qui rend plus riche.*/
 public class Diplomates extends Pouvoir {
-    
+
     /**Le nom de la classe. */
     private static final String NOM = "Diplomates";
 

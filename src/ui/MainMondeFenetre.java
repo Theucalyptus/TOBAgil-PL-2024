@@ -17,7 +17,7 @@ public class MainMondeFenetre implements Observer {
     private static final int DEFAULT_LARGEUR = 600;
     private static final int DEFAULT_HAUTEUR = 600;
 
-    
+
     // composants de la gui
     private final MainMondeView view;
 

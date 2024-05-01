@@ -1,5 +1,4 @@
 package jeu;
-import jeu.Specialite;
 import jeu.peuples.Peuple;
 import jeu.pouvoirs.Pouvoir;
 
@@ -19,10 +18,10 @@ public class Combinaison {
     /** Le status de déclin de la combinaison. */
     private Boolean declin;
 
-    /** La combinaison a-t-elle déja fais son premier tour. */      
+    /** La combinaison a-t-elle déja fais son premier tour. */
     private Boolean premierTour;
 
-    /** Ensemble de pions de la combinaison. */      
+    /** Ensemble de pions de la combinaison. */
     private EnsemblePions pions;
 
     //===============================================================
@@ -68,6 +67,10 @@ public class Combinaison {
         return this.declin;
     }
 
+    /**
+     * Donner l'ensemble des Pions de la combinaison.
+     * @return Les Pions de la Combinaisons.
+     */
     public EnsemblePions getPions() {
         return this.pions;
     }
@@ -78,7 +81,7 @@ public class Combinaison {
     //===============================================================
 
     /**
-     * Permetre le passage en declin de la combinaison
+     * Permetre le passage en declin de la combinaison.
      */
     public void passageDeclin() {
         this.declin = true;
@@ -103,16 +106,16 @@ public class Combinaison {
         this.peuple.avantConquete(regionAConquerir);
         return (this.peuple.reductionAttaque + this.pouvoir.reductionAttaque);
     }
-    
+
     /**
-     * Permetre au peuple et pouvoir de prendre en compte un conquete
+     * Permetre au peuple et pouvoir de prendre en compte un conquete.
      * @param regionConquise La case correspondant à la région conquise.
      */
     public void apresConquete(Case regionConquise) {
         this.peuple.apresConquete(regionConquise);
         this.pouvoir.apresConquete(regionConquise);
     }
-    
+
     /**
      * Permetre au peuple et pouvoir de prendre en compte la perte d'une region.
      * @param regionConquise La case correspondant à la région perdu.
@@ -121,19 +124,18 @@ public class Combinaison {
         this.peuple.apresConqueteAdverse(regionConquise);
         this.pouvoir.apresConqueteAdverse(regionConquise);
     }
-    
+
     /**
-     * Permetre au peuple et pouvoir d'agir dans la phase de redéploiement
+     * Permetre au peuple et pouvoir d'agir dans la phase de redéploiement.
      */
     public void reDeploiement() {
         this.peuple.finAttaque();
         this.pouvoir.finAttaque();
     }
-    
+
     /**
      * Permetre d'obtenir les jetons de victoires bonus provenant du peuple et pouvoir.
-     * @param enDeclin la boolean donnant la situation de la combinaison
-     * @retun le bonus de jetons de victoires
+     * @return Le bonus de jetons de victoires.
      */
     public int finTour() {
         this.peuple.finTour(this.declin);

@@ -7,7 +7,7 @@ import javax.swing.*;
 import jeu.Jeu;
 
 public class ActionsJoueur extends JPanel {
-    
+
 	private final Jeu jeu;
 
 	public ActionsJoueur(Jeu jeu) {
@@ -28,7 +28,7 @@ public class ActionsJoueur extends JPanel {
 	  de très vite avoir énormément de code dans ces fichiers.
 
 		En attendant, voici en gros comment on réalise la partie "Active" du controlleur, celle
-		qui fait vraiment avancer le jeu. 
+		qui fait vraiment avancer le jeu.
 		La méthode actionPerformed est appelé par un widget graphique, comme un bouton ou autre.
 
 	*/
@@ -40,8 +40,8 @@ public class ActionsJoueur extends JPanel {
 	}
 
 
-	/* La classe qui suit est semsiblement la même chose, à la différence qu'elle peut être utilisé 
-		avec n'importe quelle widget Swing, en intéragissant avec la souris. Il est ainsi possible de 
+	/* La classe qui suit est semsiblement la même chose, à la différence qu'elle peut être utilisé
+		avec n'importe quelle widget Swing, en intéragissant avec la souris. Il est ainsi possible de
 		programmer des actions lorsque la souris survol le widget ou lorsque l'utilisateur clique
 		dessus.
 

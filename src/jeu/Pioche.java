@@ -1,20 +1,26 @@
 package jeu;
 import java.util.ArrayList;
 import java.util.List;
-import jeu.Combinaison;
 import jeu.pouvoirs.*;
 import jeu.peuples.*;
 import java.util.Random;
 
 
+/**
+ * Classe d'implémantation de la prioche.
+ */
 public class Pioche {
 
+    /** Stockage de la pioche. */
     private List<Combinaison> pioche;
 
+    /**Liste l'ensembles des peuples du jeu. */
     private List<Peuple> listePeuples;
 
+    /** Liste l'ensemble des Pouvoirs du jeu. */
     private List<Pouvoir> listePouvoirs;
-    
+
+    /**Construire un pioche. */
     public Pioche() {
         this.pioche = new ArrayList<Combinaison>();
         this.listePeuples = creerListePeuple();
@@ -29,13 +35,16 @@ public class Pioche {
     //===============================================================
 
 
-
+    /**
+     * Donner la pioche accessible par le joueur.
+     * @return La pioche accessible par le joueur.
+     */
     public List<Combinaison> getChoix() {
-        int length_pioche = pioche.size();
-        if (length_pioche >= 6) {
+        int lengthPioche = pioche.size();
+        if (lengthPioche >= 6) {
             return pioche.subList(0, 6);
-        } else if (length_pioche > 0) {
-            return pioche.subList(0, length_pioche);
+        } else if (lengthPioche > 0) {
+            return pioche.subList(0, lengthPioche);
         } else {
             this.pioche = creerListeCombinaisons();
             return getChoix();
@@ -48,47 +57,60 @@ public class Pioche {
     //===============================================================
 
 
+    /**
+     * Creer la liste de l'ensemble des peuples du jeu.
+     * @return La liste de l'ensemble des pouples du jeu.
+     */
     public List<Peuple> creerListePeuple() {
-        List<Peuple> listePeuples = new ArrayList<>();
-        
+        List<Peuple> listePeuplesRetournee = new ArrayList<>();
+
         for (TypesPeuples nompeuple : TypesPeuples.values()) {
             try {
                 Class<?> peupleClass = Class.forName("jeu.peuple." + nompeuple.name());
-                Peuple peuple = (Peuple) peupleClass.getDeclaredConstructor().newInstance();
-                listePeuples.add(peuple);
+                Peuple peuple =
+                    (Peuple) peupleClass.getDeclaredConstructor().newInstance();
+
+                listePeuplesRetournee.add(peuple);
             } catch (Exception e) {
                 System.out.println("Error creating instance for: " + type.name());
                 e.printStackTrace();
             }
         }
-        return listePeuples;
+        return listePeuplesRetournee;
     }
 
 
-
+    /**
+     * Creer la liste de l'ensemble des pouvoirs du jeu.
+     * @return la liste de l'ensemble des pouvoirs du jeu.
+     */
     public List<Pouvoir> creerListePouvoir() {
-        List<Pouvoir> listePouvoirs = new ArrayList<>();
-        
+        List<Pouvoir> listePouvoirsRetournee = new ArrayList<>();
+
         for (TypesPouvoirs nomPouvoir : TypesPouvoirs.values()) {
             try {
                 Class<?> peupleClass = Class.forName("jeu.peuple." + nomPouvoir.name());
-                Pouvoir pouvoir = (Pouvoir) peupleClass.getDeclaredConstructor().newInstance();
-                listePouvoirs.add(pouvoir);
+                Pouvoir pouvoir =
+                    (Pouvoir) peupleClass.getDeclaredConstructor().newInstance();
+                listePouvoirsRetournee.add(pouvoir);
             } catch (Exception e) {
                 System.out.println("Erreur pour : " + type.name());
                 e.printStackTrace();
             }
         }
-        return listePouvoirs;
+        return listePouvoirsRetournee;
     }
 
-
+    /**
+     * Creer la liste de l'ensemble des combinaisons du jeu.
+     * @return La liste de l'ensemble des combinaisons de la pioche.
+     */
     public List<Combinaison> creerListeCombinaisons() {
         List<Combinaison> listeCombinaisons = new ArrayList<>();
         Random rand = new Random();
         int taille = Math.min(this.listePeuples.size(), this.listePouvoirs.size());
         for (int i = 0; i < taille; i++) {
-            
+
             int num1 = rand.nextInt(taille - i);
             int num2 = rand.nextInt(taille - i);
 
@@ -103,12 +125,15 @@ public class Pioche {
         return listeCombinaisons;
     }
 
-
+    /**
+     * Donner la Combinaison attachée à l'indice donnée en argument.
+     * @param indice L'indice de la combinaison voulut.
+     */
     public void combinaisonChoisit(int indice) {
 
         Peuple peuple = this.pioche.get(indice).getPeuple();
-        Pouvoir pouvoir = this.pioche.get(indice).getPouvoir();         // ils faudraient les rajouter que si ils ne sont plus utiliser
-
+        Pouvoir pouvoir = this.pioche.get(indice).getPouvoir();
+        // ils faudraient les rajouter que si ils ne sont plus utiliser
         this.pioche.remove(indice);
     }
 

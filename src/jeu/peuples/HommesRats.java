@@ -2,7 +2,7 @@ package jeu.peuples;
 
 /**Classe d'implémantation du peuple des Hommes-Rats. */
 public class HommesRats extends Peuple {
-    
+
     /** Le nom des HommesRats. */
     private static final String NOM = "Hommes-Rats";
 

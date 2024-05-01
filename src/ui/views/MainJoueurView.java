@@ -9,7 +9,7 @@ import jeu.Combinaison;
 import jeu.Joueur;
 
 public class MainJoueurView extends JPanel {
- 
+
     private JLabel nom = new JLabel();
     private List<CombinaisonView> combViews;
 

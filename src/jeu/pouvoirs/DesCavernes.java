@@ -4,7 +4,7 @@ package jeu.pouvoirs;
  * les territoires
  * avec des cavernes. Et les territoires avec des Cavernes sont adjacente au votre.*/
 public class DesCavernes extends Pouvoir {
-    
+
     /**Le nom de la classe. */
     private static final String NOM = "Des Cavernes";
 

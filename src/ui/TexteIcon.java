@@ -29,7 +29,7 @@ public class TexteIcon extends JPanel {
 
         super.add(this.imgLabel);
         super.add(this.textLabel);
-        
+
     }
 
     public void setText(String texte) {

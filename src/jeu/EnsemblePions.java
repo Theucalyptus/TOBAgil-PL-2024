@@ -13,14 +13,14 @@ public class EnsemblePions {
     public EnsemblePions(Peuple peuple, int nombre_pions) {
         this.peuple = peuple;
         this.nombre_pions = nombre_pions;
-    } 
+    }
 
     /** Obtenir le type de peuple de l'ensemble.
-     * @return le peuple 
+     * @return le peuple
      */
     public Peuple getPeuple() {
         return this.peuple;
-    } 
+    }
 
     /**Donner l'état de l'unité
      * @return L'état de l'unité : VIVANT, ENDECLIN, MORT
@@ -28,10 +28,10 @@ public class EnsemblePions {
 
 
     /** Obtenir le nombre de pions de l'ensemble.
-     * @return le nombre de pions de l'ensemble 
+     * @return le nombre de pions de l'ensemble
      */
     public int getNombre() {
         return this.nombre_pions;
-    } 
+    }
 
 }

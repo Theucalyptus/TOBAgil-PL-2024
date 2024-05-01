@@ -1,10 +1,10 @@
 package jeu.peuples;
 
 /**
- * Classe d'implémantation du peuple des Géants. 
+ * Classe d'implémantation du peuple des Géants.
  */
 public class Geants extends Peuple {
-    
+
     /** Le nom des Geants. */
     private static final String NOM = "Geants";
 

@@ -2,7 +2,7 @@ package jeu.pouvoirs;
 
 /**Classe Marins. Le Marin est un pouvoir qui permet de prendre les mers et lac.*/
 public class Marins extends Pouvoir {
-    
+
     /**Le nom de la classe. */
     private static final String NOM = "Marins";
 

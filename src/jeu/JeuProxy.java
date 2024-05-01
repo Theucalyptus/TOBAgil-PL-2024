@@ -21,13 +21,14 @@ public class JeuProxy implements Jeu {
 
     @Override
     public void setFinDuTour(boolean finDuTour) {
-        
+        // ne rien faire
     }
 
     @Override
     public void setMonde(Monde leNouveauMonde) {
         throw new OperationInterditeException(
-            "Un joueur n'a pas le droit de changer le monde");    }
+            "Un joueur n'a pas le droit de changer le monde");
+    }
 
     @Override
     public void setNumeroTour(int numero) {
@@ -35,11 +36,11 @@ public class JeuProxy implements Jeu {
             "Un joueur n'a pas le droit de modifier le numéro du tour");
     }
 
-    /**L'implématation du jeu */
+    /**L'implématation du jeu. */
     private Jeu impl;
 
     /**
-     * Construire un proxy
+     * Construire un proxy.
      * @param jeu le jeu sur lequel on fait un proxy.
      */
     public JeuProxy(Jeu jeu) {

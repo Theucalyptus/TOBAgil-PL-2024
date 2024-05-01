@@ -30,31 +30,31 @@ public class ImageFactory {
     public static final Image regionImage(TypesRegions type) {
         String path = ROOT_ASSETS_PATH + "regions/" + type.name().toLowerCase() + ".png";
         return readImage(path);
-        
+
     }
-    
+
     public static final Image peupleLogoImage(TypesPeuples type) {
-        String path = ROOT_ASSETS_PATH + "peuples/" + type.name().toLowerCase() +  ".png"; 
+        String path = ROOT_ASSETS_PATH + "peuples/" + type.name().toLowerCase() +  ".png";
         return readImage(path);
     }
 
     public static final Image peupleTroupeImage(TypesPeuples type, Boolean enDeclin) {
-        String path = ROOT_ASSETS_PATH + "troupes/" + type.name().toLowerCase() + (enDeclin ? "_declin" : "") + ".png"; 
+        String path = ROOT_ASSETS_PATH + "troupes/" + type.name().toLowerCase() + (enDeclin ? "_declin" : "") + ".png";
         return readImage(path);
     }
-    
+
     public static final Image pouvoirLogoImage(TypesPouvoirs type) {
-        String path = ROOT_ASSETS_PATH + "pouvoirs/" + type.name().toLowerCase() + ".png"; 
+        String path = ROOT_ASSETS_PATH + "pouvoirs/" + type.name().toLowerCase() + ".png";
         return readImage(path);
     }
 
     public static final Image batimentsImage(TypesBatiments type) {
-        String path = ROOT_ASSETS_PATH + "batiments/" + type.name().toLowerCase() + ".png"; 
+        String path = ROOT_ASSETS_PATH + "batiments/" + type.name().toLowerCase() + ".png";
         return readImage(path);
     }
 
     public static final Image symboleImage(TypesSymboles type) {
-        String path = ROOT_ASSETS_PATH + "symboles/" + type.name().toLowerCase() + ".png"; 
+        String path = ROOT_ASSETS_PATH + "symboles/" + type.name().toLowerCase() + ".png";
         return readImage(path);
     }
 }

@@ -72,7 +72,7 @@ public class JeuReel implements Jeu {
     public JeuReel() {
         this(0, null);
     }
-    
+
 
     private JeuReel(int nbJoueurs, Monde leMonde) {
         this.joueurs = new ArrayList<>();
@@ -91,7 +91,7 @@ public class JeuReel implements Jeu {
 
     // requetes
 
-    
+
     /**Obtenir le monde.
      * @return Le monde de la partie.
      */
@@ -171,7 +171,7 @@ public class JeuReel implements Jeu {
      * Permet de mettre à jour le joueur Courant.
      * @param joueurCourant le joueur qui sera le nouveau joueur courant.
      * @throws IllegalArgumentException Quand le joueur Courant est un pointeur null.
-     * @throws JoeurExterieurException Quand le joueur n'est pas dans la liste des 
+     * @throws JoeurExterieurException Quand le joueur n'est pas dans la liste des
      * joueurs de la partie.
      */
     public void setJoueurCourant(Joueur joueurCourant) {

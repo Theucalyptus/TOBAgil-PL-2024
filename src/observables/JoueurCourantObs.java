@@ -4,7 +4,7 @@ import java.util.Observable;
 
 @SuppressWarnings("deprecation")
 public class JoueurCourantObs extends Observable {
-    
+
     public JoueurCourantObs() {
         super();
     }
