@@ -2,7 +2,7 @@ package jeu.pouvoirs;
 
 /**Classe Pillards. L'Pillards est un pouvoir qui rend plus riche.*/
 public class Pillards extends Pouvoir {
-    
+
     /**Le nom de la classe. */
     private static final String NOM = "Pillards";
 

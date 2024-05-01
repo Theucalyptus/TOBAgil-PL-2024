@@ -2,7 +2,7 @@ package jeu.pouvoirs;
 
 /**Classe Fortunes. L'Fortunes est un pouvoir qui rend plus riche.*/
 public class Fortunes extends Pouvoir {
-    
+
     /**Le nom de la classe. */
     private static final String NOM = "Fortunes";
 

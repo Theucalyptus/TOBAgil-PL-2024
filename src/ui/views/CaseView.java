@@ -25,10 +25,10 @@ public class CaseView extends JPanel implements Observer {
         super.setLayout(new OverlayLayout(this));
         super.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.WHITE));
         this.bgImage = ImageFactory.regionImage(caseAffichee.getTypeRegion());
-        
+
         this.overlay = new CaseOverlay(this);
         super.add(this.overlay);
-        
+
         this.bgLabel = new JLabel(new ImageIcon(this.bgImage));
         super.add(this.bgLabel);
 

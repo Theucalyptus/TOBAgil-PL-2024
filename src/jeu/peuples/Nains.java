@@ -19,28 +19,28 @@ public class Nains extends Peuple {
 
     /** Le nombre de régions comportant une Mine contrôlé par ce peuple.*/
     private int nbMines = 0;
-    
+
     // Constructeur
 
     /** Construire les nains */
     public Nains() {
         super(TypesPeuples.NAINS, NOM, DESCRIPTION, PIONSSUP);
     }
-    
+
     @Override
     public void apresConquete(Case regionConquise) {
     	if (regionConquise.getTypeRessource() == TypesSymboles.MINE) {
     		this.nbMines ++;
     	}
     }
-    
+
     @Override
     public void apresConqueteAdverse(Case regionConquise) {
     	if (regionConquise.getTypeRessource() == TypesSymboles.MINE) {
     		this.nbMines --;
     	}
     }
-    
+
     @Override
     public void finTour(boolean enDeclin) {
     	this.nbJetons = this.nbMines;

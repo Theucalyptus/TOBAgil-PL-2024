@@ -13,13 +13,13 @@ public abstract class Specialite {
 	
     /**Le nombre de pions supplémentaires qu'apporte la spécialité.*/
     private int nbPions;
-    
+
     /**Le nombre de jetons de victoire qu'apporte la spécialité en fin de tour.*/
     protected int nbJetons = 0;
-    
+
     /**La réduction du coût en pions d'attaque d'une case.*/
     protected int reductionAttaque = 0;
-    
+
     /**Construire une spécialité à partir de son nom, de sa description et de son nombre de pions supplémentaires.
      * @param nom Le nom de la spécialité.
      * @param description La description de la spécialité.
@@ -51,14 +51,14 @@ public abstract class Specialite {
     public int getNbPions() {
         return this.nbPions;
     }
-    
+
     /**Donner le nombre de jetons supplémentaire qu'offre cette spécialité en fin de tour.
      * @return Le nombre de jetons supplémentaire.
      */
     public int getNbJetons() {
         return this.nbJetons;
     }
-    
+
     /**Procédure à appeler lors du début du tour du joueur.
      * Le début d'un tour est également le début de l'attaque.
      */
@@ -69,23 +69,23 @@ public abstract class Specialite {
      */
     public void avantConquete(Case regionAConquerir) {
     }
-    
+
     /**Procédure à appeler après la conquête d'une région.
      */
     public void apresConquete(Case regionConquise) {
     }
-    
+
     /**Procédure à appeler après la conquête d'une région du joueur par un autre joueur.
      */
     public void apresConqueteAdverse(Case regionConquise) {
     }
-    
+
     /**Procédure à appeler une fois la phase d'attaque terminée.
      * Cet instant correspond aussi au redéploiement.
      */
     public void finAttaque() {
     }
-    
+
     /**Procédure à appeler lors de la fin du tour du joueur.
      */
     public void finTour(boolean enDeclin) {

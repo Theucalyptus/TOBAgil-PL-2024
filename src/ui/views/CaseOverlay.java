@@ -30,9 +30,9 @@ public class CaseOverlay extends JPanel {
         super.setAlignmentX(0);
         super.setLayout(layout);
         // marge de l'overlay par rapport au bord de la case
-        super.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4)); 
-    
-        
+        super.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
+
+
         this.pionsLbl = new JLabel();
         this.pionsLbl.setHorizontalTextPosition(SwingConstants.RIGHT);
         this.pionsLbl.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -61,13 +61,13 @@ public class CaseOverlay extends JPanel {
      */
     public void updateOverlay(Case maCase) {
 
-        
+
         // Affichages des pions
         int numberPions = maCase.getNombrepions();
         if(numberPions > 0) {
             Peuple peuple = maCase.getPeuple();
             Boolean enDeclin = false;
-             
+
             ImageIcon icon;
             icon = new ImageIcon(ImageFactory.peupleTroupeImage(peuple.getType(), enDeclin));
             this.pionsLbl.setIcon(icon);
@@ -101,5 +101,5 @@ public class CaseOverlay extends JPanel {
 
     }
 
-    
+
 }

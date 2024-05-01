@@ -122,7 +122,7 @@ public class TestMonde {
         assertEquals("La première coordonnée doit être " + x, co.get(0), x, PRECISION);
         assertEquals("La deuxième coordonnée doit être " + y, co.get(1), y, PRECISION);
     }
-    
+
     @Test(expected=IllegalArgumentException.class)
     void testerRobustesseGetCaseXNegatif() {
         this.unMonde.getCase(-1, 1);

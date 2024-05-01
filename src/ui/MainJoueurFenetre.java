@@ -14,7 +14,7 @@ public class MainJoueurFenetre implements Observer {
 
     // constantes de classe
     private static final String NOM = "SmallWorld - Joueur Courant";
-    
+
     // composants de la gui
     private final MainJoueurView view = new MainJoueurView();
 
@@ -40,7 +40,7 @@ public class MainJoueurFenetre implements Observer {
     @Override
     public void update(Observable arg0, Object arg1) {
         this.view.setJoueur(jeu.getJoueurCourant());
-        this.fenetre.pack();        
+        this.fenetre.pack();
     }
 
 }

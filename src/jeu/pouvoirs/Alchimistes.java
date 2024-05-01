@@ -2,7 +2,7 @@ package jeu.pouvoirs;
 
 /**Classe Alchimistes. L'Alchimiste est un pouvoir qui rend plus riche sur le long terme. */
 public class Alchimistes extends Pouvoir {
-    
+
     /**Le nom de la classe. */
     private static final String NOM = "Alchimistes";
 

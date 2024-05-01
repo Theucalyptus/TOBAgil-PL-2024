@@ -16,7 +16,7 @@ public class PiocheFenetre {
 
     // TODO : à exporter dans jeu.pioche;
     public static final int NBCLASSE = 2;
-    
+
     private CombinaisonView selectedClass = null;
     private JFrame fenetre;
 
@@ -24,7 +24,7 @@ public class PiocheFenetre {
         this.fenetre = new JFrame("SmallWorld - Pioche");
         this.fenetre.setMinimumSize(new Dimension(800, 600));
         Container contentPane = this.fenetre.getContentPane();
-        
+
         JPanel mainPanel = new JPanel();
         contentPane.add(mainPanel);
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
@@ -51,7 +51,7 @@ public class PiocheFenetre {
         this.fenetre.setVisible(true);
         this.fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
-    
+
 	public class ActionQuitter implements ActionListener {
 		
         @Override
@@ -66,7 +66,7 @@ public class PiocheFenetre {
 	}
 
     public class MouseEventHandler extends MouseAdapter {
-        
+
         @Override
         public void mouseEntered(MouseEvent e) {
             CombinaisonView entree = (CombinaisonView) e.getSource();
@@ -74,22 +74,22 @@ public class PiocheFenetre {
                 entree.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.BLUE));
             }
         }
-        
+
         @Override
         public void mouseExited(MouseEvent e) {
             CombinaisonView entree = (CombinaisonView) e.getSource();
             if(selectedClass != entree) {
                 entree.setBorder(BorderFactory.createEmptyBorder());
             }
-        }    
-    
+        }
+
         @Override
         public void mouseClicked(MouseEvent e) {
             CombinaisonView entree = (CombinaisonView) e.getSource();
             if(selectedClass != null) {
                 selectedClass.setBorder(BorderFactory.createEmptyBorder());
             }
-            
+
             entree.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.GREEN));
             selectedClass = entree;
         }

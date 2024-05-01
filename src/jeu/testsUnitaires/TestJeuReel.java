@@ -67,7 +67,7 @@ public class TestJeuReel {
         this.j5 = new Joueur("Yuji", 0);
         this.unJeuA5Joueurs.ajouterJoueur(this.j5);
     }
-    
+
     /**Tester le constructeur. */
     @Test
     void testerConstructeurJeu() {
@@ -114,7 +114,7 @@ public class TestJeuReel {
         assertEquals("Le jeu à 3 Joueurs doit avoir 9 tours.",
             this.unJeuA3Joueurs.getNombreTourTotal(), 9, PRECISION);
     }
-    
+
     /**Tester l'actualisation du nombre de tour dans un jeu a 4 joueurs. */
     @Test
     void testerSetNombreTourJeu4Joueurs() {

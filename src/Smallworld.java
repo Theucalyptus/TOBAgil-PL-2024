@@ -33,7 +33,7 @@ public class Smallworld {
         jeu.ajouterJoueur(j2);
         jeu.ajouterJoueur(j3);
         jeu.setMonde(new Monde(jeu.getNombreJoueur()));
-                
+
         // VUES
         PiocheFenetre piocheF = new PiocheFenetre();
         MainMondeFenetre mondeF = new MainMondeFenetre(jeu);

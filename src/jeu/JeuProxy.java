@@ -21,7 +21,7 @@ public class JeuProxy implements Jeu {
 
     @Override
     public void setFinDuTour(boolean finDuTour) {
-        
+        // ne rien faire
     }
 
     @Override

@@ -62,19 +62,21 @@ public class Pioche {
      * @return La liste de l'ensemble des pouples du jeu.
      */
     public List<Peuple> creerListePeuple() {
-        List<Peuple> listePeuples = new ArrayList<>();
+        List<Peuple> listePeuplesRetournee = new ArrayList<>();
 
         for (TypesPeuples nompeuple : TypesPeuples.values()) {
             try {
                 Class<?> peupleClass = Class.forName("jeu.peuple." + nompeuple.name());
-                Peuple peuple = (Peuple) peupleClass.getDeclaredConstructor().newInstance();
-                listePeuples.add(peuple);
+                Peuple peuple =
+                    (Peuple) peupleClass.getDeclaredConstructor().newInstance();
+
+                listePeuplesRetournee.add(peuple);
             } catch (Exception e) {
                 System.out.println("Error creating instance for: " + type.name());
                 e.printStackTrace();
             }
         }
-        return listePeuples;
+        return listePeuplesRetournee;
     }
 
 
@@ -83,31 +85,32 @@ public class Pioche {
      * @return la liste de l'ensemble des pouvoirs du jeu.
      */
     public List<Pouvoir> creerListePouvoir() {
-        List<Pouvoir> listePouvoirs = new ArrayList<>();
-        
+        List<Pouvoir> listePouvoirsRetournee = new ArrayList<>();
+
         for (TypesPouvoirs nomPouvoir : TypesPouvoirs.values()) {
             try {
                 Class<?> peupleClass = Class.forName("jeu.peuple." + nomPouvoir.name());
-                Pouvoir pouvoir = (Pouvoir) peupleClass.getDeclaredConstructor().newInstance();
-                listePouvoirs.add(pouvoir);
+                Pouvoir pouvoir =
+                    (Pouvoir) peupleClass.getDeclaredConstructor().newInstance();
+                listePouvoirsRetournee.add(pouvoir);
             } catch (Exception e) {
                 System.out.println("Erreur pour : " + type.name());
                 e.printStackTrace();
             }
         }
-        return listePouvoirs;
+        return listePouvoirsRetournee;
     }
 
     /**
-     * Creer la liste de l'ensemble des Combinaisons du jeu.
-     * @return La liste des Pouvoirs.
+     * Creer la liste de l'ensemble des combinaisons du jeu.
+     * @return La liste de l'ensemble des combinaisons de la pioche.
      */
     public List<Combinaison> creerListeCombinaisons() {
         List<Combinaison> listeCombinaisons = new ArrayList<>();
         Random rand = new Random();
         int taille = Math.min(this.listePeuples.size(), this.listePouvoirs.size());
         for (int i = 0; i < taille; i++) {
-            
+
             int num1 = rand.nextInt(taille - i);
             int num2 = rand.nextInt(taille - i);
 
@@ -123,7 +126,7 @@ public class Pioche {
     }
 
     /**
-     * Donner la Combinaison attachée à l'indice donnée en argument
+     * Donner la Combinaison attachée à l'indice donnée en argument.
      * @param indice L'indice de la combinaison voulut.
      */
     public void combinaisonChoisit(int indice) {

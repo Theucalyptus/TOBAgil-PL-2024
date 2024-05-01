@@ -3,7 +3,7 @@ package jeu.pouvoirs;
 /**Classe Ancestraux. L'Ancestral est un pouvoir qui permet d'avoir deux peuples
  * en déclin en même temps.*/
 public class Ancestraux extends Pouvoir {
-    
+
     /**Le nom de la classe. */
     private static final String NOM = "Ancestraux";
 

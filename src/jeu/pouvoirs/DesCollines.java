@@ -5,7 +5,7 @@ import jeu.TypesRegions;
 
 /**Classe Des Collines. Les Collines est un pouvoir qui rend plus riche.*/
 public class DesCollines extends Pouvoir {
-    
+
     /**Le nom de la classe. */
     private static final String NOM = "Des Collines";
 

@@ -2,7 +2,7 @@ package jeu.pouvoirs;
 
 /**Classe Montes. L'Montes est un pouvoir qui rend plus riche.*/
 public class Montes extends Pouvoir {
-    
+
     /**Le nom de la classe. */
     private static final String NOM = "Montes";
 

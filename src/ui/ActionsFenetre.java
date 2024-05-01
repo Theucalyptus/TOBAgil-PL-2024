@@ -8,11 +8,11 @@ import jeu.Jeu;
 import controleurs.*;
 
 public class ActionsFenetre {
-    
+
     private final JFrame fenetre;
 
     public ActionsFenetre(Jeu jeu) {
-       
+
         this.fenetre = new JFrame("SmallWorld - Actions");
         Container contentPane = this.fenetre.getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));

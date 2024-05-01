@@ -4,7 +4,7 @@ import java.util.Observable;
 
 @SuppressWarnings("deprecation")
 public class NombreTourObs extends Observable {
-    
+
     public NombreTourObs() {
         super();
     }

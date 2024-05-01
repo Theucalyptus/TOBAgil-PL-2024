@@ -8,7 +8,7 @@ import jeu.Jeu;
 import jeu.exceptions.PartieEnCoursException;
 
 public class ActionsJeu extends JPanel {
-    
+
 	private final Jeu jeu;
 
 	public ActionsJeu(Jeu jeu) {
@@ -30,7 +30,7 @@ public class ActionsJeu extends JPanel {
 	  de très vite avoir énormément de code dans ces fichiers.
 
 		En attendant, voici en gros comment on réalise la partie "Active" du controlleur, celle
-		qui fait vraiment avancer le jeu. 
+		qui fait vraiment avancer le jeu.
 		La méthode actionPerformed est appelé par un widget graphique, comme un bouton ou autre.
 
 	*/
