@@ -10,7 +10,7 @@ public abstract class Specialite {
 
     /**La description de la spécialité.*/
     private String description;
-	
+
     /**Le nombre de pions supplémentaires qu'apporte la spécialité.*/
     private int nbPions;
 

@@ -2,7 +2,6 @@ package jeu;
 
 import java.util.Observer;
 
-import jeu.exceptions.PartieEnCoursException;
 
 /**Interface de modélisation du jeu SmallWorld. */
 @SuppressWarnings("deprecation")
@@ -44,14 +43,14 @@ public interface Jeu {
 
     /**
      * Ajoute un observateur à l'observable du joueur courant.
+     * @param obs L'observer à ajouter.
      */
-    @SuppressWarnings("deprecation")
     void addJoueurCourantObserver(Observer obs);
 
     /**
      * Ajoute un observateur au nombre de tour.
+     * @param obs L'observer à ajouter.
      */
-    @SuppressWarnings("deprecation")
     void addNbTourObserver(Observer obs);
 
     /**changer la valeur du monde par une nouvelle.
@@ -59,15 +58,15 @@ public interface Jeu {
      */
     void setMonde(Monde leNouveauMonde);
 
-    /** Lance une partie.
+    /** Lancer une partie.
      * @throws PartieEnCoursException Quand on essaye de lancer une
      * partie alors qu'il y en a une déjà en cours.
      */
-    public void lancerPartie();
+    void lancerPartie();
 
     /**
      * Passe au tour suivant.
      */
     void passerTour();
-    
+
 }

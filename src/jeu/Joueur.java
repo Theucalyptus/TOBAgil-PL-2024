@@ -7,9 +7,10 @@ public class Joueur {
     /** Le Nom du joueur. */
     private String nom;
 
+    /**Combinaisons du Joueur. */
     //private Ensemble<Combinaison> combinaison;
     private Combinaison combinaison;
-    
+
     /** Le Nombre de point de victoire du joueur. */
     private int pointsVictoire;
 
@@ -52,14 +53,17 @@ public class Joueur {
     }
 
 
-    /* Changer de combinaison.
-     *@param nouvelle_combinaison du joueur.
+    /** Changer de combinaison.
+     *@param nouvelleCombinaison du joueur.
     */
-    //public void setCombinaisons(Ensemble<Combinaison> nouvelle_combinaison) {
-    public void setCombinaison(Combinaison nouvelle_combinaison) {
-        this.combinaison = nouvelle_combinaison;
+    //public void setCombinaisons(Ensemble<Combinaison> nouvelleCombinaison) {
+    public void setCombinaison(Combinaison nouvelleCombinaison) {
+        this.combinaison = nouvelleCombinaison;
     }
 
+    /**Obtenir la Combinaison du joueur.
+     * @return la Combinaison du joueur.
+     */
     public Combinaison getCombinaison() {
         return this.combinaison;
     }

@@ -92,24 +92,17 @@ public class JeuReel implements Jeu {
     // requetes
 
 
-    /**Obtenir le monde.
-     * @return Le monde de la partie.
-     */
+    @Override
     public Monde getMonde() {
         return this.monde;
     }
 
-    /** Permet d'obtenir le joueur qui est en train de jouer.
-     * @return Le Joueur courant.
-     */
+    @Override
     public Joueur getJoueurCourant() {
         return this.joueurCourant;
     }
 
-    /**
-     * Obtenir le numéro du tour en train d'être joué.
-     * @return Le numéro du tour qui est en train d'être joué.
-     */
+    @Override
     public int getNumeroTour() {
         return this.noTour;
     }
@@ -122,48 +115,44 @@ public class JeuReel implements Jeu {
         return this.nombreJoueurs;
     }
 
+    /*
     /**
      * Obtenir la liste des Joueurs.
      * @return La liste des Joueurs.
-     */
-    /* public List<Joueur> getJoueurs() {
+     *\/
+    public List<Joueur> getJoueurs() {
         return this.joueurs;
     } */
 
-    /**
-     * Ajoute un observateur à l'observable du joueur courant.
-     */
+    @Override
     public void addJoueurCourantObserver(Observer obs) {
         this.joueurCourantObs.addObserver(obs);
     }
 
-    /**
-     * Ajoute un observateur au nombre de tour.
-     */
+    @Override
     public void addNbTourObserver(Observer obs) {
         this.nbTourObs.addObserver(obs);
     }
 
 
-    /**Obtenir le Nombre de tour totale de la partie.
-     * @return Le nombre de tour totale que durera la partie.
-     */
+    @Override
     public int getNombreTourTotal() {
         return this.nbToursTotals;
     }
 
+    /**
+     * Obtenir si la partie est en cours.
+     * @return Si la partie est en cours.
+     */
     public boolean estEnCoursDePartie() {
         return this.enCours;
     }
 
     // commandes
 
-    /**
-     * Donner le numéro du tour.
-     * @param noTour le nouveau numéro du tour.
-     */
-    public void setNumeroTour(int noTour) {
-        this.noTour = noTour;
+    @Override
+    public void setNumeroTour(int newNoTour) {
+        this.noTour = newNoTour;
         this.nbTourObs.notifyObservers();
     }
 
@@ -179,9 +168,7 @@ public class JeuReel implements Jeu {
         this.joueurCourantObs.notifyJoueurCourant();
     }
 
-    /**Changer la valeur de monde par une nouvelle.
-     * @param leNouveauMonde Le nouveau Monde.
-     */
+    @Override
     public void setMonde(Monde leNouveauMonde) {
         this.monde = leNouveauMonde;
     }
@@ -228,6 +215,7 @@ public class JeuReel implements Jeu {
      * en pleine partie.
      * @throws IllegalArgumentException Quand le Joueur est une poignée null.
      */
+    @Override
     public void ajouterJoueur(Joueur joueur) {
         if (joueur == null) {
             throw new IllegalArgumentException("Le joueur ne doit pas être nul.");
@@ -245,6 +233,7 @@ public class JeuReel implements Jeu {
      * @throws PartieEnCoursException Quand on essaye de lancer une
      * partie alors qu'il y en a une déjà en cours.
      */
+    @Override
     public void lancerPartie() {
         if (enCours) {
             throw new PartieEnCoursException();
@@ -256,8 +245,9 @@ public class JeuReel implements Jeu {
     }
 
     /**
-     * Permet de passer au tour suivant
+     * Permet de passer au tour suivant.
      */
+    @Override
     public void passerTour() {
 
         // Actions de fin de tour
@@ -265,14 +255,14 @@ public class JeuReel implements Jeu {
 
 
         // Passage au tour suivant
-        if(this.joueursIter.hasNext()) {
+        if (this.joueursIter.hasNext()) {
             this.setJoueurCourant(this.joueursIter.next());
         } else {
             this.joueursIter = this.joueurs.listIterator();
             this.setNumeroTour(this.getNumeroTour() + 1);
             this.setJoueurCourant(this.joueursIter.next());
         }
-        if(this.getNumeroTour() > this.getNombreTourTotal()) {
+        if (this.getNumeroTour() > this.getNombreTourTotal()) {
             this.enCours = false;
         }
     }

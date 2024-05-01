@@ -1,8 +1,10 @@
 package jeu;
 import java.util.ArrayList;
 import java.util.List;
-import jeu.pouvoirs.*;
-import jeu.peuples.*;
+import jeu.pouvoirs.Pouvoir;
+import jeu.peuples.Peuple;
+import jeu.peuples.TypesPeuples;
+import jeu.pouvoirs.TypesPouvoirs;
 import java.util.Random;
 
 
@@ -10,6 +12,9 @@ import java.util.Random;
  * Classe d'implémantation de la prioche.
  */
 public class Pioche {
+
+    /**Le nombre de Combinaison dans la pioche. */
+    public static final int LONGUEURPIOCHE = 6;
 
     /** Stockage de la pioche. */
     private List<Combinaison> pioche;
@@ -41,8 +46,8 @@ public class Pioche {
      */
     public List<Combinaison> getChoix() {
         int lengthPioche = pioche.size();
-        if (lengthPioche >= 6) {
-            return pioche.subList(0, 6);
+        if (lengthPioche >= LONGUEURPIOCHE) {
+            return pioche.subList(0, LONGUEURPIOCHE);
         } else if (lengthPioche > 0) {
             return pioche.subList(0, lengthPioche);
         } else {

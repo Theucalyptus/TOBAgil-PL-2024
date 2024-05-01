@@ -1,7 +1,8 @@
 package jeu.pouvoirs;
 
 /**Classe Batisseur. Le Batisseur est un pouvoir qui permet de placer une forteresse
- * qui augmente de 1 point la défense de la case et qui donne 1 point de victoire a chaque fin de tour.
+ * qui augmente de 1 point la défense de la case et qui donne 1 point de victoire
+ * a chaque fin de tour.
  * La rémunération s'arrete une fois en déclin mais la défense reste. */
 public class Batisseurs extends Pouvoir {
 

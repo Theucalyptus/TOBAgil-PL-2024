@@ -55,16 +55,13 @@ public class JeuProxy implements Jeu {
             "Un joueur n'a pas le droit d'ajouter un joueur à la partie");
     }
 
-    /**Obtenir le monde.
-     * @return Le monde.
-     */
+
+    @Override
     public Monde getMonde() {
         return this.impl.getMonde();
     }
 
-    /**Obtenir le joueur courant.
-     * @return Le joueur courant.
-     */
+    @Override
     public Joueur getJoueurCourant() {
         return this.impl.getJoueurCourant();
     }
@@ -77,9 +74,7 @@ public class JeuProxy implements Jeu {
         return this.impl.getNumeroTour();
     }
 
-    /**Obtenir le Nombre de tour totale de la partie.
-     * @return Le nombre de tour totale que durera la partie.
-     */
+    @Override
     public int getNombreTourTotal() {
         return this.impl.getNombreTourTotal();
     }
