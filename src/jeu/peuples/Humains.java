@@ -3,7 +3,7 @@ package jeu.peuples;
 import jeu.Case;
 import jeu.TypesRegions;
 
-/**Classe d'implémantation du peuple des Humains */
+/**Classe d'implémantation du peuple des Humains. */
 public class Humains extends Peuple {
 
     /** Le nom des Humains. */
@@ -15,15 +15,15 @@ public class Humains extends Peuple {
             + "de victoire supplémentaire "
             + "en fin de tour.";
 
-    /** Le nombre d'Humains sans le nombre associé au pouvoir */
+    /** Le nombre d'Humains sans le nombre associé au pouvoir. */
     private static final int PIONSSUP = 5;
 
-    /** Le nombre de régions comportant un Champ contrôlé par ce peuple.*/
+    /** Le nombre de régions comportant un Champ contrôlé par ce peuple. */
     private int nbChamps = 0;
 
     // Constructeur
 
-    /** Construire les Humains */
+    /** Construire les Humains. */
     public Humains() {
         super(TypesPeuples.HUMAINS, NOM, DESCRIPTION, PIONSSUP);
     }
@@ -31,14 +31,14 @@ public class Humains extends Peuple {
     @Override
     public void apresConquete(Case regionConquise) {
     	if (regionConquise.getTypeRegion() == TypesRegions.CHAMP) {
-    		this.nbChamps ++;
+    		this.nbChamps++;
     	}
     }
 
     @Override
     public void apresConqueteAdverse(Case regionConquise) {
     	if (regionConquise.getTypeRegion() == TypesRegions.CHAMP) {
-    		this.nbChamps --;
+    		this.nbChamps--;
     	}
     }
 

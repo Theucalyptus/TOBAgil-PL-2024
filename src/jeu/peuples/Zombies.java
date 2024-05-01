@@ -18,12 +18,12 @@ public class Zombies extends Peuple {
                 + "Peuple actif. Un joueur a le droit d'attaquer son Peuple actif "
                 + "avec ses Zombies en déclin.";
 
-    /** Le nombre de Zombies sans le nombre associé au pouvoir */
+    /** Le nombre de Zombies sans le nombre associé au pouvoir. */
     private static final int PIONSSUP = 6;
 
     // Constructeur
 
-    /** Construire les Zombies */
+    /** Construire les Zombies. */
     public Zombies() {
         super(TypesPeuples.ZOMBIES, NOM, DESCRIPTION, PIONSSUP);
     }

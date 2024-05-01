@@ -14,12 +14,12 @@ public class Geants extends Peuple {
                 + "qu'ils occupent avec 1 pion de moins que "
                 + "nécessaire, avec un minimum de 1 pion.";
 
-    /** Le nombre de Geants sans le nombre associé au pouvoir */
+    /** Le nombre de Geants sans le nombre associé au pouvoir. */
     private static final int PIONSSUP = 6;
 
     // Constructeur
 
-    /** Construire les Geants */
+    /** Construire les Geants. */
     public Geants() {
         super(TypesPeuples.GEANTS, NOM, DESCRIPTION, PIONSSUP);
     }

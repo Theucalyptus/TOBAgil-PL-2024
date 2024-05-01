@@ -15,12 +15,12 @@ public class Squelettes extends Peuple {
             + "Squelettes lors de ce tour, et ajoutez ce pion à ceux que vous "
             + "redéployez à la fin de votre tour.";
 
-    /** Le nombre de Squelettes sans le nombre associé au pouvoir */
+    /** Le nombre de Squelettes sans le nombre associé au pouvoir. */
     private static final int PIONSSUP = 6;
 
     // Constructeur
 
-    /** Construire les Squelettes */
+    /** Construire les Squelettes. */
     public Squelettes() {
         super(TypesPeuples.SQUELETTES, NOM, DESCRIPTION, PIONSSUP);
     }

@@ -18,12 +18,12 @@ public class MiPortions extends Peuple {
             + "abandonnée par les Mi-portions, la Tanière qui s'y trouve est "
             + "retirée du plateau. En déclin, les deux Tanières disparaissent.";
 
-    /** Le nombre de Mi-Portions sans le nombre associé au pouvoir */
+    /** Le nombre de Mi-Portions sans le nombre associé au pouvoir. */
     private static final int PIONSSUP = 6;
 
     // Constructeur
 
-    /** Construire les Mi-Portions */
+    /** Construire les Mi-Portions. */
     public MiPortions() {
         super(TypesPeuples.MIPORTIONS, NOM, DESCRIPTION, PIONSSUP);
     }

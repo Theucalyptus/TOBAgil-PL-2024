@@ -12,10 +12,10 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 
-/**Tester le jeu */
+/**Tester le jeu. */
 public class TestJeuReel {
 
-    /**La précision des tests d'égalité */
+    /**La précision des tests d'égalité. */
     public static final double PRECISION = 0.0001;
     /**Un Jeu quelconque. */
     private JeuReel aJeu;
@@ -87,14 +87,14 @@ public class TestJeuReel {
         assertTrue(this.aJeu.getJoueurs().contains(unJoueur));
     }
 
-    /**Tester la Robustesse d'ajouterJoueur avec un joueur null */
-    @Test(expected=IllegalArgumentException.class)
+    /**Tester la Robustesse d'ajouterJoueur avec un joueur null. */
+    @Test(expected = IllegalArgumentException.class)
     void testerRobustesseAjouterJoueurNull() {
         this.aJeu.ajouterJoueur(null);
     }
 
     /**Tester la Robustesse d'ajouter Joueur dans une partie déjà pleine. */
-    @Test(expected=PartiePleineException.class)
+    @Test(expected = PartiePleineException.class)
     void testerRobustesseAjouterJoueurTropDeJoueur() {
         this.unJeuA5Joueurs.ajouterJoueur(new Joueur("Jean", 0));
     }

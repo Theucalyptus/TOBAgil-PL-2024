@@ -14,7 +14,7 @@ public class Nains extends Peuple {
             + "occupée par vos Nains rapporte 1 jeton de victoire supplémentaire en fin "
             + "de tour. Ce pouvoir continue de s'appliquer même s'ils sont en déclin.";
 
-    /** Le nombre de nains sans le nombre associé au pouvoir */
+    /** Le nombre de nains sans le nombre associé au pouvoir. */
     private static final int PIONSSUP = 3;
 
     /** Le nombre de régions comportant une Mine contrôlé par ce peuple.*/
@@ -22,7 +22,7 @@ public class Nains extends Peuple {
 
     // Constructeur
 
-    /** Construire les nains */
+    /** Construire les nains. */
     public Nains() {
         super(TypesPeuples.NAINS, NOM, DESCRIPTION, PIONSSUP);
     }
@@ -30,14 +30,14 @@ public class Nains extends Peuple {
     @Override
     public void apresConquete(Case regionConquise) {
     	if (regionConquise.getTypeRessource() == TypesSymboles.MINE) {
-    		this.nbMines ++;
+    		this.nbMines++;
     	}
     }
 
     @Override
     public void apresConqueteAdverse(Case regionConquise) {
     	if (regionConquise.getTypeRessource() == TypesSymboles.MINE) {
-    		this.nbMines --;
+    		this.nbMines--;
     	}
     }
 
