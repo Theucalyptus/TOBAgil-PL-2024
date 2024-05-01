@@ -2,8 +2,6 @@ package jeu;
 
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.text.html.HTMLDocument.Iterator;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -245,6 +243,7 @@ public class JeuReel implements Jeu {
      * @throws PartieEnCoursException Quand on essaye de lancer une
      * partie alors qu'il y en a une déjà en cours.
      */
+    public void lancerPartie() {
     public void lancerPartie() {
         if (enCours) {
             throw new PartieEnCoursException();
