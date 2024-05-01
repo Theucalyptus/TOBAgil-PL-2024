@@ -259,7 +259,12 @@ public class JeuReel implements Jeu {
      * Permet de passer au tour suivant
      */
     public void passerTour() {
-        System.out.println("Tour " + this.getNumeroTour() + " sur " + this.getNombreTourTotal());
+
+        // Actions de fin de tour
+        this.joueurCourant.addPoints(4);
+
+
+        // Passage au tour suivant
         if(this.joueursIter.hasNext()) {
             this.setJoueurCourant(this.joueursIter.next());
         } else {

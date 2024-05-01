@@ -57,5 +57,10 @@ public class ImageFactory {
         String path = ROOT_ASSETS_PATH + "symboles/" + type.name().toLowerCase() + ".png";
         return readImage(path);
     }
+
+    public static final Image pieceImage(int nombre) {
+        String path = ROOT_ASSETS_PATH + "jetons/" + Integer.toString(nombre) + ".png";
+        return readImage(path);
+    }
 }
 
