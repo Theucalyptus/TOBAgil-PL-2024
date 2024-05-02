@@ -268,7 +268,7 @@ public class Case extends Observable {
     }
 
     /**
-     * Notifie les observateurs que l'objet à changé
+     * Notifie les observateurs que l'objet à changé.
      */
     private void notification() {
         this.setChanged();

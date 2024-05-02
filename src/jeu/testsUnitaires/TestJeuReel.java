@@ -39,6 +39,14 @@ public class TestJeuReel {
     private JeuReel unJeuA4Joueurs;
     /**Un jeu à 5 joueurs. */
     private JeuReel unJeuA5Joueurs;
+    /**Cinq. */
+    public static final int CIMQ = 5;
+    /**Neuf. */
+    public static final int NUEF = 9;
+    /**Huit. */
+    public static final int HUIT = 8;
+    /**Dix. */
+    public static final int DIX = 10;
 
     /**Mise en place des tests. */
     @Before
@@ -104,7 +112,7 @@ public class TestJeuReel {
     void testerSetNombreTourJeu2Joueurs() {
         this.unJeuA2Joueurs.majNombreToursTotals();
         assertEquals("Le jeu à 2 Joueurs doit avoir 10 tours.",
-            this.unJeuA2Joueurs.getNombreTourTotal(), 10, PRECISION);
+            this.unJeuA2Joueurs.getNombreTourTotal(), DIX, PRECISION);
     }
 
     /**Tester l'actualision du nombre de tour dans un jeu a 3 joueurs. */
@@ -112,7 +120,7 @@ public class TestJeuReel {
     void testerSetNombreTourJeu3Joueurs() {
         this.unJeuA3Joueurs.majNombreToursTotals();
         assertEquals("Le jeu à 3 Joueurs doit avoir 9 tours.",
-            this.unJeuA3Joueurs.getNombreTourTotal(), 9, PRECISION);
+            this.unJeuA3Joueurs.getNombreTourTotal(), NEUF, PRECISION);
     }
 
     /**Tester l'actualisation du nombre de tour dans un jeu a 4 joueurs. */
@@ -120,7 +128,7 @@ public class TestJeuReel {
     void testerSetNombreTourJeu4Joueurs() {
         this.unJeuA4Joueurs.majNombreToursTotals();
         assertEquals("Le jeu à 4 Joueurs doit avoir 8 tours.",
-            this.unJeuA4Joueurs.getNombreTourTotal(), 8, PRECISION);
+            this.unJeuA4Joueurs.getNombreTourTotal(), HUIT, PRECISION);
     }
 
     /**Tester l'actualisation du nombre de tour dans un jeu a 5 joueurs. */
@@ -128,7 +136,7 @@ public class TestJeuReel {
     void testerSetNombreTourJeu5Joueurs() {
         this.unJeuA5Joueurs.majNombreToursTotals();
         assertEquals("Le jeu à 5 Joueurs doit avoir 8 tours.",
-            this.unJeuA5Joueurs.getNombreTourTotal(), 8, PRECISION);
+            this.unJeuA5Joueurs.getNombreTourTotal(), HUIT, PRECISION);
     }
 
     /**Tester le getteur du nombre de Tour. */

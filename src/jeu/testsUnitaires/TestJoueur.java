@@ -18,6 +18,9 @@ public class TestJoueur {
     /**Nombre de point à retirer durant le test. */
     private static final int POINTARETIRER = 5;
 
+    /**Moins Dix-sept. */
+    public static final int MOINSDIXSEPT = -17;
+
     /**Instance testé de Joueur. */
     private Joueur unJoueur;
 
@@ -89,6 +92,6 @@ public class TestJoueur {
     /**Test la robustesse de la soustraction de point. */
     @Test(expected = IllegalArgumentException.class)
     void testerRubustesseSubPoints() {
-        this.unJoueur.subPoints(-17);
+        this.unJoueur.subPoints(MOINSDIXSEPT);
     }
 }
