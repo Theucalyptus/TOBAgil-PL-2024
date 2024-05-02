@@ -4,9 +4,11 @@ import ui.MainMondeFenetre;
 
 import ui.PiocheFenetre;
 import jeu.Combinaison;
+import jeu.EnsemblePions;
 import jeu.JeuReel;
 import jeu.Joueur;
 import jeu.Monde;
+import jeu.batiments.TypesBatiments;
 import jeu.peuples.Amazones;
 import jeu.peuples.Elfes;
 import jeu.pouvoirs.Alchimistes;
@@ -39,6 +41,12 @@ public class Smallworld {
         MainMondeFenetre mondeF = new MainMondeFenetre(jeu);
         MainJoueurFenetre joueurF = new MainJoueurFenetre(jeu);
         ActionsFenetre actionsF = new ActionsFenetre(jeu);
+
+        jeu.getMonde().getCase(2, 2).setNewpions(new EnsemblePions(new Amazones(), 4));
+        jeu.getMonde().getCase(3, 3).setTypeBatiment(TypesBatiments.ANTRE_DE_TROLL, 1);
+        jeu.getMonde().getCase(3, 1).setTypeBatiment(TypesBatiments.CAMPEMENT, 2);
+        jeu.getMonde().getCase(3, 2).setTypeBatiment(TypesBatiments.FORTERESSE, 3);
+        //jeu.getMonde().getCase(2, 1)
 
     }
 }

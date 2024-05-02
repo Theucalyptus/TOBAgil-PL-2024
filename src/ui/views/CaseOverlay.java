@@ -2,6 +2,7 @@ package ui.views;
 
 import java.awt.GridLayout;
 import java.util.Random;
+import java.util.Map.Entry;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -79,16 +80,19 @@ public class CaseOverlay extends JPanel {
 
 
         // Affichages des batiments
-        TypesBatiments batT = TypesBatiments.AUCUN;
-        if(batT != TypesBatiments.AUCUN) {
-            int nbBatiments = new Random().nextInt(2) + 1;
-            ImageIcon icon = new ImageIcon(ImageFactory.batimentsImage(batT));
-            this.constructionLbl.setIcon(icon);
-            this.constructionLbl.setText(Integer.toString(nbBatiments));
-        } else {
-            this.constructionLbl.setText((""));
-            this.constructionLbl.setIcon(null);
+        for(Entry<TypesBatiments,Integer> e : maCase.getBatiment().entrySet()) {
+            TypesBatiments batT = e.getKey();
+            int batN = e.getValue();
+            if(batT != TypesBatiments.AUCUN) {
+                ImageIcon icon = new ImageIcon(ImageFactory.batimentsImage(batT));
+                this.constructionLbl.setIcon(icon);
+                this.constructionLbl.setText(Integer.toString(batN));
+            } else {
+                this.constructionLbl.setText((""));
+                this.constructionLbl.setIcon(null);
+            }
         }
+
 
 
         // Affichages des ressources

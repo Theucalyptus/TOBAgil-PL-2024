@@ -93,7 +93,7 @@ public class Case extends Observable {
         this.typeRegion = region;
         this.batiments = new HashMap<TypesBatiments, Integer>();
         this.pions = pions;
-        this.ressource = ressource;
+        this.ressource = TypesSymboles.SOURCE_MAGIQUE;
         if (region == TypesRegions.MER_ET_LAC) {
             this.prenable = false;
         } else {
@@ -199,6 +199,7 @@ public class Case extends Observable {
      */
     public void setNewpions(EnsemblePions newPions) {
         this.pions = newPions;
+        this.notification();
     }
 
     //1 forteresse par region max
@@ -224,6 +225,8 @@ public class Case extends Observable {
         if (newBatiment == TypesBatiments.TANIERE) {
             this.prenable = false;
         }
+
+        this.notification();
     }
 
     //Pas de setRegion car on ne peut modifier une region
@@ -254,6 +257,7 @@ public class Case extends Observable {
      */
     public void removeBatiment(TypesBatiments batiment) {
         this.batiments.remove(batiment);
+        this.notification();
     }
 
     /**Ajoute un voisin de la Case dans sa liste voisins.
@@ -263,4 +267,12 @@ public class Case extends Observable {
         this.voisins.add(caseVoisine);
     }
 
+    /**
+     * Notifie les observateurs que l'objet à changé
+     */
+    private void notification() {
+        this.setChanged();
+        this.notifyObservers();
+        this.clearChanged();
+    }
 }

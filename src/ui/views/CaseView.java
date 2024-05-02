@@ -41,8 +41,7 @@ public class CaseView extends JPanel implements Observer {
         });
 
         caseAffichee.addObserver(this);
-
-        this.update(caseAffichee, null);
+        this.overlay.updateOverlay(caseAffichee);
     }
 
     private void resizeIcon() {
