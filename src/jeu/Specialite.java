@@ -20,15 +20,16 @@ public abstract class Specialite {
     /**La réduction du coût en pions d'attaque d'une case.*/
     protected int reductionAttaque = 0;
 
-    /**Construire une spécialité à partir de son nom, de sa description et de son nombre de pions supplémentaires.
+    /**Construire une spécialité à partir de son nom, de sa description
+     * et de son nombre de pions supplémentaires.
      * @param nom Le nom de la spécialité.
      * @param description La description de la spécialité.
-     * @param unitesup Le nombre de pions suplémentaires qu'apporte la spécialité.
+     * @param pionsSup Le nombre de pions suplémentaires qu'apporte la spécialité.
     */
-    public Specialite(String nom, String description, int pions_sup) {
+    public Specialite(String nom, String description, int pionsSup) {
         this.nom = nom;
         this.description = description;
-        this.nbPions = pions_sup;
+        this.nbPions = pionsSup;
     }
 
     /**Donner le nom de la spécialité.
@@ -66,16 +67,19 @@ public abstract class Specialite {
     }
 
     /**Procédure à appeler avant la conquête d'une région.
+     * @param regionAConquerir La région à conquérir.
      */
     public void avantConquete(Case regionAConquerir) {
     }
 
     /**Procédure à appeler après la conquête d'une région.
+     * @param regionConquise La région qui a été conquise.
      */
     public void apresConquete(Case regionConquise) {
     }
 
     /**Procédure à appeler après la conquête d'une région du joueur par un autre joueur.
+     * @param regionConquise La région qui a été conquise.
      */
     public void apresConqueteAdverse(Case regionConquise) {
     }
@@ -87,6 +91,7 @@ public abstract class Specialite {
     }
 
     /**Procédure à appeler lors de la fin du tour du joueur.
+     * @param enDeclin Si le peuple est en déclin.
      */
     public void finTour(boolean enDeclin) {
     }

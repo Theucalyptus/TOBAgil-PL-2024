@@ -22,6 +22,15 @@ public class TestMonde {
     /**Le nombre de colonne du plateau. */
     private int nbY;
 
+    // MagicNumber
+    /**Trois. */
+    public static final int TROIS = 3;
+    /**21. */
+    public static final int VINGTETUN = 21;
+    /**5. */
+    public static final int CINQ = 5;
+
+
     @Before
     void setUp() {
         this.unMonde = new Monde();
@@ -34,12 +43,12 @@ public class TestMonde {
 
     @Test
     void testerConstructeurDimension() {
-        new Monde(3, 21);
+        new Monde(TROIS, VINGTETUN);
     }
 
     @Test(expected = IllegalArgumentException.class)
     void testerRobustesseConstructeurDimensionPremierNegatif() {
-        new Monde(-3, 5);
+        new Monde(-TROIS, CINQ);
     }
 
     @Test(expected = IllegalArgumentException.class)

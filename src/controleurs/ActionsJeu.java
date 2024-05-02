@@ -9,8 +9,13 @@ import jeu.exceptions.PartieEnCoursException;
 
 public class ActionsJeu extends JPanel {
 
+	/**Le jeu sur lequel on agit. */
 	private final Jeu jeu;
 
+	/**
+	 * Construire une action sur le jeu.
+	 * @param jeu le jeu sur lequel on veut agir.
+	 */
 	public ActionsJeu(Jeu jeu) {
 		super();
 		super.setName("Actions du Jeu");
