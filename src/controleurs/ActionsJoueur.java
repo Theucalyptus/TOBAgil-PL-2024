@@ -79,6 +79,7 @@ public class ActionsJoueur extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			jeu.getJoueurCourant().getCombinaison().passageDeclin();
+			jeu.passerTour();
 		}
 	}
 }
