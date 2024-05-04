@@ -95,6 +95,7 @@
 		<module name="ParameterName"/>
 		<module name="StaticVariableName"/>
 		<module name="TypeName"/>
+		<!-- <module name="MagicNumber"/> -->
 
 		<!-- Checks for imports                              -->
 		<!-- See https://checkstyle.org/config_import.html -->
@@ -149,7 +150,6 @@
 	</module>
 		<module name="IllegalInstantiation"/>
 		<module name="InnerAssignment"/>
-		<module name="MagicNumber"/>
 		<module name="MissingSwitchDefault"/>
 		<module name="MultipleVariableDeclarations"/>
 		<module name="SimplifyBooleanExpression"/>

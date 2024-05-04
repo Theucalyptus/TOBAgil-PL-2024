@@ -13,7 +13,7 @@ import jeu.pouvoirs.*;
 
 public class ImageFactory {
 
-    private static final String ROOT_ASSETS_PATH="./assets/";
+    private static final String ROOT_ASSETS_PATH = "./assets/";
 
     private static final Image readImage(String path) {
         Image img = null;
@@ -39,27 +39,32 @@ public class ImageFactory {
     }
 
     public static final Image peupleTroupeImage(TypesPeuples type, Boolean enDeclin) {
-        String path = ROOT_ASSETS_PATH + "troupes/" + type.name().toLowerCase() + (enDeclin ? "_declin" : "") + ".png";
+        String path = ROOT_ASSETS_PATH + "troupes/" + type.name().toLowerCase()
+            + (enDeclin ? "_declin" : "") + ".png";
         return readImage(path);
     }
 
     public static final Image pouvoirLogoImage(TypesPouvoirs type) {
-        String path = ROOT_ASSETS_PATH + "pouvoirs/" + type.name().toLowerCase() + ".png";
+        String path = ROOT_ASSETS_PATH + "pouvoirs/" + type.name().toLowerCase()
+            + ".png";
         return readImage(path);
     }
 
     public static final Image batimentsImage(TypesBatiments type) {
-        String path = ROOT_ASSETS_PATH + "batiments/" + type.name().toLowerCase() + ".png";
+        String path = ROOT_ASSETS_PATH + "batiments/" + type.name().toLowerCase()
+            + ".png";
         return readImage(path);
     }
 
     public static final Image symboleImage(TypesSymboles type) {
-        String path = ROOT_ASSETS_PATH + "symboles/" + type.name().toLowerCase() + ".png";
+        String path = ROOT_ASSETS_PATH + "symboles/" + type.name().toLowerCase()
+            + ".png";
         return readImage(path);
     }
 
     public static final Image pieceImage(int nombre) {
-        String path = ROOT_ASSETS_PATH + "jetons/" + Integer.toString(nombre) + ".png";
+        String path = ROOT_ASSETS_PATH + "jetons/" + Integer.toString(nombre)
+            + ".png";
         return readImage(path);
     }
 }

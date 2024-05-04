@@ -13,4 +13,4 @@ fi
 # supprimer les espaces en fin de ligne
 find -name "*.java" -exec sed -i "s/ *$//" {} \;
 # appliquer le checkstyle
-find -name "*.java" -print -exec java -jar $FILEPATH -c checkstyle.xml {} \; | grep "[ERROR]" >erreursCheckStyle.log
+find -name "*.java" -print -exec java -jar $FILEPATH -c checkstyle.xml {} \; | grep "\[ERROR\]" >erreursCheckStyle.log

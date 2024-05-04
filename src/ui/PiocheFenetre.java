@@ -33,11 +33,13 @@ public class PiocheFenetre {
 
         // à refactor pour utiliser pioche quand dispo
         //for(int i=0;i<NBCLASSE;i++){
-           CombinaisonView entree = new CombinaisonView(new Combinaison(new Elfes(), new Volants()));
+           CombinaisonView entree =
+                new CombinaisonView(new Combinaison(new Elfes(), new Volants()));
            entree.addMouseListener(trace);
            mainPanel.add(entree);
 
-           entree = new CombinaisonView(new Combinaison(new Amazones(), new Alchimistes()));
+           entree =
+                new CombinaisonView(new Combinaison(new Amazones(), new Alchimistes()));
            entree.addMouseListener(trace);
            mainPanel.add(entree);
         //}
@@ -53,10 +55,10 @@ public class PiocheFenetre {
     }
 
 	public class ActionQuitter implements ActionListener {
-		
+
         @Override
         public void actionPerformed(ActionEvent evt) {
-			if(selectedClass == null) {
+			if (selectedClass == null) {
                 System.out.println("AUCUNE CLASSE SELECTIONNE - REESSAYER !");
             } else {
                 System.out.println("OK - combinaison selectionne");
@@ -70,7 +72,7 @@ public class PiocheFenetre {
         @Override
         public void mouseEntered(MouseEvent e) {
             CombinaisonView entree = (CombinaisonView) e.getSource();
-            if(selectedClass != entree) {
+            if (selectedClass != entree) {
                 entree.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.BLUE));
             }
         }
@@ -78,7 +80,7 @@ public class PiocheFenetre {
         @Override
         public void mouseExited(MouseEvent e) {
             CombinaisonView entree = (CombinaisonView) e.getSource();
-            if(selectedClass != entree) {
+            if (selectedClass != entree) {
                 entree.setBorder(BorderFactory.createEmptyBorder());
             }
         }
@@ -86,7 +88,7 @@ public class PiocheFenetre {
         @Override
         public void mouseClicked(MouseEvent e) {
             CombinaisonView entree = (CombinaisonView) e.getSource();
-            if(selectedClass != null) {
+            if (selectedClass != null) {
                 selectedClass.setBorder(BorderFactory.createEmptyBorder());
             }
 
