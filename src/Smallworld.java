@@ -3,6 +3,8 @@ import ui.MainJoueurFenetre;
 import ui.MainMondeFenetre;
 
 import ui.PiocheFenetre;
+import ui.selecteur.Selecteur;
+import ui.views.CaseView;
 import jeu.Combinaison;
 import jeu.EnsemblePions;
 import jeu.JeuReel;
@@ -43,17 +45,19 @@ public /*final*/ class Smallworld {
         jeu.ajouterJoueur(j3);
         jeu.setMonde(new Monde(jeu.getNombreJoueur()));
 
+        //SELECTEUR
+        Selecteur<CaseView> selecteurCase = new Selecteur<CaseView>();
+        
         // VUES
         PiocheFenetre piocheF = new PiocheFenetre();
-        MainMondeFenetre mondeF = new MainMondeFenetre(jeu);
+        MainMondeFenetre mondeF = new MainMondeFenetre(jeu, selecteurCase);
         MainJoueurFenetre joueurF = new MainJoueurFenetre(jeu);
-        ActionsFenetre actionsF = new ActionsFenetre(jeu);
+        ActionsFenetre actionsF = new ActionsFenetre(jeu, selecteurCase);
 
         jeu.getMonde().getCase(2, 2).setNewpions(new EnsemblePions(new Amazones(), 4));
         jeu.getMonde().getCase(3, 3).setTypeBatiment(TypesBatiments.ANTRE_DE_TROLL, 1);
         jeu.getMonde().getCase(3, 1).setTypeBatiment(TypesBatiments.CAMPEMENT, 2);
         jeu.getMonde().getCase(3, 2).setTypeBatiment(TypesBatiments.FORTERESSE, 3);
         //jeu.getMonde().getCase(2, 1)
-
     }
 }

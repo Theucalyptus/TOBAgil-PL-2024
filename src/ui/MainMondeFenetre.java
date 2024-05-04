@@ -7,6 +7,8 @@ import java.util.Observer;
 import javax.swing.*;
 
 import jeu.Jeu;
+import ui.selecteur.Selecteur;
+import ui.views.CaseView;
 import ui.views.MainMondeView;
 
 @SuppressWarnings("deprecation")
@@ -28,10 +30,10 @@ public class MainMondeFenetre implements Observer {
     private JFrame fenetre;
 
     //public MainGui(Jeu jeu) {
-    public MainMondeFenetre(Jeu jeu) {
+    public MainMondeFenetre(Jeu jeu, Selecteur<CaseView> selecteurCase) {
         this.jeu = jeu;
         this.jeu.addNbTourObserver(this);
-        this.view = new MainMondeView(jeu.getMonde());
+        this.view = new MainMondeView(jeu.getMonde(), selecteurCase);
 
         this.fenetre = new JFrame(NOM);
         Container contenu = this.fenetre.getContentPane();
