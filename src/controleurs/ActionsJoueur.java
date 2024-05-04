@@ -8,8 +8,13 @@ import jeu.Jeu;
 
 public class ActionsJoueur extends JPanel {
 
+	/**Le jeu dans lequel le joueur est. */
 	private final Jeu jeu;
 
+	/**
+	 * Construire le contrôleur du Joueur. 
+	 * @param jeu Le jeu dans lequel 
+	 */
 	public ActionsJoueur(Jeu jeu) {
 		super();
 		this.jeu = jeu;
@@ -27,7 +32,7 @@ public class ActionsJoueur extends JPanel {
 
 	}
 
-	/* On définit une action concernant le joueur dans la classe du contrôlleur correspondant
+	/* On définit une action concernant le joueur dans la classe du contrôleur correspondant
 	  Je suis pas sûr que ce soit la meilleure option, un refactor est probable car on risque
 	  de très vite avoir énormément de code dans ces fichiers.
 
