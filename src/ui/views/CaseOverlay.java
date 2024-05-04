@@ -1,7 +1,6 @@
 package ui.views;
 
 import java.awt.GridLayout;
-import java.util.Random;
 import java.util.Map.Entry;
 
 import javax.swing.BorderFactory;
@@ -14,12 +13,11 @@ import jeu.Case;
 import jeu.TypesSymboles;
 import jeu.batiments.TypesBatiments;
 import jeu.peuples.Peuple;
-import jeu.peuples.TypesPeuples;
 import ui.utils.ImageFactory;
 
 public class CaseOverlay extends JPanel {
 
-    private final static GridLayout layout = new GridLayout(2, 2);
+    private static final GridLayout LAYOUT = new GridLayout(2, 2);
 
     private final JLabel pionsLbl;
     private final JLabel constructionLbl;
@@ -29,7 +27,7 @@ public class CaseOverlay extends JPanel {
         super();
         // pour que l'overlay ne soit pas en cascade mais bien juste au dessus
         super.setAlignmentX(0);
-        super.setLayout(layout);
+        super.setLayout(LAYOUT);
         // marge de l'overlay par rapport au bord de la case
         super.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
 
@@ -58,19 +56,22 @@ public class CaseOverlay extends JPanel {
 
 
     /**
-     * Met à jour l'overlay d'une case en fonction des caractéristiques de la case sous-jacante.
+     * Met à jour l'overlay d'une case en fonction des caractéristiques de la case
+     * sous-jacante.
+     * @param maCase La case dont on met à jour l'affichage.
      */
     public void updateOverlay(Case maCase) {
 
 
         // Affichages des pions
         int numberPions = maCase.getNombrepions();
-        if(numberPions > 0) {
+        if (numberPions > 0) {
             Peuple peuple = maCase.getPeuple();
             Boolean enDeclin = false;
 
             ImageIcon icon;
-            icon = new ImageIcon(ImageFactory.peupleTroupeImage(peuple.getType(), enDeclin));
+            icon = new ImageIcon(ImageFactory.peupleTroupeImage(peuple.getType(),
+                enDeclin));
             this.pionsLbl.setIcon(icon);
             this.pionsLbl.setText(Integer.toString(numberPions));
         } else {
@@ -80,10 +81,10 @@ public class CaseOverlay extends JPanel {
 
 
         // Affichages des batiments
-        for(Entry<TypesBatiments,Integer> e : maCase.getBatiment().entrySet()) {
+        for (Entry<TypesBatiments, Integer> e : maCase.getBatiment().entrySet()) {
             TypesBatiments batT = e.getKey();
             int batN = e.getValue();
-            if(batT != TypesBatiments.AUCUN) {
+            if (batT != TypesBatiments.AUCUN) {
                 ImageIcon icon = new ImageIcon(ImageFactory.batimentsImage(batT));
                 this.constructionLbl.setIcon(icon);
                 this.constructionLbl.setText(Integer.toString(batN));
@@ -97,7 +98,7 @@ public class CaseOverlay extends JPanel {
 
         // Affichages des ressources
         TypesSymboles symT = maCase.getTypeRessource();
-        if(symT != TypesSymboles.AUCUN) {
+        if (symT != TypesSymboles.AUCUN) {
             this.symboleLbl.setIcon(new ImageIcon(ImageFactory.symboleImage(symT)));
         } else {
             this.symboleLbl.setIcon(null);

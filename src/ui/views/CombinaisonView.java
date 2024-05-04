@@ -22,7 +22,7 @@ public class CombinaisonView extends JPanel {
         super();
         super.setLayout(new FlowLayout());
 
-        if(comb.getDeclin()) {
+        if (comb.getDeclin()) {
             super.setBackground(Color.GRAY);
         } else {
             super.setBackground(Color.WHITE);
@@ -31,9 +31,13 @@ public class CombinaisonView extends JPanel {
         Peuple peupleC = comb.getPeuple();
         Pouvoir pouvoirC = comb.getPouvoir();
 
-        this.peupleLbl.setIcon(new ImageIcon(ImageFactory.peupleLogoImage(peupleC.getType())));
+        this.peupleLbl.setIcon(new ImageIcon(
+            ImageFactory.peupleLogoImage(peupleC.getType())));
+
         this.peupleLbl.setText(peupleC.getNom());
-        this.pouvoirLbl.setIcon(new ImageIcon(ImageFactory.pouvoirLogoImage(pouvoirC.getType())));
+        this.pouvoirLbl.setIcon(new ImageIcon(
+            ImageFactory.pouvoirLogoImage(pouvoirC.getType())));
+
         this.pouvoirLbl.setText(pouvoirC.getNom());
 
         super.add(this.peupleLbl);

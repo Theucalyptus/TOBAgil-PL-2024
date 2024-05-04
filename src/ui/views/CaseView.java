@@ -3,7 +3,6 @@ package ui.views;
 import javax.swing.*;
 
 import jeu.Case;
-import jeu.TypesRegions;
 import ui.utils.ImageFactory;
 
 import java.awt.*;
@@ -35,7 +34,7 @@ public class CaseView extends JPanel implements Observer {
         // Ajout gestion redimensionnement image dynamique
         super.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent ev) {
-                CaseView maCase = (CaseView)ev.getSource();
+                CaseView maCase = (CaseView) ev.getSource();
                 maCase.resizeIcon();
             }
         });
@@ -45,12 +44,15 @@ public class CaseView extends JPanel implements Observer {
     }
 
     private void resizeIcon() {
-        Image imageTemp = this.bgImage.getScaledInstance(this.getWidth(), this.getHeight(), java.awt.Image.SCALE_SMOOTH);
+        Image imageTemp = this.bgImage.getScaledInstance(this.getWidth(),
+            this.getHeight(),
+            java.awt.Image.SCALE_SMOOTH);
+
         this.bgLabel.setIcon(new ImageIcon(imageTemp));
     }
 
     public void update(Observable arg0, Object arg1) {
-        Case maCase = (Case)arg0;
+        Case maCase = (Case) arg0;
         this.overlay.updateOverlay(maCase);
 
     }

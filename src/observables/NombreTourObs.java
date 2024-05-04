@@ -5,6 +5,7 @@ import java.util.Observable;
 @SuppressWarnings("deprecation")
 public class NombreTourObs extends Observable {
 
+    /**Construire un observable nombre de tour. */
     public NombreTourObs() {
         super();
     }

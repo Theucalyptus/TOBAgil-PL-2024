@@ -95,6 +95,7 @@
 		<module name="ParameterName"/>
 		<module name="StaticVariableName"/>
 		<module name="TypeName"/>
+		<!-- <module name="MagicNumber"/> -->
 
 		<!-- Checks for imports                              -->
 		<!-- See https://checkstyle.org/config_import.html -->

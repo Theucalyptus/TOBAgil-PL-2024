@@ -5,6 +5,7 @@ import java.util.Observable;
 @SuppressWarnings("deprecation")
 public class JoueurCourantObs extends Observable {
 
+    /**Construire un joueur courant observable. */
     public JoueurCourantObs() {
         super();
     }

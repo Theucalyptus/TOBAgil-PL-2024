@@ -15,7 +15,14 @@ import jeu.pouvoirs.Alchimistes;
 import jeu.pouvoirs.Volants;
 
 /**Classe principale de l'application.*/
-public class Smallworld {
+public /*final*/ class Smallworld {
+
+    /*
+     /**Supprimer le Constructeur par défaut. *\/
+     private Smallworld() {
+        // ne rien faire.
+    }
+    */
 
     /**Lancer l'application.
      * @param args Les paramètre de la ligne de commandes, ils ne

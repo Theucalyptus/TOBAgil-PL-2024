@@ -46,7 +46,7 @@ public class MainJoueurView extends JPanel {
 
 
     public void setJoueur(Joueur joueur) {
-        for(CombinaisonView cbv : this.combViews) {
+        for (CombinaisonView cbv : this.combViews) {
             this.combinaisonsPnl.remove(cbv);;
         }
         this.combViews.clear();
@@ -59,7 +59,7 @@ public class MainJoueurView extends JPanel {
         this.combViews.add(new CombinaisonView(comb));
         //}
 
-        for(CombinaisonView cbw : this.combViews) {
+        for (CombinaisonView cbw : this.combViews) {
             this.combinaisonsPnl.add(cbw);
         }
     }
@@ -71,7 +71,7 @@ public class MainJoueurView extends JPanel {
 
             public JetonView(int nombre) {
                 super();
-                assert(nombre == 1 || nombre == 3 || nombre == 5 || nombre == 10);
+                assert (nombre == 1 || nombre == 3 || nombre == 5 || nombre == 10);
                 this.setIcon(new ImageIcon(ImageFactory.pieceImage(nombre)));
                 this.setNombre(0);
             }
