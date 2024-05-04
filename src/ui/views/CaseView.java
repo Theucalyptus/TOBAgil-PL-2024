@@ -16,6 +16,7 @@ import java.util.Observer;
 public class CaseView extends JPanel implements Observer {
     private Image bgImage;
     private JLabel bgLabel;
+    private Case caseAffichee = null;
 
     private CaseOverlay overlay;
 
@@ -41,6 +42,8 @@ public class CaseView extends JPanel implements Observer {
 
         caseAffichee.addObserver(this);
         this.overlay.updateOverlay(caseAffichee);
+        
+        this.caseAffichee = caseAffichee;
     }
 
     private void resizeIcon() {
@@ -55,5 +58,9 @@ public class CaseView extends JPanel implements Observer {
         Case maCase = (Case) arg0;
         this.overlay.updateOverlay(maCase);
 
+    }
+    
+    public Case getVraieCase() {
+    	return this.caseAffichee;
     }
 }

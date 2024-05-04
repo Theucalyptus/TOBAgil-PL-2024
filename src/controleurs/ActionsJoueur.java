@@ -4,20 +4,28 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
+import jeu.Case;
 import jeu.Jeu;
+import ui.selecteur.Selecteur;
+import ui.views.CaseView;
 
 public class ActionsJoueur extends JPanel {
 
 	/**Le jeu dans lequel le joueur est. */
 	private final Jeu jeu;
+	
+	/**Le sélecteur de case du jeu. */
+	private Selecteur<CaseView> selecteurCase;
 
 	/**
 	 * Construire le contrôleur du Joueur.
 	 * @param jeu Le jeu dans lequel
 	 */
-	public ActionsJoueur(Jeu jeu) {
+	public ActionsJoueur(Jeu jeu, Selecteur<CaseView> selecteurCase) {
 		super();
 		this.jeu = jeu;
+		this.selecteurCase = selecteurCase;
+		
 		super.setLayout(new FlowLayout());
 		super.setBorder(BorderFactory.createTitledBorder("Actions du Joueur"));
 
@@ -28,6 +36,10 @@ public class ActionsJoueur extends JPanel {
 		JButton declinBtn = new JButton("Passer en déclin");
 		declinBtn.addActionListener(new ActionDeclin());
 		super.add(declinBtn);
+		
+		JButton agirCaseBtn = new JButton("Agir sur la case sélectionnée");
+		agirCaseBtn.addActionListener(new ActionAgirCase());
+		super.add(agirCaseBtn);
 
 
 	}
@@ -80,12 +92,25 @@ public class ActionsJoueur extends JPanel {
 
 	}
 
-	/**Classe déclenché quand le bouton action déclin est clické. */
+	/**Classe déclenchée quand le bouton action déclin est cliqué. */
 	private final class ActionDeclin implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			jeu.getJoueurCourant().getCombinaison().passageDeclin();
 			jeu.passerTour();
+		}
+	}
+	
+	/**Classe déclenchée quand le bouton agir case est cliqué. */
+	private final class ActionAgirCase implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent evt) {
+			CaseView caseSelectionnee = selecteurCase.getSelection();
+			if(selecteurCase.getSelection() == null) {
+				System.out.println("Aucune case n'est sélectionnée");
+			} else {
+				System.out.println("Nombre de pions sur la case : " + caseSelectionnee.getVraieCase().getNombrepions());
+			}
 		}
 	}
 }
