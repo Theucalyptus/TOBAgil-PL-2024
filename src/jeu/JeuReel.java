@@ -37,9 +37,6 @@ public class JeuReel implements Jeu {
     /** Le nombre de tour total qui devra être fait dans la partie. */
     private int nbToursTotals;
 
-    /** Indicateur de fin de tour du joueur. */
-    private boolean finDuTour;
-
     /** Le nombre de Joueur de la partie. */
     private int nombreJoueurs;
 
@@ -73,7 +70,6 @@ public class JeuReel implements Jeu {
     private JeuReel(int nbJoueurs, Monde leMonde) {
         this.joueurs = new ArrayList<>();
         this.monde = leMonde;
-        this.finDuTour = true;
         this.enCours = false;
         this.nbToursTotals = 0;
         this.noTour = 1;
