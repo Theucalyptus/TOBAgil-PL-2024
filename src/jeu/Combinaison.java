@@ -82,12 +82,19 @@ public class Combinaison {
     //===============================================================
 
     /**
-     * 
      * Ajouter un groupe de pions à la liste de la combinaison.
-     * 
+     * @param groupe le groupe de pion a ajouter.
      */
     public void addGroupe(GroupePions groupe) {
         this.pions.add(groupe);
+    }
+
+    /**
+     * Supprimer un groupe de pions de la liste de la combinaison.
+     * @param groupe le groupe de pion a ajouter.
+     */
+    public void supprGroupe(GroupePions groupe) {
+        this.pions.remove(groupe);
     }
 
     /**
