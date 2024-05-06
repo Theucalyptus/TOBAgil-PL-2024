@@ -52,7 +52,7 @@ public class TestJeuReel {
     @Before
     void setUp() {
         // creer une partie de 4 joueurs (Pascal, Emanuel, Gabriel, Yann)
-        this.aJeu = new JeuReel(CINQ);
+        this.aJeu = new JeuReel(this.CINQ);
         this.unJoueur = new Joueur("Emanuel", 0);
         unJeuA5Joueurs = new JeuReel(5);
         this.j1 = new Joueur("Gabriel", 0);
