@@ -100,6 +100,8 @@ public class Monde {
                 boolean coins;
                 boolean centre;
 
+                int nb_pions = 1; //nombre de pions a placer sur la nouvelle case
+                
                 coins = ((x == 0 && y == 0)
                     || (x == (this.dimX - 1)) && y == (this.dimY - 1));
                 //on verifie si on est sur les cases du centre
@@ -111,6 +113,7 @@ public class Monde {
                 if (coins || centre) { //on traite les cas où on veut la mer ou un lac
                     newregion = TypesRegions.MER_ET_LAC;
                     newsymbole = TypesSymboles.AUCUN;
+                    nb_pions = 0;
                 } else {
                     // choix d'une region aleatoire de la liste des regions possibles
                     // on recupere les cles du dictionnaire
@@ -154,12 +157,11 @@ public class Monde {
                     }  else {
                         newsymbole = TypesSymboles.AUCUN;
                     }
-
                 }
 
                 // on pose une tribu oubliée sur la case
                 Peuple monPeuple = new TribuOubliee();
-                EnsemblePions newEnsemblePions = new EnsemblePions(monPeuple, 1);
+                EnsemblePions newEnsemblePions = new EnsemblePions(monPeuple, nb_pions);
                 // création de la nouvelle case
                 Case newcase = new Case(x, y, newregion, newEnsemblePions, newsymbole);
                 // ajout de la nouvelle case à la grille
