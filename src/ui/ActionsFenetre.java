@@ -11,8 +11,14 @@ import controleurs.*;
 
 public class ActionsFenetre {
 
+    /** La fenêtre. */
     private final JFrame fenetre;
 
+    /**
+     * Construit une fenêtre des contrôleurs.
+     * @param jeu le jeu à contrôlé
+     * @param selecteurCase le sélecteur de case
+     */
     public ActionsFenetre(Jeu jeu, Selecteur<CaseView> selecteurCase) {
 
         this.fenetre = new JFrame("SmallWorld - Actions");
