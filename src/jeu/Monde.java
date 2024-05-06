@@ -109,8 +109,6 @@ public class Monde {
                     || ((x == (this.dimX / 2 - 1)) && (y == (this.dimY / 2))));
 
                 if (coins || centre) { //on traite les cas où on veut la mer ou un lac
-                    System.out.println("Dimensions: " + this.dimX + ", " + this.dimY);
-                    System.out.println("Coins ou centre: " + x + ", " + y);
                     newregion = TypesRegions.MER_ET_LAC;
                     newsymbole = TypesSymboles.AUCUN;
                 } else {
