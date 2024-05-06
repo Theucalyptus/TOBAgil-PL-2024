@@ -1,7 +1,8 @@
 package jeu;
+import java.util.List;
+
 import jeu.peuples.Peuple;
 import jeu.pouvoirs.Pouvoir;
-
 
 public class Combinaison {
 
@@ -21,8 +22,8 @@ public class Combinaison {
     /** La combinaison a-t-elle déja fais son premier tour. */
     private Boolean premierTour;
 
-    /** Ensemble de pions de la combinaison. */
-    private EnsemblePions pions;
+    /** Liste de groupe de pions de la combinaison. */
+    private List<GroupePions> pions;
 
     //===============================================================
     //                        Constructeurs
@@ -68,10 +69,10 @@ public class Combinaison {
     }
 
     /**
-     * Donner l'ensemble des Pions de la combinaison.
-     * @return Les Pions de la Combinaisons.
+     * Donner les groupes de Pions de la combinaison.
+     * @return Les groupes de pions de la Combinaisons.
      */
-    public EnsemblePions getPions() {
+    public List<GroupePions> getPions() {
         return this.pions;
     }
 
@@ -79,6 +80,15 @@ public class Combinaison {
     //===============================================================
     //                          Commandes
     //===============================================================
+
+    /**
+     * 
+     * Ajouter un groupe de pions à la liste de la combinaison.
+     * 
+     */
+    public void addGroupe(GroupePions groupe) {
+        this.pions.add(groupe);
+    }
 
     /**
      * Permetre le passage en declin de la combinaison.
@@ -143,5 +153,4 @@ public class Combinaison {
         this.premierTour = false;
         return (this.peuple.getNbJetons() + this.pouvoir.getNbJetons());
     }
-
 }
