@@ -6,8 +6,11 @@ import javax.swing.*;
 
 import jeu.Case;
 import jeu.Jeu;
+import jeu.batiments.TypesBatiments;
 import ui.selecteur.Selecteur;
 import ui.views.CaseView;
+
+import java.util.Scanner;
 
 public class ActionsJoueur extends JPanel {
 
@@ -40,6 +43,10 @@ public class ActionsJoueur extends JPanel {
 		JButton agirCaseBtn = new JButton("Agir sur la case sélectionnée");
 		agirCaseBtn.addActionListener(new ActionAgirCase());
 		super.add(agirCaseBtn);
+
+		JButton ajouterBatimentBtn = new JButton("Ajouter un batiment");
+		ajouterBatimentBtn.addActionListener(new ActionAjouterBatiment());
+		super.add(ajouterBatimentBtn);
 
 
 	}
@@ -113,4 +120,63 @@ public class ActionsJoueur extends JPanel {
 			}
 		}
 	}
+
+
+	/**Classe déclenchée quand le bouton ajouterBatiment est cliqué. */
+	private final class ActionAjouterBatiment implements ActionListener {
+
+		//Permet d'avoir un seul scanner en continue
+		Scanner scanner;
+
+		public ActionAjouterBatiment() {
+			scanner = new Scanner(System.in); // Initialisez le scanner dans le constructeur
+		}
+	
+
+		@Override
+		public void actionPerformed(ActionEvent evt) {
+			CaseView caseSelectionnee = selecteurCase.getSelection();
+			if(selecteurCase.getSelection() == null) {
+				System.out.println("Aucune case n'est sélectionnée");
+			} else {
+				String input;
+				//Initialisation du type de batiment
+				TypesBatiments newbatiment = TypesBatiments.AUCUN;
+				//On boucle tant que l'utilisateur ne donne pas un bon Type de batiment
+				//Condition pour rester dans la boucle
+				Boolean Correcte = false;
+				do {
+					//Demande du batiment à ajouter
+					System.out.println("Vous souhaitez ajouter : CAMPEMENT, FORTERESSE,	ANTRE_DE_TROLL, TANIERE ?");
+					input = scanner.nextLine();
+					System.out.println("Vous souhaitez rajouter : " + input);
+					//On detecte quel batiment a été choisi
+					switch (input) {
+						case "CAMPEMENT":
+							newbatiment = TypesBatiments.CAMPEMENT;
+							Correcte = true;
+							break;
+						case "FORTERESSE":
+							newbatiment = TypesBatiments.FORTERESSE;
+							Correcte = true;
+							break;
+						case "ANTRE_DE_TROLL":
+							newbatiment = TypesBatiments.ANTRE_DE_TROLL;
+							Correcte = true;
+							break;
+						case "TANIERE":
+							newbatiment = TypesBatiments.TANIERE;
+							Correcte = true;
+							break;
+						default:
+							scanner = new Scanner(System.in);
+							System.out.println("Type de batiment inexistant.");
+					}
+				} while (!Correcte);
+				//Rajouter le batiment à la case sélectionné
+				caseSelectionnee.getVraieCase().setTypeBatiment(newbatiment, 1);
+			}
+		}
+	}
+	
 }
