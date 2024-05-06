@@ -103,12 +103,14 @@ public class Monde {
                 coins = ((x == 0 && y == 0)
                     || (x == (this.dimX - 1)) && y == (this.dimY - 1));
                 //on verifie si on est sur les cases du centre
-                centre = (((x == (this.dimX / 2)) && (y == (this.dimY / 2)))
-                    || ((x == (this.dimX / 2 + 1)) && (y == (this.dimY / 2)))
+                centre = (((x == (this.dimX / 2 - 1)) && (y == (this.dimY / 2 - 1)))
+                    || ((x == (this.dimX / 2 )) && (y == (this.dimY / 2 - 1)))
                     || ((x == (this.dimX / 2)) && (y == (this.dimY / 2)))
-                    || ((x == (this.dimX / 2 + 1)) && (y == (this.dimY / 2 + 1))));
+                    || ((x == (this.dimX / 2 - 1)) && (y == (this.dimY / 2))));
 
                 if (coins || centre) { //on traite les cas où on veut la mer ou un lac
+                    System.out.println("Dimensions: " + this.dimX + ", " + this.dimY);
+                    System.out.println("Coins ou centre: " + x + ", " + y);
                     newregion = TypesRegions.MER_ET_LAC;
                     newsymbole = TypesSymboles.AUCUN;
                 } else {
@@ -195,21 +197,5 @@ public class Monde {
             }
         }
         return new Case(); //on ne devrait jamais arriver à ce return
-    }
-
-    /** Afficher le monde dans le terminal.
-     * @param monMonde le monde à afficher
-    */
-    public void afficherMonde(Monde monMonde) {
-        Case caseCourante;
-        for (int x = 0; x < monMonde.getDimX(); x++) {
-            for (int y = 0; y < monMonde.getDimY(); y++) {
-                caseCourante = monMonde.getCase(x, y);
-                System.out.println("--------");
-                System.out.println(caseCourante.getTypeRegion());
-                System.out.println(caseCourante.getTypeRessource());
-                System.out.println("--------");
-            }
-        }
     }
 }
