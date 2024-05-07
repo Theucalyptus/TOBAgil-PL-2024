@@ -64,7 +64,7 @@ public class CaseOverlay extends JPanel {
         // Affichages des pions
         int numberPions = maCase.getNombrepions();
         if (numberPions > 0) {
-            Peuple peuple = maCase.getPeuple();
+            Peuple peuple = maCase.getGroupePions().getCombinaison().getPeuple();
             Boolean enDeclin = false;
 
             ImageIcon icon;
