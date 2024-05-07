@@ -2,6 +2,7 @@ package jeu;
 
 import java.util.Map;
 import java.util.Observable;
+import java.util.Set;
 
 import jeu.batiments.TypesBatiments;
 
@@ -56,6 +57,7 @@ public class Case extends Observable {
     /** Status de la case (prenable ou non). */
     private Boolean prenable;
 
+    private boolean estBordure;
 
     // Constructeurs
 
@@ -72,7 +74,8 @@ public class Case extends Observable {
         this.pions = null;
         this.ressource = TypesSymboles.AUCUN;
         this.prenable = true;
-    }
+        this.estBordure = false;
+    }   
 
     /**
      * Construire une Case à partir d'un type de région, d'un batiment, d'un ensemble de
@@ -265,6 +268,22 @@ public class Case extends Observable {
     */
     public void ajoutVoisins(Case caseVoisine) {
         this.voisins.add(caseVoisine);
+    }
+
+    public boolean estAtteignable(Joueur joueur) {
+
+        if (this.estBordure && (joueur.getCombinaisonActive().getPions().size() == 0) ) {
+            return true
+        }
+
+        //checker si la case est atteignable par un joueur déjà déployé ?
+        for (Case voisine : case.getVoisins()) {
+            if (voisine.getGroupePions().getCombinaison() == this.joueurCourant.getCombinaison()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
