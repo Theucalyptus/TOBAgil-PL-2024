@@ -182,15 +182,8 @@ public class Combinaison {
         return(nmb_pions);
     }
 
-    /** Permet d'obtenir le nombre de groupes de pions
-     * 
-     */
-
-     public int nombre_groupes_pions(){
-        int nmb_grp_pions;
-        for (GroupePions e : this.pions) {
-            nmb_grp_pions++;
-        }
-        return(nmb_grp_pions);
-     }
+    /** Permet d'obtenir le nombre de groupes de pions.*/
+    public int nombre_groupes_pions(){
+    return this.pions.size();
+    }
 }
