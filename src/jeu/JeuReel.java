@@ -37,9 +37,6 @@ public class JeuReel implements Jeu {
     /** Le nombre de tour total qui devra être fait dans la partie. */
     private int nbToursTotals;
 
-    /** Indicateur de fin de tour du joueur. */
-    private boolean finDuTour;
-
     /** Le nombre de Joueur de la partie. */
     private int nombreJoueurs;
 
@@ -73,7 +70,6 @@ public class JeuReel implements Jeu {
     private JeuReel(int nbJoueurs, Monde leMonde) {
         this.joueurs = new ArrayList<>();
         this.monde = leMonde;
-        this.finDuTour = true;
         this.enCours = false;
         this.nbToursTotals = 0;
         this.noTour = 1;
@@ -149,7 +145,7 @@ public class JeuReel implements Jeu {
     @Override
     public void setNumeroTour(int newNoTour) {
         this.noTour = newNoTour;
-        this.nbTourObs.notifyObservers();
+        this.nbTourObs.notifyNombreTour();
     }
 
     /**
@@ -245,21 +241,25 @@ public class JeuReel implements Jeu {
      */
     @Override
     public void passerTour() {
+        if(this.enCours) {
+            // Actions de fin de tour
+            this.joueurCourant.addPoints(4);
 
-        // Actions de fin de tour
-        this.joueurCourant.addPoints(4);
 
-
-        // Passage au tour suivant
-        if (this.joueursIter.hasNext()) {
-            this.setJoueurCourant(this.joueursIter.next());
+            // Passage au tour suivant
+            if (this.joueursIter.hasNext()) {
+                this.setJoueurCourant(this.joueursIter.next());
+            } else {
+                this.joueursIter = this.joueurs.listIterator();
+                this.setNumeroTour(this.getNumeroTour() + 1);
+                this.setJoueurCourant(this.joueursIter.next());
+            }
+            if (this.getNumeroTour() > this.getNombreTourTotal()) {
+                this.enCours = false;
+                System.out.println("");
+            }
         } else {
-            this.joueursIter = this.joueurs.listIterator();
-            this.setNumeroTour(this.getNumeroTour() + 1);
-            this.setJoueurCourant(this.joueursIter.next());
-        }
-        if (this.getNumeroTour() > this.getNombreTourTotal()) {
-            this.enCours = false;
+            System.out.println("Partie non-commencé ou terminée. Abandon !");
         }
     }
 }
