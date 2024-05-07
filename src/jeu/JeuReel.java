@@ -145,7 +145,7 @@ public class JeuReel implements Jeu {
     @Override
     public void setNumeroTour(int newNoTour) {
         this.noTour = newNoTour;
-        this.nbTourObs.notifyObservers();
+        this.nbTourObs.notifyNombreTour();
     }
 
     /**
@@ -241,21 +241,25 @@ public class JeuReel implements Jeu {
      */
     @Override
     public void passerTour() {
+        if(this.enCours) {
+            // Actions de fin de tour
+            this.joueurCourant.addPoints(4);
 
-        // Actions de fin de tour
-        this.joueurCourant.addPoints(4);
 
-
-        // Passage au tour suivant
-        if (this.joueursIter.hasNext()) {
-            this.setJoueurCourant(this.joueursIter.next());
+            // Passage au tour suivant
+            if (this.joueursIter.hasNext()) {
+                this.setJoueurCourant(this.joueursIter.next());
+            } else {
+                this.joueursIter = this.joueurs.listIterator();
+                this.setNumeroTour(this.getNumeroTour() + 1);
+                this.setJoueurCourant(this.joueursIter.next());
+            }
+            if (this.getNumeroTour() > this.getNombreTourTotal()) {
+                this.enCours = false;
+                System.out.println("");
+            }
         } else {
-            this.joueursIter = this.joueurs.listIterator();
-            this.setNumeroTour(this.getNumeroTour() + 1);
-            this.setJoueurCourant(this.joueursIter.next());
-        }
-        if (this.getNumeroTour() > this.getNombreTourTotal()) {
-            this.enCours = false;
+            System.out.println("Partie non-commencé ou terminée. Abandon !");
         }
     }
 }
