@@ -69,4 +69,8 @@ public interface Jeu {
      */
     void passerTour();
 
+    /**
+     * Permet d'attaquer une case.
+     */
+    void attaquerCase();
 }

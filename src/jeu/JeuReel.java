@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Observer;
 
+import javax.swing.GroupLayout.Group;
+
 import jeu.exceptions.JoueurDejaDansLaPartieException;
 import jeu.exceptions.NombreJoueurIncorrectException;
 import jeu.exceptions.PartieEnCoursException;
@@ -274,5 +276,30 @@ public class JeuReel implements Jeu {
         } else {
             System.out.println("Partie non-commencé ou terminée. Abandon !");
         }
+    }
+
+    public void attaquerCase(Case case) {
+        //checker si la case est
+        if (case.estAtteignable()) {
+            if (case.getPrenable()) { //Boolean et pas boolean
+                Combinaison combinaisonActive = joueurCourant.getCombinaisonActive();
+                int diff = combinaisonActive.getNbPionsEnMain() - getNombreAttaquantNecessaire();
+                if(diff >= 0) {
+                    GroupePions newGroupe = new GroupePions(combinaisonActive, 1)
+                    case.setNewpions(newGroupe);
+                    combinaisonActive.addGroupe(newGroupe);
+                    combinaisonActive.setNbPionsEnMain(diff);
+                } else if (diff >= -3){
+                    //lancer dé
+                } else {
+                    //exception conquête impossible pas assez de pions
+                }
+
+            } else {
+                //exception case non prenable (effet de pouvoir) (imprenable + paix).
+            }
+        } else {
+            //exception case non atteignable (pas de pions sur une case voisine)
+        } 
     }
 }

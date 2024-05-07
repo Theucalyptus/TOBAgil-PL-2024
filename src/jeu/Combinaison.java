@@ -27,6 +27,9 @@ public class Combinaison {
     /** Liste de groupe de pions de la combinaison. */
     private List<GroupePions> pions;
 
+    /** Nombre de pions dans la main du joueur (0 en fin de tour) */
+    private int nbPionsEnMain;
+
     //===============================================================
     //                        Constructeurs
     //===============================================================
@@ -78,7 +81,13 @@ public class Combinaison {
         return this.pions;
     }
 
+    public int getNbPionsEnMain() {
+        return this.nbPionsEnMain;
+    }
 
+    public void setNbPionsEnMain(int newNbPions) {
+        this.nbPionsEnMain = newNbPions;
+    }
     //===============================================================
     //                          Commandes
     //===============================================================
