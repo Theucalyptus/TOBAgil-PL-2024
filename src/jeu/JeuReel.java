@@ -237,6 +237,16 @@ public class JeuReel implements Jeu {
         this.setJoueurCourant(this.joueursIter.next());
     }
 
+    /** Ajouter le nombre de points de victoire au joueur. */
+    private void ajouterPtsVictoire() {
+        int nb_pts = 0;
+        int pts_bonus = 0;
+        Combinaison combinaison_joueur = this.joueurCourant.getCombinaison(); //la combinaison du joueur courant
+        pts_bonus = combinaison_joueur.finTour(); //obtenir le nombre de points bonus
+        nb_pts = combinaison_joueur.nombre_groupes_pions() + pts_bonus;
+        this.joueurCourant.addPoints(nb_pts);
+    }
+
     /**
      * Permet de passer au tour suivant.
      */
@@ -244,7 +254,8 @@ public class JeuReel implements Jeu {
     public void passerTour() {
         if(this.enCours) {
             // Actions de fin de tour
-            this.joueurCourant.addPoints(4);
+            this.ajouterPtsVictoire();
+            //this.joueurCourant.addPoints(4);
 
 
             // Passage au tour suivant
