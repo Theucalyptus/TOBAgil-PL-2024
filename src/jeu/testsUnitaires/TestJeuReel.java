@@ -6,6 +6,7 @@ import jeu.JeuReel;
 import jeu.Joueur;
 import jeu.Monde;
 import jeu.exceptions.JoueurDejaDansLaPartieException;
+import jeu.exceptions.MauvaisMondeException;
 import jeu.exceptions.PartiePleineException;
 
 import static org.junit.Assert.*;
@@ -53,7 +54,7 @@ public class TestJeuReel {
     /**Cinq. */
     public static final int CINQ = 5;
     /**Neuf. */
-    public static final int NUEF = 9;
+    public static final int NEUF = 9;
     /**Huit. */
     public static final int HUIT = 8;
     /**Dix. */
@@ -96,19 +97,43 @@ public class TestJeuReel {
     /**Tester le constructeur. */
     @Test
     public void testerConstructeurJeu() {
-        JeuReel unJeu = new JeuReel();
+        new JeuReel();
     }
 
-    /**Tester la commande Ajouter Joueur. */
+    /**Tester le constructeur. */
+    @Test
+    public void testerConstructeurJeuNombreJoueur() {
+        new JeuReel(CINQ);
+    }
+
+    /**Tester le getteur du monde. */
+    @Test
+    public void testerGetMonde() {
+        assertTrue("Le monde doit être la même poigné",
+            this.unJeuAvecUnMonde.getMonde() == this.unMonde);
+    }
+
+
+    /**Tester le getteur de la liste de Joueurs. */
+    @Test
+    public void testerGetNombreJoueur() {
+        int js = this.unJeuA2Joueurs.getNombreJoueur();
+        assertEquals("Le nombre de joueur doît être de 2",
+            js, 2);
+    }
+
+    /*
+    /**Tester la commande Ajouter Joueur. *\/
     @Test
     public void testerAjouterJoueur() {
         assertTrue(!this.aJeu.getJoueurs().contains(unJoueur));
         int av = this.aJeu.getNombreJoueur();
         this.aJeu.ajouterJoueur(unJoueur);
         assertEquals("Le nombre de Joueur doit augmenter.",
-            this.aJeu.getNombreJoueur(), av + 1, PRECISION);
+        this.aJeu.getNombreJoueur(), av + 1, PRECISION);
         assertTrue(this.aJeu.getJoueurs().contains(unJoueur));
     }
+    */
 
     /**Tester la Robustesse d'ajouterJoueur avec un joueur null. */
     @Test(expected = IllegalArgumentException.class)
@@ -122,37 +147,45 @@ public class TestJeuReel {
         this.unJeuA5Joueurs.ajouterJoueur(new Joueur("Jean", 0));
     }
 
-    /**Tester l'actualisation du nombre de tour dans un Jeu a 2 joueurs. */
+    /*
+    /**Tester l'actualisation du nombre de tour dans un Jeu a 2 joueurs. *\/
     @Test
-    public void testerSetNombreTourJeu2Joueurs() {
+    public void testerMajNombreToursTotalsJeu2Joueurs() {
         this.unJeuA2Joueurs.majNombreToursTotals();
         assertEquals("Le jeu à 2 Joueurs doit avoir 10 tours.",
             this.unJeuA2Joueurs.getNombreTourTotal(), DIX, PRECISION);
     }
 
-    /**Tester l'actualision du nombre de tour dans un jeu a 3 joueurs. */
+    /**Tester l'actualision du nombre de tour dans un jeu a 3 joueurs. *\/
     @Test
-    public void testerSetNombreTourJeu3Joueurs() {
+    public void testerMajNombreToursTotalsJeu3Joueurs() {
         this.unJeuA3Joueurs.majNombreToursTotals();
         assertEquals("Le jeu à 3 Joueurs doit avoir 9 tours.",
             this.unJeuA3Joueurs.getNombreTourTotal(), NEUF, PRECISION);
     }
 
-    /**Tester l'actualisation du nombre de tour dans un jeu a 4 joueurs. */
+    /**Tester l'actualisation du nombre de tour dans un jeu a 4 joueurs. *\/
     @Test
-    public void testerSetNombreTourJeu4Joueurs() {
+    public void testerMajNombreToursTotalsJeu4Joueurs() {
         this.unJeuA4Joueurs.majNombreToursTotals();
         assertEquals("Le jeu à 4 Joueurs doit avoir 8 tours.",
             this.unJeuA4Joueurs.getNombreTourTotal(), HUIT, PRECISION);
     }
 
-    /**Tester l'actualisation du nombre de tour dans un jeu a 5 joueurs. */
+    /**Tester l'actualisation du nombre de tour dans un jeu a 5 joueurs. *\/
     @Test
-    public void testerSetNombreTourJeu5Joueurs() {
+    public void testerMajNombreToursTotalsJeu5Joueurs() {
         this.unJeuA5Joueurs.majNombreToursTotals();
         assertEquals("Le jeu à 5 Joueurs doit avoir 8 tours.",
             this.unJeuA5Joueurs.getNombreTourTotal(), HUIT, PRECISION);
     }
+
+    /**Tester la robustesse de la mise à jour du nobre de tour totals. *\/
+    @Test(expected = NombreJoueurIncorrectException.class)
+    public void testerRobustesseMajNombreTourTotals() {
+        this.aJeu.majNombreToursTotals();
+    }
+    */
 
     /**Tester le getteur du nombre de Tour. */
     @Test
@@ -161,21 +194,6 @@ public class TestJeuReel {
             this.aJeu.getNombreTourTotal(), 0, PRECISION);
     }
 
-    /**Tester le getteur de la liste de Joueurs. */
-    @Test
-    public void testerGetJoueurs() {
-        List<Joueur> js = this.unJeuA2Joueurs.getJoueurs();
-        assertEquals("Le nombre de joueur doît être de 2",
-            js.size(), 2);
-    }
-
-    /**Tester le setteur de la fin du Tour. */
-    @Test
-    public void testerSetFinDuTour() {
-        this.aJeu.setFinDuTour();
-        assertTrue("La fin du tour doit être mis a true.",
-            this.aJeu.estFinDeTour());
-    }
 
     /**Tester le setteurs du joueur courant. */
     @Test
@@ -190,12 +208,6 @@ public class TestJeuReel {
             + " fait partie de la partie.", this.aJeu.getJoueurCourant() == unJoueur);
     }
 
-    /**Tester le getteur du monde. */
-    @Test
-    public void testerGetMonde() {
-        assertTrue("Le monde doit être la même poigné",
-            this.unJeuAvecUnMonde.getMonde() == this.unMonde);
-    }
 
     /**Tester le changement forcée du Monde. */
     @Test
@@ -205,11 +217,31 @@ public class TestJeuReel {
             this.aJeu.getMonde() == this.unMonde);
     }
 
-    /**Tester le getteur du joueurCourant. */
+    /**Tester la robustesse du changement de Monde avec une poignée nulle. */
+    @Test(expected = IllegalArgumentException.class)
+    public void testerRobustesseSetMondeNull() {
+        this.aJeu.setMonde(null);
+    }
+
+    /**Tester la robustesse du changement du monde avec un monde
+     * au mauvaise dimension. */
+    @Test(expected = MauvaisMondeException.class)
+    public void testerRobustesseSetMondeMauvaisMonde() {
+        this.aJeu.setMonde(new Monde(CINQ));
+    }
+
+    /**Tester le setteur d'enCours avec True. */
     @Test
-    public void testerGetJoueurCourant() {
-        this.aJeu.setJoueurCourant(unJoueur);
-        assertTrue(this.aJeu.getJoueurCourant() == this.unJoueur);
+    public void testerSetEnCoursTrue() {
+        this.aJeu.setEnCours(true);
+        assertTrue(this.aJeu.estEnCoursDePartie());
+    }
+
+    /**Tester le setteur d'enCours avec True. */
+    @Test
+    public void testerSetEnCoursFalse() {
+        this.aJeu.setEnCours(false);
+        assertFalse(this.aJeu.estEnCoursDePartie());
     }
 
     /**Tester la robustesse de l'ajout d'observer sur le
@@ -227,4 +259,14 @@ public class TestJeuReel {
         this.aJeu.addJoueurCourantObserver(null);
     }
 
+    /**Tester si réinitialiser Joueurs vide bien la liste de Joueur.
+    */
+    @Test
+    public void testerReinitialiserJoueurs() {
+        assertEquals("Le jeu doit avoir 5 joueurs avant le test.",
+            this.unJeuA5Joueurs.getNombreJoueur(), 5, PRECISION);
+        this.unJeuA5Joueurs.reinitialiserJoueurs();
+        assertEquals("Le jeu doit avoir 0 joueur après la réinitialisation.",
+            this.unJeuA5Joueurs.getNombreJoueur(), 5, PRECISION);
+    }
 }

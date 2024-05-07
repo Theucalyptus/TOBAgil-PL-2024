@@ -180,6 +180,7 @@ public class JeuReel implements Jeu {
 
     /**Actualiser le nombre de tour de la partie en fonction du
      * nombre de joueur dans la partie.
+     * @throws NombreJoueurIncorrectException Si le Nombre de Joueur n'est pas conforme.
      */
     private void majNombreToursTotals() {
         switch (this.nombreJoueurs) {
@@ -227,10 +228,10 @@ public class JeuReel implements Jeu {
      */
     @Override
     public void lancerPartie() {
-        if (enCours) {
+        if (this.enCours) {
             throw new PartieEnCoursException();
         }
-        enCours = true;
+        this.enCours = true;
         this.majNombreToursTotals();
         this.setNumeroTour(1);
         this.joueursIter = this.joueurs.listIterator();

@@ -19,5 +19,5 @@ Script bash pour générer / raffraichir la documentation javadoc du projet
 
 ### Git
 
-Tutoriel plutôt long et complet : https://www.youtube.com/watch?v=V6Zo68uQPqE&ab_channel=LeWagon
+Tutoriel plutôt long (30 min en x1) et complet : https://www.youtube.com/watch?v=V6Zo68uQPqE&ab_channel=LeWagon
 
