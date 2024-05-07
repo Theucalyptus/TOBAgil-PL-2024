@@ -8,28 +8,39 @@ import jeu.exceptions.OperationInterditeException;
 @SuppressWarnings("deprecation")
 public class JeuProxy implements Jeu {
 
+    /**Lancer une execption si la méthode est appelée.
+     * @param obs L'observer que l'on veut ajouter
+     * @throws OperationInterditeException Si la méthode est appelé.
+     */
     @Override
     public void addJoueurCourantObserver(Observer obs) {
-        // TODO Auto-generated method stub
+        throw new OperationInterditeException(
+            "Le joueur n'a pas accès à cette méthode.");
     }
 
+    /**Lancer une execption si la méthode est appeleé.
+     * @throws OperationInterditeException Si la méthode est appelée.
+     */
     @Override
     public void lancerPartie() {
         throw new OperationInterditeException(
             "Un joueur n'a pas le droit de lancer une partie");
     }
 
-    @Override
-    public void setFinDuTour(boolean finDuTour) {
-        // ne rien faire
-    }
-
+    /**Lancer une exepction si le joueur appele la méthode.
+     * @param leNouveauMonde le nouveau monde par lequel on remplace l'ancien.
+     * @throws OperationInterditeException Si la méthode est appelée.
+     */
     @Override
     public void setMonde(Monde leNouveauMonde) {
         throw new OperationInterditeException(
             "Un joueur n'a pas le droit de changer le monde");
     }
 
+    /**Lancer une expeption si la méthode est appelée.
+     * @param numero Le nouveau numéro du tour.
+     * @throws OperationInterditeException Si la méthode est appelée.
+     */
     @Override
     public void setNumeroTour(int numero) {
         throw new OperationInterditeException(
@@ -79,5 +90,23 @@ public class JeuProxy implements Jeu {
         return this.impl.getNombreTourTotal();
     }
 
+    /**Lancer une execption si le joueur essaye de passer au tour Suivant.
+     * @throws OperationInterditeException Si un joueur appelle cette fonction.
+     */
+    @Override
+    public void passerTour() {
+        throw new OperationInterditeException(
+            "Un joueur n'a pas accès a cette commande.");
+    }
+
+    /**Lancer une exeption si le joueur appele cette méthode.
+     * @param obs l'observer à ajouter.
+     * @throws OperationInterditeException Si la méthode est appelée.
+     */
+    @Override
+    public void addNbTourObserver(Observer obs) {
+        throw new OperationInterditeException(
+            "Le joueur n' a pas accès à cette méthode.");
+    }
 
 }

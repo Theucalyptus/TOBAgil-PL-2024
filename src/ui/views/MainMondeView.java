@@ -14,14 +14,22 @@ import ui.selecteur.Selecteur;
 
 public class MainMondeView extends JPanel {
 
-    public final int nombreLignes;
-    public final int nombreColonnes;
-
+    /** Le nombre de ligne à afficher. */
+    private final int nombreLignes;
+    /** Le nombre de colonne à afficher. */
+    private final int nombreColonnes;
+    /** Le layout de mise en page. */
     private GridLayout layout;
+    /** La liste des cases affichées. */
     private List<CaseView> cases;
-    
+    /** Le sélecteur de case. */
     private Selecteur<CaseView> selecteurCase;
 
+    /**
+     * Construit la vue affichant un monde du jeu.
+     * @param monde le monde à afficher
+     * @param selecteurCase le sélecteur de case
+     */
     public MainMondeView(Monde monde, Selecteur<CaseView> selecteurCase) {
         super();
         this.nombreColonnes = monde.getDimX();
@@ -30,7 +38,7 @@ public class MainMondeView extends JPanel {
         super.setLayout(this.layout);
 
         MouseListenerCases trace = new MouseListenerCases();
-        
+
         this.cases = new ArrayList<CaseView>();
         for (int i = 0; i < nombreLignes; i++) {
             for (int j = 0; j < nombreColonnes; j++) {
@@ -40,12 +48,11 @@ public class MainMondeView extends JPanel {
                 super.add(temp);
             }
         }
-        
+
         this.selecteurCase = selecteurCase;
 
     }
-    
-    //Mouse Listener pour gérer la sélection des cases
+
     public class MouseListenerCases extends MouseAdapter {
 
         @Override
@@ -68,7 +75,7 @@ public class MainMondeView extends JPanel {
         public void mousePressed(MouseEvent e) {
             CaseView entree = (CaseView) e.getSource();
             CaseView caseSelectionnee = selecteurCase.getSelection();
-            
+
             if (caseSelectionnee != entree && caseSelectionnee != null) {
             	caseSelectionnee.setBorder(BorderFactory.createEmptyBorder());
             }

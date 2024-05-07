@@ -12,16 +12,22 @@ import ui.views.MainJoueurView;
 @SuppressWarnings("deprecation")
 public class MainJoueurFenetre implements Observer {
 
-    // constantes de classe
+    /** Titre de la fenêtre. */
     private static final String NOM = "SmallWorld - Joueur Courant";
 
-    // composants de la gui
+    /** Vue dans la fenêtre. */
     private final MainJoueurView view = new MainJoueurView();
 
+    /** Le jeu. */
     private final Jeu jeu;
 
+    /** La fenêtre. */
     private JFrame fenetre;
 
+    /**
+     * Construit une fenêtre affichant le joueur courant.
+     * @param jeu le jeu dont on affiche les joueurs
+     */
     public MainJoueurFenetre(Jeu jeu) {
         this.jeu = jeu;
         jeu.addJoueurCourantObserver(this);

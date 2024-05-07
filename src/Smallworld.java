@@ -47,7 +47,7 @@ public /*final*/ class Smallworld {
 
         //SELECTEUR
         Selecteur<CaseView> selecteurCase = new Selecteur<CaseView>();
-        
+
         // VUES
         PiocheFenetre piocheF = new PiocheFenetre();
         MainMondeFenetre mondeF = new MainMondeFenetre(jeu, selecteurCase);

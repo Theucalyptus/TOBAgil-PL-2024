@@ -2,7 +2,10 @@ package jeu.testsUnitaires;
 
 import org.junit.*;
 
+import jeu.Combinaison;
 import jeu.Joueur;
+import jeu.peuples.Amazones;
+import jeu.pouvoirs.Volants;
 
 import static org.junit.Assert.*;
 
@@ -24,46 +27,50 @@ public class TestJoueur {
     /**Instance testé de Joueur. */
     private Joueur unJoueur;
 
+    /**Une instance de Combianaison. */
+    private Combinaison uneCombinaison;
+
     /**Mise en place du test, création des instances. */
     @Before
     public void setUp() {
         this.unJoueur = new Joueur("Paul", 0);
+        this.uneCombinaison = new Combinaison(new Amazones(), new Volants());
     }
 
-    /**Test la robustesse du constructeur. */
+    /**Tester la robustesse du constructeur. */
     @Test(expected = IllegalArgumentException.class)
-    void testerConstructeurRobustesseNomVide() {
+    public void testerConstructeurRobustesseNomVide() {
         new Joueur("", 0);
     }
 
-    /**Test la robustesse du Constructeur. */
+    /**Tester la robustesse du Constructeur. */
     @Test(expected = IllegalArgumentException.class)
-    void testerConstructeurRobustesseNomNull() {
+    public void testerConstructeurRobustesseNomNull() {
         new Joueur(null, 0);
     }
 
-    /**Test la robustesse du constructeur. */
+    /**Tester la robustesse du constructeur. */
     @Test(expected = IllegalArgumentException.class)
-    void testerConstructeurRobustessePointNegatif() {
+    public void testerConstructeurRobustessePointNegatif() {
         new Joueur("Marie", -1);
     }
 
-    /**Test l'accesseur de nom. */
+    /**Tester l'accesseur de nom. */
     @Test
-    void testerGetNom() {
+    public void testerGetNom() {
         assertTrue(this.unJoueur.getNom().equals("Paul"));
     }
 
-    /**Test l'accesseur de Points. */
+    /**Tester l'accesseur de Points. */
     @Test
-    void testerGetPoints() {
+    public void testerGetPoints() {
         assertEquals("Le nombre de points de être " + 0,
                 0, this.unJoueur.getPoints(), PRECISION);
     }
 
-    /**Test la commande d'ajout de points. */
+    /**Tester la commande d'ajout de points. */
     @Test
-    void testerAddPointsPositif() {
+    public void testerAddPointsPositif() {
         int av = this.unJoueur.getPoints();
         this.unJoueur.addPoints(POINTAAJOUTER);
         int resultat = POINTAAJOUTER + av;
@@ -71,17 +78,17 @@ public class TestJoueur {
                 this.unJoueur.getPoints(), resultat, PRECISION);
     }
 
-    /**Test la robustesse d'ajout de point. TODO : tester si on retire
+    /**Tester la robustesse d'ajout de point. TODO : tester si on retire
      * plus de plus que le capital du joueur.
      */
     @Test(expected = IllegalArgumentException.class)
-    void testerRobustesseAddPointsNegatif() {
+    public void testerRobustesseAddPointsNegatif() {
         this.unJoueur.addPoints(-1);
     }
 
-    /**Test la commande de soustraction de point. */
+    /**Tester la commande de soustraction de point. */
     @Test
-    void testerSubPoints() {
+    public void testerSubPoints() {
         int av = this.unJoueur.getPoints();
         int resultat = av - POINTARETIRER;
         this.unJoueur.subPoints(POINTARETIRER);
@@ -89,9 +96,23 @@ public class TestJoueur {
                 this.unJoueur.getPoints(), resultat, PRECISION);
     }
 
-    /**Test la robustesse de la soustraction de point. */
+    /**Tester la robustesse de la soustraction de point. */
     @Test(expected = IllegalArgumentException.class)
-    void testerRubustesseSubPoints() {
+    public void testerRubustesseSubPoints() {
         this.unJoueur.subPoints(MOINSDIXSEPT);
+    }
+
+    /**Tester le getteur de la Combianaison. */
+    public void testerGetCombinaison() {
+        assertIsNull("Le Joueur en devrait pas avoir de combinaison encore.",
+            this.unJoueur.getCombinaison());
+    }
+
+    /**Tester le changement de combinaison. */
+    @Test
+    public void testerSetCombinaison() {
+        this.unJoueur.setCombinaison(this.uneCombinaison);
+        assertTrue("La combinaison doit être Amazone + Volants", 
+            this.unJoueur.getCombinaison() == this.uneCombinaison);
     }
 }

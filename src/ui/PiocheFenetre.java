@@ -17,9 +17,13 @@ public class PiocheFenetre {
     // TODO : à exporter dans jeu.pioche;
     public static final int NBCLASSE = 2;
 
+    /** La vue de la combinaison sélectionner de la pioche. */
     private CombinaisonView selectedClass = null;
+
+    /** La fenêtre. */
     private JFrame fenetre;
 
+    /** Construit une fenêtre affichant la pioche. */
     public PiocheFenetre() {
         this.fenetre = new JFrame("SmallWorld - Pioche");
         this.fenetre.setMinimumSize(new Dimension(800, 600));
