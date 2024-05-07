@@ -86,7 +86,7 @@ public class ActionsJoueur extends JPanel {
             	for (int y = 0; y < monde_actuel.getDimY(); y++) {
 					Case case_courante = monde_actuel.getCase(x, y); //on recupere la case aux coordonnees (x, y)
 					//on verifie si la case contient le peuple du joueur
-					if (case_courante.getPeuple() == peuple_joueur) {
+					if (case_courante.getGroupePions().getCombinaison().getPeuple() == peuple_joueur) {
 						pts_gagnes++;	//on ajoute un point de victoire au joueur
 						//effet special pour le peuple HUMAINS
 						if ((peuple_joueur.getType() == TypesPeuples.HUMAINS) && (case_courante.getTypeRegion() == TypesRegions.CHAMP)
@@ -133,6 +133,7 @@ public class ActionsJoueur extends JPanel {
 					}
 				}
 			}
+			System.out.println("Points gagnés : " + pts_gagnes);
 			joueur_courant.addPoints(pts_gagnes); //on ajoute les points gagnés au nombre de points que le joueur a déjà
 			
 			jeu.passerTour();

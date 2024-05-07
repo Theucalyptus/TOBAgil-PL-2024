@@ -1,4 +1,6 @@
 package jeu;
+import java.util.List;
+
 import jeu.peuples.Peuple;
 import jeu.pouvoirs.Pouvoir;
 import java.util.ArrayList;
@@ -22,11 +24,8 @@ public class Combinaison {
     /** La combinaison a-t-elle déja fais son premier tour. */
     private Boolean premierTour;
 
-    /** Ensemble de pions de la combinaison. */
-    private EnsemblePions pions;
-
-    /** Ensemble de groupes de pions */
-    private List<EnsemblePions> grp_pions;
+    /** Liste de groupe de pions de la combinaison. */
+    private List<GroupePions> pions;
 
     //===============================================================
     //                        Constructeurs
@@ -40,9 +39,8 @@ public class Combinaison {
         this.peuple = peuple;
         this.pouvoir = pouvoir;
         this.declin = false;
-        this.pions = null;
         this.premierTour = true;
-        this.grp_pions = new ArrayList<>();
+        this.pions = new ArrayList<>();
     }
 
     //===============================================================
@@ -73,10 +71,10 @@ public class Combinaison {
     }
 
     /**
-     * Donner l'ensemble des Pions de la combinaison.
-     * @return Les Pions de la Combinaisons.
+     * Donner les groupes de Pions de la combinaison.
+     * @return Les groupes de pions de la Combinaisons.
      */
-    public EnsemblePions getPions() {
+    public List<GroupePions> getPions() {
         return this.pions;
     }
 
@@ -84,6 +82,22 @@ public class Combinaison {
     //===============================================================
     //                          Commandes
     //===============================================================
+
+    /**
+     * Ajouter un groupe de pions à la liste de la combinaison.
+     * @param groupe le groupe de pion a ajouter.
+     */
+    public void addGroupe(GroupePions groupe) {
+        this.pions.add(groupe);
+    }
+
+    /**
+     * Supprimer un groupe de pions de la liste de la combinaison.
+     * @param groupe le groupe de pion a ajouter.
+     */
+    public void supprGroupe(GroupePions groupe) {
+        this.pions.remove(groupe);
+    }
 
     /**
      * Permetre le passage en declin de la combinaison.
@@ -152,9 +166,9 @@ public class Combinaison {
     /** Permetre d'ajouter un ensemble de pion dans le groupe d'ensemble de pions
      * @param pion l'ensemble de pions que l'on ajoute
      */
-    public void ajoutGroupesPions(EnsemblePions pions) {
+    public void ajoutGroupesPions(GroupePions pions) {
         //on peut relever une erreur si il y a un problème au niveau de l'ajout
-        if (!this.grp_pions.add(pions)){}
+        if (!this.pions.add(pions)){}
     }
 
     /** Permet d'obtenir le nombre de pions en main
@@ -162,7 +176,7 @@ public class Combinaison {
      */
     public int nombre_pions() {
         int nmb_pions = 0;
-        for (EnsemblePions e : this.grp_pions) {
+        for (GroupePions e : this.pions) {
             nmb_pions = e.getNombre();
         }
         return(nmb_pions);

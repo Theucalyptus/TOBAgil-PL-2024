@@ -48,7 +48,7 @@ public class Case extends Observable {
     private Map<TypesBatiments, Integer> batiments;
 
     /** L'ensemble des unités posées sur une case. */
-    private EnsemblePions pions;
+    private GroupePions pions;
 
     /**Ressource de la case. */
     private TypesSymboles ressource;
@@ -85,7 +85,7 @@ public class Case extends Observable {
      * @param ressource type de ressource sur la Case.
      */
     public Case(int i, int j, TypesRegions region,
-                EnsemblePions pions, TypesSymboles ressource) {
+                GroupePions pions, TypesSymboles ressource) {
         this.voisins = new ArrayList<>();
         this.coordonnees = new ArrayList<>();
         this.coordonnees.add(i);
@@ -179,8 +179,8 @@ public class Case extends Observable {
      * Obtenir le peuple qui occupe la case.
      * @return peuple qui occupe la Case.
      */
-    public Peuple getPeuple() {
-        return this.pions.getPeuple();
+    public GroupePions getGroupePions() {
+        return this.pions;
     }
 
     /**Donner les voisins de la case.
@@ -197,7 +197,7 @@ public class Case extends Observable {
      * Modifie l'ensemble de pions placées sur la Case.
      * @param newPions ensemble de pions placées sur la Case.
      */
-    public void setNewpions(EnsemblePions newPions) {
+    public void setNewpions(GroupePions newPions) {
         this.pions = newPions;
         this.notification();
     }
