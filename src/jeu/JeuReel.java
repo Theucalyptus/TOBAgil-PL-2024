@@ -232,6 +232,7 @@ public class JeuReel implements Jeu {
         }
         enCours = true;
         this.majNombreToursTotals();
+        this.setNumeroTour(1);
         this.joueursIter = this.joueurs.listIterator();
         this.setJoueurCourant(this.joueursIter.next());
     }

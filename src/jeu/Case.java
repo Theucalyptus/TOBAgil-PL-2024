@@ -179,8 +179,8 @@ public class Case extends Observable {
      * Obtenir le peuple qui occupe la case.
      * @return peuple qui occupe la Case.
      */
-    public Peuple getPeuple() {
-        return this.pions.getPeuple();
+    public GroupePions getGroupePions() {
+        return this.pions;
     }
 
     /**Donner les voisins de la case.

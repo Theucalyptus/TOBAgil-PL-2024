@@ -3,6 +3,8 @@ import java.util.List;
 
 import jeu.peuples.Peuple;
 import jeu.pouvoirs.Pouvoir;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Combinaison {
 
@@ -37,8 +39,8 @@ public class Combinaison {
         this.peuple = peuple;
         this.pouvoir = pouvoir;
         this.declin = false;
-        this.pions = null;
         this.premierTour = true;
+        this.pions = new ArrayList<>();
     }
 
     //===============================================================
@@ -160,4 +162,24 @@ public class Combinaison {
         this.premierTour = false;
         return (this.peuple.getNbJetons() + this.pouvoir.getNbJetons());
     }
+
+    /** Permetre d'ajouter un ensemble de pion dans le groupe d'ensemble de pions
+     * @param pion l'ensemble de pions que l'on ajoute
+     */
+    public void ajoutGroupesPions(GroupePions pions) {
+        //on peut relever une erreur si il y a un problème au niveau de l'ajout
+        if (!this.pions.add(pions)){}
+    }
+
+    /** Permet d'obtenir le nombre de pions en main
+     * @return le nombre de pions total
+     */
+    public int nombre_pions() {
+        int nmb_pions = 0;
+        for (GroupePions e : this.pions) {
+            nmb_pions = e.getNombre();
+        }
+        return(nmb_pions);
+    }
+
 }
