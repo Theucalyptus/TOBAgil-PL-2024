@@ -72,6 +72,70 @@ public class ActionsJoueur extends JPanel {
 	private final class ActionFinirTour implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
+			//------------------------------------------------------------------------------
+			//Compter le nombre de points de victoires gagnés par le joueur à la fin du tour
+			//------------------------------------------------------------------------------
+			
+			int pts_gagnes = 0;
+			Joueur joueur_courant = jeu.getJoueurCourant(); //obtenir le joueur dont le tour se finit
+			Monde monde_actuel = jeu.getMonde();
+			Combinaison combinaison_joueur = joueur_courant.getCombinaisonActive();
+			Peuple peuple_joueur = combinaison_joueur.getPeuple();
+			Pouvoir pouvoir_joueur = combinaison_joueur.getPouvoir();
+			for (int x = 0; x < monde_actuel.getDimX(); x++) {		//parcours de la grille de cases
+            	for (int y = 0; y < monde_actuel.getDimY(); y++) {
+					Case case_courante = monde_actuel.getCase(x, y); //on recupere la case aux coordonnees (x, y)
+					//on verifie si la case contient le peuple du joueur
+					if (case_courante.getGroupePions().getCombinaison().getPeuple() == peuple_joueur) {
+						pts_gagnes++;	//on ajoute un point de victoire au joueur
+						//effet special pour le peuple HUMAINS
+						if ((peuple_joueur.getType() == TypesPeuples.HUMAINS) && (case_courante.getTypeRegion() == TypesRegions.CHAMP)
+							&& !(combinaison_joueur.getDeclin())) { 
+							pts_gagnes++;
+						}
+						//effet special pour le peuple MAGES
+						if ((peuple_joueur.getType() == TypesPeuples.MAGES) && (case_courante.getTypeRessource() == TypesSymboles.SOURCE_MAGIQUE) 
+							&& !(combinaison_joueur.getDeclin())) { 
+							pts_gagnes++;
+						}
+						//effet special pour le peuple NAINS
+						if ((peuple_joueur.getType() == TypesPeuples.NAINS) && (case_courante.getTypeRessource() == TypesSymboles.MINE)) { 
+							pts_gagnes++;
+						}
+						//effet special du pouvoir BATISSEURS
+						if ((pouvoir_joueur.getType() == TypesPouvoirs.BATISSEURS) && !(combinaison_joueur.getDeclin())) {
+							pts_gagnes++;
+						}
+						//effet special du pouvoir DES_COLLINES
+						if ((pouvoir_joueur.getType() == TypesPouvoirs.DES_COLLINES) && (case_courante.getTypeRegion() == TypesRegions.COLLINE)) {
+							pts_gagnes++;
+						}
+						//effet special du pouvoir DES_FORETS
+						if ((pouvoir_joueur.getType() == TypesPouvoirs.DES_FORETS) && (case_courante.getTypeRegion() == TypesRegions.FORET)) {
+							pts_gagnes++;
+						}
+						//effet special du pouvoir DES_MARAIS
+						if ((pouvoir_joueur.getType() == TypesPouvoirs.DES_MARAIS) && (case_courante.getTypeRegion() == TypesRegions.MARAIS)) {
+							pts_gagnes++;
+						}
+						//effet special du pouvoir MARCHANDS
+						if (pouvoir_joueur.getType() == TypesPouvoirs.MARCHANDS) {
+							pts_gagnes++;
+						}
+					}
+					//effet special du pouvoir ALCHIMISTES
+					if ((pouvoir_joueur.getType() == TypesPouvoirs.ALCHIMISTES) && !(combinaison_joueur.getDeclin())) {
+						pts_gagnes = pts_gagnes + 2;
+					}
+					//effet special du pouvoir FORTUNES
+					if ((pouvoir_joueur.getType() == TypesPouvoirs.FORTUNES) && (jeu.getNumeroTour() == 1)) {
+						pts_gagnes = pts_gagnes + 7;
+					}
+				}
+			}
+			System.out.println("Points gagnés : " + pts_gagnes);
+			joueur_courant.addPoints(pts_gagnes); //on ajoute les points gagnés au nombre de points que le joueur a déjà
+			
 			jeu.passerTour();
 		}
 	}
@@ -113,7 +177,7 @@ public class ActionsJoueur extends JPanel {
 	private final class ActionDeclin implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
-			jeu.getJoueurCourant().getCombinaison().passageDeclin();
+			jeu.getJoueurCourant().getCombinaisonActive().passageDeclin();
 			jeu.passerTour();
 		}
 	}

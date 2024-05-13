@@ -64,7 +64,7 @@ public class MainJoueurView extends JPanel {
         this.points.setScore(joueur.getPoints());
 
         //for(Combinaison comb : joueur.getCombinaisonList()) {
-        Combinaison comb = joueur.getCombinaison();
+        Combinaison comb = joueur.getCombinaisonActive();
         this.combViews.add(new CombinaisonView(comb));
         //}
 

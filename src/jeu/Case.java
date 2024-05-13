@@ -273,12 +273,12 @@ public class Case extends Observable {
     public boolean estAtteignable(Joueur joueur) {
 
         if (this.estBordure && (joueur.getCombinaisonActive().getPions().size() == 0) ) {
-            return true
+            return true;
         }
 
         //checker si la case est atteignable par un joueur déjà déployé ?
-        for (Case voisine : case.getVoisins()) {
-            if (voisine.getGroupePions().getCombinaison() == this.joueurCourant.getCombinaison()) {
+        for (Case voisine : this.getVoisins()) {
+            if (voisine.getGroupePions().getCombinaison() == joueur.getCombinaisonActive()) {
                 return true;
             }
         }
