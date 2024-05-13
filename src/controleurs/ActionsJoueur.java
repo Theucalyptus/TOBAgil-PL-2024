@@ -49,10 +49,6 @@ public class ActionsJoueur extends JPanel {
 		JButton declinBtn = new JButton("Passer en déclin");
 		declinBtn.addActionListener(new ActionDeclin());
 		super.add(declinBtn);
-		
-		JButton agirCaseBtn = new JButton("Agir sur la case sélectionnée");
-		agirCaseBtn.addActionListener(new ActionAgirCase());
-		super.add(agirCaseBtn);
 
 		JButton ajouterBatimentBtn = new JButton("Ajouter un batiment");
 		ajouterBatimentBtn.addActionListener(new ActionAjouterBatiment());
@@ -181,19 +177,6 @@ public class ActionsJoueur extends JPanel {
 		public void actionPerformed(ActionEvent evt) {
 			jeu.getJoueurCourant().getCombinaisonActive().passageDeclin();
 			jeu.passerTour();
-		}
-	}
-	
-	/**Classe déclenchée quand le bouton agir case est cliqué. */
-	private final class ActionAgirCase implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent evt) {
-			CaseView caseSelectionnee = selecteurCase.getSelection();
-			if(selecteurCase.getSelection() == null) {
-				System.out.println("Aucune case n'est sélectionnée");
-			} else {
-				System.out.println("Nombre de pions sur la case : " + caseSelectionnee.getVraieCase().getNombrepions());
-			}
 		}
 	}
 
