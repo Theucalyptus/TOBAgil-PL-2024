@@ -58,7 +58,9 @@ public class ActionsJoueur extends JPanel {
 		ajouterBatimentBtn.addActionListener(new ActionAjouterBatiment());
 		super.add(ajouterBatimentBtn);
 
-
+		JButton attaquerCase = new JButton("Attaquer la case sélectionnée");
+		attaquerCase.addActionListener(new ActionAttaquerCase());
+		super.add(attaquerCase);
 	}
 
 	/**On définit une action concernant le joueur dans la classe du contrôleur
@@ -252,5 +254,17 @@ public class ActionsJoueur extends JPanel {
 			}
 		}
 	}
-	
+
+	/**Classe déclenchée quand le bouton agir case est cliqué. */
+	private final class ActionAttaquerCase implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent evt) {
+			CaseView caseSelectionnee = selecteurCase.getSelection();
+			if(selecteurCase.getSelection() == null) {
+				System.out.println("Aucune case n'est sélectionnée");
+			} else {
+				jeu.attaquerCase(caseSelectionnee.getVraieCase());
+			}
+		}
+	}
 }
