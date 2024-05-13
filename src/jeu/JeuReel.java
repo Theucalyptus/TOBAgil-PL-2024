@@ -291,12 +291,15 @@ public class JeuReel implements Jeu {
                     combinaisonActive.addGroupe(newGroupe);
                     combinaisonActive.setNbPionsEnMain(diff);
                 } else if (diff >= -3){
+                    System.out.println("Pas assez de pions !");
                     //lancer dé
                 } else {
+                    System.out.println("Pas assez de pions !");
                     //exception conquête impossible pas assez de pions
                 }
 
             } else {
+                System.out.println("Case non prenable");
                 //exception case non prenable (effet de pouvoir) (imprenable + paix).
             }
         //} else {
