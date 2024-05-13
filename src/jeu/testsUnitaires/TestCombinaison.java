@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 
 /**Tester les Combinaisons. */
 public class TestCombinaison {
-    
+
     /**Une Combinaison. */
     private Combinaison uneCombinaison;
 

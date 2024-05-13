@@ -112,7 +112,7 @@ public class TestJoueur {
     @Test
     public void testerSetCombinaison() {
         this.unJoueur.setCombinaison(this.uneCombinaison);
-        assertTrue("La combinaison doit être Amazone + Volants", 
+        assertTrue("La combinaison doit être Amazone + Volants",
             this.unJoueur.getCombinaison() == this.uneCombinaison);
     }
 }
