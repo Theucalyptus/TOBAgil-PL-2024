@@ -19,7 +19,7 @@ public class TestCase {
     private Case uneCase;
     /**une Case. */
     private Case uneCase2;
-    
+
     /**Mise en place du test. */
     @Before
     public void setUp() {
@@ -152,7 +152,7 @@ public class TestCase {
     public void testerRobustesseSetPrenable() {
         this.uneCase.setPrenable(null);
     }
-    
+
     /**Tester le fait de retirer un batiment sur la case. */
     @Test
     public void testerRemoveBatiment() {
