@@ -11,7 +11,7 @@ public class Joueur {
 
     /**Combinaisons du Joueur. */
     private List<Combinaison> combinaisonsDeclins;
-    
+
     /** La combinaison active du joueur. */
     private Combinaison combinaisonActive;
 
@@ -62,7 +62,7 @@ public class Joueur {
      *@param nouvelleCombinaison du joueur.
     */
     public void changerCombinaisonActive(Combinaison nouvelleCombinaison) {
-        assert(this.combinaisonActive.getDeclin());
+        assert (this.combinaisonActive.getDeclin());
         this.combinaisonsDeclins.add(this.combinaisonActive);
         this.combinaisonActive = nouvelleCombinaison;
     }

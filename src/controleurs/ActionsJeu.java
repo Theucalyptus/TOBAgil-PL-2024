@@ -53,4 +53,3 @@ public class ActionsJeu extends JPanel {
 		}
 	}
 }
- 

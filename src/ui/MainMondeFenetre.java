@@ -28,7 +28,7 @@ public class MainMondeFenetre implements Observer {
     /** Le jeu affiché. */
     private final Jeu jeu;
 
-    /** La fenêtre */
+    /** La fenêtre. */
     private JFrame fenetre;
 
     /**

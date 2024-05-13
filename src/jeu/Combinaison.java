@@ -4,7 +4,6 @@ import java.util.List;
 import jeu.peuples.Peuple;
 import jeu.pouvoirs.Pouvoir;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Combinaison {
 
@@ -27,7 +26,7 @@ public class Combinaison {
     /** Liste de groupe de pions de la combinaison. */
     private List<GroupePions> pions;
 
-    /** Nombre de pions dans la main du joueur (0 en fin de tour) */
+    /** Nombre de pions dans la main du joueur (0 en fin de tour). */
     private int nbPionsEnMain;
 
     //===============================================================
@@ -81,16 +80,25 @@ public class Combinaison {
         return this.pions;
     }
 
+    /**
+     * Obtenir le nombre de pions en mains.
+     * @return Le nombre de pions en mains.
+     */
     public int getNbPionsEnMain() {
         return this.nbPionsEnMain;
     }
 
-    public void setNbPionsEnMain(int newNbPions) {
-        this.nbPionsEnMain = newNbPions;
-    }
     //===============================================================
     //                          Commandes
     //===============================================================
+
+    /**
+     * Changer le nombre de pions en mains de la Combinaisons.
+     * @param newNbPions Le nouveau nombre de pion en mains.
+     */
+    public void setNbPionsEnMain(int newNbPions) {
+        this.nbPionsEnMain = newNbPions;
+    }
 
     /**
      * Ajouter un groupe de pions à la liste de la combinaison.
@@ -172,27 +180,33 @@ public class Combinaison {
         return (this.peuple.getNbJetons() + this.pouvoir.getNbJetons());
     }
 
-    /** Permetre d'ajouter un ensemble de pion dans le groupe d'ensemble de pions
-     * @param pion l'ensemble de pions que l'on ajoute
+    /** Permetre d'ajouter un ensemble de pion dans le groupe d'ensemble de pions.
+     * @param lesPions L'ensemble de pions que l'on ajoute.
      */
-    public void ajoutGroupesPions(GroupePions pions) {
+    public void ajoutGroupesPions(GroupePions lesPions) {
         //on peut relever une erreur si il y a un problème au niveau de l'ajout
-        if (!this.pions.add(pions)){}
-    }
-
-    /** Permet d'obtenir le nombre de pions en main
-     * @return le nombre de pions total
-     */
-    public int nombre_pions() {
-        int nmb_pions = 0;
-        for (GroupePions e : this.pions) {
-            nmb_pions = e.getNombre();
+        if (!this.pions.add(lesPions)) {
+            // List retourne toujours vrai donc cet environnement ne sera
+            // jamais appelé
+            throw new RuntimeException("Les pions n'ont pas été ajouté.");
         }
-        return(nmb_pions);
     }
 
-    /** Permet d'obtenir le nombre de groupes de pions.*/
-    public int nombre_groupes_pions(){
-    return this.pions.size();
+    /** Permet d'obtenir le nombre de pions en main.
+     * @return Le nombre de pions total.
+     */
+    public int nombrePions() {
+        int nmbPions = 0;
+        for (GroupePions e : this.pions) {
+            nmbPions = e.getNombre();
+        }
+        return nmbPions;
+    }
+
+    /** Permet d'obtenir le nombre de groupes de pions.
+     * @return Le nombre de Groupe de pions que possède la Combinaison.
+    */
+    public int nombreGroupesPions() {
+        return this.pions.size();
     }
 }

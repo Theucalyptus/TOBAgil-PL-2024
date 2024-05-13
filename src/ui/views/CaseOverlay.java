@@ -79,7 +79,7 @@ public class CaseOverlay extends JPanel {
 
 
         // Affichages des batiments
-        for(JLabel construLbl : this.constructionsLbls) {
+        for (JLabel construLbl : this.constructionsLbls) {
             super.remove(construLbl);
         }
         this.constructionsLbls.clear();

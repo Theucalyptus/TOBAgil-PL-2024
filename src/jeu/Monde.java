@@ -7,10 +7,7 @@ import java.util.Set;
 import java.util.HashMap;
 
 import java.util.Random;
-import jeu.peuples.Peuple;
 import jeu.peuples.TribuOubliee;
-import jeu.peuples.TypesPeuples;
-import jeu.pouvoirs.TypesPouvoirs;
 
 public class Monde {
 
@@ -102,20 +99,20 @@ public class Monde {
                 boolean coins;
                 boolean centre;
 
-                int nb_pions = 1; //nombre de pions a placer sur la nouvelle case
-                
+                int nbPions = 1; //nombre de pions a placer sur la nouvelle case
+
                 coins = ((x == 0 && y == 0)
                     || (x == (this.dimX - 1)) && y == (this.dimY - 1));
                 //on verifie si on est sur les cases du centre
                 centre = (((x == (this.dimX / 2 - 1)) && (y == (this.dimY / 2 - 1)))
-                    || ((x == (this.dimX / 2 )) && (y == (this.dimY / 2 - 1)))
+                    || ((x == (this.dimX / 2)) && (y == (this.dimY / 2 - 1)))
                     || ((x == (this.dimX / 2)) && (y == (this.dimY / 2)))
                     || ((x == (this.dimX / 2 - 1)) && (y == (this.dimY / 2))));
 
                 if (coins || centre) { //on traite les cas où on veut la mer ou un lac
                     newregion = TypesRegions.MER_ET_LAC;
                     newsymbole = TypesSymboles.AUCUN;
-                    nb_pions = 0;
+                    nbPions = 0;
                 } else {
                     // choix d'une region aleatoire de la liste des regions possibles
                     // on recupere les cles du dictionnaire
@@ -163,8 +160,8 @@ public class Monde {
 
 
                 // on pose une tribu oubliée sur la case
-                Combinaison tribuOublieeComb = new Combinaison(new TribuOubliee(), null); 
-                GroupePions newEnsemblePions = new GroupePions(tribuOublieeComb, nb_pions);
+                Combinaison tribuOublieeComb = new Combinaison(new TribuOubliee(), null);
+                GroupePions newEnsemblePions = new GroupePions(tribuOublieeComb, nbPions);
                 // création de la nouvelle case
                 Case newcase = new Case(x, y, newregion, newEnsemblePions, newsymbole);
                 // ajout de la nouvelle case à la grille
