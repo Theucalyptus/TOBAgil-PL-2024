@@ -2,7 +2,7 @@ package jeu;
 
 import java.util.Map;
 import java.util.Observable;
-import java.util.Set;
+// import java.util.Set;
 
 import jeu.batiments.TypesBatiments;
 
@@ -14,7 +14,7 @@ import java.util.Collection;
 //import jeu.batiments.Batiment;
 //import jeu.batiments.TypesBatiments;
 //import jeu.TypesRegions;
-import jeu.peuples.Peuple;
+//import jeu.peuples.Peuple;
 
 /**Case du jeu. Une case possède :
  * type de région
@@ -57,6 +57,7 @@ public class Case extends Observable {
     /** Status de la case (prenable ou non). */
     private Boolean prenable;
 
+    /** Définie si une Case est sur la bordure du terrain ou non. */
     private boolean estBordure;
 
     // Constructeurs
@@ -75,7 +76,7 @@ public class Case extends Observable {
         this.ressource = TypesSymboles.AUCUN;
         this.prenable = true;
         this.estBordure = false;
-    }   
+    }
 
     /**
      * Construire une Case à partir d'un type de région, d'un batiment, d'un ensemble de
@@ -270,15 +271,21 @@ public class Case extends Observable {
         this.voisins.add(caseVoisine);
     }
 
+    /**
+     * Obtenir si le Joueur peut atteindre la case.
+     * @param joueur le joueur dont on veut savoir s'il peut atteindre la case.
+     * @return Si le Joueur peut l'atteindre.
+     */
     public boolean estAtteignable(Joueur joueur) {
 
-        if (this.estBordure && (joueur.getCombinaisonActive().getPions().size() == 0) ) {
+        if (this.estBordure && (joueur.getCombinaisonActive().getPions().size() == 0)) {
             return true;
         }
 
         //checker si la case est atteignable par un joueur déjà déployé ?
         for (Case voisine : this.getVoisins()) {
-            if (voisine.getGroupePions().getCombinaison() == joueur.getCombinaisonActive()) {
+            if (voisine.getGroupePions().getCombinaison()
+                    == joueur.getCombinaisonActive()) {
                 return true;
             }
         }

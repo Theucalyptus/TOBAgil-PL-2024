@@ -109,4 +109,9 @@ public class JeuProxy implements Jeu {
             "Le joueur n' a pas accès à cette méthode.");
     }
 
+    @Override
+    public void attaquerCase(Case laCase) {
+        this.impl.attaquerCase(laCase);
+    }
+
 }

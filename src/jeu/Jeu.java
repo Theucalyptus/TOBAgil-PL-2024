@@ -71,7 +71,7 @@ public interface Jeu {
 
     /**
      * Permet d'attaquer une case.
-     * @param laCase la case à attaqué
+     * @param laCase la case à attaquer.
      */
     void attaquerCase(Case laCase);
 }

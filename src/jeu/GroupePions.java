@@ -1,7 +1,7 @@
 package jeu;
 
-import jeu.Combinaison;
-
+/**Classe qui représente un groupe de pions. Un groupe de pions est un
+ * nombre de pions d'une certaine combinaison Peuple-Pouvoir. */
 public class GroupePions {
     /** Type de Combinaison. */
     private Combinaison combinaison;
@@ -10,7 +10,7 @@ public class GroupePions {
     private int nombrePions;
 
     /** Constructeur à partir d'un peuple et d'un nombre de pions.
-     * @param combinaiason La combinaison dont fait partie l'ensemble de pions.
+     * @param combinaison La combinaison dont fait partie l'ensemble de pions.
      * @param nombrePions Le nombre de pions dont l'ensemble de pions fait partie.
      */
     public GroupePions(Combinaison combinaison, int nombrePions) {
