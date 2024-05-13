@@ -32,7 +32,8 @@ public class ActionsJoueur extends JPanel {
 
 	/**
 	 * Construire le contrôleur du Joueur.
-	 * @param jeu Le jeu dans lequel
+	 * @param jeu Le jeu dans lequel on agit.
+	 * @param selecteurCase Le selecteur de Case.
 	 */
 	public ActionsJoueur(Jeu jeu, Selecteur<CaseView> selecteurCase) {
 		super();
@@ -77,73 +78,77 @@ public class ActionsJoueur extends JPanel {
 
 			int pointsGagnes = 0;
 			 // obtenir le joueur dont le tour se finit
-			Joueur joueur_courant = jeu.getJoueurCourant();
+			Joueur joueurCourant = jeu.getJoueurCourant();
 
-			Monde monde_actuel = jeu.getMonde();
-			Combinaison combinaison_joueur = joueur_courant.getCombinaisonActive();
-			Peuple peuple_joueur = combinaison_joueur.getPeuple();
-			Pouvoir pouvoir_joueur = combinaison_joueur.getPouvoir();
+			Monde mondeActuel = jeu.getMonde();
+			Combinaison combinaisonJoueur = joueurCourant.getCombinaisonActive();
+			Peuple peupleJoueur = combinaisonJoueur.getPeuple();
+			Pouvoir pouvoirJoueur = combinaisonJoueur.getPouvoir();
 			// parcours de la grille de cases
-			for (int x = 0; x < monde_actuel.getDimX(); x++) {
-            	for (int y = 0; y < monde_actuel.getDimY(); y++) {
+			for (int x = 0; x < mondeActuel.getDimX(); x++) {
+            	for (int y = 0; y < mondeActuel.getDimY(); y++) {
 					// on recupere la case aux coordonnees (x, y)
-					Case case_courante = monde_actuel.getCase(x, y);
+					Case caseCourante = mondeActuel.getCase(x, y);
 
 					// on verifie si la case contient le peuple du joueur
-					if (case_courante.getGroupePions().getCombinaison().getPeuple()
-							== peuple_joueur) {
+					if (caseCourante.getGroupePions().getCombinaison().getPeuple()
+							== peupleJoueur) {
 						// on ajoute un point de victoire au joueur
 						pointsGagnes++;
 						// effet special pour le peuple HUMAINS
-						if ((peuple_joueur.getType() == TypesPeuples.HUMAINS)
-								&& (case_courante.getTypeRegion() == TypesRegions.CHAMP)
-								&& !(combinaison_joueur.getDeclin())) {
+						if ((peupleJoueur.getType() == TypesPeuples.HUMAINS)
+								&& (caseCourante.getTypeRegion() == TypesRegions.CHAMP)
+								&& !(combinaisonJoueur.getDeclin())) {
 							pointsGagnes++;
 						}
 						// effet special pour le peuple MAGES
-						if ((peuple_joueur.getType() == TypesPeuples.MAGES)
-								&& (case_courante.getTypeRessource()
+						if ((peupleJoueur.getType() == TypesPeuples.MAGES)
+								&& (caseCourante.getTypeRessource()
 									== TypesSymboles.SOURCE_MAGIQUE)
-								&& !(combinaison_joueur.getDeclin())) {
+								&& !(combinaisonJoueur.getDeclin())) {
 							pointsGagnes++;
 						}
 						// effet special pour le peuple NAINS
-						if ((peuple_joueur.getType() == TypesPeuples.NAINS)
-								&& (case_courante.getTypeRessource() == TypesSymboles.MINE)) {
+						if ((peupleJoueur.getType() == TypesPeuples.NAINS)
+								&& (caseCourante.getTypeRessource()
+									== TypesSymboles.MINE)) {
 							pointsGagnes++;
 						}
 						// effet special du pouvoir BATISSEURS
-						if ((pouvoir_joueur.getType() == TypesPouvoirs.BATISSEURS)
-								&& !(combinaison_joueur.getDeclin())) {
+						if ((pouvoirJoueur.getType() == TypesPouvoirs.BATISSEURS)
+								&& !(combinaisonJoueur.getDeclin())) {
 							pointsGagnes++;
 						}
 						// effet special du pouvoir DES_COLLINES
-						if ((pouvoir_joueur.getType() == TypesPouvoirs.DES_COLLINES)
-								&& (case_courante.getTypeRegion() == TypesRegions.COLLINE)) {
+						if ((pouvoirJoueur.getType() == TypesPouvoirs.DES_COLLINES)
+								&& (caseCourante.getTypeRegion()
+									== TypesRegions.COLLINE)) {
 							pointsGagnes++;
 						}
 						// effet special du pouvoir DES_FORETS
-						if ((pouvoir_joueur.getType() == TypesPouvoirs.DES_FORETS)
-								&& (case_courante.getTypeRegion() == TypesRegions.FORET)) {
+						if ((pouvoirJoueur.getType() == TypesPouvoirs.DES_FORETS)
+								&& (caseCourante.getTypeRegion()
+									== TypesRegions.FORET)) {
 							pointsGagnes++;
 						}
 						// effet special du pouvoir DES_MARAIS
-						if ((pouvoir_joueur.getType() == TypesPouvoirs.DES_MARAIS)
-								&& (case_courante.getTypeRegion() == TypesRegions.MARAIS)) {
+						if ((pouvoirJoueur.getType() == TypesPouvoirs.DES_MARAIS)
+								&& (caseCourante.getTypeRegion()
+								== TypesRegions.MARAIS)) {
 							pointsGagnes++;
 						}
 						// effet special du pouvoir MARCHANDS
-						if (pouvoir_joueur.getType() == TypesPouvoirs.MARCHANDS) {
+						if (pouvoirJoueur.getType() == TypesPouvoirs.MARCHANDS) {
 							pointsGagnes++;
 						}
 					}
 					// effet special du pouvoir ALCHIMISTES
-					if ((pouvoir_joueur.getType() == TypesPouvoirs.ALCHIMISTES)
-							&& !(combinaison_joueur.getDeclin())) {
+					if ((pouvoirJoueur.getType() == TypesPouvoirs.ALCHIMISTES)
+							&& !(combinaisonJoueur.getDeclin())) {
 						pointsGagnes = pointsGagnes + 2;
 					}
 					// effet special du pouvoir FORTUNES
-					if ((pouvoir_joueur.getType() == TypesPouvoirs.FORTUNES)
+					if ((pouvoirJoueur.getType() == TypesPouvoirs.FORTUNES)
 							&& (jeu.getNumeroTour() == 1)) {
 						pointsGagnes = pointsGagnes + 7;
 					}
@@ -151,8 +156,8 @@ public class ActionsJoueur extends JPanel {
 			}
 			System.out.println("Points gagnés : " + pointsGagnes);
 			// on ajoute les points gagnés au nombre de points que le joueur a déjà
-			joueur_courant.addPoints(pointsGagnes);
-			
+			joueurCourant.addPoints(pointsGagnes);
+
 			jeu.passerTour();
 		}
 	}
@@ -207,14 +212,15 @@ public class ActionsJoueur extends JPanel {
 		Scanner scanner;
 
 		public ActionAjouterBatiment() {
-			scanner = new Scanner(System.in); // Initialisez le scanner dans le constructeur
+			// Initialisez le scanner dans le constructeur
+			scanner = new Scanner(System.in);
 		}
-	
+
 
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			CaseView caseSelectionnee = selecteurCase.getSelection();
-			if(selecteurCase.getSelection() == null) {
+			if (selecteurCase.getSelection() == null) {
 				System.out.println("Aucune case n'est sélectionnée");
 			} else {
 				String input;
@@ -222,7 +228,7 @@ public class ActionsJoueur extends JPanel {
 				TypesBatiments newbatiment = TypesBatiments.AUCUN;
 				//On boucle tant que l'utilisateur ne donne pas un bon Type de batiment
 				//Condition pour rester dans la boucle
-				Boolean Correcte = false;
+				Boolean correcte = false;
 				do {
 					//Demande du batiment à ajouter
 					System.out.println("Vous souhaitez ajouter : CAMPEMENT, FORTERESSE,	ANTRE_DE_TROLL, TANIERE ?");
@@ -232,25 +238,25 @@ public class ActionsJoueur extends JPanel {
 					switch (input) {
 						case "CAMPEMENT":
 							newbatiment = TypesBatiments.CAMPEMENT;
-							Correcte = true;
+							correcte = true;
 							break;
 						case "FORTERESSE":
 							newbatiment = TypesBatiments.FORTERESSE;
-							Correcte = true;
+							correcte = true;
 							break;
 						case "ANTRE_DE_TROLL":
 							newbatiment = TypesBatiments.ANTRE_DE_TROLL;
-							Correcte = true;
+							correcte = true;
 							break;
 						case "TANIERE":
 							newbatiment = TypesBatiments.TANIERE;
-							Correcte = true;
+							correcte = true;
 							break;
 						default:
 							scanner = new Scanner(System.in);
 							System.out.println("Type de batiment inexistant.");
 					}
-				} while (!Correcte);
+				} while (!correcte);
 				//Rajouter le batiment à la case sélectionné
 				caseSelectionnee.getVraieCase().setTypeBatiment(newbatiment, 1);
 			}
@@ -262,7 +268,7 @@ public class ActionsJoueur extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			CaseView caseSelectionnee = selecteurCase.getSelection();
-			if(selecteurCase.getSelection() == null) {
+			if (selecteurCase.getSelection() == null) {
 				System.out.println("Aucune case n'est sélectionnée");
 			} else {
 				jeu.attaquerCase(caseSelectionnee.getVraieCase());

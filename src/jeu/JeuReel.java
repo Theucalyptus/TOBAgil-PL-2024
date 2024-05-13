@@ -288,7 +288,7 @@ public class JeuReel implements Jeu {
             if (maCase.getPrenable()) { //Boolean et pas boolean
                 Combinaison combinaisonActive = joueurCourant.getCombinaisonActive();
                 int diff = 0;
-                // ou combinaisonActive.getNbPionsEnMain() - getNombreAttaquantNecessaire();
+            // ou combinaisonActive.getNbPionsEnMain() - getNombreAttaquantNecessaire();
 
                 if (diff >= 0) {
                     GroupePions newGroupe = new GroupePions(combinaisonActive, 1);

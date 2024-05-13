@@ -26,7 +26,7 @@ public class TestCombinaison {
         0);
 
     /**La précisions des égalités. */
-    public static double PRECISION = 0.0001;
+    private static double PRECISION = 0.0001;
 
     /**Set up des tests. */
     @Before
