@@ -4,8 +4,6 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
-import org.w3c.dom.events.MouseEvent;
-
 import jeu.Case;
 import jeu.Jeu;
 import jeu.batiments.TypesBatiments;
@@ -265,7 +263,7 @@ public class ActionsJoueur extends JPanel {
 			if(selecteurCase.getSelection() == null) {
 				System.out.println("Aucune case n'est sélectionnée");
 			} else {
-				jeu.attaquerCase(caseSelectionnee);
+				jeu.attaquerCase(caseSelectionnee.getVraieCase());
 			}
 		}
 	}
