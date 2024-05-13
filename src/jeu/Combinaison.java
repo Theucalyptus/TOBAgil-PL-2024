@@ -121,7 +121,7 @@ public class Combinaison {
      */
     public void debutTour() {
         this.peuple.debutTour();
-        this.peuple.debutTour();
+        this.pouvoir.debutTour();
     }
 
     /**
@@ -131,7 +131,7 @@ public class Combinaison {
      */
     public int avantConquete(Case regionAConquerir) {
         this.peuple.avantConquete(regionAConquerir);
-        this.peuple.avantConquete(regionAConquerir);
+        this.pouvoir.avantConquete(regionAConquerir);
         return (this.peuple.reductionAttaque + this.pouvoir.reductionAttaque);
     }
 
