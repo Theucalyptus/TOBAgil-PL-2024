@@ -2,6 +2,8 @@ package jeu;
 
 import java.util.Observer;
 
+import jeu.exceptions.PartieEnCoursException;
+
 
 /**Interface de modélisation du jeu SmallWorld. */
 @SuppressWarnings("deprecation")
@@ -74,4 +76,11 @@ public interface Jeu {
      * @param laCase la case à attaquer.
      */
     void attaquerCase(Case laCase);
+
+    /**
+     * Permet de placer des pions sur une case.
+     * @param laCase la case à attaquer.
+     * @param nbPions le nombre de pions à placer.
+     */
+    void placerPions(Case laCase, int nbPions);
 }

@@ -1,5 +1,7 @@
 package jeu;
 
+import jeu.Case;
+
 /**Classe qui représente un groupe de pions. Un groupe de pions est un
  * nombre de pions d'une certaine combinaison Peuple-Pouvoir. */
 public class GroupePions {
@@ -8,6 +10,9 @@ public class GroupePions {
 
     /** Nombre de pions. */
     private int nombrePions;
+
+    /** Case */
+    private Case laCase;
 
     /** Constructeur à partir d'un peuple et d'un nombre de pions.
      * @param combinaison La combinaison dont fait partie l'ensemble de pions.
@@ -31,6 +36,22 @@ public class GroupePions {
      */
     public int getNombre() {
         return this.nombrePions;
+    }
+
+    /** Obtenir la case où se trouve les pions.
+     * @return la case.
+     */
+    public Case getCase() {
+        return this.laCase;
+    }
+
+    public void setNombre(int newNombrePions) {
+        this.nombrePions = newNombrePions;
+    }
+
+
+    public void setCase(Case newCase) {
+        this.laCase = newCase;
     }
 
 }
