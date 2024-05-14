@@ -203,6 +203,13 @@ public class Case extends Observable {
      */
     public void setNewpions(GroupePions newPions) {
         this.pions = newPions;
+        newPions.getCombinaison().addGroupe(newPions);
+        newPions.setCase(this);
+        this.notification();
+    }    
+    
+    public void setNewNombrePions(int newNombre) {
+        this.pions.setNombre(newNombre);
         this.notification();
     }
 
