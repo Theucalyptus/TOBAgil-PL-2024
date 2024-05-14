@@ -276,27 +276,43 @@ public class JeuReel implements Jeu {
                 this.enCours = false;
                 System.out.println("");
             }
+            debutTour();
         } else {
             System.out.println("Partie non-commencé ou terminée. Abandon !");
         }
     }
 
-    @Override
+    //Se lance au debut du tour d'un joueur
+    private void debutTour() {
+        int pionsARecuperer = 0;
+        
+        System.out.println("Début du tour de " + joueurCourant.getNom());
+        // Récupère tout les pions sauf 1 sur chaque case possédé par le joueur.
+        for (GroupePions pions : joueurCourant.getCombinaisonActive().getPions()) {
+            pionsARecuperer += pions.getNombre() - 1;
+            pions.getCase().setNewNombrePions(1);
+            
+            System.out.println("Pions récupérés");
+        }
+        joueurCourant.getCombinaisonActive().setNbPionsEnMain(pionsARecuperer);
+    }
+
+    /** Pour attaquer une case choisie*/
     public void attaquerCase(Case maCase) {
-        //checker si la case est
+        //checker si la case est atteignable (bordure etc)
         //if (maCase.estAtteignable()) {
             if (maCase.getPrenable()) { //Boolean et pas boolean
                 Combinaison combinaisonActive = joueurCourant.getCombinaisonActive();
-                int diff = 0;
-            // ou combinaisonActive.getNbPionsEnMain() - getNombreAttaquantNecessaire();
+                int diff = combinaisonActive.getNbPionsEnMain() - maCase.getNombreAttaquantNecessaire();
 
                 if (diff >= 0) {
                     GroupePions newGroupe = new GroupePions(combinaisonActive, 1);
                     maCase.setNewpions(newGroupe);
-                    combinaisonActive.addGroupe(newGroupe);
+                    //combinaisonActive.addGroupe(newGroupe);
                     combinaisonActive.setNbPionsEnMain(diff);
                 } else if (diff >= -3) {
                     System.out.println("Pas assez de pions !");
+                    System.out.println("Possédé : " + combinaisonActive.getNbPionsEnMain() + "/" + maCase.getNombreAttaquantNecessaire());
                     //lancer dé
                 } else {
                     System.out.println("Pas assez de pions !");
@@ -310,5 +326,22 @@ public class JeuReel implements Jeu {
         //} else {
             //exception case non atteignable (pas de pions sur une case voisine)
         //}
+    }
+
+    public void placerPions(Case maCase, int nbPions) {
+        // On vérifie que la case appartient bien au joueur dont c'est le tour.
+        Combinaison active = joueurCourant.getCombinaisonActive();
+        int pionsEnMain = active.getNbPionsEnMain();
+
+        if (maCase.getGroupePions().getCombinaison() == active) {
+            if (nbPions <= pionsEnMain) {
+                maCase.setNewNombrePions(maCase.getNombrepions() + nbPions);
+                active.setNbPionsEnMain(pionsEnMain - nbPions);
+            } else {
+                System.out.println("Vous n'avez pas assez de pions en main");
+            }
+        } else {
+            System.out.println("Cette case ne vous appartient pas");
+        }
     }
 }
