@@ -283,9 +283,13 @@ public class JeuReel implements Jeu {
 
     //Se lance au debut du tour d'un joueur
     private void debutTour() {
+        System.out.println("Début du tour de " + joueurCourant.getNom());
+        recupPions();
+    }
+
+    private void recupPions() {
         int pionsARecuperer = 0;
         
-        System.out.println("Début du tour de " + joueurCourant.getNom());
         // Récupère tout les pions sauf 1 sur chaque case possédé par le joueur.
         for (GroupePions pions : joueurCourant.getCombinaisonActive().getPions()) {
             pionsARecuperer += pions.getNombre() - 1;
@@ -304,10 +308,11 @@ public class JeuReel implements Jeu {
             if (maCase.getPrenable()) { //Boolean et pas boolean
                 Combinaison combinaisonActive = joueurCourant.getCombinaisonActive();
                 System.out.println("Pions en main : " + combinaisonActive.getNbPionsEnMain());
-                int diff = combinaisonActive.getNbPionsEnMain() - maCase.getNombreAttaquantNecessaire();
+                int attaquants = maCase.getNombreAttaquantNecessaire();
+                int diff = combinaisonActive.getNbPionsEnMain() - attaquants;
 
                 if (diff >= 0) {
-                    GroupePions newGroupe = new GroupePions(combinaisonActive, 1);
+                    GroupePions newGroupe = new GroupePions(combinaisonActive, attaquants);
                     maCase.setNewpions(newGroupe);
                     //combinaisonActive.addGroupe(newGroupe);
                     combinaisonActive.setNbPionsEnMain(diff);
@@ -317,6 +322,7 @@ public class JeuReel implements Jeu {
                     //lancer dé
                 } else {
                     System.out.println("Pas assez de pions !");
+                    System.out.println("Possédé : " + combinaisonActive.getNbPionsEnMain() + "/" + maCase.getNombreAttaquantNecessaire());
                     //exception conquête impossible pas assez de pions
                 }
 
@@ -345,5 +351,10 @@ public class JeuReel implements Jeu {
         } else {
             System.out.println("Cette case ne vous appartient pas");
         }
+    }
+
+    public void redeployement() {
+        recupPions();
+        // passe le joueur dans l'état redéployement.
     }
 }

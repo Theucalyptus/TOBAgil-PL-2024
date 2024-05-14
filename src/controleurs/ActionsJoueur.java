@@ -43,10 +43,6 @@ public class ActionsJoueur extends JPanel {
 		super.setLayout(new FlowLayout());
 		super.setBorder(BorderFactory.createTitledBorder("Actions du Joueur"));
 
-		JButton finTourBtn = new JButton("Fin du Tour");
-		finTourBtn.addActionListener(new ActionFinirTour());
-		super.add(finTourBtn);
-
 		JButton declinBtn = new JButton("Passer en déclin");
 		declinBtn.addActionListener(new ActionDeclin());
 		super.add(declinBtn);
@@ -62,6 +58,14 @@ public class ActionsJoueur extends JPanel {
 		JButton placerPion = new JButton("Placer un pion");
 		placerPion.addActionListener(new ActionPlacerPion());
 		super.add(placerPion);
+
+		JButton redeployement = new JButton("Redéployement");
+		redeployement.addActionListener(new ActionRedeployement());
+		super.add(redeployement);
+
+		JButton finTourBtn = new JButton("Fin du Tour");
+		finTourBtn.addActionListener(new ActionFinirTour());
+		super.add(finTourBtn);
 	}
 
 	/**On définit une action concernant le joueur dans la classe du contrôleur
@@ -291,6 +295,14 @@ public class ActionsJoueur extends JPanel {
 			} else {
 				jeu.placerPions(caseSelectionnee.getVraieCase(), 1);
 			}
+		}
+	}
+
+	/**Classe déclenchée quand le bouton redéployement est cliqué. */
+	private final class ActionRedeployement implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent evt) {
+			jeu.redeployement();
 		}
 	}
 }
