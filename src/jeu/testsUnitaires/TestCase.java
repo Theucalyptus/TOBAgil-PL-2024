@@ -19,6 +19,12 @@ public class TestCase {
     private Case uneCase;
     /**une Case. */
     private Case uneCase2;
+    /**10. */
+    private static final int DIX = 10;
+    /**Nombre Negatif. */
+    private static final int NOMBRENEGATIF = -2;
+    /**13. */
+    private static final int TREIZE = 13;
 
     /**Mise en place du test. */
     @Before
@@ -38,13 +44,13 @@ public class TestCase {
                 new Combinaison(
                     new Amazones(),
                     new Volants()),
-                10),
+                DIX),
             TypesSymboles.AUCUN);
     }
 
     /**Tester la Robustesse du constructeur sur le premier argument. */
     @Test(expected = IllegalArgumentException.class)
-    public void testerRobustesseConstructeuriNégatif() {
+    public void testerRobustesseConstructeuriNegatif() {
         new Case(-1,
             2,
             TypesRegions.CHAMP,
@@ -52,7 +58,7 @@ public class TestCase {
                 new Combinaison(
                     new Amazones(),
                     new Volants()),
-                10),
+                DIX),
             TypesSymboles.AUCUN);
     }
 
@@ -60,13 +66,13 @@ public class TestCase {
     @Test(expected = IllegalArgumentException.class)
     public void testerRobustesseConstructeurjNégatif() {
         new Case(1,
-            -2,
+            NOMBRENEGATIF,
             TypesRegions.CHAMP,
             new GroupePions(
                 new Combinaison(
                     new Amazones(),
                     new Volants()),
-                10),
+                DIX),
             TypesSymboles.AUCUN);
     }
 
@@ -80,7 +86,7 @@ public class TestCase {
                 new Combinaison(
                     new Amazones(),
                     new Volants()),
-                10),
+                DIX),
             TypesSymboles.AUCUN);
     }
 
@@ -94,14 +100,15 @@ public class TestCase {
                 new Combinaison(
                     new Amazones(),
                     new Volants()),
-                10),
+                DIX),
             null);
     }
 
-    /**Tester le setteur du nouveau groue de pions */
+    /**Tester le setteur du nouveau groue de pions. */
     @Test
     public void testerSetNewPions() {
-        GroupePions leNouveau = new GroupePions(new Combinaison(new Amazones(), new Volants()), 13);
+        GroupePions leNouveau = new GroupePions(new Combinaison(new Amazones(),
+            new Volants()), TREIZE);
         this.uneCase.setNewpions(leNouveau);
         assertTrue(this.uneCase.getGroupePions() == leNouveau);
     }

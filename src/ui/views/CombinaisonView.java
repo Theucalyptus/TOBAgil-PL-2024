@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import jeu.Combinaison;
-import jeu.Joueur;
 import jeu.peuples.*;
 import jeu.pouvoirs.*;
 import ui.utils.ImageFactory;
