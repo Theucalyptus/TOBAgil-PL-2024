@@ -3,6 +3,8 @@ package jeu;
 import java.util.ArrayList;
 import java.util.List;
 
+import jeu.exceptions.OperationInterditeException;
+
 /** Classe représentant un joueur. */
 public class Joueur {
 
@@ -62,8 +64,12 @@ public class Joueur {
      *@param nouvelleCombinaison du joueur.
     */
     public void changerCombinaisonActive(Combinaison nouvelleCombinaison) {
-        assert (this.combinaisonActive.getDeclin());
-        this.combinaisonsDeclins.add(this.combinaisonActive);
+        if (this.combinaisonActive != null && this.combinaisonActive.getDeclin() == false) {
+            throw new OperationInterditeException("Combinaison actuelle pas en déclin !");
+        }
+        if(this.combinaisonActive != null) {
+            this.combinaisonsDeclins.add(this.combinaisonActive);
+        }
         this.combinaisonActive = nouvelleCombinaison;
     }
 

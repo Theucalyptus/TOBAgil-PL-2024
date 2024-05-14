@@ -237,6 +237,7 @@ public class JeuReel implements Jeu {
         this.setNumeroTour(1);
         this.joueursIter = this.joueurs.listIterator();
         this.setJoueurCourant(this.joueursIter.next());
+        this.debutTour();
     }
 
     /** Ajouter le nombre de points de victoire au joueur. */
@@ -261,8 +262,6 @@ public class JeuReel implements Jeu {
         if (this.enCours) {
             // Actions de fin de tour
             this.ajouterPtsVictoire();
-            //this.joueurCourant.addPoints(4);
-
 
             // Passage au tour suivant
             if (this.joueursIter.hasNext()) {
@@ -294,15 +293,17 @@ public class JeuReel implements Jeu {
             
             System.out.println("Pions récupérés");
         }
-        joueurCourant.getCombinaisonActive().setNbPionsEnMain(pionsARecuperer);
+        // ajout des pions récupérés à la main du joueur
+        joueurCourant.getCombinaisonActive().setNbPionsEnMain(pionsARecuperer + joueurCourant.getCombinaisonActive().getNbPionsEnMain());
     }
 
     /** Pour attaquer une case choisie*/
     public void attaquerCase(Case maCase) {
         //checker si la case est atteignable (bordure etc)
-        //if (maCase.estAtteignable()) {
+        if (maCase.estAtteignable(joueurCourant)) {
             if (maCase.getPrenable()) { //Boolean et pas boolean
                 Combinaison combinaisonActive = joueurCourant.getCombinaisonActive();
+                System.out.println("Pions en main : " + combinaisonActive.getNbPionsEnMain());
                 int diff = combinaisonActive.getNbPionsEnMain() - maCase.getNombreAttaquantNecessaire();
 
                 if (diff >= 0) {
@@ -323,9 +324,10 @@ public class JeuReel implements Jeu {
                 System.out.println("Case non prenable");
                 //exception case non prenable (effet de pouvoir) (imprenable + paix).
             }
-        //} else {
+        } else {
             //exception case non atteignable (pas de pions sur une case voisine)
-        //}
+            System.out.println("Case non atteignable.");
+        }
     }
 
     public void placerPions(Case maCase, int nbPions) {

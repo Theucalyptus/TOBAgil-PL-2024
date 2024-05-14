@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.management.RuntimeErrorException;
+
 import java.util.HashMap;
 
 import java.util.Random;
-import jeu.peuples.TribuOubliee;
 
 public class Monde {
 
@@ -98,6 +99,7 @@ public class Monde {
                 //on verifie si on veut une mer ou un lac
                 boolean coins;
                 boolean centre;
+                boolean bordure;
 
                 int nbPions = 1; //nombre de pions a placer sur la nouvelle case
 
@@ -108,6 +110,7 @@ public class Monde {
                     || ((x == (this.dimX / 2)) && (y == (this.dimY / 2 - 1)))
                     || ((x == (this.dimX / 2)) && (y == (this.dimY / 2)))
                     || ((x == (this.dimX / 2 - 1)) && (y == (this.dimY / 2))));
+                bordure = x == 0 || x == this.dimX-1 || y == 0 || y == this.dimY-1;
 
                 if (coins || centre) { //on traite les cas où on veut la mer ou un lac
                     newregion = TypesRegions.MER_ET_LAC;
@@ -160,10 +163,10 @@ public class Monde {
 
 
                 // on pose une tribu oubliée sur la case
-                Combinaison tribuOublieeComb = new Combinaison(new TribuOubliee(), null);
+                Combinaison tribuOublieeComb = new Combinaison(new jeu.peuples.TribuOubliee(), new jeu.pouvoirs.TribuOubliee());
                 GroupePions newEnsemblePions = new GroupePions(tribuOublieeComb, nbPions);
                 // création de la nouvelle case
-                Case newcase = new Case(x, y, newregion, newEnsemblePions, newsymbole);
+                Case newcase = new Case(x, y, newregion, newEnsemblePions, newsymbole, bordure);
                 // ajout de la nouvelle case à la grille
                 this.grille.add(newcase);
             }
@@ -196,6 +199,8 @@ public class Monde {
                 return maCase;
             }
         }
-        return new Case(); //on ne devrait jamais arriver à ce return
+        
+        // Si tout est bien développé, ne devrait jamais arriver !
+        throw new RuntimeErrorException(null);
     }
 }

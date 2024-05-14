@@ -43,6 +43,7 @@ public class Combinaison {
         this.declin = false;
         this.premierTour = true;
         this.pions = new ArrayList<>();
+        this.nbPionsEnMain = peuple.getNbPions() + pouvoir.getNbPions();
     }
 
     //===============================================================

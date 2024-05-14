@@ -114,4 +114,9 @@ public class JeuProxy implements Jeu {
         this.impl.attaquerCase(laCase);
     }
 
+    @Override
+    public void placerPions(Case laCase, int nbPions) {
+        throw new OperationInterditeException("Le joueur doit passer par le contrôleur !");
+    }
+
 }

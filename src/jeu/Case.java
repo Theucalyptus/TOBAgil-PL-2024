@@ -62,22 +62,6 @@ public class Case extends Observable {
 
     // Constructeurs
 
-    /**Constructeur de la Classe Case avec tous les attributs par défaut.
-    */
-    public Case() {
-        System.out.println("NE DEVRAIT PAS EXISTER !!");
-        this.voisins = new ArrayList<>();
-        this.coordonnees = new ArrayList<>();
-        this.coordonnees.add(0);
-        this.coordonnees.add(0);
-        this.typeRegion = TypesRegions.CHAMP;
-        this.batiments = new HashMap<>();
-        this.pions = null;
-        this.ressource = TypesSymboles.AUCUN;
-        this.prenable = true;
-        this.estBordure = false;
-    }
-
     /**
      * Construire une Case à partir d'un type de région, d'un batiment, d'un ensemble de
      * pions, d'une ressource, d'un status. Pas de parametre batiment car à
@@ -89,7 +73,7 @@ public class Case extends Observable {
      * @param ressource type de ressource sur la Case.
      */
     public Case(int i, int j, TypesRegions region,
-                GroupePions pions, TypesSymboles ressource) {
+                GroupePions pions, TypesSymboles ressource, Boolean bordure) {
         this.voisins = new ArrayList<>();
         this.coordonnees = new ArrayList<>();
         this.coordonnees.add(i);
@@ -97,12 +81,13 @@ public class Case extends Observable {
         this.typeRegion = region;
         this.batiments = new HashMap<TypesBatiments, Integer>();
         this.pions = pions;
-        this.ressource = TypesSymboles.SOURCE_MAGIQUE;
+        this.ressource = ressource;
         if (region == TypesRegions.MER_ET_LAC) {
             this.prenable = false;
         } else {
             this.prenable = true;
         }
+        this.estBordure = bordure;
     }
 
     // getteurs
@@ -308,4 +293,5 @@ public class Case extends Observable {
         this.notifyObservers();
         this.clearChanged();
     }
+
 }
