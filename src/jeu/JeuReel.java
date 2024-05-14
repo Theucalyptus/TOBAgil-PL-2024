@@ -11,7 +11,10 @@ import jeu.exceptions.JoueurDejaDansLaPartieException;
 import jeu.exceptions.NombreJoueurIncorrectException;
 import jeu.exceptions.PartieEnCoursException;
 import jeu.exceptions.PartiePleineException;
-
+import jeu.peuples.Peuple;
+import jeu.peuples.TypesPeuples;
+import jeu.pouvoirs.Pouvoir;
+import jeu.pouvoirs.TypesPouvoirs;
 import observables.JoueurCourantObs;
 import observables.NombreTourObs;
 
@@ -242,16 +245,19 @@ public class JeuReel implements Jeu {
 
     /** Ajouter le nombre de points de victoire au joueur. */
     private void ajouterPtsVictoire() {
-        int nombrePoints = 0;
-        int pointsBonus = 0;
+        //---------------------------------------------------------------------------
+        // Compter le nombre de points de victoires gagnés par le joueur à la fin du
+        // tour
+        //---------------------------------------------------------------------------
+
         // la combinaison du joueur courant
         Combinaison combinaisonJoueur = this.joueurCourant.getCombinaisonActive();
 
         // obtenir le nombre de points bonus
-        pointsBonus = combinaisonJoueur.finTour();
+        int pointsBonus = combinaisonJoueur.finTour();
 
-        nombrePoints = combinaisonJoueur.nombreGroupesPions() + pointsBonus;
-        this.joueurCourant.addPoints(nombrePoints);
+        int totalPoints = combinaisonJoueur.nombreGroupesPions() + pointsBonus;
+        this.joueurCourant.addPoints(totalPoints);
     }
 
     /**
@@ -260,22 +266,27 @@ public class JeuReel implements Jeu {
     @Override
     public void passerTour() {
         if (this.enCours) {
-            // Actions de fin de tour
-            this.ajouterPtsVictoire();
+            // Si le joueur a bien posé tout ses pions.
+            if(joueurCourant.getCombinaisonActive().getNbPionsEnMain() == 0) {
+                // Actions de fin de tour
+                this.ajouterPtsVictoire();
 
-            // Passage au tour suivant
-            if (this.joueursIter.hasNext()) {
-                this.setJoueurCourant(this.joueursIter.next());
+                // Passage au tour suivant
+                if (this.joueursIter.hasNext()) {
+                    this.setJoueurCourant(this.joueursIter.next());
+                } else {
+                    this.joueursIter = this.joueurs.listIterator();
+                    this.setNumeroTour(this.getNumeroTour() + 1);
+                    this.setJoueurCourant(this.joueursIter.next());
+                }
+                if (this.getNumeroTour() > this.getNombreTourTotal()) {
+                    this.enCours = false;
+                    System.out.println("");
+                }
+                debutTour();
             } else {
-                this.joueursIter = this.joueurs.listIterator();
-                this.setNumeroTour(this.getNumeroTour() + 1);
-                this.setJoueurCourant(this.joueursIter.next());
+                System.out.println("Vous avez encore des pions à placer");
             }
-            if (this.getNumeroTour() > this.getNombreTourTotal()) {
-                this.enCours = false;
-                System.out.println("");
-            }
-            debutTour();
         } else {
             System.out.println("Partie non-commencé ou terminée. Abandon !");
         }
@@ -312,9 +323,19 @@ public class JeuReel implements Jeu {
                 int diff = combinaisonActive.getNbPionsEnMain() - attaquants;
 
                 if (diff >= 0) {
+                    // On déloge les pions adverses
+                    GroupePions anciensPions = maCase.getGroupePions();
+                    if (anciensPions != null) {
+                        Combinaison ancienneCombinaison = anciensPions.getCombinaison();
+                        // Le joueur perd son territoire
+                        ancienneCombinaison.getPions().remove(anciensPions);
+                        // Le joueur récupère tout ses pions sauf 1
+                        ancienneCombinaison.setNbPionsEnMain(ancienneCombinaison.getNbPionsEnMain() + anciensPions.getNombre() - 1);
+                    }
+
+                    // On place nos pions sur la case
                     GroupePions newGroupe = new GroupePions(combinaisonActive, attaquants);
                     maCase.setNewpions(newGroupe);
-                    //combinaisonActive.addGroupe(newGroupe);
                     combinaisonActive.setNbPionsEnMain(diff);
                 } else if (diff >= -3) {
                     System.out.println("Pas assez de pions !");
