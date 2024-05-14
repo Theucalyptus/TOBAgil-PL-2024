@@ -138,7 +138,8 @@ public class Monde {
                     // choix d'un symbole aleatoire
                     int nombreTotalSymboles = 3 * nombreMaxSymbols;
                     // probabilite de mettre un symbole sur la case
-                    double p = nombreTotalSymboles / (this.getDimX() * this.getDimY());
+                    double p = (double)nombreTotalSymboles / (double)(this.getDimX() * this.getDimY());
+                    System.out.println(p);
                     Set<TypesSymboles> symbolesSet = nombreSymboles.keySet();
                     TypesSymboles[] symbolesArray =
                         symbolesSet.toArray(new TypesSymboles[0]);
