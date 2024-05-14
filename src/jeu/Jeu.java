@@ -83,4 +83,6 @@ public interface Jeu {
      * @param nbPions le nombre de pions à placer.
      */
     void placerPions(Case laCase, int nbPions);
+
+    void redeployement();
 }
