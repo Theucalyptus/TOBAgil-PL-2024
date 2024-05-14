@@ -55,9 +55,13 @@ public class ActionsJoueur extends JPanel {
 		ajouterBatimentBtn.addActionListener(new ActionAjouterBatiment());
 		super.add(ajouterBatimentBtn);
 
-		JButton attaquerCase = new JButton("Attaquer la case sélectionnée");
+		JButton attaquerCase = new JButton("Attaquer");
 		attaquerCase.addActionListener(new ActionAttaquerCase());
 		super.add(attaquerCase);
+
+		JButton placerPion = new JButton("Placer un pion");
+		placerPion.addActionListener(new ActionPlacerPion());
+		super.add(placerPion);
 	}
 
 	/**On définit une action concernant le joueur dans la classe du contrôleur
@@ -263,7 +267,7 @@ public class ActionsJoueur extends JPanel {
 		}
 	}
 
-	/**Classe déclenchée quand le bouton agir case est cliqué. */
+	/**Classe déclenchée quand le bouton attaquer case est cliqué. */
 	private final class ActionAttaquerCase implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
@@ -272,6 +276,19 @@ public class ActionsJoueur extends JPanel {
 				System.out.println("Aucune case n'est sélectionnée");
 			} else {
 				jeu.attaquerCase(caseSelectionnee.getVraieCase());
+			}
+		}
+	}	
+	
+	/**Classe déclenchée quand le bouton placer pion est cliqué. */
+	private final class ActionPlacerPion implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent evt) {
+			CaseView caseSelectionnee = selecteurCase.getSelection();
+			if (selecteurCase.getSelection() == null) {
+				System.out.println("Aucune case n'est sélectionnée");
+			} else {
+				jeu.placerPions(caseSelectionnee.getVraieCase(), 1);
 			}
 		}
 	}
