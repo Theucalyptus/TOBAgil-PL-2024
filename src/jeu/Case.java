@@ -276,6 +276,7 @@ public class Case extends Observable {
 
         //checker si la case est atteignable par un joueur déjà déployé ?
         for (Case voisine : this.getVoisins()) {
+            System.out.println("Case voisine : " + voisine.getCoordonnees().toString());
             if (voisine.getGroupePions().getCombinaison()
                     == joueur.getCombinaisonActive()) {
                 return true;

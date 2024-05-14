@@ -275,6 +275,7 @@ public class ActionsJoueur extends JPanel {
 			if (selecteurCase.getSelection() == null) {
 				System.out.println("Aucune case n'est sélectionnée");
 			} else {
+				System.out.println("Attaque de la case : " + caseSelectionnee.getVraieCase().getCoordonnees().toString());
 				jeu.attaquerCase(caseSelectionnee.getVraieCase());
 			}
 		}

@@ -171,6 +171,25 @@ public class Monde {
                 this.grille.add(newcase);
             }
         }
+
+        // ajout des cases voisines
+        int x, y;
+        int[] xOffsets = {1, -1, 0, 0};
+        int[] yOffsets = {0, 0, -1, 1};
+        for(Case maCase : this.grille) {
+            x = maCase.getCoordonnees().get(0);
+            y = maCase.getCoordonnees().get(1);
+
+
+            for(int i=0;i<4;i++) {
+                int xVois = x+xOffsets[i];
+                int yVois = y+yOffsets[i];
+                boolean coordValide = xVois >= 0 && xVois < this.dimX && yVois >= 0 && yVois < this.dimY;
+                if(coordValide) {
+                    maCase.ajoutVoisins(this.getCase(xVois, yVois));
+                }
+            } 
+        }
     }
 
     /** Obtenir le nombre de tuiles en largeur.
