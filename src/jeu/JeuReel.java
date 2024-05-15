@@ -176,6 +176,17 @@ public class JeuReel extends Observable implements Jeu {
         this.etat = newEtat;
     }
 
+    /**
+     * Changer la valeur du champs enCours par la valeur en argument.
+     * @param enCours La nouvelle valeur de enCours.
+     */
+    public void setEtatJoueur(JoueurState newEtat) {
+        this.joueurCourant.setEtat(newEtat);
+        this.joueurCourantObs.notifierChangement();
+    }
+
+
+
     /**Actualiser le nombre de tour de la partie en fonction du
      * nombre de joueur dans la partie.
      * @throws NombreJoueurIncorrectException Si le Nombre de Joueur n'est pas conforme.
