@@ -251,7 +251,7 @@ public class TestJeuReel {
      * Nombre de Tour. */
     @Test(expected = IllegalArgumentException.class)
     public void testerRobustesseAddNbTourObserver() {
-        this.aJeu.addJoueurCourantObserver(null);
+        this.aJeu.addNbTourObserver(null);
     }
 
     /**Tester la robustesse de l'ajout de d'observer sur le

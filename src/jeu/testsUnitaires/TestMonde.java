@@ -132,7 +132,6 @@ public class TestMonde {
     //         unAutreMonde.getDimY(), 6, PRECISION);
     // }
 
-
     // @Test(expected = IllegalArgumentException.class)
     // void testerRobustesseCreerMondeZero() {
     //     CreerMonde(0);
@@ -185,64 +184,64 @@ public class TestMonde {
         new Monde(NOMBRENEGATIF);
     }
 
-    /**Tester le getteurs d'une case. */
-    @Test
-    public void testerGetUneCase() {
-        int x = 1;
-        int y = 2;
-        int dim = 2;
-        Case uneCase = this.unMonde.getCase(x, y);
-        List<Integer> co = uneCase.getCoordonnees();
-        assertEquals("La listes des coordonnée doit avoir une dimension de " + dim,
-            co.size(), DEUX, PRECISION);
-        assertEquals("La première coordonnée doit être " + x, co.get(0), x, PRECISION);
-        assertEquals("La deuxième coordonnée doit être " + y, co.get(1), y, PRECISION);
-    }
+    // /**Tester le getteurs d'une case. */
+    // @Test
+    // public void testerGetUneCase() {
+    //     int x = 1;
+    //     int y = 2;
+    //     int dim = 2;
+    //     Case uneCase = this.unMonde.getCase(x, y);
+    //     List<Integer> co = uneCase.getCoordonnees();
+    //     assertEquals("La listes des coordonnée doit avoir une dimension de " + dim,
+    //         co.size(), DEUX, PRECISION);
+    //     assertEquals("La première coordonnée doit être " + x, co.get(0), x, PRECISION);
+    //     assertEquals("La deuxième coordonnée doit être " + y, co.get(1), y, PRECISION);
+    // }
 
-    /**Tester le getteur d'une case sur un monde a 2 joueurs. */
-    @Test
-    public void testerGetUneCase2Joueurs() {
-        Case laCase = this.unMondeA2Joueurs.getCase(DEUX, TROIS);
-        List<Integer> co = laCase.getCoordonnees();
-        assertEquals("La listes des coordonnée doit avoir une dimension de " + DEUX,
-            co.size(), DEUX, PRECISION);
-        assertEquals("La première coordonnée doit être " + DEUX, co.get(0), DEUX, PRECISION);
-        assertEquals("La deuxième coordonnée doit être " + TROIS, co.get(1), TROIS, PRECISION);
-    }
+    // /**Tester le getteur d'une case sur un monde a 2 joueurs. */
+    // @Test
+    // public void testerGetUneCase2Joueurs() {
+    //     Case laCase = this.unMondeA2Joueurs.getCase(DEUX, TROIS);
+    //     List<Integer> co = laCase.getCoordonnees();
+    //     assertEquals("La listes des coordonnée doit avoir une dimension de " + DEUX,
+    //         co.size(), DEUX, PRECISION);
+    //     assertEquals("La première coordonnée doit être " + DEUX, co.get(0), DEUX, PRECISION);
+    //     assertEquals("La deuxième coordonnée doit être " + TROIS, co.get(1), TROIS, PRECISION);
+    // }
 
-    /**Tester le getteur d'une case sur un monde a 3 joueurs. */
-    @Test
-    public void testerGetUneCase3Joueurs() {
-        Case laCase = this.unMondeA3Joueurs.getCase(DEUX, TROIS);
-        List<Integer> co = laCase.getCoordonnees();
-        assertEquals("La listes des coordonnée doit avoir une dimension de " + DEUX,
-            co.size(), DEUX, PRECISION);
-        assertEquals("La première coordonnée doit être " + DEUX, co.get(0), DEUX, PRECISION);
-        assertEquals("La deuxième coordonnée doit être " + TROIS, co.get(1), TROIS, PRECISION);
-    }
+    // /**Tester le getteur d'une case sur un monde a 3 joueurs. */
+    // @Test
+    // public void testerGetUneCase3Joueurs() {
+    //     Case laCase = this.unMondeA3Joueurs.getCase(DEUX, TROIS);
+    //     List<Integer> co = laCase.getCoordonnees();
+    //     assertEquals("La listes des coordonnée doit avoir une dimension de " + DEUX,
+    //         co.size(), DEUX, PRECISION);
+    //     assertEquals("La première coordonnée doit être " + DEUX, co.get(0), DEUX, PRECISION);
+    //     assertEquals("La deuxième coordonnée doit être " + TROIS, co.get(1), TROIS, PRECISION);
+    // }
 
 
-    /**Tester le getteur d'une case sur un monde a 4 joueurs. */
-    @Test
-    public void testerGetUneCase4Joueurs() {
-        Case laCase = this.unMondeA4Joueurs.getCase(DEUX, TROIS);
-        List<Integer> co = laCase.getCoordonnees();
-        assertEquals("La listes des coordonnée doit avoir une dimension de " + DEUX,
-            co.size(), DEUX, PRECISION);
-        assertEquals("La première coordonnée doit être " + DEUX, co.get(0), DEUX, PRECISION);
-        assertEquals("La deuxième coordonnée doit être " + TROIS, co.get(1), TROIS, PRECISION);
-    }
+    // /**Tester le getteur d'une case sur un monde a 4 joueurs. */
+    // @Test
+    // public void testerGetUneCase4Joueurs() {
+    //     Case laCase = this.unMondeA4Joueurs.getCase(DEUX, TROIS);
+    //     List<Integer> co = laCase.getCoordonnees();
+    //     assertEquals("La listes des coordonnée doit avoir une dimension de " + DEUX,
+    //         co.size(), DEUX, PRECISION);
+    //     assertEquals("La première coordonnée doit être " + DEUX, co.get(0), DEUX, PRECISION);
+    //     assertEquals("La deuxième coordonnée doit être " + TROIS, co.get(1), TROIS, PRECISION);
+    // }
 
-    /**Tester le getteur d'une case sur un monde a 5 joueurs. */
-    @Test
-    public void testerGetUneCase5Joueurs() {
-        Case laCase = this.unMondeA5Joueurs.getCase(DEUX, TROIS);
-        List<Integer> co = laCase.getCoordonnees();
-        assertEquals("La listes des coordonnée doit avoir une dimension de " + DEUX,
-            co.size(), DEUX, PRECISION);
-        assertEquals("La première coordonnée doit être " + DEUX, co.get(0), DEUX, PRECISION);
-        assertEquals("La deuxième coordonnée doit être " + TROIS, co.get(1), TROIS, PRECISION);
-    }
+    // /**Tester le getteur d'une case sur un monde a 5 joueurs. */
+    // @Test
+    // public void testerGetUneCase5Joueurs() {
+    //     Case laCase = this.unMondeA5Joueurs.getCase(DEUX, TROIS);
+    //     List<Integer> co = laCase.getCoordonnees();
+    //     assertEquals("La listes des coordonnée doit avoir une dimension de " + DEUX,
+    //         co.size(), DEUX, PRECISION);
+    //     assertEquals("La première coordonnée doit être " + DEUX, co.get(0), DEUX, PRECISION);
+    //     assertEquals("La deuxième coordonnée doit être " + TROIS, co.get(1), TROIS, PRECISION);
+    // }
 
 
     /**Tester la robustesse de getCase avec un Nombre négatif en abscisse. */

@@ -1,7 +1,5 @@
 package jeu;
 
-import jeu.Case;
-
 /**Classe qui représente un groupe de pions. Un groupe de pions est un
  * nombre de pions d'une certaine combinaison Peuple-Pouvoir. */
 public class GroupePions {

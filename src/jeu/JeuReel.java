@@ -285,13 +285,13 @@ public class JeuReel implements Jeu {
     //Se lance au debut du tour d'un joueur
     private void debutTour() {
         int pionsARecuperer = 0;
-        
+
         System.out.println("Début du tour de " + joueurCourant.getNom());
         // Récupère tout les pions sauf 1 sur chaque case possédé par le joueur.
         for (GroupePions pions : joueurCourant.getCombinaisonActive().getPions()) {
             pionsARecuperer += pions.getNombre() - 1;
             pions.getCase().setNewNombrePions(1);
-            
+
             System.out.println("Pions récupérés");
         }
         joueurCourant.getCombinaisonActive().setNbPionsEnMain(pionsARecuperer);

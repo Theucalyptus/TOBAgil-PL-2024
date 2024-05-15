@@ -73,14 +73,14 @@ public interface Jeu {
 
     /**
      * Permet d'attaquer une case.
-     * @param laCase la case à attaquer.
+     * @param laCase La case à attaquer.
      */
     void attaquerCase(Case laCase);
 
     /**
      * Permet de placer des pions sur une case.
-     * @param laCase la case à attaquer.
-     * @param nbPions le nombre de pions à placer.
+     * @param laCase La case à attaquer.
+     * @param nbPions Le nombre de pions à placer.
      */
     void placerPions(Case laCase, int nbPions);
 }
