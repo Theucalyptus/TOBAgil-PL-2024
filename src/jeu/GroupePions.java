@@ -1,6 +1,8 @@
 package jeu;
 
 import jeu.Combinaison;
+import jeu.peuples.*;
+import jeu.pouvoirs.*;
 
 public class GroupePions {
     /** Type de Combinaison. */
@@ -23,6 +25,14 @@ public class GroupePions {
      */
     public Combinaison getCombinaison() {
         return this.combinaison;
+    }
+
+    public Peuple getPeuple() {
+        return this.combinaison.getPeuple();
+    }
+
+    public Pouvoir getPouvoir() {
+        return this.combinaison.getPouvoir();
     }
 
 

@@ -1,10 +1,9 @@
 package jeu;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import jeu.pouvoirs.Pouvoir;
-import jeu.peuples.Peuple;
-import jeu.peuples.TypesPeuples;
-import jeu.pouvoirs.TypesPouvoirs;
+import jeu.pouvoirs.*;
+import jeu.peuples.*;
 import java.util.Random;
 
 
@@ -30,7 +29,7 @@ public class Pioche {
         this.pioche = new ArrayList<Combinaison>();
         this.listePeuples = creerListePeuple();
         this.listePouvoirs = creerListePouvoir();
-        this.pioche = creerListeCombinaisons(this.listePeuples, this.listePouvoirs);
+        this.pioche = creerListeCombinaisons();
     }
 
 
@@ -56,6 +55,10 @@ public class Pioche {
         }
     }
 
+    public int lengthPioche() {
+        return pioche.size();
+    }
+
 
     //===============================================================
     //                          Commandes
@@ -69,16 +72,25 @@ public class Pioche {
     public List<Peuple> creerListePeuple() {
         List<Peuple> listePeuplesRetournee = new ArrayList<>();
 
-        for (TypesPeuples nompeuple : TypesPeuples.values()) {
+        for (NomClassePeuples nompeuple : NomClassePeuples.values()) {
             try {
-                Class<?> peupleClass = Class.forName("jeu.peuple." + nompeuple.name());
+                Class<?> peupleClass = Class.forName("jeu.peuples." + nompeuple.name());
                 Peuple peuple =
                     (Peuple) peupleClass.getDeclaredConstructor().newInstance();
 
                 listePeuplesRetournee.add(peuple);
-            } catch (Exception e) {
-                System.out.println("Error creating instance for: " + type.name());
-                e.printStackTrace();
+
+            } catch (ClassNotFoundException e) {
+                System.out.println("Classe non trouvée pour : " + "jeu.peuples." + nompeuple.name());
+                //e.printStackTrace();
+
+            } catch (NoSuchMethodException e) {
+                System.out.println("Constructeur par défaut non trouvé pour : " + "jeu.peuples." + nompeuple.name());
+                //e.printStackTrace();
+
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                System.out.println("Erreur lors de l'instanciation pour : " + "jeu.peuples." + nompeuple.name());
+                //e.printStackTrace();
             }
         }
         return listePeuplesRetournee;
@@ -92,15 +104,23 @@ public class Pioche {
     public List<Pouvoir> creerListePouvoir() {
         List<Pouvoir> listePouvoirsRetournee = new ArrayList<>();
 
-        for (TypesPouvoirs nomPouvoir : TypesPouvoirs.values()) {
+        for (NomClassePouvoirs nomPouvoir : NomClassePouvoirs.values()) {
             try {
-                Class<?> peupleClass = Class.forName("jeu.peuple." + nomPouvoir.name());
+                Class<?> pouvoirClass = Class.forName("jeu.pouvoirs." + nomPouvoir.name());
                 Pouvoir pouvoir =
-                    (Pouvoir) peupleClass.getDeclaredConstructor().newInstance();
+                    (Pouvoir) pouvoirClass.getDeclaredConstructor().newInstance();
                 listePouvoirsRetournee.add(pouvoir);
-            } catch (Exception e) {
-                System.out.println("Erreur pour : " + type.name());
-                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                System.out.println("Classe non trouvée pour : " + "jeu.pouvoirs." + nomPouvoir.name());
+                //e.printStackTrace();
+
+            } catch (NoSuchMethodException e) {
+                System.out.println("Constructeur par défaut non trouvé pour : " + "jeu.pouvoirs." + nomPouvoir.name());
+                //e.printStackTrace();
+
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                System.out.println("Erreur lors de l'instanciation pour : " + "jeu.pouvoirs." + nomPouvoir.name());
+                //e.printStackTrace();
             }
         }
         return listePouvoirsRetournee;
@@ -123,9 +143,9 @@ public class Pioche {
                                 this.listePeuples.get(num1),
                                 this.listePouvoirs.get(num2));
             listeCombinaisons.add(combinaison);
-
-            listePeuples.remove(num1);
-            listePouvoirs.remove(num2);
+            // On pourrait supprimer les peuples et combinaison de la liste afin qu'ils n'apparaisent plus
+            //listePeuples.remove(num1);
+            //listePouvoirs.remove(num2);
         }
         return listeCombinaisons;
     }
@@ -134,12 +154,12 @@ public class Pioche {
      * Donner la Combinaison attachée à l'indice donnée en argument.
      * @param indice L'indice de la combinaison voulut.
      */
-    public void combinaisonChoisit(int indice) {
+    public Combinaison combinaisonChoisit(int indice) {
 
-        Peuple peuple = this.pioche.get(indice).getPeuple();
-        Pouvoir pouvoir = this.pioche.get(indice).getPouvoir();
-        // ils faudraient les rajouter que si ils ne sont plus utiliser
+        Combinaison combinaison = this.pioche.get(indice);
+        // Remettre l'association au fond de la pioche
         this.pioche.remove(indice);
+        return combinaison;
     }
 
 }

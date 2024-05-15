@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Random;
 import jeu.peuples.Peuple;
 import jeu.peuples.TribuOubliee;
+import jeu.pouvoirs.DesForets;
 
 public class Monde {
 
@@ -158,8 +159,8 @@ public class Monde {
                 }
 
                 // on pose une tribu oubliée sur la case
-                Peuple monPeuple = new TribuOubliee();
-                GroupePions newEnsemblePions = new GroupePions(monPeuple, 1);
+                Combinaison maCombinaison = new Combinaison(new TribuOubliee(), new DesForets());
+                GroupePions newEnsemblePions = new GroupePions(maCombinaison, 1);
                 // création de la nouvelle case
                 Case newcase = new Case(x, y, newregion, newEnsemblePions, newsymbole);
                 // ajout de la nouvelle case à la grille
