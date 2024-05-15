@@ -20,7 +20,7 @@ import jeu.Pioche;
 public class PiocheFenetre {
 
     // TODO : à exporter dans jeu.pioche;
-    public static final int NBCLASSE = 2;
+    public static final int NBCLASSE = 5;
     private Pioche pioche;
     private CombinaisonView selectedClass = null;
     private JFrame fenetre;
