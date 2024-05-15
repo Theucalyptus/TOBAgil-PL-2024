@@ -74,7 +74,7 @@ public class PiocheFenetre {
                 System.out.println("AUCUNE CLASSE SELECTIONNE - REESSAYER !");
             } else {
                 System.out.println("OK - combinaison selectionne");
-                jeu.setEtatJoueur(JoueurState.DEBUT_TOUR);
+                jeu.getJoueurCourant().setEtat(JoueurState.DEBUT_TOUR);
                 fenetre.dispose();
             }
 		}

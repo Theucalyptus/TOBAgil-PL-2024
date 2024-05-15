@@ -2,11 +2,13 @@ package jeu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import jeu.exceptions.OperationInterditeException;
 
 /** Classe représentant un joueur. */
-public class Joueur {
+@SuppressWarnings("deprecation")
+public class Joueur extends Observable {
 
     /** Le Nom du joueur. */
     private String nom;
@@ -61,6 +63,7 @@ public class Joueur {
      */
     public void setEtat(JoueurState nouvelEtat) {
         this.etat = nouvelEtat;
+        this.notifierChangement();
     }
 
     /**Ajouter des points de victoire au joueur .
@@ -68,6 +71,7 @@ public class Joueur {
     */
     public void addPoints(int ajout) {
         this.pointsVictoire = this.pointsVictoire + ajout;
+        this.notifierChangement();
     }
 
     /**Enlever des points de victoire au joueur .
@@ -75,6 +79,7 @@ public class Joueur {
     */
     public void subPoints(int enleve) {
         this.pointsVictoire = this.pointsVictoire - enleve;
+        this.notifierChangement();
     }
 
 
@@ -91,6 +96,8 @@ public class Joueur {
             this.combinaisonsDeclins.add(this.combinaisonActive);
         }
         this.combinaisonActive = nouvelleCombinaison;
+
+        this.notifierChangement();
     }
 
     /**Obtenir la Combinaison du joueur.
@@ -106,5 +113,15 @@ public class Joueur {
      */
     public List<Combinaison> getCombinaisonsDeclins() {
         return this.combinaisonsDeclins;
+    }
+
+
+    /**
+     * 
+     */
+    private void notifierChangement() {
+        super.setChanged();
+        super.notifyObservers();
+        super.clearChanged();
     }
 }

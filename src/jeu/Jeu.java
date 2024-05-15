@@ -41,12 +41,6 @@ public interface Jeu {
     void setNumeroTour(int numero);
 
     /**
-     * Redéfini l'état du joueur courant et le notifie.
-     * @param newEtat l'état à attribuer.
-     */
-    void setEtatJoueur(JoueurState newEtat);
-
-    /**
      * Ajouter un observateur.
      * @param obs L'observer à ajouter.
      */

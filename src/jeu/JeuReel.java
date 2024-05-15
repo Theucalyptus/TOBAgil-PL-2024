@@ -154,8 +154,10 @@ public class JeuReel extends Observable implements Jeu {
      * joueurs de la partie.
      */
     public void setJoueurCourant(Joueur joueurCourant) {
+        this.joueurCourantObs.detacher();
         this.joueurCourant = joueurCourant;
-        this.notifierModifs();
+        this.joueurCourantObs.attacher();
+        this.joueurCourantObs.notifierChangement();
     }
 
     @Override
@@ -174,15 +176,6 @@ public class JeuReel extends Observable implements Jeu {
      */
     private void setEtat(JeuState newEtat) {
         this.etat = newEtat;
-    }
-
-    /**
-     * Changer la valeur du champs enCours par la valeur en argument.
-     * @param enCours La nouvelle valeur de enCours.
-     */
-    public void setEtatJoueur(JoueurState newEtat) {
-        this.joueurCourant.setEtat(newEtat);
-        this.joueurCourantObs.notifierChangement();
     }
 
 
@@ -311,15 +304,13 @@ public class JeuReel extends Observable implements Jeu {
 
     private void recupPions() {
         int pionsARecuperer = 0;
-        System.out.println("Début du tour de " + joueurCourant.getNom());
 
         // Récupère tout les pions sauf 1 sur chaque case possédé par le joueur.
         for (GroupePions pions : joueurCourant.getCombinaisonActive().getPions()) {
             pionsARecuperer += pions.getNombre() - 1;
             pions.getCase().setNewNombrePions(1);
-
-            System.out.println("Pions récupérés");
         }
+
         // ajout des pions récupérés à la main du joueur
         joueurCourant.getCombinaisonActive().setNbPionsEnMain(pionsARecuperer + joueurCourant.getCombinaisonActive().getNbPionsEnMain());
         this.joueurCourantObs.notifierChangement();
@@ -327,6 +318,10 @@ public class JeuReel extends Observable implements Jeu {
 
     /** Pour attaquer une case choisie*/
     public void attaquerCase(Case maCase) {
+        if (joueurCourant.getEtat() == JoueurState.DEBUT_TOUR) {
+            joueurCourant.setEtat(JoueurState.ATTAQUE);
+        }
+
         //checker si la case est atteignable (bordure etc)
         if (maCase.estAtteignable(joueurCourant)) {
             if (maCase.getPrenable()) { //Boolean et pas boolean
