@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
-FILEPATH=checkstyle-10.14.0-all.jar
-URL=https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.14.0/checkstyle-10.14.0-all.jar
+FILEPATH=checkstyle-10.16.0-all.jar
+URL=https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.16.0/checkstyle-10.16.0-all.jar
 
 
 if [ ! -f $FILEPATH ]; then

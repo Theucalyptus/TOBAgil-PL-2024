@@ -69,8 +69,8 @@
 	<!-- Checks for Headers                                -->
 	<!-- See https://checkstyle.org/config_header.html   -->
 	<!-- <module name="Header"> -->
-	<!--   <property name="headerFile" value="${checkstyle.header.file}"/> -->
-	<!--   <property name="fileExtensions" value="java"/> -->
+	  <!-- <property name="headerFile" value="${checkstyle.header.file}"/> -->
+	  <!-- <property name="fileExtensions" value="java"/> -->
 	<!-- </module> -->
 
 	<module name="TreeWalker">
@@ -95,11 +95,11 @@
 		<module name="ParameterName"/>
 		<module name="StaticVariableName"/>
 		<module name="TypeName"/>
-		<!-- <module name="MagicNumber"/> -->
+		<module name="MagicNumber"/>
 
 		<!-- Checks for imports                              -->
 		<!-- See https://checkstyle.org/config_import.html -->
-		<!-- <module name="AvoidStarImport"/> -->
+		<module name="AvoidStarImport"/>
 		<module name="IllegalImport"/> <!-- defaults to sun.* packages -->
 		<module name="RedundantImport"/>
 		<module name="UnusedImports">

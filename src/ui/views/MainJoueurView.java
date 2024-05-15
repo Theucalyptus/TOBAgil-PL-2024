@@ -103,7 +103,7 @@ public class MainJoueurView extends JPanel implements Observer {
 
             /**
              * Construit la vue d'un tas de pièce.
-             * @param nombre le chiffre sur les pièces
+             * @param nombre Le chiffre sur les pièces.
              */
             public JetonView(int nombre) {
                 super();

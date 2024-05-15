@@ -20,7 +20,7 @@ import jeu.pouvoirs.TypesPouvoirs;
  * Classe représentant une partie de jeu.
  */
 @SuppressWarnings("deprecation")
-public class JeuReel extends Observable implements Jeu{
+public class JeuReel extends Observable implements Jeu {
 
     // atributs
 
@@ -300,12 +300,13 @@ public class JeuReel extends Observable implements Jeu{
 
     private void recupPions() {
         int pionsARecuperer = 0;
-        
+        System.out.println("Début du tour de " + joueurCourant.getNom());
+
         // Récupère tout les pions sauf 1 sur chaque case possédé par le joueur.
         for (GroupePions pions : joueurCourant.getCombinaisonActive().getPions()) {
             pionsARecuperer += pions.getNombre() - 1;
             pions.getCase().setNewNombrePions(1);
-            
+
             System.out.println("Pions récupérés");
         }
         // ajout des pions récupérés à la main du joueur
@@ -384,13 +385,15 @@ public class JeuReel extends Observable implements Jeu{
     }
 
     @Override
-    public JeuState getEtat() {
-        return this.etat;
-    }
-
     public void redeployement() {
         recupPions();
         this.joueurCourant.setEtat(JoueurState.REDEPLOYMENT);
         this.joueurCourantObs.notifierChangement();
     }
+
+    @Override
+    public JeuState getEtat() {
+        return this.etat;
+    }
+
 }

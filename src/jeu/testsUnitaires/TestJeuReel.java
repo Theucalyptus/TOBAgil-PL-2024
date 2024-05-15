@@ -47,10 +47,12 @@ public class TestJeuReel {
     private JeuReel unJeuAvecUnMonde;
     /**Un monde pour cinq joueurs. */
     private Monde unMonde;
-    /**Un Observer sur le Nombre de Tour. */
-    private Observer unObserverSurTour;
-    /**Un Observer sur le JoueurCourant. */
-    private Observer unObserverSurJoueur;
+
+    // /**Un Observer sur le Nombre de Tour. */
+    // private Observer unObserverSurTour;
+    // /**Un Observer sur le JoueurCourant. */
+    // private Observer unObserverSurJoueur;
+
     /**Cinq. */
     public static final int CINQ = 5;
     /**Neuf. */
@@ -64,14 +66,15 @@ public class TestJeuReel {
     @Before
     public void setUp() {
         // creer une partie de 4 joueurs (Pascal, Emanuel, Gabriel, Yann)
-        this.aJeu = new JeuReel(this.CINQ);
+        this.aJeu = new JeuReel(CINQ);
         this.unJoueur = new Joueur("Emanuel", 0);
-        unJeuA5Joueurs = new JeuReel(5);
-        this.unJeuAvecUnMonde = new JeuReel(5);
+        unJeuA5Joueurs = new JeuReel(CINQ);
+        this.unJeuAvecUnMonde = new JeuReel(CINQ);
         this.unMonde = new Monde(CINQ);
         this.unJeuAvecUnMonde.setMonde(this.unMonde);
-        this.unObserverSurJoueur = new Observer();
-        this.unObserverSurTour = new Observer();
+
+        // this.unObserverSurJoueur = new Observer();
+        // this.unObserverSurTour = new Observer();
 
         this.j1 = new Joueur("Gabriel", 0);
         this.unJeuA2Joueurs.ajouterJoueur(this.j1);
@@ -248,7 +251,7 @@ public class TestJeuReel {
      * Nombre de Tour. */
     @Test(expected = IllegalArgumentException.class)
     public void testerRobustesseAddNbTourObserver() {
-        this.aJeu.addJoueurCourantObserver(null);
+        this.aJeu.addNbTourObserver(null);
     }
 
     /**Tester la robustesse de l'ajout de d'observer sur le

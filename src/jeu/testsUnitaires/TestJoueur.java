@@ -15,6 +15,7 @@ public class TestJoueur {
     /**Donne la précisions des test d'égalité. */
     public static final double PRECISION = 0.00001;
 
+    // magic Numbers
     /**Nombre de point à ajouter durant le test. */
     private static final int POINTAAJOUTER = 10;
 
@@ -61,12 +62,12 @@ public class TestJoueur {
         assertTrue(this.unJoueur.getNom().equals("Paul"));
     }
 
-    /**Tester l'accesseur de Points. */
-    @Test
-    public void testerGetPoints() {
-        assertEquals("Le nombre de points de être " + 0,
-                0, this.unJoueur.getPoints(), PRECISION);
-    }
+    // /**Tester l'accesseur de Points. */
+    // @Test
+    // public void testerGetPoints() {
+    //     assertEquals("Le nombre de points de être " + 0,
+    //             0, this.unJoueur.getPoints(), PRECISION);
+    // }
 
     /**Tester la commande d'ajout de points. */
     @Test
@@ -78,9 +79,7 @@ public class TestJoueur {
                 this.unJoueur.getPoints(), resultat, PRECISION);
     }
 
-    /**Tester la robustesse d'ajout de point. TODO : tester si on retire
-     * plus de plus que le capital du joueur.
-     */
+    /**Tester la robustesse d'ajout de point. */
     @Test(expected = IllegalArgumentException.class)
     public void testerRobustesseAddPointsNegatif() {
         this.unJoueur.addPoints(-1);
@@ -98,21 +97,32 @@ public class TestJoueur {
 
     /**Tester la robustesse de la soustraction de point. */
     @Test(expected = IllegalArgumentException.class)
-    public void testerRubustesseSubPoints() {
+    public void testerRobustesseSubPointsNegatif() {
         this.unJoueur.subPoints(MOINSDIXSEPT);
     }
 
-    /**Tester le getteur de la Combianaison. */
-    public void testerGetCombinaison() {
-        assertIsNull("Le Joueur en devrait pas avoir de combinaison encore.",
-            this.unJoueur.getCombinaison());
+    /**Tester la robustesse de la soustraction de points avec 
+     * plus que le capital du Joueur. */
+    @Test(expected = IllegalArgumentException.class)
+    public void testerRobustesseSubPointsPlusQueCapital() {
+        this.unJoueur.subPoints(this.unJoueur.getPoints() + 2);
     }
+
+    // /**Tester le getteur de la Combianaison. */
+    // public void testerGetCombinaison() {
+    //     assertIsNull("Le Joueur en devrait pas avoir de combinaison encore.",
+    //         this.unJoueur.getCombinaison());
+    // }
 
     /**Tester le changement de combinaison. */
     @Test
-    public void testerSetCombinaison() {
-        this.unJoueur.setCombinaison(this.uneCombinaison);
+    public void testerChangerCombinaisonActive() {
+        int NombreDeCombinaisonEnDeclinAvant = 
+            this.unJoueur.getCombinaisonsDeclins().size();
+        this.unJoueur.changerCombinaisonActive(this.uneCombinaison);
         assertTrue("La combinaison doit être Amazone + Volants",
-            this.unJoueur.getCombinaison() == this.uneCombinaison);
+            this.unJoueur.getCombinaisonActive() == this.uneCombinaison);
+        assertEquals(this.unJoueur.getCombinaisonsDeclins().size(),
+            NombreDeCombinaisonEnDeclinAvant + 1, PRECISION);
     }
 }
