@@ -26,6 +26,7 @@ import ui.views.CaseView;
 import java.util.Observer;
 import java.util.Scanner;
 
+@SuppressWarnings("deprecation")
 public class ActionsJoueur extends JPanel implements Observer {
 
 	/**Le jeu dans lequel le joueur est. */
@@ -37,7 +38,6 @@ public class ActionsJoueur extends JPanel implements Observer {
 	/**Les boutons disponibles */
 	JButton declinBtn;
 	JButton ajouterBatimentBtn;
-	JButton etatAttaque;
 	JButton attaquerCase;
 	JButton placerPion;
 	JButton redeployement;
@@ -65,11 +65,6 @@ public class ActionsJoueur extends JPanel implements Observer {
 		ajouterBatimentBtn = new JButton("Ajouter un batiment");
 		ajouterBatimentBtn.addActionListener(new ActionAjouterBatiment());
 		super.add(ajouterBatimentBtn);
-
-		// A mettre à part avec les boutons pour changer d'état
-		etatAttaque = new JButton("Attaquer");
-		etatAttaque.addActionListener(new ActionEtatAttaque());
-		super.add(etatAttaque);
 
 		attaquerCase = new JButton("Conquérir");
 		attaquerCase.addActionListener(new ActionAttaquerCase());
@@ -206,13 +201,6 @@ public class ActionsJoueur extends JPanel implements Observer {
 		}
 	}
 
-	/**Passage dans l'état Attaque. */
-	private final class ActionEtatAttaque implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent evt) {
-			jeu.setEtatJoueur(JoueurState.ATTAQUE);
-		}
-	}
 
 	public void update(java.util.Observable o, Object arg) {
 		JoueurState etat = this.jeu.getJoueurCourant().getEtat();
@@ -226,12 +214,8 @@ public class ActionsJoueur extends JPanel implements Observer {
 		boolean batimentBtnActif = etat != JoueurState.CHOIX_COMBINAISON;
 		this.ajouterBatimentBtn.setEnabled(batimentBtnActif);
 
-		// Actualisation bouton Attaque
-		boolean etatAttaqueBtnActif = etat == JoueurState.DEBUT_TOUR;
-		this.etatAttaque.setEnabled(etatAttaqueBtnActif);
-
 		// Actualisation bouton Conquerir
-		boolean conquerirBtnActif = (etat == JoueurState.ATTAQUE) && (pionsEnMain >= 2);
+		boolean conquerirBtnActif = (etat == JoueurState.ATTAQUE || etat == JoueurState.DEBUT_TOUR) && (pionsEnMain >= 2);
 		this.attaquerCase.setEnabled(conquerirBtnActif);
 
 		// Actualisation bouton Redeployement
