@@ -6,11 +6,13 @@ import javax.swing.*;
 
 import jeu.Case;
 import jeu.Jeu;
+import jeu.JeuState;
 import jeu.batiments.TypesBatiments;
 import jeu.exceptions.CoupInvalideException;
 import jeu.Monde;
 import jeu.Combinaison;
 import jeu.Joueur;
+import jeu.JoueurState;
 import jeu.peuples.Peuple;
 import jeu.pouvoirs.Pouvoir;
 import jeu.peuples.TypesPeuples;
@@ -21,15 +23,25 @@ import jeu.TypesSymboles;
 import ui.selecteur.Selecteur;
 import ui.views.CaseView;
 
+import java.util.Observer;
 import java.util.Scanner;
 
-public class ActionsJoueur extends JPanel {
+public class ActionsJoueur extends JPanel implements Observer {
 
 	/**Le jeu dans lequel le joueur est. */
 	private Jeu jeu;
 
 	/**Le sélecteur de case du jeu. */
 	private Selecteur<CaseView> selecteurCase;
+
+	/**Les boutons disponibles */
+	JButton declinBtn;
+	JButton ajouterBatimentBtn;
+	JButton etatAttaque;
+	JButton attaquerCase;
+	JButton placerPion;
+	JButton redeployement;
+	JButton finTourBtn;
 
 	/**
 	 * Construire le contrôleur du Joueur.
@@ -38,33 +50,42 @@ public class ActionsJoueur extends JPanel {
 	 */
 	public ActionsJoueur(Jeu jeu, Selecteur<CaseView> selecteurCase) {
 		super();
+        jeu.ajouterObservateurJoueurCourant(this);
+
 		this.jeu = jeu;
 		this.selecteurCase = selecteurCase;
 
 		super.setLayout(new FlowLayout());
 		super.setBorder(BorderFactory.createTitledBorder("Actions du Joueur"));
 
-		JButton declinBtn = new JButton("Passer en déclin");
+		declinBtn = new JButton("Passer en déclin");
 		declinBtn.addActionListener(new ActionDeclin());
 		super.add(declinBtn);
 
-		JButton ajouterBatimentBtn = new JButton("Ajouter un batiment");
+		ajouterBatimentBtn = new JButton("Ajouter un batiment");
 		ajouterBatimentBtn.addActionListener(new ActionAjouterBatiment());
 		super.add(ajouterBatimentBtn);
 
-		JButton attaquerCase = new JButton("Attaquer");
+		// A mettre à part avec les boutons pour changer d'état
+		etatAttaque = new JButton("Attaquer");
+		etatAttaque.addActionListener(new ActionEtatAttaque());
+		super.add(etatAttaque);
+
+		attaquerCase = new JButton("Conquérir");
 		attaquerCase.addActionListener(new ActionAttaquerCase());
 		super.add(attaquerCase);
 
-		JButton placerPion = new JButton("Placer un pion");
+		placerPion = new JButton("Placer un pion");
 		placerPion.addActionListener(new ActionPlacerPion());
 		super.add(placerPion);
 
-		JButton redeployement = new JButton("Redéployement");
+		// A mettre à part avec les boutons pour changer d'état
+		redeployement = new JButton("Redéployement");
 		redeployement.addActionListener(new ActionRedeployement());
 		super.add(redeployement);
 
-		JButton finTourBtn = new JButton("Fin du Tour");
+		// A mettre à part avec les boutons pour changer d'état
+		finTourBtn = new JButton("Fin du Tour");
 		finTourBtn.addActionListener(new ActionFinirTour());
 		super.add(finTourBtn);
 	}
@@ -183,5 +204,52 @@ public class ActionsJoueur extends JPanel {
 		public void actionPerformed(ActionEvent evt) {
 			jeu.redeployement();
 		}
+	}
+
+	/**Passage dans l'état Attaque. */
+	private final class ActionEtatAttaque implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent evt) {
+			jeu.setEtatJoueur(JoueurState.ATTAQUE);
+		}
+	}
+
+	public void update(java.util.Observable o, Object arg) {
+		JoueurState etat = this.jeu.getJoueurCourant().getEtat();
+		int pionsEnMain = jeu.getJoueurCourant().getCombinaisonActive().getNbPionsEnMain();
+
+		// Actualisation bouton déclin
+		boolean declinBtnActif = etat == JoueurState.DEBUT_TOUR;
+		this.declinBtn.setEnabled(declinBtnActif);
+
+		// Actualisation bouton batiment
+		boolean batimentBtnActif = etat != JoueurState.CHOIX_COMBINAISON;
+		this.ajouterBatimentBtn.setEnabled(batimentBtnActif);
+
+		// Actualisation bouton Attaque
+		boolean etatAttaqueBtnActif = etat == JoueurState.DEBUT_TOUR;
+		this.etatAttaque.setEnabled(etatAttaqueBtnActif);
+
+		// Actualisation bouton Conquerir
+		boolean conquerirBtnActif = (etat == JoueurState.ATTAQUE) && (pionsEnMain >= 2);
+		this.attaquerCase.setEnabled(conquerirBtnActif);
+
+		// Actualisation bouton Redeployement
+		boolean redeployementBtnActif = (etat == JoueurState.ATTAQUE)
+			|| (etat == JoueurState.REDEPLOYMENT);
+		this.redeployement.setEnabled(redeployementBtnActif);
+
+		// Actualisation bouton placer pion
+		boolean placerPionBtnActif = ((etat == JoueurState.ATTAQUE)
+			|| (etat == JoueurState.REDEPLOYMENT))
+			&& pionsEnMain > 0;
+		this.placerPion.setEnabled(placerPionBtnActif);
+
+		// Actualisation bouton Fin de tour
+		boolean finTourBtnActif = (etat == JoueurState.ATTAQUE
+			|| etat == JoueurState.REDEPLOYMENT)
+			&& pionsEnMain == 0;
+		this.finTourBtn.setEnabled(finTourBtnActif);
+
 	}
 }

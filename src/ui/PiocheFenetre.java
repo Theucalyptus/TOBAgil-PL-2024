@@ -5,10 +5,14 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import jeu.Combinaison;
+import jeu.Jeu;
+import jeu.JoueurState;
 import jeu.peuples.Amazones;
 import jeu.peuples.Elfes;
 import jeu.pouvoirs.Alchimistes;
 import jeu.pouvoirs.Volants;
+import ui.PiocheFenetre.ActionQuitter;
+import ui.PiocheFenetre.MouseEventHandler;
 import ui.views.CombinaisonView;
 
 
@@ -20,11 +24,15 @@ public class PiocheFenetre {
     /** La vue de la combinaison sélectionner de la pioche. */
     private CombinaisonView selectedClass = null;
 
+    /** Le jeu affiché. */
+    private final Jeu jeu;
+
     /** La fenêtre. */
     private JFrame fenetre;
 
     /** Construit une fenêtre affichant la pioche. */
-    public PiocheFenetre() {
+    public PiocheFenetre(Jeu jeu) {
+        this.jeu = jeu;
         this.fenetre = new JFrame("SmallWorld - Pioche");
         this.fenetre.setMinimumSize(new Dimension(800, 600));
         Container contentPane = this.fenetre.getContentPane();
@@ -66,6 +74,7 @@ public class PiocheFenetre {
                 System.out.println("AUCUNE CLASSE SELECTIONNE - REESSAYER !");
             } else {
                 System.out.println("OK - combinaison selectionne");
+                jeu.setEtatJoueur(JoueurState.DEBUT_TOUR);
                 fenetre.dispose();
             }
 		}
