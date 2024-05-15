@@ -26,20 +26,22 @@ public class PiocheFenetre {
     private JFrame fenetre;
     private Map<CombinaisonView, Integer> combinaisonIndexMap = new HashMap<>();
 
+    private JPanel mainPanel;
+    private MouseEventHandler trace;
+
     public PiocheFenetre() {
         this.pioche = new Pioche();
         this.fenetre = new JFrame("SmallWorld - Pioche");
         this.fenetre.setMinimumSize(new Dimension(800, 600));
-        this.fenetre.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         Container contentPane = this.fenetre.getContentPane();
 
-        JPanel mainPanel = new JPanel();
+        this.mainPanel = new JPanel();
         contentPane.add(mainPanel);
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 
-		MouseEventHandler trace = new MouseEventHandler();
+		this.trace = new MouseEventHandler();
 
-        updateView(mainPanel, trace);
+        updateView();
 
         //List<Combinaison> Visible = pioche.getChoix();
         //for (int i = 0; i <= Math.min(pioche.lengthPioche(), pioche.LONGUEURPIOCHE) ; i++) {
@@ -62,31 +64,32 @@ public class PiocheFenetre {
         //   mainPanel.add(entree);
         //}
         //}
-        JButton selectButton = new JButton("Selectionner");
-        selectButton.addActionListener(new ActionQuitter());
-        selectButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        mainPanel.add(selectButton);
 
         this.fenetre.pack();
         this.fenetre.setVisible(true);
-        this.fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.fenetre.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 
-    private void updateView(JPanel mainPanel, MouseEventHandler trace) {
-        mainPanel.removeAll();
+    private void updateView() {
+        this.mainPanel.removeAll();
         combinaisonIndexMap.clear();
 
         List<Combinaison> visible = pioche.getChoix();
         int maxIndex = Math.min(pioche.lengthPioche(), Pioche.LONGUEURPIOCHE);
         for (int i = 0; i < maxIndex; i++) {
             CombinaisonView entree = new CombinaisonView(visible.get(i));
-            entree.addMouseListener(trace);
-            mainPanel.add(entree);
+            entree.addMouseListener(this.trace);
+            this.mainPanel.add(entree);
             combinaisonIndexMap.put(entree, i);
         }
 
-        mainPanel.revalidate();
-        mainPanel.repaint();
+        this.mainPanel.revalidate();
+        this.mainPanel.repaint();
+
+        JButton selectButton = new JButton("Selectionner");
+        selectButton.addActionListener(new ActionQuitter());
+        selectButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        mainPanel.add(selectButton);
     }
 
 	public class ActionQuitter implements ActionListener {
@@ -99,7 +102,7 @@ public class PiocheFenetre {
                 System.out.println("OK - combinaison selectionne");
                 int indiceChoisi = combinaisonIndexMap.get(selectedClass);
                 pioche.combinaisonChoisit(indiceChoisi);
-                fenetre.dispose();
+                updateView();
             }
 		}
 	}

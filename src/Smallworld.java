@@ -11,10 +11,8 @@ import jeu.JeuReel;
 import jeu.Joueur;
 import jeu.Monde;
 import jeu.batiments.TypesBatiments;
-import jeu.peuples.Amazones;
-import jeu.peuples.Elfes;
-import jeu.pouvoirs.Alchimistes;
-import jeu.pouvoirs.Volants;
+import jeu.peuples.*;
+import jeu.pouvoirs.*;
 
 /**Classe principale de l'application.*/
 public /*final*/ class Smallworld {
