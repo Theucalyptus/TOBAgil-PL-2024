@@ -101,7 +101,7 @@ public class TestJoueur {
         this.unJoueur.subPoints(MOINSDIXSEPT);
     }
 
-    /**Tester la robustesse de la soustraction de points avec 
+    /**Tester la robustesse de la soustraction de points avec
      * plus que le capital du Joueur. */
     @Test(expected = IllegalArgumentException.class)
     public void testerRobustesseSubPointsPlusQueCapital() {
@@ -117,7 +117,7 @@ public class TestJoueur {
     /**Tester le changement de combinaison. */
     @Test
     public void testerChangerCombinaisonActive() {
-        int NombreDeCombinaisonEnDeclinAvant = 
+        int NombreDeCombinaisonEnDeclinAvant =
             this.unJoueur.getCombinaisonsDeclins().size();
         this.unJoueur.changerCombinaisonActive(this.uneCombinaison);
         assertTrue("La combinaison doit être Amazone + Volants",

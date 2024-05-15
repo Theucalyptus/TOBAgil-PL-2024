@@ -29,7 +29,7 @@ public class ActionsFenetre {
         // Ajout du controlleur pour le joueur
         contentPane.add(new ActionsJeu(jeu));
         contentPane.add(new ActionsJoueur(jeu, selecteurCase));
-        
+
         this.fenetre.pack();
         this.fenetre.setVisible(true);
         this.fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
