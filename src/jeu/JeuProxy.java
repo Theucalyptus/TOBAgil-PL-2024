@@ -70,16 +70,15 @@ public class JeuProxy implements Jeu {
             "Le joueur n'a pas accès à cette méthode.");
     }
 
-    // /**Lancer une execption si la méthode est appelée.
-    //  * @param obs L'observer que l'on veut ajouter
-    //  * @throws OperationInterditeException Si la méthode est appelé.
-    //  */
-    // @Override
-    // public void addJoueurCourantObserver(Observer obs) {
-    //     throw new OperationInterditeException(
-    //         "Le joueur n'a pas accès à cette méthode.");
-    // }
-
+    /**Lancer une execption si la méthode est appelée.
+     * @param obs L'observer que l'on veut ajouter
+     * @throws OperationInterditeException Si la méthode est appelé.
+     */
+    @Override
+    public void ajouterObservateurJoueurCourant(Observer obs) {
+        throw new OperationInterditeException(
+            "Le joueur n'a pas accès à cette méthode.");
+    }
     
     // /**Lancer une exeption si le joueur appele cette méthode.
     //  * @param obs l'observer à ajouter.
@@ -90,7 +89,6 @@ public class JeuProxy implements Jeu {
     //     throw new OperationInterditeException(
     //         "Le joueur n' a pas accès à cette méthode.");
     // }
-
     
     /**Lancer une exepction si le joueur appele la méthode.
      * @param leNouveauMonde le nouveau monde par lequel on remplace l'ancien.
@@ -144,4 +142,5 @@ public class JeuProxy implements Jeu {
     public JeuState getEtat() {
         return this.impl.getEtat();
     }   
+
 }

@@ -49,6 +49,12 @@ public interface Jeu {
      */
     void ajouterObservateur(Observer obs);
 
+    /**
+     * Ajoute un observateur du joueur courant.
+     * @param obs L'observer à ajouter.
+     */
+    void ajouterObservateurJoueurCourant(Observer obs);
+
     /**changer la valeur du monde par une nouvelle.
      * @param leNouveauMonde la nouvelle valeur.
      */

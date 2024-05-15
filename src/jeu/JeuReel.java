@@ -48,6 +48,9 @@ public class JeuReel extends Observable implements Jeu {
     /** Indique le statut de la partie. */
     private JeuState etat;
 
+    /** Observable du joueur courant. */
+    private JoueurCourantObs joueurCourantObs;
+
     // Constructeur
 
     /**Construire un Jeu Réel.
@@ -72,6 +75,7 @@ public class JeuReel extends Observable implements Jeu {
         this.joueursIter = null;
         this.nombreJoueurs = nbJoueurs;
         this.etat = JeuState.PAS_COMMENCEE;
+        this.joueurCourantObs = new JoueurCourantObs(this);
     }
 
 
@@ -114,6 +118,12 @@ public class JeuReel extends Observable implements Jeu {
     public void ajouterObservateur(Observer obs) {
         super.addObserver(obs);
     }
+
+    @Override
+    public void ajouterObservateurJoueurCourant(Observer obs) {
+        this.joueurCourantObs.addObserver(obs);
+    }
+
 
     @Override
     public int getNombreTourTotal() {
@@ -283,7 +293,9 @@ public class JeuReel extends Observable implements Jeu {
     //Se lance au debut du tour d'un joueur
     private void debutTour() {
         System.out.println("Début du tour de " + this.joueurCourant.getNom());
+        // TODO logique màj de l'état du joueur
         recupPions();
+        this.joueurCourantObs.notifierChangement();
     }
 
     private void recupPions() {
@@ -299,6 +311,7 @@ public class JeuReel extends Observable implements Jeu {
         }
         // ajout des pions récupérés à la main du joueur
         joueurCourant.getCombinaisonActive().setNbPionsEnMain(pionsARecuperer + joueurCourant.getCombinaisonActive().getNbPionsEnMain());
+        this.joueurCourantObs.notifierChangement();
     }
 
     /** Pour attaquer une case choisie*/
@@ -344,6 +357,7 @@ public class JeuReel extends Observable implements Jeu {
             //exception case non atteignable (pas de pions sur une case voisine)
             System.out.println("Case non atteignable.");
         }
+        this.joueurCourantObs.notifierChangement();
     }
 
     public void placerPions(Case maCase, int nbPions) {
@@ -361,6 +375,7 @@ public class JeuReel extends Observable implements Jeu {
         } else {
             System.out.println("Cette case ne vous appartient pas");
         }
+        this.joueurCourantObs.notifierChangement();
     }
 
     private void notifierModifs() {
@@ -372,7 +387,8 @@ public class JeuReel extends Observable implements Jeu {
     @Override
     public void redeployement() {
         recupPions();
-        // passe le joueur dans l'état redéployement.
+        this.joueurCourant.setEtat(JoueurState.REDEPLOYMENT);
+        this.joueurCourantObs.notifierChangement();
     }
 
     @Override
