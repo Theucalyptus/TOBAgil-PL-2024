@@ -178,15 +178,6 @@ public class JeuReel extends Observable implements Jeu {
         this.etat = newEtat;
     }
 
-    /**
-     * Changer la valeur du champs enCours par la valeur en argument.
-     * @param enCours La nouvelle valeur de enCours.
-     */
-    public void setEtatJoueur(JoueurState newEtat) {
-        this.joueurCourant.setEtat(newEtat);
-        this.joueurCourantObs.notifierChangement();
-    }
-
 
 
     /**Actualiser le nombre de tour de la partie en fonction du
@@ -327,6 +318,10 @@ public class JeuReel extends Observable implements Jeu {
 
     /** Pour attaquer une case choisie*/
     public void attaquerCase(Case maCase) {
+        if (joueurCourant.getEtat() == JoueurState.DEBUT_TOUR) {
+            joueurCourant.setEtat(JoueurState.ATTAQUE);
+        }
+
         //checker si la case est atteignable (bordure etc)
         if (maCase.estAtteignable(joueurCourant)) {
             if (maCase.getPrenable()) { //Boolean et pas boolean
