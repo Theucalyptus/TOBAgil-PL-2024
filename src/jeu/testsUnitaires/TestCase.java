@@ -29,8 +29,10 @@ public class TestCase {
     /**Mise en place du test. */
     @Before
     public void setUp() {
-        this.uneCase = new Case(1, 1, TypesRegions.COLLINE, null, TypesSymboles.AUCUN, false);
-        this.uneCase2 = new Case(1, 1, TypesRegions.COLLINE, null, TypesSymboles.AUCUN, true);
+        this.uneCase = new Case(1, 1, TypesRegions.COLLINE, null,
+            TypesSymboles.AUCUN, false);
+        this.uneCase2 = new Case(1, 1, TypesRegions.COLLINE, null,
+            TypesSymboles.AUCUN, true);
 
     }
 
@@ -66,7 +68,7 @@ public class TestCase {
 
     /**Tester la Robustesse du constructeur sur le deuxième argument. */
     @Test(expected = IllegalArgumentException.class)
-    public void testerRobustesseConstructeurjNégatif() {
+    public void testerRobustesseConstructeurNegatif() {
         new Case(1,
             NOMBRENEGATIF,
             TypesRegions.CHAMP,

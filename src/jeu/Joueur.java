@@ -49,12 +49,16 @@ public class Joueur {
         return this.pointsVictoire;
     }
 
-    /**Obtenir l'état d'un joueur. */
+    /**Obtenir l'état d'un joueur.
+     * @return l'état dans lequel est le joueur.
+     */
     public JoueurState getEtat() {
         return this.etat;
     }
 
-    /**Définit l'état d'un joueur. */
+    /**Définit l'état d'un joueur.
+     * @param nouvelEtat le nouvel état du joueur.
+     */
     public void setEtat(JoueurState nouvelEtat) {
         this.etat = nouvelEtat;
     }
@@ -78,8 +82,10 @@ public class Joueur {
      *@param nouvelleCombinaison du joueur.
     */
     public void changerCombinaisonActive(Combinaison nouvelleCombinaison) {
-        if (this.combinaisonActive != null && this.combinaisonActive.getDeclin() == false) {
-            throw new OperationInterditeException("Combinaison actuelle pas en déclin !");
+        if (this.combinaisonActive != null 
+                && this.combinaisonActive.getDeclin() == false) {
+            throw new OperationInterditeException(
+                "Combinaison actuelle pas en déclin !");
         }
         if(this.combinaisonActive != null) {
             this.combinaisonsDeclins.add(this.combinaisonActive);
