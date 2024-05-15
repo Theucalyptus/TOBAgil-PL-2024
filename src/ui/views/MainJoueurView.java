@@ -18,6 +18,7 @@ import javax.swing.SwingUtilities;
 import jeu.Combinaison;
 import jeu.Jeu;
 import jeu.Joueur;
+import jeu.JoueurCourantObs;
 import ui.utils.ImageFactory;
 
 @SuppressWarnings("deprecation")
@@ -41,7 +42,7 @@ public class MainJoueurView extends JPanel implements Observer {
      */
     public MainJoueurView(Jeu jeu) {
         super();
-        jeu.ajouterObservateur(this);
+        jeu.ajouterObservateurJoueurCourant(this);
         super.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
 
@@ -162,8 +163,9 @@ public class MainJoueurView extends JPanel implements Observer {
 
     @Override
     public void update(Observable arg0, Object arg1) {
-        Jeu jeu = (Jeu)arg0;
-        this.setJoueur(jeu.getJoueurCourant());
+        JoueurCourantObs obs = (JoueurCourantObs)arg0;
+        Joueur joueurCourant = (Joueur)arg1;
+        this.setJoueur(joueurCourant);
         SwingUtilities.getWindowAncestor(this).pack();
     }
 

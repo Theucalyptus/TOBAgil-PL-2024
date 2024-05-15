@@ -119,4 +119,10 @@ public class JeuProxy implements Jeu {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'redeployement'");
     }
+
+    @Override
+    public void ajouterObservateurJoueurCourant(Observer obs) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'ajouterObservateurJoueurCourant'");
+    }
 }
