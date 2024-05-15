@@ -4,18 +4,24 @@ import java.awt.BorderLayout;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import jeu.Combinaison;
+import jeu.Jeu;
 import jeu.Joueur;
 import ui.utils.ImageFactory;
 
-public class MainJoueurView extends JPanel {
+@SuppressWarnings("deprecation")
+public class MainJoueurView extends JPanel implements Observer {
 
     /** Le label des informations sur le joueur. */
     private JPanel informationsPnl;
@@ -33,8 +39,9 @@ public class MainJoueurView extends JPanel {
     /**
      * Construit la vue d'un joueur.
      */
-    public MainJoueurView() {
+    public MainJoueurView(Jeu jeu) {
         super();
+        jeu.ajouterObservateur(this);
         super.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
 
@@ -151,6 +158,13 @@ public class MainJoueurView extends JPanel {
             this.jeton10.setNombre(nb10);
 
         }
+    }
+
+    @Override
+    public void update(Observable arg0, Object arg1) {
+        Jeu jeu = (Jeu)arg0;
+        this.setJoueur(jeu.getJoueurCourant());
+        SwingUtilities.getWindowAncestor(this).pack();
     }
 
 }

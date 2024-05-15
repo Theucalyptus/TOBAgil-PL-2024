@@ -3,26 +3,24 @@ package jeu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Observable;
 import java.util.Observer;
-
-import javax.swing.GroupLayout.Group;
 
 import jeu.exceptions.JoueurDejaDansLaPartieException;
 import jeu.exceptions.NombreJoueurIncorrectException;
 import jeu.exceptions.PartieEnCoursException;
+import jeu.exceptions.PartiePasEnCoursException;
 import jeu.exceptions.PartiePleineException;
 import jeu.peuples.Peuple;
 import jeu.peuples.TypesPeuples;
 import jeu.pouvoirs.Pouvoir;
 import jeu.pouvoirs.TypesPouvoirs;
-import observables.JoueurCourantObs;
-import observables.NombreTourObs;
 
 /**
  * Classe représentant une partie de jeu.
  */
 @SuppressWarnings("deprecation")
-public class JeuReel implements Jeu {
+public class JeuReel extends Observable implements Jeu{
 
     // atributs
 
@@ -47,14 +45,8 @@ public class JeuReel implements Jeu {
     /** Le plateau. */
     private Monde monde;              // Le plateau du monde
 
-    /** Indique si la partie est encore (pas commencée ou pas finies). */
-    private Boolean enCours = false;
-
-    /** Permet de notifier lorsque le joueur courant change. */
-    private JoueurCourantObs joueurCourantObs;
-
-    /** Permet de notifier lorsque le numero du tour change. */
-    private NombreTourObs nbTourObs;
+    /** Indique le statut de la partie. */
+    private JeuState etat;
 
     // Constructeur
 
@@ -74,14 +66,12 @@ public class JeuReel implements Jeu {
     private JeuReel(int nbJoueurs, Monde leMonde) {
         this.joueurs = new ArrayList<>();
         this.monde = leMonde;
-        this.enCours = false;
         this.nbToursTotals = 0;
         this.noTour = 1;
         this.joueurCourant = null;
         this.joueursIter = null;
-        this.joueurCourantObs = new JoueurCourantObs();
-        this.nbTourObs = new NombreTourObs();
         this.nombreJoueurs = nbJoueurs;
+        this.etat = JeuState.PAS_COMMENCEE;
     }
 
 
@@ -121,15 +111,9 @@ public class JeuReel implements Jeu {
     } */
 
     @Override
-    public void addJoueurCourantObserver(Observer obs) {
-        this.joueurCourantObs.addObserver(obs);
+    public void ajouterObservateur(Observer obs) {
+        super.addObserver(obs);
     }
-
-    @Override
-    public void addNbTourObserver(Observer obs) {
-        this.nbTourObs.addObserver(obs);
-    }
-
 
     @Override
     public int getNombreTourTotal() {
@@ -141,7 +125,7 @@ public class JeuReel implements Jeu {
      * @return Si la partie est en cours.
      */
     public boolean estEnCoursDePartie() {
-        return this.enCours;
+        return this.etat == JeuState.EN_COURS;
     }
 
     // commandes
@@ -149,7 +133,7 @@ public class JeuReel implements Jeu {
     @Override
     public void setNumeroTour(int newNoTour) {
         this.noTour = newNoTour;
-        this.nbTourObs.notifyNombreTour();
+        this.notifierModifs();
     }
 
     /**
@@ -161,7 +145,7 @@ public class JeuReel implements Jeu {
      */
     public void setJoueurCourant(Joueur joueurCourant) {
         this.joueurCourant = joueurCourant;
-        this.joueurCourantObs.notifyJoueurCourant();
+        this.notifierModifs();
     }
 
     @Override
@@ -178,8 +162,8 @@ public class JeuReel implements Jeu {
      * Changer la valeur du champs enCours par la valeur en argument.
      * @param enCours La nouvelle valeur de enCours.
      */
-    public void setEnCours(boolean enCours) {
-        this.enCours = enCours;
+    private void setEtat(JeuState newEtat) {
+        this.etat = newEtat;
     }
 
     /**Actualiser le nombre de tour de la partie en fonction du
@@ -232,15 +216,17 @@ public class JeuReel implements Jeu {
      */
     @Override
     public void lancerPartie() {
-        if (this.enCours) {
+        if (this.etat == JeuState.EN_COURS || this.etat == JeuState.TERMINEE) {
             throw new PartieEnCoursException();
         }
-        this.enCours = true;
+
+        this.setEtat(JeuState.EN_COURS);
+        this.joueursIter = this.joueurs.listIterator();
+        this.setJoueurCourant(this.joueursIter.next()); // la position est importante !
         this.majNombreToursTotals();
         this.setNumeroTour(1);
-        this.joueursIter = this.joueurs.listIterator();
-        this.setJoueurCourant(this.joueursIter.next());
         this.debutTour();
+        this.notifierModifs();
     }
 
     /** Ajouter le nombre de points de victoire au joueur. */
@@ -265,36 +251,38 @@ public class JeuReel implements Jeu {
      */
     @Override
     public void passerTour() {
-        if (this.enCours) {
+
+        if (this.estEnCoursDePartie()) {
             // Si le joueur a bien posé tout ses pions.
             if(joueurCourant.getCombinaisonActive().getNbPionsEnMain() == 0) {
                 // Actions de fin de tour
                 this.ajouterPtsVictoire();
-
-                // Passage au tour suivant
-                if (this.joueursIter.hasNext()) {
-                    this.setJoueurCourant(this.joueursIter.next());
-                } else {
-                    this.joueursIter = this.joueurs.listIterator();
-                    this.setNumeroTour(this.getNumeroTour() + 1);
-                    this.setJoueurCourant(this.joueursIter.next());
-                }
-                if (this.getNumeroTour() > this.getNombreTourTotal()) {
-                    this.enCours = false;
-                    System.out.println("");
-                }
-                debutTour();
             } else {
-                System.out.println("Vous avez encore des pions à placer");
+                System.out.println("ERREUR : tous les pions ne sont pas placés ! Pas de points attribués.");
             }
+
+            // Passage au tour suivant
+            if (this.joueursIter.hasNext()) {
+                this.setJoueurCourant(this.joueursIter.next());
+            } else {
+                this.joueursIter = this.joueurs.listIterator();
+                this.setNumeroTour(this.getNumeroTour() + 1);
+                this.setJoueurCourant(this.joueursIter.next());
+            }
+            if (this.getNumeroTour() > this.getNombreTourTotal()) {
+                this.setEtat(JeuState.TERMINEE);
+                System.out.println("Fin de la partie !");
+            }
+            debutTour();
         } else {
             System.out.println("Partie non-commencé ou terminée. Abandon !");
+            throw new PartiePasEnCoursException();
         }
     }
 
     //Se lance au debut du tour d'un joueur
     private void debutTour() {
-        System.out.println("Début du tour de " + joueurCourant.getNom());
+        System.out.println("Début du tour de " + this.joueurCourant.getNom());
         recupPions();
     }
 
@@ -372,6 +360,17 @@ public class JeuReel implements Jeu {
         } else {
             System.out.println("Cette case ne vous appartient pas");
         }
+    }
+
+    private void notifierModifs() {
+        super.setChanged();
+        super.notifyObservers();
+        super.clearChanged();
+    }
+
+    @Override
+    public JeuState getEtat() {
+        return this.etat;
     }
 
     public void redeployement() {

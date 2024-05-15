@@ -44,16 +44,10 @@ public interface Jeu {
     void setNumeroTour(int numero);
 
     /**
-     * Ajoute un observateur à l'observable du joueur courant.
+     * Ajoute un observateur.
      * @param obs L'observer à ajouter.
      */
-    void addJoueurCourantObserver(Observer obs);
-
-    /**
-     * Ajoute un observateur au nombre de tour.
-     * @param obs L'observer à ajouter.
-     */
-    void addNbTourObserver(Observer obs);
+    void ajouterObservateur(Observer obs);
 
     /**changer la valeur du monde par une nouvelle.
      * @param leNouveauMonde la nouvelle valeur.
@@ -85,4 +79,10 @@ public interface Jeu {
     void placerPions(Case laCase, int nbPions);
 
     void redeployement();
+
+    /**
+     * Permet d'obtenier l'état de la partie.
+     * @return l'état courant de la partie
+     */
+    JeuState getEtat();
 }

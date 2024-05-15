@@ -38,7 +38,7 @@ public class MainMondeFenetre implements Observer {
      */
     public MainMondeFenetre(Jeu jeu, Selecteur<CaseView> selecteurCase) {
         this.jeu = jeu;
-        this.jeu.addNbTourObserver(this);
+        this.jeu.ajouterObservateur(this);
         this.view = new MainMondeView(jeu.getMonde(), selecteurCase);
 
         this.fenetre = new JFrame(NOM);

@@ -13,7 +13,7 @@ public class JeuProxy implements Jeu {
      * @throws OperationInterditeException Si la méthode est appelé.
      */
     @Override
-    public void addJoueurCourantObserver(Observer obs) {
+    public void ajouterObservateur(Observer obs) {
         throw new OperationInterditeException(
             "Le joueur n'a pas accès à cette méthode.");
     }
@@ -99,16 +99,6 @@ public class JeuProxy implements Jeu {
             "Un joueur n'a pas accès a cette commande.");
     }
 
-    /**Lancer une exeption si le joueur appele cette méthode.
-     * @param obs l'observer à ajouter.
-     * @throws OperationInterditeException Si la méthode est appelée.
-     */
-    @Override
-    public void addNbTourObserver(Observer obs) {
-        throw new OperationInterditeException(
-            "Le joueur n' a pas accès à cette méthode.");
-    }
-
     @Override
     public void attaquerCase(Case laCase) {
         this.impl.attaquerCase(laCase);
@@ -119,4 +109,14 @@ public class JeuProxy implements Jeu {
         throw new OperationInterditeException("Le joueur doit passer par le contrôleur !");
     }
 
+    @Override
+    public JeuState getEtat() {
+        return this.impl.getEtat();
+    }
+
+    @Override
+    public void redeployement() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'redeployement'");
+    }
 }

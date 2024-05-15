@@ -7,6 +7,7 @@ import javax.swing.*;
 import jeu.Case;
 import jeu.Jeu;
 import jeu.batiments.TypesBatiments;
+import jeu.exceptions.CoupInvalideException;
 import jeu.Monde;
 import jeu.Combinaison;
 import jeu.Joueur;
@@ -25,7 +26,7 @@ import java.util.Scanner;
 public class ActionsJoueur extends JPanel {
 
 	/**Le jeu dans lequel le joueur est. */
-	private final Jeu jeu;
+	private Jeu jeu;
 
 	/**Le sélecteur de case du jeu. */
 	private Selecteur<CaseView> selecteurCase;
@@ -68,56 +69,22 @@ public class ActionsJoueur extends JPanel {
 		super.add(finTourBtn);
 	}
 
-	/**On définit une action concernant le joueur dans la classe du contrôleur
-	 * correspondant. Je suis pas sûr que ce soit la meilleure option, un refactor est
-	 * probable car on risque de très vite avoir énormément de code dans ces fichiers.
-	 * En attendant, voici en gros comment on réalise la partie "Active" du controlleur,
-	 * celle qui fait vraiment avancer le jeu.
-	 * La méthode actionPerformed est appelé par un widget graphique, comme un bouton ou
-	 * autre.
-	 */
-	private final class ActionFinirTour implements ActionListener {
+
+	private void messageDialogue(ActionEvent evt, String message) {
+		JFrame fenetre = (JFrame) SwingUtilities.getWindowAncestor((JButton)evt.getSource());
+		JOptionPane.showMessageDialog(fenetre, message);
+	}
+
+	/**Classe déclenchée quand le bouton action Finir le tour est pressé. */
+	private class ActionFinirTour implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			jeu.passerTour();
 		}
 	}
 
-
-	/** La classe qui suit est semsiblement la même chose, à la différence qu'elle peut
-	 * être utilisé avec n'importe quelle widget Swing, en intéragissant avec la souris.
-	 * Il est ainsi possible de programmer des actions lorsque la souris survol le widget
-	 * ou lorsque l'utilisateur clique dessus.
-	 *
-	 * Ici, la classe suppose que le widget est de type JButton mais cela peut être
-	 * remplacé par n'importe quelle classe de widget Swing, y compris les custom comme
-	 * CaseView...
-	*/
-	private final class ActionSouris extends MouseAdapter {
-
-		public void mouseCliked(MouseEvent ev) {
-			System.out.println("Appui sur "
-					+ ((JButton) ev.getSource()).getText());
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent ev) {
-			JButton source = (JButton) ev.getSource();
-			System.out.println("Entrée dans "
-					+ source.getText());
-		}
-
-		@Override
-		public void mouseExited(MouseEvent ev) {
-			JButton source = (JButton) ev.getSource();
-			System.out.println("Sortie de "
-					+ source.getText());
-		}
-
-	}
-
 	/**Classe déclenchée quand le bouton action déclin est cliqué. */
-	private final class ActionDeclin implements ActionListener {
+	private class ActionDeclin implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			jeu.getJoueurCourant().getCombinaisonActive().passageDeclin();
@@ -125,9 +92,8 @@ public class ActionsJoueur extends JPanel {
 		}
 	}
 
-
 	/**Classe déclenchée quand le bouton ajouterBatiment est cliqué. */
-	private final class ActionAjouterBatiment implements ActionListener {
+	private class ActionAjouterBatiment implements ActionListener {
 
 		//Permet d'avoir un seul scanner en continue
 		Scanner scanner;
@@ -142,7 +108,7 @@ public class ActionsJoueur extends JPanel {
 		public void actionPerformed(ActionEvent evt) {
 			CaseView caseSelectionnee = selecteurCase.getSelection();
 			if (selecteurCase.getSelection() == null) {
-				System.out.println("Aucune case n'est sélectionnée");
+				messageDialogue(evt, "Action Impossible ! Aucune case sélectionnée.");
 			} else {
 				String input;
 				//Initialisation du type de batiment
@@ -185,12 +151,12 @@ public class ActionsJoueur extends JPanel {
 	}
 
 	/**Classe déclenchée quand le bouton attaquer case est cliqué. */
-	private final class ActionAttaquerCase implements ActionListener {
+	private class ActionAttaquerCase implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			CaseView caseSelectionnee = selecteurCase.getSelection();
 			if (selecteurCase.getSelection() == null) {
-				System.out.println("Aucune case n'est sélectionnée");
+				messageDialogue(evt, "Action Impossible ! Aucune case sélectionnée.");
 			} else {
 				System.out.println("Attaque de la case : " + caseSelectionnee.getVraieCase().getCoordonnees().toString());
 				jeu.attaquerCase(caseSelectionnee.getVraieCase());
@@ -199,12 +165,12 @@ public class ActionsJoueur extends JPanel {
 	}	
 	
 	/**Classe déclenchée quand le bouton placer pion est cliqué. */
-	private final class ActionPlacerPion implements ActionListener {
+	private class ActionPlacerPion implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			CaseView caseSelectionnee = selecteurCase.getSelection();
 			if (selecteurCase.getSelection() == null) {
-				System.out.println("Aucune case n'est sélectionnée");
+				messageDialogue(evt, "Action Impossible ! Aucune case sélectionnée.");
 			} else {
 				jeu.placerPions(caseSelectionnee.getVraieCase(), 1);
 			}
