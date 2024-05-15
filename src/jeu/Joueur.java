@@ -20,6 +20,9 @@ public class Joueur {
     /** Le Nombre de point de victoire du joueur. */
     private int pointsVictoire;
 
+    /** Le status du joueur. */
+    private JoueurState etat;
+
     /**
      * Construire un Joueur.
      * @param name Le nom du Joueur.
@@ -29,6 +32,7 @@ public class Joueur {
         this.nom = name;
         this.pointsVictoire = pointsVictoire;
         this.combinaisonsDeclins = new ArrayList<>();
+        this.etat = JoueurState.CHOIX_COMBINAISON;
     }
 
     /**Obtenir le nom du joueur .
@@ -43,6 +47,16 @@ public class Joueur {
     */
     public int getPoints() {
         return this.pointsVictoire;
+    }
+
+    /**Obtenir l'état d'un joueur. */
+    public JoueurState getEtat() {
+        return this.etat;
+    }
+
+    /**Définit l'état d'un joueur. */
+    public void setEtat(JoueurState nouvelEtat) {
+        this.etat = nouvelEtat;
     }
 
     /**Ajouter des points de victoire au joueur .

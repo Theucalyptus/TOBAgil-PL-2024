@@ -293,6 +293,7 @@ public class JeuReel extends Observable implements Jeu{
     //Se lance au debut du tour d'un joueur
     private void debutTour() {
         System.out.println("Début du tour de " + this.joueurCourant.getNom());
+        // TODO logique màj de l'état du joueur
         recupPions();
         this.joueurCourantObs.notifierChangement();
     }
@@ -389,7 +390,7 @@ public class JeuReel extends Observable implements Jeu{
 
     public void redeployement() {
         recupPions();
-        // passe le joueur dans l'état redéployement.
+        this.joueurCourant.setEtat(JoueurState.REDEPLOYMENT);
         this.joueurCourantObs.notifierChangement();
     }
 }
