@@ -26,7 +26,7 @@ public class TestGroupePion {
     private Case uneCase;
     // magic Numbers.
     /** Un Nombre Negatif. */
-    private static final int NOMBRENEGATIF = -4;    
+    private static final int NOMBRENEGATIF = -4;
     /**4. */
     private static final int QUATRE = 4;
     /**La précision des tests d'égalité. */
@@ -35,9 +35,9 @@ public class TestGroupePion {
     /**Mise en place du test. */
     @Before
     public void setUp() {
-        this.unGroupePions = new GroupePions(new Combinaison(new Amazones(), 
+        this.unGroupePions = new GroupePions(new Combinaison(new Amazones(),
             new Volants()), 10);
-        this.uneCase = new Case(1, 1, TypesRegions.MARAIS, null, TypesSymboles.AUCUN)
+        this.uneCase = new Case(1, 1, TypesRegions.MARAIS, null, TypesSymboles.AUCUN, false);
     }
 
     /**Tester le Constructeur de la classe. */
@@ -61,7 +61,7 @@ public class TestGroupePion {
     /**Tester la robustesse du Constructeur avec un nombre de Pions négatif. */
     @test(expected = IllegalArgumentException.class)
     public void testerRobustesseConstructeurNegatif() {
-        new GroupePions(new Combinaison(new HommesRats(), 
+        new GroupePions(new Combinaison(new HommesRats(),
             new DesForets()), NOMBRENEGATIF);
     }
 

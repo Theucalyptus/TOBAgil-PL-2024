@@ -11,7 +11,7 @@ public class TestPioche {
     /**Une pioche. */
     private Pioche unePioche;
     //Magic Numbers
-    
+
     /**Mise en place du test. */
     @Before
     public void setUp() {

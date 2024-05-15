@@ -188,7 +188,7 @@ public class Monde {
                 if(coordValide) {
                     maCase.ajoutVoisins(this.getCase(xVois, yVois));
                 }
-            } 
+            }
         }
     }
 
@@ -218,7 +218,7 @@ public class Monde {
                 return maCase;
             }
         }
-        
+
         // Si tout est bien développé, ne devrait jamais arriver !
         throw new RuntimeErrorException(null);
     }

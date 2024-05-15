@@ -29,8 +29,8 @@ public class TestCase {
     /**Mise en place du test. */
     @Before
     public void setUp() {
-        this.uneCase = new Case(1, 1, TypesRegions.COLLINE, null, TypesSymboles.AUCUN);
-        this.uneCase2 = new Case(1, 1, TypesRegions.COLLINE, null, TypesSymboles.AUCUN);
+        this.uneCase = new Case(1, 1, TypesRegions.COLLINE, null, TypesSymboles.AUCUN, false);
+        this.uneCase2 = new Case(1, 1, TypesRegions.COLLINE, null, TypesSymboles.AUCUN, true);
 
     }
 
@@ -45,7 +45,8 @@ public class TestCase {
                     new Amazones(),
                     new Volants()),
                 DIX),
-            TypesSymboles.AUCUN);
+            TypesSymboles.AUCUN,
+            true);
     }
 
     /**Tester la Robustesse du constructeur sur le premier argument. */
@@ -59,7 +60,8 @@ public class TestCase {
                     new Amazones(),
                     new Volants()),
                 DIX),
-            TypesSymboles.AUCUN);
+            TypesSymboles.AUCUN,
+            false);
     }
 
     /**Tester la Robustesse du constructeur sur le deuxième argument. */
@@ -73,7 +75,8 @@ public class TestCase {
                     new Amazones(),
                     new Volants()),
                 DIX),
-            TypesSymboles.AUCUN);
+            TypesSymboles.AUCUN,
+            false);
     }
 
     /**Tester la Robustesse du Constructeur sur le Troisième argument. */
@@ -87,7 +90,8 @@ public class TestCase {
                     new Amazones(),
                     new Volants()),
                 DIX),
-            TypesSymboles.AUCUN);
+            TypesSymboles.AUCUN,
+            true);
     }
 
     /**Tester la Robustesse du Constructeur sur le Cinquième argument. */
@@ -101,7 +105,8 @@ public class TestCase {
                     new Amazones(),
                     new Volants()),
                 DIX),
-            null);
+            null,
+            false);
     }
 
     /**Tester le setteur du nouveau groue de pions. */
