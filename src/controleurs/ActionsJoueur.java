@@ -7,6 +7,7 @@ import javax.swing.*;
 import jeu.Case;
 import jeu.Jeu;
 import jeu.batiments.TypesBatiments;
+import jeu.exceptions.CoupInvalideException;
 import jeu.Monde;
 import jeu.Combinaison;
 import jeu.Joueur;
@@ -25,7 +26,7 @@ import java.util.Scanner;
 public class ActionsJoueur extends JPanel {
 
 	/**Le jeu dans lequel le joueur est. */
-	private final Jeu jeu;
+	private Jeu jeu;
 
 	/**Le sélecteur de case du jeu. */
 	private Selecteur<CaseView> selecteurCase;
@@ -43,10 +44,6 @@ public class ActionsJoueur extends JPanel {
 		super.setLayout(new FlowLayout());
 		super.setBorder(BorderFactory.createTitledBorder("Actions du Joueur"));
 
-		JButton finTourBtn = new JButton("Fin du Tour");
-		finTourBtn.addActionListener(new ActionFinirTour());
-		super.add(finTourBtn);
-
 		JButton declinBtn = new JButton("Passer en déclin");
 		declinBtn.addActionListener(new ActionDeclin());
 		super.add(declinBtn);
@@ -62,145 +59,32 @@ public class ActionsJoueur extends JPanel {
 		JButton placerPion = new JButton("Placer un pion");
 		placerPion.addActionListener(new ActionPlacerPion());
 		super.add(placerPion);
+
+		JButton redeployement = new JButton("Redéployement");
+		redeployement.addActionListener(new ActionRedeployement());
+		super.add(redeployement);
+
+		JButton finTourBtn = new JButton("Fin du Tour");
+		finTourBtn.addActionListener(new ActionFinirTour());
+		super.add(finTourBtn);
 	}
 
-	/**On définit une action concernant le joueur dans la classe du contrôleur
-	 * correspondant. Je suis pas sûr que ce soit la meilleure option, un refactor est
-	 * probable car on risque de très vite avoir énormément de code dans ces fichiers.
-	 * En attendant, voici en gros comment on réalise la partie "Active" du controlleur,
-	 * celle qui fait vraiment avancer le jeu.
-	 * La méthode actionPerformed est appelé par un widget graphique, comme un bouton ou
-	 * autre.
-	 */
-	private final class ActionFinirTour implements ActionListener {
+
+	private void messageDialogue(ActionEvent evt, String message) {
+		JFrame fenetre = (JFrame) SwingUtilities.getWindowAncestor((JButton)evt.getSource());
+		JOptionPane.showMessageDialog(fenetre, message);
+	}
+
+	/**Classe déclenchée quand le bouton action Finir le tour est pressé. */
+	private class ActionFinirTour implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
-			//---------------------------------------------------------------------------
-			// Compter le nombre de points de victoires gagnés par le joueur à la fin du
-			// tour
-			//---------------------------------------------------------------------------
-
-			int pointsGagnes = 0;
-			 // obtenir le joueur dont le tour se finit
-			Joueur joueurCourant = jeu.getJoueurCourant();
-
-			Monde mondeActuel = jeu.getMonde();
-			Combinaison combinaisonJoueur = joueurCourant.getCombinaisonActive();
-			Peuple peupleJoueur = combinaisonJoueur.getPeuple();
-			Pouvoir pouvoirJoueur = combinaisonJoueur.getPouvoir();
-			// parcours de la grille de cases
-			for (int x = 0; x < mondeActuel.getDimX(); x++) {
-            	for (int y = 0; y < mondeActuel.getDimY(); y++) {
-					// on recupere la case aux coordonnees (x, y)
-					Case caseCourante = mondeActuel.getCase(x, y);
-
-					// on verifie si la case contient le peuple du joueur
-					if (caseCourante.getGroupePions().getCombinaison().getPeuple()
-							== peupleJoueur) {
-						// on ajoute un point de victoire au joueur
-						pointsGagnes++;
-						// effet special pour le peuple HUMAINS
-						if ((peupleJoueur.getType() == TypesPeuples.HUMAINS)
-								&& (caseCourante.getTypeRegion() == TypesRegions.CHAMP)
-								&& !(combinaisonJoueur.getDeclin())) {
-							pointsGagnes++;
-						}
-						// effet special pour le peuple MAGES
-						if ((peupleJoueur.getType() == TypesPeuples.MAGES)
-								&& (caseCourante.getTypeRessource()
-									== TypesSymboles.SOURCE_MAGIQUE)
-								&& !(combinaisonJoueur.getDeclin())) {
-							pointsGagnes++;
-						}
-						// effet special pour le peuple NAINS
-						if ((peupleJoueur.getType() == TypesPeuples.NAINS)
-								&& (caseCourante.getTypeRessource()
-									== TypesSymboles.MINE)) {
-							pointsGagnes++;
-						}
-						// effet special du pouvoir BATISSEURS
-						if ((pouvoirJoueur.getType() == TypesPouvoirs.BATISSEURS)
-								&& !(combinaisonJoueur.getDeclin())) {
-							pointsGagnes++;
-						}
-						// effet special du pouvoir DES_COLLINES
-						if ((pouvoirJoueur.getType() == TypesPouvoirs.DES_COLLINES)
-								&& (caseCourante.getTypeRegion()
-									== TypesRegions.COLLINE)) {
-							pointsGagnes++;
-						}
-						// effet special du pouvoir DES_FORETS
-						if ((pouvoirJoueur.getType() == TypesPouvoirs.DES_FORETS)
-								&& (caseCourante.getTypeRegion()
-									== TypesRegions.FORET)) {
-							pointsGagnes++;
-						}
-						// effet special du pouvoir DES_MARAIS
-						if ((pouvoirJoueur.getType() == TypesPouvoirs.DES_MARAIS)
-								&& (caseCourante.getTypeRegion()
-								== TypesRegions.MARAIS)) {
-							pointsGagnes++;
-						}
-						// effet special du pouvoir MARCHANDS
-						if (pouvoirJoueur.getType() == TypesPouvoirs.MARCHANDS) {
-							pointsGagnes++;
-						}
-					}
-					// effet special du pouvoir ALCHIMISTES
-					if ((pouvoirJoueur.getType() == TypesPouvoirs.ALCHIMISTES)
-							&& !(combinaisonJoueur.getDeclin())) {
-						pointsGagnes = pointsGagnes + 2;
-					}
-					// effet special du pouvoir FORTUNES
-					if ((pouvoirJoueur.getType() == TypesPouvoirs.FORTUNES)
-							&& (jeu.getNumeroTour() == 1)) {
-						pointsGagnes = pointsGagnes + 7;
-					}
-				}
-			}
-			System.out.println("Points gagnés : " + pointsGagnes);
-			// on ajoute les points gagnés au nombre de points que le joueur a déjà
-			joueurCourant.addPoints(pointsGagnes);
-
 			jeu.passerTour();
 		}
 	}
 
-
-	/** La classe qui suit est semsiblement la même chose, à la différence qu'elle peut
-	 * être utilisé avec n'importe quelle widget Swing, en intéragissant avec la souris.
-	 * Il est ainsi possible de programmer des actions lorsque la souris survol le widget
-	 * ou lorsque l'utilisateur clique dessus.
-	 *
-	 * Ici, la classe suppose que le widget est de type JButton mais cela peut être
-	 * remplacé par n'importe quelle classe de widget Swing, y compris les custom comme
-	 * CaseView...
-	*/
-	private final class ActionSouris extends MouseAdapter {
-
-		public void mouseCliked(MouseEvent ev) {
-			System.out.println("Appui sur "
-					+ ((JButton) ev.getSource()).getText());
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent ev) {
-			JButton source = (JButton) ev.getSource();
-			System.out.println("Entrée dans "
-					+ source.getText());
-		}
-
-		@Override
-		public void mouseExited(MouseEvent ev) {
-			JButton source = (JButton) ev.getSource();
-			System.out.println("Sortie de "
-					+ source.getText());
-		}
-
-	}
-
 	/**Classe déclenchée quand le bouton action déclin est cliqué. */
-	private final class ActionDeclin implements ActionListener {
+	private class ActionDeclin implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			jeu.getJoueurCourant().getCombinaisonActive().passageDeclin();
@@ -208,9 +92,8 @@ public class ActionsJoueur extends JPanel {
 		}
 	}
 
-
 	/**Classe déclenchée quand le bouton ajouterBatiment est cliqué. */
-	private final class ActionAjouterBatiment implements ActionListener {
+	private class ActionAjouterBatiment implements ActionListener {
 
 		//Permet d'avoir un seul scanner en continue
 		Scanner scanner;
@@ -225,7 +108,7 @@ public class ActionsJoueur extends JPanel {
 		public void actionPerformed(ActionEvent evt) {
 			CaseView caseSelectionnee = selecteurCase.getSelection();
 			if (selecteurCase.getSelection() == null) {
-				System.out.println("Aucune case n'est sélectionnée");
+				messageDialogue(evt, "Action Impossible ! Aucune case sélectionnée.");
 			} else {
 				String input;
 				//Initialisation du type de batiment
@@ -268,28 +151,37 @@ public class ActionsJoueur extends JPanel {
 	}
 
 	/**Classe déclenchée quand le bouton attaquer case est cliqué. */
-	private final class ActionAttaquerCase implements ActionListener {
+	private class ActionAttaquerCase implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			CaseView caseSelectionnee = selecteurCase.getSelection();
 			if (selecteurCase.getSelection() == null) {
-				System.out.println("Aucune case n'est sélectionnée");
+				messageDialogue(evt, "Action Impossible ! Aucune case sélectionnée.");
 			} else {
+				System.out.println("Attaque de la case : " + caseSelectionnee.getVraieCase().getCoordonnees().toString());
 				jeu.attaquerCase(caseSelectionnee.getVraieCase());
 			}
 		}
 	}	
 	
 	/**Classe déclenchée quand le bouton placer pion est cliqué. */
-	private final class ActionPlacerPion implements ActionListener {
+	private class ActionPlacerPion implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			CaseView caseSelectionnee = selecteurCase.getSelection();
 			if (selecteurCase.getSelection() == null) {
-				System.out.println("Aucune case n'est sélectionnée");
+				messageDialogue(evt, "Action Impossible ! Aucune case sélectionnée.");
 			} else {
 				jeu.placerPions(caseSelectionnee.getVraieCase(), 1);
 			}
+		}
+	}
+
+	/**Classe déclenchée quand le bouton redéployement est cliqué. */
+	private final class ActionRedeployement implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent evt) {
+			jeu.redeployement();
 		}
 	}
 }

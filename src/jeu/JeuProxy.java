@@ -7,7 +7,7 @@ import jeu.exceptions.OperationInterditeException;
 /**Le proxy du jeu pour éviter toute tentative de triche de la part des joueurs. */
 @SuppressWarnings("deprecation")
 public class JeuProxy implements Jeu {
-
+    
     /**L'implématation du jeu. */
     private Jeu impl;
 
@@ -65,21 +65,31 @@ public class JeuProxy implements Jeu {
      * @throws OperationInterditeException Si la méthode est appelé.
      */
     @Override
-    public void addJoueurCourantObserver(Observer obs) {
+    public void ajouterObservateur(Observer obs) {
         throw new OperationInterditeException(
             "Le joueur n'a pas accès à cette méthode.");
     }
 
+    // /**Lancer une execption si la méthode est appelée.
+    //  * @param obs L'observer que l'on veut ajouter
+    //  * @throws OperationInterditeException Si la méthode est appelé.
+    //  */
+    // @Override
+    // public void addJoueurCourantObserver(Observer obs) {
+    //     throw new OperationInterditeException(
+    //         "Le joueur n'a pas accès à cette méthode.");
+    // }
+
     
-    /**Lancer une exeption si le joueur appele cette méthode.
-     * @param obs l'observer à ajouter.
-     * @throws OperationInterditeException Si la méthode est appelée.
-     */
-    @Override
-    public void addNbTourObserver(Observer obs) {
-        throw new OperationInterditeException(
-            "Le joueur n' a pas accès à cette méthode.");
-    }
+    // /**Lancer une exeption si le joueur appele cette méthode.
+    //  * @param obs l'observer à ajouter.
+    //  * @throws OperationInterditeException Si la méthode est appelée.
+    //  */
+    // @Override
+    // public void addNbTourObserver(Observer obs) {
+    //     throw new OperationInterditeException(
+    //         "Le joueur n' a pas accès à cette méthode.");
+    // }
 
     
     /**Lancer une exepction si le joueur appele la méthode.
@@ -115,9 +125,23 @@ public class JeuProxy implements Jeu {
         this.impl.attaquerCase(laCase);
     }
 
-
+    /**Lancer une exception si cette fonction est appelé.
+     * @throws OperationInterditeException si la méthode est appelée.
+     */
     @Override
     public void placerPions(Case laCase, int nbPions) {
-        this.impl.placerPions(laCase, nbPions);
+        throw new OperationInterditeException("Le joueur doit passer par le contrôleur !");
     }
+
+
+    @Override
+    public void redeployement() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'redeployement'");
+    }
+    
+    @Override
+    public JeuState getEtat() {
+        return this.impl.getEtat();
+    }   
 }

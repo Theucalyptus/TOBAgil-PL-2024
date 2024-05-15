@@ -124,7 +124,7 @@ public class TestJeuProxy {
 
     /**Tester la robustesse d'ajouter Joueur. */
     @Test(expected = OperationInterditeException.class)
-    public void testerRobustesseAjouterJoueurTropDeJoueur() {
+    public void testerRobustesseAjouterJoueurNull() {
         this.unProxy.ajouterJoueur(null);
     }
 
@@ -169,11 +169,6 @@ public class TestJeuProxy {
     */
 
 
-    /**Tester le changement forcée du Monde. */
-    @Test(expected = OperationInterditeException.class)
-    public void testerSetMonde() {
-        this.unProxy.setMonde(unMonde);
-    }
 
     /**Tester la robustesse du changement de Monde avec une poignée nulle. */
     @Test(expected = OperationInterditeException.class)
@@ -203,22 +198,29 @@ public class TestJeuProxy {
         this.unProxy.setNumeroTour(CINQ);
     }
 
+    /**Tester la Robustesse d'ajouterObserver. */
+    @Test(expected = OperationInterditeException.class)
+    public void testerRobustesseAjouterObservateurNull() {
+        this.unProxy.ajouterObservateur(null);
+    }
 
 
+    /*
     /**Tester l'ajout de d'observer sur le
      * Joueur Courant.
-     */
+     *\/
     @Test(expected = OperationInterditeException.class)
     public void testerRobustesseAddJoueurCourant() {
         this.unProxy.addJoueurCourantObserver(null);
     }
 
     /**Tester la robustesse de l'ajout d'observer sur le
-     * Nombre de Tour. */
+     * Nombre de Tour. *\/
     @Test(expected = OperationInterditeException.class)
     public void testerRobustesseAddNbTourObserver() {
         this.unProxy.addNbTourObserver(null);
     }
+    */
 
     /*
     /**Tester si réinitialiser Joueurs vide bien la liste de Joueur.
@@ -233,9 +235,16 @@ public class TestJeuProxy {
     }
     */
 
+
+    /**Tester le changement forcée du Monde. */
+    @Test(expected = OperationInterditeException.class)
+    public void testerSetMondeAvecUnMonde() {
+        this.unProxy.setMonde(unMonde);
+    }
+
     /**Tester set monde. */
     @Test(expected = OperationInterditeException.class)
-    public void testerSetMonde() {
+    public void testerSetMondeNull() {
         this.unProxy.setMonde(null);
     }
 

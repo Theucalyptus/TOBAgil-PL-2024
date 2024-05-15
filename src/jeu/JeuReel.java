@@ -3,23 +3,24 @@ package jeu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Observable;
 import java.util.Observer;
-
-import javax.swing.GroupLayout.Group;
 
 import jeu.exceptions.JoueurDejaDansLaPartieException;
 import jeu.exceptions.NombreJoueurIncorrectException;
 import jeu.exceptions.PartieEnCoursException;
+import jeu.exceptions.PartiePasEnCoursException;
 import jeu.exceptions.PartiePleineException;
-
-import observables.JoueurCourantObs;
-import observables.NombreTourObs;
+import jeu.peuples.Peuple;
+import jeu.peuples.TypesPeuples;
+import jeu.pouvoirs.Pouvoir;
+import jeu.pouvoirs.TypesPouvoirs;
 
 /**
  * Classe représentant une partie de jeu.
  */
 @SuppressWarnings("deprecation")
-public class JeuReel implements Jeu {
+public class JeuReel extends Observable implements Jeu {
 
     // atributs
 
@@ -44,14 +45,8 @@ public class JeuReel implements Jeu {
     /** Le plateau. */
     private Monde monde;              // Le plateau du monde
 
-    /** Indique si la partie est encore (pas commencée ou pas finies). */
-    private Boolean enCours = false;
-
-    /** Permet de notifier lorsque le joueur courant change. */
-    private JoueurCourantObs joueurCourantObs;
-
-    /** Permet de notifier lorsque le numero du tour change. */
-    private NombreTourObs nbTourObs;
+    /** Indique le statut de la partie. */
+    private JeuState etat;
 
     // Constructeur
 
@@ -71,14 +66,12 @@ public class JeuReel implements Jeu {
     private JeuReel(int nbJoueurs, Monde leMonde) {
         this.joueurs = new ArrayList<>();
         this.monde = leMonde;
-        this.enCours = false;
         this.nbToursTotals = 0;
         this.noTour = 1;
         this.joueurCourant = null;
         this.joueursIter = null;
-        this.joueurCourantObs = new JoueurCourantObs();
-        this.nbTourObs = new NombreTourObs();
         this.nombreJoueurs = nbJoueurs;
+        this.etat = JeuState.PAS_COMMENCEE;
     }
 
 
@@ -118,15 +111,9 @@ public class JeuReel implements Jeu {
     } */
 
     @Override
-    public void addJoueurCourantObserver(Observer obs) {
-        this.joueurCourantObs.addObserver(obs);
+    public void ajouterObservateur(Observer obs) {
+        super.addObserver(obs);
     }
-
-    @Override
-    public void addNbTourObserver(Observer obs) {
-        this.nbTourObs.addObserver(obs);
-    }
-
 
     @Override
     public int getNombreTourTotal() {
@@ -138,7 +125,7 @@ public class JeuReel implements Jeu {
      * @return Si la partie est en cours.
      */
     public boolean estEnCoursDePartie() {
-        return this.enCours;
+        return this.etat == JeuState.EN_COURS;
     }
 
     // commandes
@@ -146,7 +133,7 @@ public class JeuReel implements Jeu {
     @Override
     public void setNumeroTour(int newNoTour) {
         this.noTour = newNoTour;
-        this.nbTourObs.notifyNombreTour();
+        this.notifierModifs();
     }
 
     /**
@@ -158,7 +145,7 @@ public class JeuReel implements Jeu {
      */
     public void setJoueurCourant(Joueur joueurCourant) {
         this.joueurCourant = joueurCourant;
-        this.joueurCourantObs.notifyJoueurCourant();
+        this.notifierModifs();
     }
 
     @Override
@@ -175,8 +162,8 @@ public class JeuReel implements Jeu {
      * Changer la valeur du champs enCours par la valeur en argument.
      * @param enCours La nouvelle valeur de enCours.
      */
-    public void setEnCours(boolean enCours) {
-        this.enCours = enCours;
+    private void setEtat(JeuState newEtat) {
+        this.etat = newEtat;
     }
 
     /**Actualiser le nombre de tour de la partie en fonction du
@@ -229,28 +216,34 @@ public class JeuReel implements Jeu {
      */
     @Override
     public void lancerPartie() {
-        if (this.enCours) {
+        if (this.etat == JeuState.EN_COURS || this.etat == JeuState.TERMINEE) {
             throw new PartieEnCoursException();
         }
-        this.enCours = true;
+
+        this.setEtat(JeuState.EN_COURS);
+        this.joueursIter = this.joueurs.listIterator();
+        this.setJoueurCourant(this.joueursIter.next()); // la position est importante !
         this.majNombreToursTotals();
         this.setNumeroTour(1);
-        this.joueursIter = this.joueurs.listIterator();
-        this.setJoueurCourant(this.joueursIter.next());
+        this.debutTour();
+        this.notifierModifs();
     }
 
     /** Ajouter le nombre de points de victoire au joueur. */
     private void ajouterPtsVictoire() {
-        int nombrePoints = 0;
-        int pointsBonus = 0;
+        //---------------------------------------------------------------------------
+        // Compter le nombre de points de victoires gagnés par le joueur à la fin du
+        // tour
+        //---------------------------------------------------------------------------
+
         // la combinaison du joueur courant
         Combinaison combinaisonJoueur = this.joueurCourant.getCombinaisonActive();
 
         // obtenir le nombre de points bonus
-        pointsBonus = combinaisonJoueur.finTour();
+        int pointsBonus = combinaisonJoueur.finTour();
 
-        nombrePoints = combinaisonJoueur.nombreGroupesPions() + pointsBonus;
-        this.joueurCourant.addPoints(nombrePoints);
+        int totalPoints = combinaisonJoueur.nombreGroupesPions() + pointsBonus;
+        this.joueurCourant.addPoints(totalPoints);
     }
 
     /**
@@ -258,11 +251,15 @@ public class JeuReel implements Jeu {
      */
     @Override
     public void passerTour() {
-        if (this.enCours) {
-            // Actions de fin de tour
-            this.ajouterPtsVictoire();
-            //this.joueurCourant.addPoints(4);
 
+        if (this.estEnCoursDePartie()) {
+            // Si le joueur a bien posé tout ses pions.
+            if(joueurCourant.getCombinaisonActive().getNbPionsEnMain() == 0) {
+                // Actions de fin de tour
+                this.ajouterPtsVictoire();
+            } else {
+                System.out.println("ERREUR : tous les pions ne sont pas placés ! Pas de points attribués.");
+            }
 
             // Passage au tour suivant
             if (this.joueursIter.hasNext()) {
@@ -273,20 +270,26 @@ public class JeuReel implements Jeu {
                 this.setJoueurCourant(this.joueursIter.next());
             }
             if (this.getNumeroTour() > this.getNombreTourTotal()) {
-                this.enCours = false;
-                System.out.println("");
+                this.setEtat(JeuState.TERMINEE);
+                System.out.println("Fin de la partie !");
             }
             debutTour();
         } else {
             System.out.println("Partie non-commencé ou terminée. Abandon !");
+            throw new PartiePasEnCoursException();
         }
     }
 
     //Se lance au debut du tour d'un joueur
     private void debutTour() {
-        int pionsARecuperer = 0;
+        System.out.println("Début du tour de " + this.joueurCourant.getNom());
+        recupPions();
+    }
 
+    private void recupPions() {
+        int pionsARecuperer = 0;
         System.out.println("Début du tour de " + joueurCourant.getNom());
+
         // Récupère tout les pions sauf 1 sur chaque case possédé par le joueur.
         for (GroupePions pions : joueurCourant.getCombinaisonActive().getPions()) {
             pionsARecuperer += pions.getNombre() - 1;
@@ -294,21 +297,34 @@ public class JeuReel implements Jeu {
 
             System.out.println("Pions récupérés");
         }
-        joueurCourant.getCombinaisonActive().setNbPionsEnMain(pionsARecuperer);
+        // ajout des pions récupérés à la main du joueur
+        joueurCourant.getCombinaisonActive().setNbPionsEnMain(pionsARecuperer + joueurCourant.getCombinaisonActive().getNbPionsEnMain());
     }
 
     /** Pour attaquer une case choisie*/
     public void attaquerCase(Case maCase) {
         //checker si la case est atteignable (bordure etc)
-        //if (maCase.estAtteignable()) {
+        if (maCase.estAtteignable(joueurCourant)) {
             if (maCase.getPrenable()) { //Boolean et pas boolean
                 Combinaison combinaisonActive = joueurCourant.getCombinaisonActive();
-                int diff = combinaisonActive.getNbPionsEnMain() - maCase.getNombreAttaquantNecessaire();
+                System.out.println("Pions en main : " + combinaisonActive.getNbPionsEnMain());
+                int attaquants = maCase.getNombreAttaquantNecessaire();
+                int diff = combinaisonActive.getNbPionsEnMain() - attaquants;
 
                 if (diff >= 0) {
-                    GroupePions newGroupe = new GroupePions(combinaisonActive, 1);
+                    // On déloge les pions adverses
+                    GroupePions anciensPions = maCase.getGroupePions();
+                    if (anciensPions != null) {
+                        Combinaison ancienneCombinaison = anciensPions.getCombinaison();
+                        // Le joueur perd son territoire
+                        ancienneCombinaison.getPions().remove(anciensPions);
+                        // Le joueur récupère tout ses pions sauf 1
+                        ancienneCombinaison.setNbPionsEnMain(ancienneCombinaison.getNbPionsEnMain() + anciensPions.getNombre() - 1);
+                    }
+
+                    // On place nos pions sur la case
+                    GroupePions newGroupe = new GroupePions(combinaisonActive, attaquants);
                     maCase.setNewpions(newGroupe);
-                    //combinaisonActive.addGroupe(newGroupe);
                     combinaisonActive.setNbPionsEnMain(diff);
                 } else if (diff >= -3) {
                     System.out.println("Pas assez de pions !");
@@ -316,6 +332,7 @@ public class JeuReel implements Jeu {
                     //lancer dé
                 } else {
                     System.out.println("Pas assez de pions !");
+                    System.out.println("Possédé : " + combinaisonActive.getNbPionsEnMain() + "/" + maCase.getNombreAttaquantNecessaire());
                     //exception conquête impossible pas assez de pions
                 }
 
@@ -323,9 +340,10 @@ public class JeuReel implements Jeu {
                 System.out.println("Case non prenable");
                 //exception case non prenable (effet de pouvoir) (imprenable + paix).
             }
-        //} else {
+        } else {
             //exception case non atteignable (pas de pions sur une case voisine)
-        //}
+            System.out.println("Case non atteignable.");
+        }
     }
 
     public void placerPions(Case maCase, int nbPions) {
@@ -344,4 +362,22 @@ public class JeuReel implements Jeu {
             System.out.println("Cette case ne vous appartient pas");
         }
     }
+
+    private void notifierModifs() {
+        super.setChanged();
+        super.notifyObservers();
+        super.clearChanged();
+    }
+
+    @Override
+    public void redeployement() {
+        recupPions();
+        // passe le joueur dans l'état redéployement.
+    }
+
+    @Override
+    public JeuState getEtat() {
+        return this.etat;
+    }
+
 }
