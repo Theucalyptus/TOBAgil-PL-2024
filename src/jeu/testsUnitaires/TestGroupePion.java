@@ -42,7 +42,7 @@ public class TestGroupePion {
 
     /**Tester le Constructeur de la classe. */
     @Test
-    public void testerConstructeur() {
+    public void testerConstructeur() {
         new GroupePions(new Combinaison(new Mages(), new AuxDeuxHeros()), 5);
     }
 

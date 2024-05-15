@@ -2,9 +2,6 @@ package jeu;
 
 import java.util.Observer;
 
-import jeu.exceptions.PartieEnCoursException;
-
-
 /**Interface de modélisation du jeu SmallWorld. */
 @SuppressWarnings("deprecation")
 public interface Jeu {

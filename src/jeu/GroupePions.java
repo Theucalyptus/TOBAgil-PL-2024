@@ -9,7 +9,7 @@ public class GroupePions {
     /** Nombre de pions. */
     private int nombrePions;
 
-    /** Case */
+    /** La case ou le groupe de Point se trouve. */
     private Case laCase;
 
     /** Constructeur à partir d'un peuple et d'un nombre de pions.
@@ -43,11 +43,18 @@ public class GroupePions {
         return this.laCase;
     }
 
+    /**
+     * Changer la valeur du nombre de Pions.
+     * @param newNombrePions La nouvelle valeur du nombre de pions.
+     */
     public void setNombre(int newNombrePions) {
         this.nombrePions = newNombrePions;
     }
 
-
+    /**
+     * Changer la case sur laquelle se trouve les pions.
+     * @param newCase la nouvelle case du groupe de pions.
+     */
     public void setCase(Case newCase) {
         this.laCase = newCase;
     }
