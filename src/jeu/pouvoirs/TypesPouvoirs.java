@@ -41,5 +41,7 @@ public enum TypesPouvoirs {
     /**Les Scouts. */
     SCOUTS,
     /**Les Volants. */
-    VOLANTS
+    VOLANTS,
+    /**La Tribu oubliée. */
+    TRIBU_OUBLIEE
 }

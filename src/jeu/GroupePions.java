@@ -11,8 +11,11 @@ public class GroupePions {
     /** Nombre de pions. */
     private int nombrePions;
 
+    /** Case */
+    private Case laCase;
+
     /** Constructeur à partir d'un peuple et d'un nombre de pions.
-     * @param combinaiason La combinaison dont fait partie l'ensemble de pions.
+     * @param combinaison La combinaison dont fait partie l'ensemble de pions.
      * @param nombrePions Le nombre de pions dont l'ensemble de pions fait partie.
      */
     public GroupePions(Combinaison combinaison, int nombrePions) {
@@ -41,6 +44,22 @@ public class GroupePions {
      */
     public int getNombre() {
         return this.nombrePions;
+    }
+
+    /** Obtenir la case où se trouve les pions.
+     * @return la case.
+     */
+    public Case getCase() {
+        return this.laCase;
+    }
+
+    public void setNombre(int newNombrePions) {
+        this.nombrePions = newNombrePions;
+    }
+
+
+    public void setCase(Case newCase) {
+        this.laCase = newCase;
     }
 
 }

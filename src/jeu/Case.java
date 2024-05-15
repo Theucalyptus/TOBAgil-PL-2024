@@ -2,6 +2,7 @@ package jeu;
 
 import java.util.Map;
 import java.util.Observable;
+// import java.util.Set;
 
 import jeu.batiments.TypesBatiments;
 
@@ -13,7 +14,7 @@ import java.util.Collection;
 //import jeu.batiments.Batiment;
 //import jeu.batiments.TypesBatiments;
 //import jeu.TypesRegions;
-import jeu.peuples.Peuple;
+//import jeu.peuples.Peuple;
 
 /**Case du jeu. Une case possède :
  * type de région
@@ -56,23 +57,10 @@ public class Case extends Observable {
     /** Status de la case (prenable ou non). */
     private Boolean prenable;
 
+    /** Définie si une Case est sur la bordure du terrain ou non. */
+    private boolean estBordure;
 
     // Constructeurs
-
-    /**Constructeur de la Classe Case avec tous les attributs par défaut.
-    */
-    public Case() {
-        System.out.println("NE DEVRAIT PAS EXISTER !!");
-        this.voisins = new ArrayList<>();
-        this.coordonnees = new ArrayList<>();
-        this.coordonnees.add(0);
-        this.coordonnees.add(0);
-        this.typeRegion = TypesRegions.CHAMP;
-        this.batiments = new HashMap<>();
-        this.pions = null;
-        this.ressource = TypesSymboles.AUCUN;
-        this.prenable = true;
-    }
 
     /**
      * Construire une Case à partir d'un type de région, d'un batiment, d'un ensemble de
@@ -85,7 +73,7 @@ public class Case extends Observable {
      * @param ressource type de ressource sur la Case.
      */
     public Case(int i, int j, TypesRegions region,
-                GroupePions pions, TypesSymboles ressource) {
+                GroupePions pions, TypesSymboles ressource, Boolean bordure) {
         this.voisins = new ArrayList<>();
         this.coordonnees = new ArrayList<>();
         this.coordonnees.add(i);
@@ -93,12 +81,13 @@ public class Case extends Observable {
         this.typeRegion = region;
         this.batiments = new HashMap<TypesBatiments, Integer>();
         this.pions = pions;
-        this.ressource = TypesSymboles.SOURCE_MAGIQUE;
+        this.ressource = ressource;
         if (region == TypesRegions.MER_ET_LAC) {
             this.prenable = false;
         } else {
             this.prenable = true;
         }
+        this.estBordure = bordure;
     }
 
     // getteurs
@@ -179,8 +168,8 @@ public class Case extends Observable {
      * Obtenir le peuple qui occupe la case.
      * @return peuple qui occupe la Case.
      */
-    public Peuple getPeuple() {
-        return this.pions.getPeuple();
+    public GroupePions getGroupePions() {
+        return this.pions;
     }
 
     /**Donner les voisins de la case.
@@ -199,6 +188,13 @@ public class Case extends Observable {
      */
     public void setNewpions(GroupePions newPions) {
         this.pions = newPions;
+        newPions.getCombinaison().addGroupe(newPions);
+        newPions.setCase(this);
+        this.notification();
+    }
+
+    public void setNewNombrePions(int newNombre) {
+        this.pions.setNombre(newNombre);
         this.notification();
     }
 
@@ -268,6 +264,29 @@ public class Case extends Observable {
     }
 
     /**
+     * Obtenir si le Joueur peut atteindre la case.
+     * @param joueur le joueur dont on veut savoir s'il peut atteindre la case.
+     * @return Si le Joueur peut l'atteindre.
+     */
+    public boolean estAtteignable(Joueur joueur) {
+
+        if (this.estBordure && (joueur.getCombinaisonActive().getPions().size() == 0)) {
+            return true;
+        }
+
+        //checker si la case est atteignable par un joueur déjà déployé ?
+        for (Case voisine : this.getVoisins()) {
+            System.out.println("Case voisine : " + voisine.getCoordonnees().toString());
+            if (voisine.getGroupePions().getCombinaison()
+                    == joueur.getCombinaisonActive()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Notifie les observateurs que l'objet à changé.
      */
     private void notification() {
@@ -275,4 +294,5 @@ public class Case extends Observable {
         this.notifyObservers();
         this.clearChanged();
     }
+
 }

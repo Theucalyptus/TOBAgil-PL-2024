@@ -1,31 +1,39 @@
 package controleurs;
 
 import java.awt.event.*;
+import java.util.Observable;
+import java.util.Observer;
 import java.awt.*;
 import javax.swing.*;
 
 import jeu.Jeu;
+import jeu.JeuReel;
+import jeu.JeuState;
 import jeu.exceptions.PartieEnCoursException;
 
-public class ActionsJeu extends JPanel {
+@SuppressWarnings("deprecation")
+public class ActionsJeu extends JPanel implements Observer {
 
 	/**Le jeu sur lequel on agit. */
-	private final Jeu jeu;
+	private final JeuReel jeu;
+
+	/**Le bouton lancer la partie. */
+	private JButton debutPartieBtn;
 
 	/**
 	 * Construire une action sur le jeu.
 	 * @param jeu le jeu sur lequel on veut agir.
 	 */
-	public ActionsJeu(Jeu jeu) {
+	public ActionsJeu(JeuReel jeu) {
 		super();
 		super.setName("Actions du Jeu");
 		this.jeu = jeu;
+		jeu.addObserver(this);
 		super.setLayout(new FlowLayout());
 		super.setBorder(BorderFactory.createTitledBorder("Actions du Jeu"));
 
-		JButton debutPartieBtn = new JButton("Lancer la partie");
-		debutPartieBtn.addActionListener(new ActionLancerPartie());
-
+		this.debutPartieBtn = new JButton("Lancer la partie");
+		this.debutPartieBtn.addActionListener(new ActionLancerPartie());
 		super.add(debutPartieBtn);
 
 	}
@@ -51,5 +59,12 @@ public class ActionsJeu extends JPanel {
 				System.out.println("Partie déjà en cours !");
 			}
 		}
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		boolean btnLancerActif = this.jeu.getEtat() == JeuState.PAS_COMMENCEE;
+		this.debutPartieBtn.setEnabled(btnLancerActif);
+		
 	}
 }

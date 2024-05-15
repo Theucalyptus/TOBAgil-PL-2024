@@ -8,16 +8,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import jeu.Combinaison;
-import jeu.Joueur;
 import jeu.peuples.*;
 import jeu.pouvoirs.*;
 import ui.utils.ImageFactory;
 
 public class CombinaisonView extends JPanel {
 
+    /** Label affichant le peuple de la combinaison. */
     private JLabel peupleLbl = new JLabel();
+    /** Label affichant le pouvoir de la combinaison. */
     private JLabel pouvoirLbl = new JLabel();
 
+    /**
+     * Construit la vue d'une combinaison.
+     * @param comb la combinaison à afficher
+     */
     public CombinaisonView(Combinaison comb) {
         super();
         super.setLayout(new FlowLayout());

@@ -23,12 +23,15 @@ public class PiocheFenetre {
     public static final int NBCLASSE = 5;
     private Pioche pioche;
     private CombinaisonView selectedClass = null;
+
+    /** La fenêtre. */
     private JFrame fenetre;
     private Map<CombinaisonView, Integer> combinaisonIndexMap = new HashMap<>();
 
     private JPanel mainPanel;
     private MouseEventHandler trace;
 
+    /** Construit une fenêtre affichant la pioche. */
     public PiocheFenetre() {
         this.pioche = new Pioche();
         this.fenetre = new JFrame("SmallWorld - Pioche");

@@ -14,25 +14,31 @@ import ui.views.MainMondeView;
 @SuppressWarnings("deprecation")
 public class MainMondeFenetre implements Observer {
 
-    // constantes de classe
+    /** Titre de la fenêtre. */
     private static final String NOM = "SmallWorld - Tour ";
+    /** Largeur par défaut de la fenêtre. */
     private static final int DEFAULT_LARGEUR = 600;
+    /** Hauteur par défaut de la fenêtre. */
     private static final int DEFAULT_HAUTEUR = 600;
 
 
-    // composants de la gui
+    /** Vue du monde. */
     private final MainMondeView view;
 
-    // modèle
+    /** Le jeu affiché. */
     private final Jeu jeu;
 
-    // fenetre
+    /** La fenêtre. */
     private JFrame fenetre;
 
-    //public MainGui(Jeu jeu) {
+    /**
+     * Construit une fenêtre affichant le monde à partir du jeu avec un sélecteur de case.
+     * @param jeu le jeu à afficher
+     * @param selecteurCase le sélecteur permettant de choisir une case
+     */
     public MainMondeFenetre(Jeu jeu, Selecteur<CaseView> selecteurCase) {
         this.jeu = jeu;
-        this.jeu.addNbTourObserver(this);
+        this.jeu.ajouterObservateur(this);
         this.view = new MainMondeView(jeu.getMonde(), selecteurCase);
 
         this.fenetre = new JFrame(NOM);
@@ -48,7 +54,9 @@ public class MainMondeFenetre implements Observer {
         this.fenetre.setSize(DEFAULT_LARGEUR, DEFAULT_HAUTEUR);
     }
 
-
+    /**
+     * Met à jour le titre de la fenêtre (nombre de tour).
+     */
     private void updateTitre() {
         int nbTour = this.jeu.getNumeroTour();
         int nbTotalTour = this.jeu.getNombreTourTotal();

@@ -33,11 +33,11 @@ public /*final*/ class Smallworld {
         // MODELE
         JeuReel jeu = new JeuReel();
         Joueur j1 = new Joueur("Fraise", 0);
-        j1.setCombinaison(new Combinaison(new Amazones(), new Alchimistes()));
+        j1.changerCombinaisonActive(new Combinaison(new Amazones(), new Alchimistes()));
         Joueur j2 = new Joueur("Framboise", 0);
-        j2.setCombinaison(new Combinaison(new Elfes(), new Alchimistes()));
+        j2.changerCombinaisonActive(new Combinaison(new Elfes(), new Alchimistes()));
         Joueur j3 = new Joueur("Pomme", 0);
-        j3.setCombinaison(new Combinaison(new Amazones(), new Volants()));
+        j3.changerCombinaisonActive(new Combinaison(new Amazones(), new Volants()));
         jeu.ajouterJoueur(j1);
         jeu.ajouterJoueur(j2);
         jeu.ajouterJoueur(j3);
@@ -45,17 +45,12 @@ public /*final*/ class Smallworld {
 
         //SELECTEUR
         Selecteur<CaseView> selecteurCase = new Selecteur<CaseView>();
-        
+
         // VUES
         PiocheFenetre piocheF = new PiocheFenetre();
         MainMondeFenetre mondeF = new MainMondeFenetre(jeu, selecteurCase);
         MainJoueurFenetre joueurF = new MainJoueurFenetre(jeu);
         ActionsFenetre actionsF = new ActionsFenetre(jeu, selecteurCase);
 
-        jeu.getMonde().getCase(2, 2).setNewpions(new GroupePions(new Combinaison(new Amazones(), new Alchimistes()), 4));
-        jeu.getMonde().getCase(3, 3).setTypeBatiment(TypesBatiments.ANTRE_DE_TROLL, 1);
-        jeu.getMonde().getCase(3, 1).setTypeBatiment(TypesBatiments.CAMPEMENT, 2);
-        jeu.getMonde().getCase(3, 2).setTypeBatiment(TypesBatiments.FORTERESSE, 3);
-        //jeu.getMonde().getCase(2, 1)
     }
 }

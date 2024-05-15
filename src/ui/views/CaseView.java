@@ -14,12 +14,19 @@ import java.util.Observer;
 
 @SuppressWarnings("deprecation")
 public class CaseView extends JPanel implements Observer {
+    /** L'image de fond de la case. */
     private Image bgImage;
+    /** Le label de fond de la case. */
     private JLabel bgLabel;
+    /** La case affichée. */
     private Case caseAffichee = null;
-
+    /** L'overlay affiché par dessus la case. */
     private CaseOverlay overlay;
 
+    /**
+     * Construit la vue d'une case du jeu.
+     * @param caseAffichee La case à afficher.
+     */
     public CaseView(Case caseAffichee) {
         super();
         super.setLayout(new OverlayLayout(this));
@@ -42,10 +49,11 @@ public class CaseView extends JPanel implements Observer {
 
         caseAffichee.addObserver(this);
         this.overlay.updateOverlay(caseAffichee);
-        
+
         this.caseAffichee = caseAffichee;
     }
 
+    /** Redimensionne l'image de fond quand la taille de la fenêtre change. */
     private void resizeIcon() {
         Image imageTemp = this.bgImage.getScaledInstance(this.getWidth(),
             this.getHeight(),
@@ -54,12 +62,17 @@ public class CaseView extends JPanel implements Observer {
         this.bgLabel.setIcon(new ImageIcon(imageTemp));
     }
 
+    @Override
     public void update(Observable arg0, Object arg1) {
         Case maCase = (Case) arg0;
         this.overlay.updateOverlay(maCase);
 
     }
-    
+
+    /**
+     * Renvoie la case affichée par la vue.
+     * @return la case
+     */
     public Case getVraieCase() {
     	return this.caseAffichee;
     }

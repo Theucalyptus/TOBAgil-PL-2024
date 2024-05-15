@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.management.RuntimeErrorException;
+
 import java.util.HashMap;
 
 import java.util.Random;
-import jeu.peuples.Peuple;
-import jeu.peuples.TribuOubliee;
-import jeu.pouvoirs.DesForets;
 
 public class Monde {
 
@@ -100,18 +99,23 @@ public class Monde {
                 //on verifie si on veut une mer ou un lac
                 boolean coins;
                 boolean centre;
+                boolean bordure;
+
+                int nbPions = 1; //nombre de pions a placer sur la nouvelle case
 
                 coins = ((x == 0 && y == 0)
                     || (x == (this.dimX - 1)) && y == (this.dimY - 1));
                 //on verifie si on est sur les cases du centre
-                centre = (((x == (this.dimX / 2)) && (y == (this.dimY / 2)))
-                    || ((x == (this.dimX / 2 + 1)) && (y == (this.dimY / 2)))
+                centre = (((x == (this.dimX / 2 - 1)) && (y == (this.dimY / 2 - 1)))
+                    || ((x == (this.dimX / 2)) && (y == (this.dimY / 2 - 1)))
                     || ((x == (this.dimX / 2)) && (y == (this.dimY / 2)))
-                    || ((x == (this.dimX / 2 + 1)) && (y == (this.dimY / 2 + 1))));
+                    || ((x == (this.dimX / 2 - 1)) && (y == (this.dimY / 2))));
+                bordure = x == 0 || x == this.dimX-1 || y == 0 || y == this.dimY-1;
 
                 if (coins || centre) { //on traite les cas où on veut la mer ou un lac
                     newregion = TypesRegions.MER_ET_LAC;
                     newsymbole = TypesSymboles.AUCUN;
+                    nbPions = 0;
                 } else {
                     // choix d'une region aleatoire de la liste des regions possibles
                     // on recupere les cles du dictionnaire
@@ -134,7 +138,7 @@ public class Monde {
                     // choix d'un symbole aleatoire
                     int nombreTotalSymboles = 3 * nombreMaxSymbols;
                     // probabilite de mettre un symbole sur la case
-                    double p = nombreTotalSymboles / (this.getDimX() * this.getDimY());
+                    double p = (double)nombreTotalSymboles / (double)(this.getDimX() * this.getDimY());
                     Set<TypesSymboles> symbolesSet = nombreSymboles.keySet();
                     TypesSymboles[] symbolesArray =
                         symbolesSet.toArray(new TypesSymboles[0]);
@@ -155,16 +159,35 @@ public class Monde {
                     }  else {
                         newsymbole = TypesSymboles.AUCUN;
                     }
-
                 }
 
+
                 // on pose une tribu oubliée sur la case
-                Combinaison maCombinaison = new Combinaison(new TribuOubliee(), new DesForets());
-                GroupePions newEnsemblePions = new GroupePions(maCombinaison, 1);
+                Peuple monPeuple = new TribuOubliee();
+                GroupePions newEnsemblePions = new GroupePions(monPeuple, 1);
                 // création de la nouvelle case
-                Case newcase = new Case(x, y, newregion, newEnsemblePions, newsymbole);
+                Case newcase = new Case(x, y, newregion, newEnsemblePions, newsymbole, bordure);
                 // ajout de la nouvelle case à la grille
                 this.grille.add(newcase);
+            }
+        }
+
+        // ajout des cases voisines
+        int x, y;
+        int[] xOffsets = {1, -1, 0, 0};
+        int[] yOffsets = {0, 0, -1, 1};
+        for(Case maCase : this.grille) {
+            x = maCase.getCoordonnees().get(0);
+            y = maCase.getCoordonnees().get(1);
+
+
+            for(int i=0;i<4;i++) {
+                int xVois = x+xOffsets[i];
+                int yVois = y+yOffsets[i];
+                boolean coordValide = xVois >= 0 && xVois < this.dimX && yVois >= 0 && yVois < this.dimY;
+                if(coordValide) {
+                    maCase.ajoutVoisins(this.getCase(xVois, yVois));
+                }
             }
         }
     }
@@ -195,22 +218,8 @@ public class Monde {
                 return maCase;
             }
         }
-        return new Case(); //on ne devrait jamais arriver à ce return
-    }
 
-    /** Afficher le monde dans le terminal.
-     * @param monMonde le monde à afficher
-    */
-    public void afficherMonde(Monde monMonde) {
-        Case caseCourante;
-        for (int x = 0; x < monMonde.getDimX(); x++) {
-            for (int y = 0; y < monMonde.getDimY(); y++) {
-                caseCourante = monMonde.getCase(x, y);
-                System.out.println("--------");
-                System.out.println(caseCourante.getTypeRegion());
-                System.out.println(caseCourante.getTypeRessource());
-                System.out.println("--------");
-            }
-        }
+        // Si tout est bien développé, ne devrait jamais arriver !
+        throw new RuntimeErrorException(null);
     }
 }

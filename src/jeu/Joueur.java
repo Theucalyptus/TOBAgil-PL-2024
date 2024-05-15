@@ -1,5 +1,9 @@
 package jeu;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jeu.exceptions.OperationInterditeException;
 
 /** Classe représentant un joueur. */
 public class Joueur {
@@ -8,11 +12,16 @@ public class Joueur {
     private String nom;
 
     /**Combinaisons du Joueur. */
-    //private Ensemble<Combinaison> combinaison;
-    private Combinaison combinaison;
+    private List<Combinaison> combinaisonsDeclins;
+
+    /** La combinaison active du joueur. */
+    private Combinaison combinaisonActive;
 
     /** Le Nombre de point de victoire du joueur. */
     private int pointsVictoire;
+
+    /** Le status du joueur. */
+    private JoueurState etat;
 
     /**
      * Construire un Joueur.
@@ -22,6 +31,8 @@ public class Joueur {
     public Joueur(String name, int pointsVictoire) {
         this.nom = name;
         this.pointsVictoire = pointsVictoire;
+        this.combinaisonsDeclins = new ArrayList<>();
+        this.etat = JoueurState.CHOIX_COMBINAISON;
     }
 
     /**Obtenir le nom du joueur .
@@ -36,6 +47,16 @@ public class Joueur {
     */
     public int getPoints() {
         return this.pointsVictoire;
+    }
+
+    /**Obtenir l'état d'un joueur. */
+    public JoueurState getEtat() {
+        return this.etat;
+    }
+
+    /**Définit l'état d'un joueur. */
+    public void setEtat(JoueurState nouvelEtat) {
+        this.etat = nouvelEtat;
     }
 
     /**Ajouter des points de victoire au joueur .
@@ -56,15 +77,28 @@ public class Joueur {
     /** Changer de combinaison.
      *@param nouvelleCombinaison du joueur.
     */
-    //public void setCombinaisons(Ensemble<Combinaison> nouvelleCombinaison) {
-    public void setCombinaison(Combinaison nouvelleCombinaison) {
-        this.combinaison = nouvelleCombinaison;
+    public void changerCombinaisonActive(Combinaison nouvelleCombinaison) {
+        if (this.combinaisonActive != null && this.combinaisonActive.getDeclin() == false) {
+            throw new OperationInterditeException("Combinaison actuelle pas en déclin !");
+        }
+        if(this.combinaisonActive != null) {
+            this.combinaisonsDeclins.add(this.combinaisonActive);
+        }
+        this.combinaisonActive = nouvelleCombinaison;
     }
 
     /**Obtenir la Combinaison du joueur.
      * @return la Combinaison du joueur.
      */
-    public Combinaison getCombinaison() {
-        return this.combinaison;
+    public Combinaison getCombinaisonActive() {
+        return this.combinaisonActive;
+    }
+
+    /**
+     * Obtenir la liste des combinaisons en déclins du joueur.
+     * @return la liste des combinaisons en déclins du joueur.
+     */
+    public List<Combinaison> getCombinaisonsDeclins() {
+        return this.combinaisonsDeclins;
     }
 }

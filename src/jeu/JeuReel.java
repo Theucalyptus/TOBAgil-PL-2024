@@ -3,22 +3,24 @@ package jeu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Observable;
 import java.util.Observer;
 
 import jeu.exceptions.JoueurDejaDansLaPartieException;
 import jeu.exceptions.NombreJoueurIncorrectException;
 import jeu.exceptions.PartieEnCoursException;
+import jeu.exceptions.PartiePasEnCoursException;
 import jeu.exceptions.PartiePleineException;
-
-import observables.JoueurCourantObs;
-import observables.NombreTourObs;
+import jeu.peuples.Peuple;
+import jeu.peuples.TypesPeuples;
+import jeu.pouvoirs.Pouvoir;
+import jeu.pouvoirs.TypesPouvoirs;
 
 /**
  * Classe représentant une partie de jeu.
  */
-
 @SuppressWarnings("deprecation")
-public class JeuReel implements Jeu {
+public class JeuReel extends Observable implements Jeu {
 
     // atributs
 
@@ -37,23 +39,17 @@ public class JeuReel implements Jeu {
     /** Le nombre de tour total qui devra être fait dans la partie. */
     private int nbToursTotals;
 
-    /** Indicateur de fin de tour du joueur. */
-    private boolean finDuTour;
-
     /** Le nombre de Joueur de la partie. */
     private int nombreJoueurs;
 
     /** Le plateau. */
     private Monde monde;              // Le plateau du monde
 
-    /** Indique si la partie est encore (pas commencée ou pas finies). */
-    private Boolean enCours = false;
+    /** Indique le statut de la partie. */
+    private JeuState etat;
 
-    /** Permet de notifier lorsque le joueur courant change. */
+    /** Observable du joueur courant. */
     private JoueurCourantObs joueurCourantObs;
-
-    /** Permet de notifier lorsque le numero du tour change. */
-    private NombreTourObs nbTourObs;
 
     // Constructeur
 
@@ -73,15 +69,13 @@ public class JeuReel implements Jeu {
     private JeuReel(int nbJoueurs, Monde leMonde) {
         this.joueurs = new ArrayList<>();
         this.monde = leMonde;
-        this.finDuTour = true;
-        this.enCours = false;
         this.nbToursTotals = 0;
         this.noTour = 1;
         this.joueurCourant = null;
         this.joueursIter = null;
-        this.joueurCourantObs = new JoueurCourantObs();
-        this.nbTourObs = new NombreTourObs();
         this.nombreJoueurs = nbJoueurs;
+        this.etat = JeuState.PAS_COMMENCEE;
+        this.joueurCourantObs = new JoueurCourantObs(this);
     }
 
 
@@ -121,13 +115,13 @@ public class JeuReel implements Jeu {
     } */
 
     @Override
-    public void addJoueurCourantObserver(Observer obs) {
-        this.joueurCourantObs.addObserver(obs);
+    public void ajouterObservateur(Observer obs) {
+        super.addObserver(obs);
     }
 
     @Override
-    public void addNbTourObserver(Observer obs) {
-        this.nbTourObs.addObserver(obs);
+    public void ajouterObservateurJoueurCourant(Observer obs) {
+        this.joueurCourantObs.addObserver(obs);
     }
 
 
@@ -141,7 +135,7 @@ public class JeuReel implements Jeu {
      * @return Si la partie est en cours.
      */
     public boolean estEnCoursDePartie() {
-        return this.enCours;
+        return this.etat == JeuState.EN_COURS;
     }
 
     // commandes
@@ -149,7 +143,7 @@ public class JeuReel implements Jeu {
     @Override
     public void setNumeroTour(int newNoTour) {
         this.noTour = newNoTour;
-        this.nbTourObs.notifyObservers();
+        this.notifierModifs();
     }
 
     /**
@@ -161,7 +155,7 @@ public class JeuReel implements Jeu {
      */
     public void setJoueurCourant(Joueur joueurCourant) {
         this.joueurCourant = joueurCourant;
-        this.joueurCourantObs.notifyJoueurCourant();
+        this.notifierModifs();
     }
 
     @Override
@@ -178,12 +172,13 @@ public class JeuReel implements Jeu {
      * Changer la valeur du champs enCours par la valeur en argument.
      * @param enCours La nouvelle valeur de enCours.
      */
-    public void setEnCours(boolean enCours) {
-        this.enCours = enCours;
+    private void setEtat(JeuState newEtat) {
+        this.etat = newEtat;
     }
 
     /**Actualiser le nombre de tour de la partie en fonction du
      * nombre de joueur dans la partie.
+     * @throws NombreJoueurIncorrectException Si le Nombre de Joueur n'est pas conforme.
      */
     private void majNombreToursTotals() {
         switch (this.nombreJoueurs) {
@@ -231,13 +226,34 @@ public class JeuReel implements Jeu {
      */
     @Override
     public void lancerPartie() {
-        if (enCours) {
+        if (this.etat == JeuState.EN_COURS || this.etat == JeuState.TERMINEE) {
             throw new PartieEnCoursException();
         }
-        enCours = true;
-        this.majNombreToursTotals();
+
+        this.setEtat(JeuState.EN_COURS);
         this.joueursIter = this.joueurs.listIterator();
-        this.setJoueurCourant(this.joueursIter.next());
+        this.setJoueurCourant(this.joueursIter.next()); // la position est importante !
+        this.majNombreToursTotals();
+        this.setNumeroTour(1);
+        this.debutTour();
+        this.notifierModifs();
+    }
+
+    /** Ajouter le nombre de points de victoire au joueur. */
+    private void ajouterPtsVictoire() {
+        //---------------------------------------------------------------------------
+        // Compter le nombre de points de victoires gagnés par le joueur à la fin du
+        // tour
+        //---------------------------------------------------------------------------
+
+        // la combinaison du joueur courant
+        Combinaison combinaisonJoueur = this.joueurCourant.getCombinaisonActive();
+
+        // obtenir le nombre de points bonus
+        int pointsBonus = combinaisonJoueur.finTour();
+
+        int totalPoints = combinaisonJoueur.nombreGroupesPions() + pointsBonus;
+        this.joueurCourant.addPoints(totalPoints);
     }
 
     /**
@@ -246,20 +262,138 @@ public class JeuReel implements Jeu {
     @Override
     public void passerTour() {
 
-        // Actions de fin de tour
-        this.joueurCourant.addPoints(4);
+        if (this.estEnCoursDePartie()) {
+            // Si le joueur a bien posé tout ses pions.
+            if(joueurCourant.getCombinaisonActive().getNbPionsEnMain() == 0) {
+                // Actions de fin de tour
+                this.ajouterPtsVictoire();
+            } else {
+                System.out.println("ERREUR : tous les pions ne sont pas placés ! Pas de points attribués.");
+            }
 
-
-        // Passage au tour suivant
-        if (this.joueursIter.hasNext()) {
-            this.setJoueurCourant(this.joueursIter.next());
+            // Passage au tour suivant
+            if (this.joueursIter.hasNext()) {
+                this.setJoueurCourant(this.joueursIter.next());
+            } else {
+                this.joueursIter = this.joueurs.listIterator();
+                this.setNumeroTour(this.getNumeroTour() + 1);
+                this.setJoueurCourant(this.joueursIter.next());
+            }
+            if (this.getNumeroTour() > this.getNombreTourTotal()) {
+                this.setEtat(JeuState.TERMINEE);
+                System.out.println("Fin de la partie !");
+            }
+            debutTour();
         } else {
-            this.joueursIter = this.joueurs.listIterator();
-            this.setNumeroTour(this.getNumeroTour() + 1);
-            this.setJoueurCourant(this.joueursIter.next());
-        }
-        if (this.getNumeroTour() > this.getNombreTourTotal()) {
-            this.enCours = false;
+            System.out.println("Partie non-commencé ou terminée. Abandon !");
+            throw new PartiePasEnCoursException();
         }
     }
+
+    //Se lance au debut du tour d'un joueur
+    private void debutTour() {
+        System.out.println("Début du tour de " + this.joueurCourant.getNom());
+        // TODO logique màj de l'état du joueur
+        recupPions();
+        this.joueurCourantObs.notifierChangement();
+    }
+
+    private void recupPions() {
+        int pionsARecuperer = 0;
+        System.out.println("Début du tour de " + joueurCourant.getNom());
+
+        // Récupère tout les pions sauf 1 sur chaque case possédé par le joueur.
+        for (GroupePions pions : joueurCourant.getCombinaisonActive().getPions()) {
+            pionsARecuperer += pions.getNombre() - 1;
+            pions.getCase().setNewNombrePions(1);
+
+            System.out.println("Pions récupérés");
+        }
+        // ajout des pions récupérés à la main du joueur
+        joueurCourant.getCombinaisonActive().setNbPionsEnMain(pionsARecuperer + joueurCourant.getCombinaisonActive().getNbPionsEnMain());
+        this.joueurCourantObs.notifierChangement();
+    }
+
+    /** Pour attaquer une case choisie*/
+    public void attaquerCase(Case maCase) {
+        //checker si la case est atteignable (bordure etc)
+        if (maCase.estAtteignable(joueurCourant)) {
+            if (maCase.getPrenable()) { //Boolean et pas boolean
+                Combinaison combinaisonActive = joueurCourant.getCombinaisonActive();
+                System.out.println("Pions en main : " + combinaisonActive.getNbPionsEnMain());
+                int attaquants = maCase.getNombreAttaquantNecessaire();
+                int diff = combinaisonActive.getNbPionsEnMain() - attaquants;
+
+                if (diff >= 0) {
+                    // On déloge les pions adverses
+                    GroupePions anciensPions = maCase.getGroupePions();
+                    if (anciensPions != null) {
+                        Combinaison ancienneCombinaison = anciensPions.getCombinaison();
+                        // Le joueur perd son territoire
+                        ancienneCombinaison.getPions().remove(anciensPions);
+                        // Le joueur récupère tout ses pions sauf 1
+                        ancienneCombinaison.setNbPionsEnMain(ancienneCombinaison.getNbPionsEnMain() + anciensPions.getNombre() - 1);
+                    }
+
+                    // On place nos pions sur la case
+                    GroupePions newGroupe = new GroupePions(combinaisonActive, attaquants);
+                    maCase.setNewpions(newGroupe);
+                    combinaisonActive.setNbPionsEnMain(diff);
+                } else if (diff >= -3) {
+                    System.out.println("Pas assez de pions !");
+                    System.out.println("Possédé : " + combinaisonActive.getNbPionsEnMain() + "/" + maCase.getNombreAttaquantNecessaire());
+                    //lancer dé
+                } else {
+                    System.out.println("Pas assez de pions !");
+                    System.out.println("Possédé : " + combinaisonActive.getNbPionsEnMain() + "/" + maCase.getNombreAttaquantNecessaire());
+                    //exception conquête impossible pas assez de pions
+                }
+
+            } else {
+                System.out.println("Case non prenable");
+                //exception case non prenable (effet de pouvoir) (imprenable + paix).
+            }
+        } else {
+            //exception case non atteignable (pas de pions sur une case voisine)
+            System.out.println("Case non atteignable.");
+        }
+        this.joueurCourantObs.notifierChangement();
+    }
+
+    public void placerPions(Case maCase, int nbPions) {
+        // On vérifie que la case appartient bien au joueur dont c'est le tour.
+        Combinaison active = joueurCourant.getCombinaisonActive();
+        int pionsEnMain = active.getNbPionsEnMain();
+
+        if (maCase.getGroupePions().getCombinaison() == active) {
+            if (nbPions <= pionsEnMain) {
+                maCase.setNewNombrePions(maCase.getNombrepions() + nbPions);
+                active.setNbPionsEnMain(pionsEnMain - nbPions);
+            } else {
+                System.out.println("Vous n'avez pas assez de pions en main");
+            }
+        } else {
+            System.out.println("Cette case ne vous appartient pas");
+        }
+        this.joueurCourantObs.notifierChangement();
+    }
+
+    private void notifierModifs() {
+        super.setChanged();
+        super.notifyObservers();
+        super.clearChanged();
+    }
+
+    @Override
+    public void redeployement() {
+        recupPions();
+        this.joueurCourant.setEtat(JoueurState.REDEPLOYMENT);
+        this.joueurCourantObs.notifierChangement();
+    }
+
+    @Override
+    public JeuState getEtat() {
+        return this.etat;
+    }
+
 }
