@@ -1,8 +1,5 @@
 package jeu.testsUnitaires;
 
-import java.util.List;
-
-import jeu.Case;
 import jeu.Monde;
 
 /**
@@ -39,10 +36,10 @@ public class TestMonde {
     private static final int QUATRE = 4;
     /**5. */
     private static final int CINQ = 5;
-    /**12 */
-    private static final int DOUZE = 12;
-    /**21. */
-    private static final int VINGTETUN = 21;
+    // /**12. */
+    // private static final int DOUZE = 12;
+    // /**21. */
+    // private static final int VINGTETUN = 21;
     /**1000. */
     private static final int MILLE = 1000;
 
@@ -205,8 +202,10 @@ public class TestMonde {
     //     List<Integer> co = laCase.getCoordonnees();
     //     assertEquals("La listes des coordonnée doit avoir une dimension de " + DEUX,
     //         co.size(), DEUX, PRECISION);
-    //     assertEquals("La première coordonnée doit être " + DEUX, co.get(0), DEUX, PRECISION);
-    //     assertEquals("La deuxième coordonnée doit être " + TROIS, co.get(1), TROIS, PRECISION);
+    //     assertEquals("La première coordonnée doit être " + DEUX, co.get(0),
+    //        DEUX, PRECISION);
+    //     assertEquals("La deuxième coordonnée doit être " + TROIS, co.get(1),
+    //        TROIS, PRECISION);
     // }
 
     // /**Tester le getteur d'une case sur un monde a 3 joueurs. */
@@ -216,8 +215,10 @@ public class TestMonde {
     //     List<Integer> co = laCase.getCoordonnees();
     //     assertEquals("La listes des coordonnée doit avoir une dimension de " + DEUX,
     //         co.size(), DEUX, PRECISION);
-    //     assertEquals("La première coordonnée doit être " + DEUX, co.get(0), DEUX, PRECISION);
-    //     assertEquals("La deuxième coordonnée doit être " + TROIS, co.get(1), TROIS, PRECISION);
+    //     assertEquals("La première coordonnée doit être " + DEUX, co.get(0),
+    //        DEUX, PRECISION);
+    //     assertEquals("La deuxième coordonnée doit être " + TROIS, co.get(1), TROIS,
+    //        PRECISION);
     // }
 
 
@@ -228,8 +229,10 @@ public class TestMonde {
     //     List<Integer> co = laCase.getCoordonnees();
     //     assertEquals("La listes des coordonnée doit avoir une dimension de " + DEUX,
     //         co.size(), DEUX, PRECISION);
-    //     assertEquals("La première coordonnée doit être " + DEUX, co.get(0), DEUX, PRECISION);
-    //     assertEquals("La deuxième coordonnée doit être " + TROIS, co.get(1), TROIS, PRECISION);
+    //     assertEquals("La première coordonnée doit être " + DEUX, co.get(0), DEUX,
+    //          PRECISION);
+    //     assertEquals("La deuxième coordonnée doit être " + TROIS, co.get(1), TROIS,
+    //          PRECISION);
     // }
 
     // /**Tester le getteur d'une case sur un monde a 5 joueurs. */
@@ -239,8 +242,10 @@ public class TestMonde {
     //     List<Integer> co = laCase.getCoordonnees();
     //     assertEquals("La listes des coordonnée doit avoir une dimension de " + DEUX,
     //         co.size(), DEUX, PRECISION);
-    //     assertEquals("La première coordonnée doit être " + DEUX, co.get(0), DEUX, PRECISION);
-    //     assertEquals("La deuxième coordonnée doit être " + TROIS, co.get(1), TROIS, PRECISION);
+    //     assertEquals("La première coordonnée doit être " + DEUX, co.get(0), DEUX,
+    //        PRECISION);
+    //     assertEquals("La deuxième coordonnée doit être " + TROIS, co.get(1), TROIS,
+    //          PRECISION);
     // }
 
 

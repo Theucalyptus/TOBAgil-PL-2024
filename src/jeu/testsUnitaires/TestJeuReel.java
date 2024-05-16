@@ -11,10 +11,6 @@ import jeu.exceptions.PartiePleineException;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-import java.util.Observer;
-
-
 /**Tester le jeu. */
 @SuppressWarnings("deprecation")
 public class TestJeuReel {

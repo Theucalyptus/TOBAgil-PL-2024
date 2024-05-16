@@ -8,8 +8,8 @@ public class Selecteur<T> {
 	public Selecteur() {
 	}
 
-	public void setSelection(T objetSelectionne) {
-		this.objetSelectionne = objetSelectionne;
+	public void setSelection(T unObjetSelectionne) {
+		this.objetSelectionne = unObjetSelectionne;
 	}
 
 	public T getSelection() {

@@ -117,12 +117,12 @@ public class TestJoueur {
     /**Tester le changement de combinaison. */
     @Test
     public void testerChangerCombinaisonActive() {
-        int NombreDeCombinaisonEnDeclinAvant =
+        int nombreDeCombinaisonEnDeclinAvant =
             this.unJoueur.getCombinaisonsDeclins().size();
         this.unJoueur.changerCombinaisonActive(this.uneCombinaison);
         assertTrue("La combinaison doit être Amazone + Volants",
             this.unJoueur.getCombinaisonActive() == this.uneCombinaison);
         assertEquals(this.unJoueur.getCombinaisonsDeclins().size(),
-            NombreDeCombinaisonEnDeclinAvant + 1, PRECISION);
+            nombreDeCombinaisonEnDeclinAvant + 1, PRECISION);
     }
 }

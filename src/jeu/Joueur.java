@@ -51,12 +51,16 @@ public class Joueur extends Observable {
         return this.pointsVictoire;
     }
 
-    /**Obtenir l'état d'un joueur. */
+    /**Obtenir l'état d'un joueur.
+     * @return l'état dans lequel est le joueur.
+     */
     public JoueurState getEtat() {
         return this.etat;
     }
 
-    /**Définit l'état d'un joueur. */
+    /**Définit l'état d'un joueur.
+     * @param nouvelEtat le nouvel état du joueur.
+     */
     public void setEtat(JoueurState nouvelEtat) {
         this.etat = nouvelEtat;
         this.notifierChangement();
@@ -83,10 +87,12 @@ public class Joueur extends Observable {
      *@param nouvelleCombinaison du joueur.
     */
     public void changerCombinaisonActive(Combinaison nouvelleCombinaison) {
-        if (this.combinaisonActive != null && this.combinaisonActive.getDeclin() == false) {
-            throw new OperationInterditeException("Combinaison actuelle pas en déclin !");
+        if (this.combinaisonActive != null
+                && !this.combinaisonActive.getDeclin()) {
+            throw new OperationInterditeException(
+                "Combinaison actuelle pas en déclin !");
         }
-        if(this.combinaisonActive != null) {
+        if (this.combinaisonActive != null) {
             this.combinaisonsDeclins.add(this.combinaisonActive);
         }
         this.combinaisonActive = nouvelleCombinaison;
@@ -111,7 +117,7 @@ public class Joueur extends Observable {
 
 
     /**
-     * 
+     * Notifier les observers que le joueur a changé.
      */
     private void notifierChangement() {
         super.setChanged();

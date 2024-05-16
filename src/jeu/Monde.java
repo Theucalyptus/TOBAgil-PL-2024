@@ -100,12 +100,13 @@ public class Monde {
                 boolean coins = ((x == 0 && y == 0)
                 || (x == (this.dimX - 1)) && y == (this.dimY - 1));
                 //on verifie si on est sur les cases du centre
-                boolean centre = (((x == (this.dimX / 2 - 1)) 
+                boolean centre = (((x == (this.dimX / 2 - 1))
                         && (y == (this.dimY / 2 - 1)))
                     || ((x == (this.dimX / 2)) && (y == (this.dimY / 2 - 1)))
                     || ((x == (this.dimX / 2)) && (y == (this.dimY / 2)))
                     || ((x == (this.dimX / 2 - 1)) && (y == (this.dimY / 2))));
-                boolean bordure = x == 0 || x == this.dimX - 1 || y == 0 || y == this.dimY - 1;
+                boolean bordure = x == 0 || x == this.dimX - 1
+                    || y == 0 || y == this.dimY - 1;
 
                 // nombre de pions a placer sur la nouvelle case
                 int nbPions = 1;
@@ -137,8 +138,8 @@ public class Monde {
                     // choix d'un symbole aleatoire
                     int nombreTotalSymboles = 3 * nombreMaxSymbols;
                     // probabilite de mettre un symbole sur la case
-                    double p = (double) nombreTotalSymboles / 
-                        (double) (this.getDimX() * this.getDimY());
+                    double p = (double) nombreTotalSymboles
+                        / (double) (this.getDimX() * this.getDimY());
                     Set<TypesSymboles> symbolesSet = nombreSymboles.keySet();
                     TypesSymboles[] symbolesArray =
                         symbolesSet.toArray(new TypesSymboles[0]);
@@ -174,7 +175,8 @@ public class Monde {
         }
 
         // ajout des cases voisines
-        int x, y;
+        int x;
+        int y;
         int[] xOffsets = {1, -1, 0, 0};
         int[] yOffsets = {0, 0, -1, 1};
         for (Case maCase : this.grille) {
@@ -185,7 +187,7 @@ public class Monde {
             for (int i = 0; i < 4; i++) {
                 int xVois = x + xOffsets[i];
                 int yVois = y + yOffsets[i];
-                boolean coordValide = xVois >= 0 && xVois < this.dimX 
+                boolean coordValide = xVois >= 0 && xVois < this.dimX
                     && yVois >= 0 && yVois < this.dimY;
                 if (coordValide) {
                     maCase.ajoutVoisins(this.getCase(xVois, yVois));

@@ -71,6 +71,7 @@ public class Case extends Observable {
      * @param region Le type de région de la Case.
      * @param pions La liste d'unité à l'initialisation. //tribus oubliées
      * @param ressource type de ressource sur la Case.
+     * @param bordure si la case est en bordure de carte.
      */
     public Case(int i, int j, TypesRegions region,
                 GroupePions pions, TypesSymboles ressource, Boolean bordure) {
@@ -193,6 +194,10 @@ public class Case extends Observable {
         this.notification();
     }
 
+    /**
+     * Changer le nombre de pions sur la Cases.
+     * @param newNombre
+     */
     public void setNewNombrePions(int newNombre) {
         this.pions.setNombre(newNombre);
         this.notification();

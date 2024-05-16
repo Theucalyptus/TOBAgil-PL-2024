@@ -6,15 +6,9 @@ import jeu.JeuProxy;
 import jeu.JeuReel;
 import jeu.Joueur;
 import jeu.Monde;
-import jeu.exceptions.JoueurDejaDansLaPartieException;
-import jeu.exceptions.MauvaisMondeException;
 import jeu.exceptions.OperationInterditeException;
-import jeu.exceptions.PartiePleineException;
 
 import static org.junit.Assert.*;
-
-import java.util.List;
-import java.util.Observer;
 
 
 /**Tester le jeu. */
@@ -254,7 +248,7 @@ public class TestJeuProxy {
         this.unProxy.lancerPartie();
     }
 
-    /**Tester passer Tour */
+    /**Tester passer Tour. */
     @Test(expected = OperationInterditeException.class)
     public void testerPasserTour() {
         this.unProxy.passerTour();
