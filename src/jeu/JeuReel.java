@@ -267,14 +267,11 @@ public class JeuReel extends Observable implements Jeu {
     public void passerTour() {
 
         if (this.estEnCoursDePartie()) {
-            // Si le joueur a bien posé tout ses pions.
-            if (joueurCourant.getCombinaisonActive().getNbPionsEnMain() == 0) {
-                // Actions de fin de tour
-                this.ajouterPtsVictoire();
-            } else {
-                System.out.println("ERREUR : tous les pions ne sont "
-                    + "pas placés ! Pas de points attribués.");
-            }
+            
+            // Actions de fin de tour
+            this.ajouterPtsVictoire();
+            this.joueurCourant.setEtat(JoueurState.DEBUT_TOUR);
+
 
             // Passage au tour suivant
             if (this.joueursIter.hasNext()) {
@@ -298,6 +295,14 @@ public class JeuReel extends Observable implements Jeu {
     //Se lance au debut du tour d'un joueur
     private void debutTour() {
         System.out.println("Début du tour de " + this.joueurCourant.getNom());
+        if(this.joueurCourant.getEtat() != JoueurState.DEBUT_TOUR) {
+            System.out.println("ERREUR state en début de tours");
+        }
+
+        if(this.joueurCourant.getCombinaisonActive().getDeclin()) {
+            this.joueurCourant.setEtat(JoueurState.CHOIX_COMBINAISON);
+        }
+
         // TODO logique màj de l'état du joueur
         recupPions();
         this.joueurCourantObs.notifierChangement();

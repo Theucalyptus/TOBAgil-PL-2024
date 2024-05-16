@@ -67,28 +67,34 @@ public class ActionsJoueur extends JPanel implements Observer {
 
 		declinBtn = new JButton("Passer en déclin");
 		declinBtn.addActionListener(new ActionDeclin());
+		declinBtn.setEnabled(false);
 		super.add(declinBtn);
 
 		ajouterBatimentBtn = new JButton("Ajouter un batiment");
 		ajouterBatimentBtn.addActionListener(new ActionAjouterBatiment());
+		ajouterBatimentBtn.setEnabled(false);
 		super.add(ajouterBatimentBtn);
 
 		attaquerCase = new JButton("Conquérir");
 		attaquerCase.addActionListener(new ActionAttaquerCase());
+		attaquerCase.setEnabled(false);
 		super.add(attaquerCase);
 
 		placerPion = new JButton("Placer un pion");
 		placerPion.addActionListener(new ActionPlacerPion());
+		placerPion.setEnabled(false);
 		super.add(placerPion);
 
 		// A mettre à part avec les boutons pour changer d'état
 		redeployement = new JButton("Redéployement");
 		redeployement.addActionListener(new ActionRedeployement());
+		redeployement.setEnabled(false);
 		super.add(redeployement);
 
 		// A mettre à part avec les boutons pour changer d'état
 		finTourBtn = new JButton("Fin du Tour");
 		finTourBtn.addActionListener(new ActionFinirTour());
+		finTourBtn.setEnabled(false);
 		super.add(finTourBtn);
 	}
 

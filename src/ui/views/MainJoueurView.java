@@ -1,7 +1,5 @@
 package ui.views;
 
-import java.awt.BorderLayout;
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -10,7 +8,6 @@ import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -81,7 +78,6 @@ public class MainJoueurView extends JPanel implements Observer {
         this.combinaisonsPnl.add(activeView);
 
         // affichages des combinaisons en déclins
-        System.out.println(joueur.getCombinaisonsDeclins().size());
         if (joueur.getCombinaisonsDeclins().size() > 0) {
             for (Combinaison comb : joueur.getCombinaisonsDeclins()) {
                 CombinaisonView newView = new CombinaisonView(comb);
