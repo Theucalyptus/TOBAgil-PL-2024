@@ -16,6 +16,9 @@ public class JeuProxy implements Jeu {
      * @param jeu le jeu sur lequel on fait un proxy.
      */
     public JeuProxy(Jeu jeu) {
+        if (jeu == null) {
+            throw new IllegalArgumentException("jeu ne doit pas être null.");
+        }
         this.impl = jeu;
     }
 
@@ -133,8 +136,7 @@ public class JeuProxy implements Jeu {
 
     @Override
     public void redeployement() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'redeployement'");
+        this.impl.redeployement();
     }
 
     @Override

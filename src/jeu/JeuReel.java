@@ -11,10 +11,6 @@ import jeu.exceptions.NombreJoueurIncorrectException;
 import jeu.exceptions.PartieEnCoursException;
 import jeu.exceptions.PartiePasEnCoursException;
 import jeu.exceptions.PartiePleineException;
-import jeu.peuples.Peuple;
-import jeu.peuples.TypesPeuples;
-import jeu.pouvoirs.Pouvoir;
-import jeu.pouvoirs.TypesPouvoirs;
 
 /**
  * Classe représentant une partie de jeu.
@@ -67,6 +63,10 @@ public class JeuReel extends Observable implements Jeu {
 
 
     private JeuReel(int nbJoueurs, Monde leMonde) {
+        if (nbJoueurs < 0 || nbJoueurs == 1 || nbJoueurs > 5) {
+            throw new IllegalArgumentException("L'appel au constructeur "
+                + "n'est pas valide.");
+        }
         this.joueurs = new ArrayList<>();
         this.monde = leMonde;
         this.nbToursTotals = 0;
@@ -115,17 +115,6 @@ public class JeuReel extends Observable implements Jeu {
     } */
 
     @Override
-    public void ajouterObservateur(Observer obs) {
-        super.addObserver(obs);
-    }
-
-    @Override
-    public void ajouterObservateurJoueurCourant(Observer obs) {
-        this.joueurCourantObs.addObserver(obs);
-    }
-
-
-    @Override
     public int getNombreTourTotal() {
         return this.nbToursTotals;
     }
@@ -146,6 +135,22 @@ public class JeuReel extends Observable implements Jeu {
         this.notifierModifs();
     }
 
+    @Override
+    public void ajouterObservateur(Observer obs) {
+        if (obs == null) {
+            throw new IllegalArgumentException("obs ne doit pas être null.");
+        }
+        super.addObserver(obs);
+    }
+
+    @Override
+    public void ajouterObservateurJoueurCourant(Observer obs) {
+        if (obs == null) {
+            throw new IllegalArgumentException("obs ne doit pas être null.");
+        }
+        this.joueurCourantObs.addObserver(obs);
+    }
+
     /**
      * Permet de mettre à jour le joueur Courant.
      * @param joueurCourant le joueur qui sera le nouveau joueur courant.
@@ -154,6 +159,12 @@ public class JeuReel extends Observable implements Jeu {
      * joueurs de la partie.
      */
     public void setJoueurCourant(Joueur joueurCourant) {
+        if (joueurCourant == null) {
+            throw new IllegalArgumentException("joueurCourant ne doit pas être null.");
+        } else if (!this.joueurs.contains(joueurCourant)) {
+            throw new IllegalArgumentException("joueurCourant doit "
+                + "participer à la partie.");
+        }
         this.joueurCourantObs.detacher();
         this.joueurCourant = joueurCourant;
         this.joueurCourantObs.attacher();
@@ -162,6 +173,9 @@ public class JeuReel extends Observable implements Jeu {
 
     @Override
     public void setMonde(Monde leNouveauMonde) {
+        if (leNouveauMonde == null) {
+            throw new IllegalArgumentException("leNouveauMonde ne doit pas être null.");
+        }
         this.monde = leNouveauMonde;
     }
 
@@ -175,6 +189,9 @@ public class JeuReel extends Observable implements Jeu {
      * @param newEtat Le nouvel état.
      */
     private void setEtat(JeuState newEtat) {
+        if (newEtat == null) {
+            throw new IllegalArgumentException("newEtat ne doit pas être null.");
+        }
         this.etat = newEtat;
     }
 
@@ -267,7 +284,7 @@ public class JeuReel extends Observable implements Jeu {
     public void passerTour() {
 
         if (this.estEnCoursDePartie()) {
-            
+
             // Actions de fin de tour
             this.ajouterPtsVictoire();
             this.joueurCourant.setEtat(JoueurState.DEBUT_TOUR);
@@ -295,11 +312,11 @@ public class JeuReel extends Observable implements Jeu {
     //Se lance au debut du tour d'un joueur
     private void debutTour() {
         System.out.println("Début du tour de " + this.joueurCourant.getNom());
-        if(this.joueurCourant.getEtat() != JoueurState.DEBUT_TOUR) {
+        if (this.joueurCourant.getEtat() != JoueurState.DEBUT_TOUR) {
             System.out.println("ERREUR state en début de tours");
         }
 
-        if(this.joueurCourant.getCombinaisonActive().getDeclin()) {
+        if (this.joueurCourant.getCombinaisonActive().getDeclin()) {
             this.joueurCourant.setEtat(JoueurState.CHOIX_COMBINAISON);
         }
 
@@ -327,6 +344,11 @@ public class JeuReel extends Observable implements Jeu {
      * @param maCase La case que l'on veut attaquer.
      */
     public void attaquerCase(Case maCase) {
+        // robustesse
+        if (maCase == null) {
+            throw new IllegalArgumentException("maCase ne doit pas être vide.");
+        }
+
         if (joueurCourant.getEtat() == JoueurState.DEBUT_TOUR) {
             joueurCourant.setEtat(JoueurState.ATTAQUE);
         }
@@ -356,7 +378,7 @@ public class JeuReel extends Observable implements Jeu {
                     // On place nos pions sur la case
                     GroupePions newGroupe = new GroupePions(combinaisonActive,
                         attaquants);
-                    maCase.setNewpions(newGroupe);
+                    maCase.setNewPions(newGroupe);
                     combinaisonActive.setNbPionsEnMain(diff);
                 } else if (diff >= -3) {
                     System.out.println("Pas assez de pions !");
@@ -385,6 +407,11 @@ public class JeuReel extends Observable implements Jeu {
 
     @Override
     public void placerPions(Case maCase, int nbPions) {
+        // robustesse
+        if (maCase == null || nbPions < 0) {
+            throw new IllegalArgumentException("L'appel n'est pas correct.");
+        }
+
         // On vérifie que la case appartient bien au joueur dont c'est le tour.
         Combinaison active = joueurCourant.getCombinaisonActive();
         int pionsEnMain = active.getNbPionsEnMain();
@@ -410,7 +437,7 @@ public class JeuReel extends Observable implements Jeu {
 
     @Override
     public void redeployement() {
-        recupPions();
+        this.recupPions();
         this.joueurCourant.setEtat(JoueurState.REDEPLOYMENT);
         this.joueurCourantObs.notifierChangement();
     }

@@ -61,11 +61,7 @@ public class Monde {
                 nombreMaxSymbols = 9;
                 break;
             default:
-                this.dimX = 6;
-                this.dimY = 6;
-                nombreMaxRegion =
-                    Math.round((float) (this.dimX * this.dimY) / nombreTypesRegion);
-                nombreMaxSymbols = 5;
+                throw new IllegalArgumentException("nbJoueurs doit être entre 2 et 5.");
         }
 
         // on associe a chaque type de region, le nombre de cases de ce type
@@ -216,6 +212,10 @@ public class Monde {
      * @return la case correspondante
      */
     public Case getCase(int x, int y) {
+        if (x < 0 || x >= this.dimX || y < 0 || y > this.dimY) {
+            throw new IllegalArgumentException("L'appel à la fonction "
+                + "n'est pas conforme.");
+        }
         for (Case maCase : this.grille) {
             List<Integer> coordonnees = maCase.getCoordonnees();
             if ((coordonnees.get(0) == x) && (coordonnees.get(1) == y)) {

@@ -135,7 +135,10 @@ public class Pioche {
      * @param indice L'indice de la combinaison voulut.
      */
     public void combinaisonChoisit(int indice) {
-
+        if (indice < 0 || indice > LONGUEURPIOCHE) {
+            throw new IllegalArgumentException("indice doit "
+                + "être en 1 et LONGUEURPIOCHE.");
+        }
         Peuple peuple = this.pioche.get(indice).getPeuple();
         Pouvoir pouvoir = this.pioche.get(indice).getPouvoir();
         // ils faudraient les rajouter que si ils ne sont plus utiliser

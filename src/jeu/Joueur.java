@@ -31,6 +31,9 @@ public class Joueur extends Observable {
      * @param pointsVictoire Le nombre de points de victoire initial.
      */
     public Joueur(String name, int pointsVictoire) {
+        if (name == null || name.equals("") || pointsVictoire < 0) {
+            throw new IllegalArgumentException("L'appel n'est pas correct.");
+        }
         this.nom = name;
         this.pointsVictoire = pointsVictoire;
         this.combinaisonsDeclins = new ArrayList<>();
@@ -63,6 +66,9 @@ public class Joueur extends Observable {
      * @param nouvelEtat le nouvel état du joueur.
      */
     public void setEtat(JoueurState nouvelEtat) {
+        if (nouvelEtat == null) {
+            throw new IllegalArgumentException("nouvelEtat ne doit pas être null.");
+        }
         this.etat = nouvelEtat;
         this.notifierChangement();
     }
@@ -71,6 +77,9 @@ public class Joueur extends Observable {
      *@param ajout de point de victoire ajouter
     */
     public void addPoints(int ajout) {
+        if (ajout < 0) {
+            throw new IllegalArgumentException("ajout ne doit pas être négatif.");
+        }
         this.pointsVictoire = this.pointsVictoire + ajout;
         this.notifierChangement();
     }
@@ -79,6 +88,9 @@ public class Joueur extends Observable {
      *@param enleve de point de victoire.
     */
     public void subPoints(int enleve) {
+        if (enleve < 0) {
+            throw new IllegalArgumentException("enleve ne doit pas négatif.");
+        }
         this.pointsVictoire = this.pointsVictoire - enleve;
         this.notifierChangement();
     }
@@ -88,6 +100,10 @@ public class Joueur extends Observable {
      *@param nouvelleCombinaison du joueur.
     */
     public void changerCombinaisonActive(Combinaison nouvelleCombinaison) {
+        if (nouvelleCombinaison == null) {
+            throw new IllegalArgumentException("nouvelleCombinaison "
+                + "ne doit pas être null.");
+        }
         if (this.combinaisonActive != null
                 && !this.combinaisonActive.getDeclin()) {
             throw new OperationInterditeException(

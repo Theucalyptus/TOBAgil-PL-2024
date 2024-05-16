@@ -11,8 +11,6 @@ import jeu.peuples.Amazones;
 import jeu.peuples.Elfes;
 import jeu.pouvoirs.Alchimistes;
 import jeu.pouvoirs.Volants;
-import ui.PiocheFenetre.ActionQuitter;
-import ui.PiocheFenetre.MouseEventHandler;
 import ui.views.CombinaisonView;
 
 

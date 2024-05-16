@@ -4,27 +4,13 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
-import jeu.Case;
 import jeu.Jeu;
-import jeu.JeuState;
-import jeu.batiments.TypesBatiments;
-import jeu.exceptions.CoupInvalideException;
-import jeu.Monde;
-import jeu.Combinaison;
-import jeu.Joueur;
 import jeu.JoueurState;
-import jeu.peuples.Peuple;
-import jeu.pouvoirs.Pouvoir;
-import jeu.peuples.TypesPeuples;
-import jeu.pouvoirs.TypesPouvoirs;
-import jeu.TypesRegions;
-import jeu.TypesSymboles;
 
 import ui.selecteur.Selecteur;
 import ui.views.CaseView;
 
 import java.util.Observer;
-import java.util.Scanner;
 import javax.swing.SwingUtilities;
 import ui.BatimentsDialog;
 
@@ -108,7 +94,7 @@ public class ActionsJoueur extends JPanel implements Observer {
 	}
 
 	/**Classe déclenchée quand le bouton action Finir le tour est pressé. */
-	private /*final*/ class ActionFinirTour implements ActionListener {
+	private final class ActionFinirTour implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			jeu.passerTour();
@@ -138,7 +124,7 @@ public class ActionsJoueur extends JPanel implements Observer {
 				// parente de ce composant
 				// 'this' fait référence à l'élément graphique actuel
 				// spécifie que la fenêtre parente est de type JFrame
-				JFrame fenetre =(JFrame) SwingUtilities.getWindowAncestor((JButton) evt.getSource());
+				JFrame fenetre = (JFrame) SwingUtilities.getWindowAncestor((JButton) evt.getSource());
 				BatimentsDialog dialog = new BatimentsDialog(fenetre, caseSelectionnee);
 				dialog.setVisible(true);
 			}
@@ -146,7 +132,7 @@ public class ActionsJoueur extends JPanel implements Observer {
 	}
 
 	/**Classe déclenchée quand le bouton attaquer case est cliqué. */
-	private class ActionAttaquerCase implements ActionListener {
+	private final class ActionAttaquerCase implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			CaseView caseSelectionnee = selecteurCase.getSelection();
@@ -161,7 +147,7 @@ public class ActionsJoueur extends JPanel implements Observer {
 	}
 
 	/**Classe déclenchée quand le bouton placer pion est cliqué. */
-	private /*final*/ class ActionPlacerPion implements ActionListener {
+	private final class ActionPlacerPion implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			CaseView caseSelectionnee = selecteurCase.getSelection();

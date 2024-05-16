@@ -17,6 +17,9 @@ public class GroupePions {
      * @param nombrePions Le nombre de pions dont l'ensemble de pions fait partie.
      */
     public GroupePions(Combinaison combinaison, int nombrePions) {
+        if (combinaison == null || nombrePions < 0) {
+            throw new IllegalArgumentException("L'appel n'est pas conforme.");
+        }
         this.combinaison = combinaison;
         this.nombrePions = nombrePions;
     }
@@ -48,6 +51,10 @@ public class GroupePions {
      * @param newNombrePions La nouvelle valeur du nombre de pions.
      */
     public void setNombre(int newNombrePions) {
+        if (newNombrePions < 0) {
+            throw new IllegalArgumentException("Le nombre de pion "
+                + "ne peut pas être positif.");
+        }
         this.nombrePions = newNombrePions;
     }
 
@@ -56,6 +63,9 @@ public class GroupePions {
      * @param newCase la nouvelle case du groupe de pions.
      */
     public void setCase(Case newCase) {
+        if (newCase == null) {
+            throw new IllegalArgumentException("La nouvelle case ne peut pas être null");
+        }
         this.laCase = newCase;
     }
 

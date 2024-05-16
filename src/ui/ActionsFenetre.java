@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 
-import jeu.Jeu;
 import jeu.JeuReel;
 import ui.selecteur.Selecteur;
 import ui.views.CaseView;
