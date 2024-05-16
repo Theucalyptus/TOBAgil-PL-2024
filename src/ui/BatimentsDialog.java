@@ -1,4 +1,4 @@
-package controleurs;
+package ui;
 
 import java.awt.event.*;
 import java.awt.*;
@@ -12,6 +12,7 @@ import jeu.Joueur;
 
 import ui.selecteur.Selecteur;
 import ui.views.CaseView;
+import ui.utils.ImageFactory;
 
 import java.util.Scanner;
 
@@ -33,20 +34,22 @@ public class BatimentsDialog extends JDialog {
 
         // Ajouter un bouton pour chaque type de bâtiment
         for (TypesBatiments typeBat : TypesBatiments.values()) {
-            JButton button = new JButton(typeBat.toString());
-			button.setIcon(new ImageIcon( ImageFactory.batimentsImage(typeBat)));
-            button.addActionListener(new ActionListener() {
-				//Permet de mettre une action différente pour chaque boutons
-                @Override
-                public void actionPerformed(ActionEvent e) {
-					// Placez le bâtiment sélectionné sur la case sélectionnée
-                    placerBatiment(typeBat);
-                }
-            });
-            fenetrePanel.add(button);
+            if (typeBat != TypesBatiments.AUCUN){
+                JButton button = new JButton(typeBat.toString());
+			    button.setIcon(new ImageIcon( ImageFactory.batimentsImage(typeBat)));
+                button.addActionListener(new ActionListener() {
+				    //Permet de mettre une action différente pour chaque boutons
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+					    // Placez le bâtiment sélectionné sur la case sélectionnée
+                        placerBatiment(typeBat);
+                    }
+                });
+                fenetrePanel.add(button);
+            }
+            getContentPane().add(fenetrePanel, BorderLayout.CENTER);
         }
-        getContentPane().add(fenetrePanel, BorderLayout.CENTER);
-    }
+    } 
 
 	/**
      * Place le batiment sélectionné sur la Case.
