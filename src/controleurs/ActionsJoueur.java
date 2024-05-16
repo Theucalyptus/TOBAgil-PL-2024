@@ -35,12 +35,19 @@ public class ActionsJoueur extends JPanel implements Observer {
 	/**Le sélecteur de case du jeu. */
 	private Selecteur<CaseView> selecteurCase;
 
-	/**Les boutons disponibles */
+	// Les boutons disponibles.
+	// TODO mettre la portée : public, privée, protégée
+	/**Bouton declin. */
 	JButton declinBtn;
+	/**Bouton ajouterBatiment. */
 	JButton ajouterBatimentBtn;
+	/**Bouton attaquerCase. */
 	JButton attaquerCase;
+	/**Bouton placerPion. */
 	JButton placerPion;
+	/**Bouton redeployement. */
 	JButton redeployement;
+	/**BOuton finTour. */
 	JButton finTourBtn;
 
 	/**
@@ -87,12 +94,13 @@ public class ActionsJoueur extends JPanel implements Observer {
 
 
 	private void messageDialogue(ActionEvent evt, String message) {
-		JFrame fenetre = (JFrame) SwingUtilities.getWindowAncestor((JButton)evt.getSource());
+		JFrame fenetre =
+			(JFrame) SwingUtilities.getWindowAncestor((JButton) evt.getSource());
 		JOptionPane.showMessageDialog(fenetre, message);
 	}
 
 	/**Classe déclenchée quand le bouton action Finir le tour est pressé. */
-	private class ActionFinirTour implements ActionListener {
+	private /*final*/ class ActionFinirTour implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			jeu.passerTour();
@@ -100,7 +108,7 @@ public class ActionsJoueur extends JPanel implements Observer {
 	}
 
 	/**Classe déclenchée quand le bouton action déclin est cliqué. */
-	private class ActionDeclin implements ActionListener {
+	private /*final*/ class ActionDeclin implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			jeu.getJoueurCourant().getCombinaisonActive().passageDeclin();
@@ -109,9 +117,11 @@ public class ActionsJoueur extends JPanel implements Observer {
 	}
 
 	/**Classe déclenchée quand le bouton ajouterBatiment est cliqué. */
-	private class ActionAjouterBatiment implements ActionListener {
+	private /*final*/ class ActionAjouterBatiment implements ActionListener {
 
 		//Permet d'avoir un seul scanner en continue
+		// TODO mettre la portée de la variable
+		/**Le Scanner qui demande quel type de Batiment. */
 		Scanner scanner;
 
 		public ActionAjouterBatiment() {
@@ -134,7 +144,8 @@ public class ActionsJoueur extends JPanel implements Observer {
 				Boolean correcte = false;
 				do {
 					//Demande du batiment à ajouter
-					System.out.println("Vous souhaitez ajouter : CAMPEMENT, FORTERESSE,	ANTRE_DE_TROLL, TANIERE ?");
+					System.out.println("Vous souhaitez ajouter : CAMPEMENT, FORTERESSE, "
+						+ "ANTRE_DE_TROLL, TANIERE ?");
 					input = scanner.nextLine();
 					System.out.println("Vous souhaitez rajouter : " + input);
 					//On detecte quel batiment a été choisi
@@ -174,14 +185,15 @@ public class ActionsJoueur extends JPanel implements Observer {
 			if (selecteurCase.getSelection() == null) {
 				messageDialogue(evt, "Action Impossible ! Aucune case sélectionnée.");
 			} else {
-				System.out.println("Attaque de la case : " + caseSelectionnee.getVraieCase().getCoordonnees().toString());
+				System.out.println("Attaque de la case : "
+					+ caseSelectionnee.getVraieCase().getCoordonnees().toString());
 				jeu.attaquerCase(caseSelectionnee.getVraieCase());
 			}
 		}
-	}	
-	
+	}
+
 	/**Classe déclenchée quand le bouton placer pion est cliqué. */
-	private class ActionPlacerPion implements ActionListener {
+	private /*final*/ class ActionPlacerPion implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			CaseView caseSelectionnee = selecteurCase.getSelection();
@@ -204,7 +216,8 @@ public class ActionsJoueur extends JPanel implements Observer {
 
 	public void update(java.util.Observable o, Object arg) {
 		JoueurState etat = this.jeu.getJoueurCourant().getEtat();
-		int pionsEnMain = jeu.getJoueurCourant().getCombinaisonActive().getNbPionsEnMain();
+		int pionsEnMain =
+			jeu.getJoueurCourant().getCombinaisonActive().getNbPionsEnMain();
 
 		// Actualisation bouton déclin
 		boolean declinBtnActif = etat == JoueurState.DEBUT_TOUR;
@@ -215,7 +228,8 @@ public class ActionsJoueur extends JPanel implements Observer {
 		this.ajouterBatimentBtn.setEnabled(batimentBtnActif);
 
 		// Actualisation bouton Conquerir
-		boolean conquerirBtnActif = (etat == JoueurState.ATTAQUE || etat == JoueurState.DEBUT_TOUR) && (pionsEnMain >= 2);
+		boolean conquerirBtnActif = (etat == JoueurState.ATTAQUE
+			|| etat == JoueurState.DEBUT_TOUR) && (pionsEnMain >= 2);
 		this.attaquerCase.setEnabled(conquerirBtnActif);
 
 		// Actualisation bouton Redeployement

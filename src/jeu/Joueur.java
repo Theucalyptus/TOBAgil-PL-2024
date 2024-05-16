@@ -87,12 +87,12 @@ public class Joueur extends Observable {
      *@param nouvelleCombinaison du joueur.
     */
     public void changerCombinaisonActive(Combinaison nouvelleCombinaison) {
-        if (this.combinaisonActive != null 
-                && this.combinaisonActive.getDeclin() == false) {
+        if (this.combinaisonActive != null
+                && !this.combinaisonActive.getDeclin()) {
             throw new OperationInterditeException(
                 "Combinaison actuelle pas en déclin !");
         }
-        if(this.combinaisonActive != null) {
+        if (this.combinaisonActive != null) {
             this.combinaisonsDeclins.add(this.combinaisonActive);
         }
         this.combinaisonActive = nouvelleCombinaison;
@@ -117,7 +117,7 @@ public class Joueur extends Observable {
 
 
     /**
-     * 
+     * Notifier les observers que le joueur a changé.
      */
     private void notifierChangement() {
         super.setChanged();

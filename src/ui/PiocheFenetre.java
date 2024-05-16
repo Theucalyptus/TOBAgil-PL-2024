@@ -30,7 +30,9 @@ public class PiocheFenetre {
     /** La fenêtre. */
     private JFrame fenetre;
 
-    /** Construit une fenêtre affichant la pioche. */
+    /** Construit une fenêtre affichant la pioche.
+     * @param jeu Le jeu dans lequel on joue.
+     */
     public PiocheFenetre(Jeu jeu) {
         this.jeu = jeu;
         this.fenetre = new JFrame("SmallWorld - Pioche");

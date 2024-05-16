@@ -17,17 +17,17 @@ public class JoueurCourantObs extends Observable implements Observer {
     }
 
     public void detacher() {
-        if(this.attache)  {
+        if (this.attache)  {
             this.jeu.getJoueurCourant().deleteObserver(this);
         }
         this.attache = false;
-    }   
+    }
 
     public void attacher() {
         this.jeu.getJoueurCourant().addObserver(this);
         this.attache = true;
     }
-    
+
     public void notifierChangement() {
         super.setChanged();
         super.notifyObservers(jeu.getJoueurCourant());
@@ -36,6 +36,6 @@ public class JoueurCourantObs extends Observable implements Observer {
 
     @Override
     public void update(Observable arg0, Object arg1) {
-        this.notifierChangement();    
+        this.notifierChangement();
     }
 }

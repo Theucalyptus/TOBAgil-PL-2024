@@ -39,6 +39,7 @@ public class MainJoueurView extends JPanel implements Observer {
 
     /**
      * Construit la vue d'un joueur.
+     * @param jeu Le jeu affiché.
      */
     public MainJoueurView(Jeu jeu) {
         super();
@@ -81,8 +82,8 @@ public class MainJoueurView extends JPanel implements Observer {
 
         // affichages des combinaisons en déclins
         System.out.println(joueur.getCombinaisonsDeclins().size());
-        if(joueur.getCombinaisonsDeclins().size() > 0) {
-            for(Combinaison comb : joueur.getCombinaisonsDeclins()) {
+        if (joueur.getCombinaisonsDeclins().size() > 0) {
+            for (Combinaison comb : joueur.getCombinaisonsDeclins()) {
                 CombinaisonView newView = new CombinaisonView(comb);
                 this.combViews.add(newView);
                 this.combinaisonsPnl.add(newView);
@@ -90,7 +91,8 @@ public class MainJoueurView extends JPanel implements Observer {
         }
 
 
-        this.nbPionsAPlacer.setText("Pions à placer : " + joueur.getCombinaisonActive().getNbPionsEnMain());
+        this.nbPionsAPlacer.setText("Pions à placer : "
+            + joueur.getCombinaisonActive().getNbPionsEnMain());
     }
 
     /**
@@ -163,8 +165,8 @@ public class MainJoueurView extends JPanel implements Observer {
 
     @Override
     public void update(Observable arg0, Object arg1) {
-        JoueurCourantObs obs = (JoueurCourantObs)arg0;
-        Joueur joueurCourant = (Joueur)arg1;
+        JoueurCourantObs obs = (JoueurCourantObs) arg0;
+        Joueur joueurCourant = (Joueur) arg1;
         this.setJoueur(joueurCourant);
         SwingUtilities.getWindowAncestor(this).pack();
     }

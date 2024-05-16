@@ -171,8 +171,8 @@ public class JeuReel extends Observable implements Jeu {
     }
 
     /**
-     * Changer la valeur du champs enCours par la valeur en argument.
-     * @param enCours La nouvelle valeur de enCours.
+     * Changer l'état du jeu.
+     * @param newEtat Le nouvel état.
      */
     private void setEtat(JeuState newEtat) {
         this.etat = newEtat;
@@ -268,11 +268,12 @@ public class JeuReel extends Observable implements Jeu {
 
         if (this.estEnCoursDePartie()) {
             // Si le joueur a bien posé tout ses pions.
-            if(joueurCourant.getCombinaisonActive().getNbPionsEnMain() == 0) {
+            if (joueurCourant.getCombinaisonActive().getNbPionsEnMain() == 0) {
                 // Actions de fin de tour
                 this.ajouterPtsVictoire();
             } else {
-                System.out.println("ERREUR : tous les pions ne sont pas placés ! Pas de points attribués.");
+                System.out.println("ERREUR : tous les pions ne sont "
+                    + "pas placés ! Pas de points attribués.");
             }
 
             // Passage au tour suivant
@@ -312,11 +313,14 @@ public class JeuReel extends Observable implements Jeu {
         }
 
         // ajout des pions récupérés à la main du joueur
-        joueurCourant.getCombinaisonActive().setNbPionsEnMain(pionsARecuperer + joueurCourant.getCombinaisonActive().getNbPionsEnMain());
+        joueurCourant.getCombinaisonActive().setNbPionsEnMain(
+            pionsARecuperer + joueurCourant.getCombinaisonActive().getNbPionsEnMain());
         this.joueurCourantObs.notifierChangement();
     }
 
-    /** Pour attaquer une case choisie*/
+    /** Attaquer une case choisie.
+     * @param maCase La case que l'on veut attaquer.
+     */
     public void attaquerCase(Case maCase) {
         if (joueurCourant.getEtat() == JoueurState.DEBUT_TOUR) {
             joueurCourant.setEtat(JoueurState.ATTAQUE);
@@ -324,9 +328,10 @@ public class JeuReel extends Observable implements Jeu {
 
         //checker si la case est atteignable (bordure etc)
         if (maCase.estAtteignable(joueurCourant)) {
-            if (maCase.getPrenable()) { //Boolean et pas boolean
+            if (maCase.getPrenable()) { // Boolean et pas boolean
                 Combinaison combinaisonActive = joueurCourant.getCombinaisonActive();
-                System.out.println("Pions en main : " + combinaisonActive.getNbPionsEnMain());
+                System.out.println("Pions en main : "
+                    + combinaisonActive.getNbPionsEnMain());
                 int attaquants = maCase.getNombreAttaquantNecessaire();
                 int diff = combinaisonActive.getNbPionsEnMain() - attaquants;
 
@@ -338,20 +343,27 @@ public class JeuReel extends Observable implements Jeu {
                         // Le joueur perd son territoire
                         ancienneCombinaison.getPions().remove(anciensPions);
                         // Le joueur récupère tout ses pions sauf 1
-                        ancienneCombinaison.setNbPionsEnMain(ancienneCombinaison.getNbPionsEnMain() + anciensPions.getNombre() - 1);
+                        ancienneCombinaison.setNbPionsEnMain(
+                            ancienneCombinaison.getNbPionsEnMain()
+                            + anciensPions.getNombre() - 1);
                     }
 
                     // On place nos pions sur la case
-                    GroupePions newGroupe = new GroupePions(combinaisonActive, attaquants);
+                    GroupePions newGroupe = new GroupePions(combinaisonActive,
+                        attaquants);
                     maCase.setNewpions(newGroupe);
                     combinaisonActive.setNbPionsEnMain(diff);
                 } else if (diff >= -3) {
                     System.out.println("Pas assez de pions !");
-                    System.out.println("Possédé : " + combinaisonActive.getNbPionsEnMain() + "/" + maCase.getNombreAttaquantNecessaire());
+                    System.out.println("Possédé : "
+                        + combinaisonActive.getNbPionsEnMain() + "/"
+                        + maCase.getNombreAttaquantNecessaire());
                     //lancer dé
                 } else {
                     System.out.println("Pas assez de pions !");
-                    System.out.println("Possédé : " + combinaisonActive.getNbPionsEnMain() + "/" + maCase.getNombreAttaquantNecessaire());
+                    System.out.println("Possédé : "
+                        + combinaisonActive.getNbPionsEnMain() + "/"
+                        + maCase.getNombreAttaquantNecessaire());
                     //exception conquête impossible pas assez de pions
                 }
 
@@ -366,6 +378,7 @@ public class JeuReel extends Observable implements Jeu {
         this.joueurCourantObs.notifierChangement();
     }
 
+    @Override
     public void placerPions(Case maCase, int nbPions) {
         // On vérifie que la case appartient bien au joueur dont c'est le tour.
         Combinaison active = joueurCourant.getCombinaisonActive();

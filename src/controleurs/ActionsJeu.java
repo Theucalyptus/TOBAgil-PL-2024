@@ -6,7 +6,6 @@ import java.util.Observer;
 import java.awt.*;
 import javax.swing.*;
 
-import jeu.Jeu;
 import jeu.JeuReel;
 import jeu.JeuState;
 import jeu.exceptions.PartieEnCoursException;
@@ -65,6 +64,6 @@ public class ActionsJeu extends JPanel implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		boolean btnLancerActif = this.jeu.getEtat() == JeuState.PAS_COMMENCEE;
 		this.debutPartieBtn.setEnabled(btnLancerActif);
-		
+
 	}
 }
