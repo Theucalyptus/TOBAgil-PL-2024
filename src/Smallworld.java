@@ -45,12 +45,13 @@ public /*final*/ class Smallworld {
 
         //SELECTEUR
         Selecteur<CaseView> selecteurCase = new Selecteur<CaseView>();
+        Selecteur<Combinaison> selecteurCombinaison = new Selecteur<Combinaison>();
 
         // VUES
-        PiocheFenetre piocheF = new PiocheFenetre();
+        PiocheFenetre piocheF = new PiocheFenetre(selecteurCombinaison);
         MainMondeFenetre mondeF = new MainMondeFenetre(jeu, selecteurCase);
         MainJoueurFenetre joueurF = new MainJoueurFenetre(jeu);
-        ActionsFenetre actionsF = new ActionsFenetre(jeu, selecteurCase);
+        ActionsFenetre actionsF = new ActionsFenetre(jeu, selecteurCase, selecteurCombinaison);
 
     }
 }

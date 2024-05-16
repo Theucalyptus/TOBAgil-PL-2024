@@ -30,19 +30,25 @@ public class ActionsJoueur extends JPanel {
 
 	/**Le sélecteur de case du jeu. */
 	private Selecteur<CaseView> selecteurCase;
+	private Selecteur<Combinaison> selecteurCombinaison;
 
 	/**
 	 * Construire le contrôleur du Joueur.
 	 * @param jeu Le jeu dans lequel on agit.
 	 * @param selecteurCase Le selecteur de Case.
 	 */
-	public ActionsJoueur(Jeu jeu, Selecteur<CaseView> selecteurCase) {
+	public ActionsJoueur(Jeu jeu, Selecteur<CaseView> selecteurCase, Selecteur<Combinaison> selecteurCombinaison) {
 		super();
 		this.jeu = jeu;
 		this.selecteurCase = selecteurCase;
+		this.selecteurCombinaison = selecteurCombinaison;
 
 		super.setLayout(new FlowLayout());
 		super.setBorder(BorderFactory.createTitledBorder("Actions du Joueur"));
+
+		JButton PiocheBtn = new JButton("Piocher");
+		PiocheBtn.addActionListener(new ActionPiocher());
+		super.add(PiocheBtn);
 
 		JButton declinBtn = new JButton("Passer en déclin");
 		declinBtn.addActionListener(new ActionDeclin());
@@ -73,6 +79,20 @@ public class ActionsJoueur extends JPanel {
 	private void messageDialogue(ActionEvent evt, String message) {
 		JFrame fenetre = (JFrame) SwingUtilities.getWindowAncestor((JButton)evt.getSource());
 		JOptionPane.showMessageDialog(fenetre, message);
+	}
+
+	/**Classe déclenchée quand le bouton action piocher est cliqué. */
+	private class ActionPiocher implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent evt) {
+			Combinaison CombinaisonSelectionnee = selecteurCombinaison.getSelection();
+			if (CombinaisonSelectionnee == null) {
+				messageDialogue(evt, "Action Impossible ! Aucune combinaison sélectionnée.");
+			} else {
+				Joueur courant = jeu.getJoueurCourant();
+				courant.changerCombinaisonActive(CombinaisonSelectionnee);
+			}
+		}
 	}
 
 	/**Classe déclenchée quand le bouton action Finir le tour est pressé. */

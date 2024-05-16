@@ -48,8 +48,9 @@ public class ImageFactory {
      * @param type le type du peuple
      * @return l'image
      */
-    public static final Image peupleLogoImage(TypesPeuples type) {
-        String path = ROOT_ASSETS_PATH + "peuples/" + type.name().toLowerCase() +  ".jpg";
+    public static final Image peupleLogoImage(TypesPeuples type, Boolean enDeclin) {
+        String path = ROOT_ASSETS_PATH + "peuples/" + type.name().toLowerCase() 
+            + (enDeclin ? "_declin" : "") +  ".png";
         return readImage(path);
     }
 
@@ -70,9 +71,9 @@ public class ImageFactory {
      * @param type le type du pouvoir
      * @return l'image
      */
-    public static final Image pouvoirLogoImage(TypesPouvoirs type) {
+    public static final Image pouvoirLogoImage(TypesPouvoirs type, Boolean enDeclin) {
         String path = ROOT_ASSETS_PATH + "pouvoirs/" + type.name().toLowerCase()
-            + ".jpg";
+            + (enDeclin ? "_declin" : "") +  ".png";
         return readImage(path);
     }
 

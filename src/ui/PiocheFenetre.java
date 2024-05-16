@@ -13,6 +13,7 @@ import java.util.Map;
 import jeu.Combinaison;
 import jeu.peuples.*;
 import jeu.pouvoirs.*;
+import ui.selecteur.Selecteur;
 import ui.views.CombinaisonView;
 import jeu.Pioche;
 
@@ -31,11 +32,14 @@ public class PiocheFenetre {
     private JPanel mainPanel;
     private MouseEventHandler trace;
 
+    private Selecteur<Combinaison> selecteurCombinaison;
+
     /** Construit une fenêtre affichant la pioche. */
-    public PiocheFenetre() {
+    public PiocheFenetre(Selecteur<Combinaison> selecteurCombinaison) {
         this.pioche = new Pioche();
         this.fenetre = new JFrame("SmallWorld - Pioche");
         this.fenetre.setMinimumSize(new Dimension(800, 600));
+        this.selecteurCombinaison = selecteurCombinaison;
         Container contentPane = this.fenetre.getContentPane();
 
         this.mainPanel = new JPanel();
@@ -104,7 +108,8 @@ public class PiocheFenetre {
             } else {
                 System.out.println("OK - combinaison selectionne");
                 int indiceChoisi = combinaisonIndexMap.get(selectedClass);
-                pioche.combinaisonChoisit(indiceChoisi);
+                Combinaison combinaison = pioche.combinaisonChoisit(indiceChoisi);
+                selecteurCombinaison.setSelection(combinaison);
                 updateView();
             }
 		}
@@ -116,7 +121,8 @@ public class PiocheFenetre {
         public void mouseEntered(MouseEvent e) {
             CombinaisonView entree = (CombinaisonView) e.getSource();
             if (selectedClass != entree) {
-                entree.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.BLUE));
+                entree.setBackground(Color.BLUE);
+            //    entree.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.BLUE));
             }
         }
 
@@ -124,6 +130,7 @@ public class PiocheFenetre {
         public void mouseExited(MouseEvent e) {
             CombinaisonView entree = (CombinaisonView) e.getSource();
             if (selectedClass != entree) {
+                entree.setBackground(Color.WHITE);
                 entree.setBorder(BorderFactory.createEmptyBorder());
             }
         }
@@ -132,10 +139,11 @@ public class PiocheFenetre {
         public void mouseClicked(MouseEvent e) {
             CombinaisonView entree = (CombinaisonView) e.getSource();
             if (selectedClass != null) {
-                selectedClass.setBorder(BorderFactory.createEmptyBorder());
+                entree.setBackground(Color.WHITE);
+            //    selectedClass.setBorder(BorderFactory.createEmptyBorder());
             }
-
-            entree.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.GREEN));
+            entree.setBackground(Color.GREEN);
+            //entree.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.GREEN));
             selectedClass = entree;
         }
     }
