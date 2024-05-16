@@ -1,5 +1,8 @@
 package jeu.pouvoirs;
 
+import jeu.Case;
+import jeu.TypesRegions;
+
 /**Classe DesMarais. L'DesMarais est un pouvoir qui rend plus riche.*/
 public class DesMarais extends Pouvoir {
 
@@ -15,9 +18,32 @@ public class DesMarais extends Pouvoir {
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
     private static final int PIONSSUP = 4;
 
+    /**Le nombre de marais conquis. */
+    private int nbMarais = 4;
+
     /**Construire un DesMarais. */
     public DesMarais() {
         super(TypesPouvoirs.DES_MARAIS, NOM, DESCRIPTION, PIONSSUP);
     }
 
+    @Override
+    public void apresConquete(Case regionConquise) {
+        if (regionConquise.getTypeRegion() == TypesRegions.MARAIS) {
+            this.nbMarais++;
+        }
+    }
+
+    @Override
+    public void apresConqueteAdverse(Case regionConquise) {
+        if (regionConquise.getTypeRegion() == TypesRegions.MARAIS) {
+            this.nbMarais--;
+        }
+    }
+
+    @Override
+    public void finTour(boolean enDeclin) {
+        if (!enDeclin) {
+            this.nbJetons = this.nbMarais;
+        }
+    }
 }

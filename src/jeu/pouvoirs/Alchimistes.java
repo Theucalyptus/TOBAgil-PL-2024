@@ -15,9 +15,19 @@ public class Alchimistes extends Pouvoir {
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
     private static final int PIONSSUP = 4;
 
+    /**Le nombre de point gagné à chaque fin de tour. */
+    private int nmb_gagne = 2;
+
     /**Construire un Alchimiste. */
     public Alchimistes() {
         super(TypesPouvoirs.ALCHIMISTES, NOM, DESCRIPTION, PIONSSUP);
+    }
+
+    @Override
+    public void finTour(boolean enDeclin) {
+        if (!enDeclin) {
+            this.nbJetons = this.nmb_gagne;
+        }
     }
 
 }
