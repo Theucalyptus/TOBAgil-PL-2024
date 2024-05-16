@@ -2,7 +2,6 @@ package jeu;
 
 import java.util.Map;
 import java.util.Observable;
-// import java.util.Set;
 
 import jeu.batiments.TypesBatiments;
 
@@ -11,24 +10,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Collection;
 
-//import jeu.batiments.Batiment;
-//import jeu.batiments.TypesBatiments;
-//import jeu.TypesRegions;
-//import jeu.peuples.Peuple;
-
 /**Case du jeu. Une case possède :
+ * une coordonnée
  * type de région
+ * une ressource
  * batiment
- * ensemble de pions
+ * groupe de pions
  * ressource (mine,...)
- * status (prenable ou non)
- *
- * Par défaut, une case est :
- *      - un Champ
- *      - sans Batiment
- *      - sans unité
- *      - sans ressource
- *      - etat prenable
+ * prenable ou non
+ * bordure ou non
+ * contient ses cases voisines
  */
 @SuppressWarnings("deprecation")
 public class Case extends Observable {
@@ -75,6 +66,12 @@ public class Case extends Observable {
      */
     public Case(int i, int j, TypesRegions region,
                 GroupePions pions, TypesSymboles ressource, Boolean bordure) {
+        // tests de robustesse
+        if (i < 0 || j < 0 || region == null || ressource == null) {
+            throw new IllegalArgumentException("Appel au constructeur de "
+                + "Case non conforme.");
+        }
+
         this.voisins = new ArrayList<>();
         this.coordonnees = new ArrayList<>();
         this.coordonnees.add(i);
@@ -185,9 +182,9 @@ public class Case extends Observable {
 
     /**
      * Modifie l'ensemble de pions placées sur la Case.
-     * @param newPions ensemble de pions placées sur la Case.
+     * @param newPions Le nouvel ensemble de pions placées sur la Case.
      */
-    public void setNewpions(GroupePions newPions) {
+    public void setNewPions(GroupePions newPions) {
         this.pions = newPions;
         newPions.getCombinaison().addGroupe(newPions);
         newPions.setCase(this);
@@ -199,6 +196,10 @@ public class Case extends Observable {
      * @param newNombre
      */
     public void setNewNombrePions(int newNombre) {
+        if (newNombre < 0) {
+            throw new IllegalArgumentException("Le nombre de Pions ne peut "
+                + "pas être négatif.");
+        }
         this.pions.setNombre(newNombre);
         this.notification();
     }
@@ -215,6 +216,10 @@ public class Case extends Observable {
      * @param nombreBatimentSup Le nombre de batiment supplémentaire.
      */
     public void setTypeBatiment(TypesBatiments newBatiment, Integer nombreBatimentSup) {
+        // robustesse
+        if (newBatiment == null || nombreBatimentSup < 0) {
+            throw new IllegalArgumentException("L'appel n'est pas Correct.");
+        }
         //On regarde si le type de batiment est déjà présent sur la case
         if ((this.batiments).containsKey(newBatiment)) {
             int ancienneVal = (this.batiments).get(newBatiment);
@@ -257,6 +262,10 @@ public class Case extends Observable {
      * @param batiment batiment à retiré de la Case.
      */
     public void removeBatiment(TypesBatiments batiment) {
+        // robustesse
+        if (batiment == null) {
+            throw new IllegalArgumentException("Batiment ne doit pas être nul.");
+        }
         this.batiments.remove(batiment);
         this.notification();
     }
@@ -265,6 +274,9 @@ public class Case extends Observable {
      * @param caseVoisine case voisine
     */
     public void ajoutVoisins(Case caseVoisine) {
+        if (caseVoisine == null) {
+            throw new IllegalAccessException("CaseVoisine ne doit pas être null.");
+        }
         this.voisins.add(caseVoisine);
     }
 
@@ -274,6 +286,10 @@ public class Case extends Observable {
      * @return Si le Joueur peut l'atteindre.
      */
     public boolean estAtteignable(Joueur joueur) {
+        // robustesse
+        if (joueur == null) {
+            throw new IllegalArgumentException("joueur ne doit pas être null.");
+        }
 
         if (this.estBordure && (joueur.getCombinaisonActive().getPions().size() == 0)) {
             return true;

@@ -71,6 +71,7 @@ public interface Jeu {
     /**
      * Attaquer une case.
      * @param laCase La case à attaquer.
+     * @throws IllegalArgumentException Si la case est null.
      */
     void attaquerCase(Case laCase);
 

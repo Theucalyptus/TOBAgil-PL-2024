@@ -1,15 +1,13 @@
 package ui;
 
 import java.awt.*;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.*;
 
 import jeu.Jeu;
 import ui.views.MainJoueurView;
 
-@SuppressWarnings("deprecation")
+//@SuppressWarnings("deprecation")
 public class MainJoueurFenetre {
 
     /** Titre de la fenêtre. */

@@ -2,6 +2,9 @@ package jeu.testsUnitaires;
 
 import jeu.Monde;
 
+import org.junit.*;
+import static org.junit.Assert.*;
+
 /**
  * TestMonde. Classe de Test de la classe monde.
  */

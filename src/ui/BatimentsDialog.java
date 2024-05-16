@@ -4,17 +4,10 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
-import jeu.Case;
-import jeu.Jeu;
 import jeu.batiments.TypesBatiments;
-import jeu.Monde;
-import jeu.Joueur;
 
-import ui.selecteur.Selecteur;
 import ui.views.CaseView;
 import ui.utils.ImageFactory;
-
-import java.util.Scanner;
 
 public class BatimentsDialog extends JDialog {
 
@@ -49,7 +42,7 @@ public class BatimentsDialog extends JDialog {
             }
             getContentPane().add(fenetrePanel, BorderLayout.CENTER);
         }
-    } 
+    }
 
 	/**
      * Place le batiment sélectionné sur la Case.

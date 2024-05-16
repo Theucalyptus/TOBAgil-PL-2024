@@ -113,17 +113,17 @@ public class TestCase {
 
     /**Tester le setteur du nouveau groue de pions. */
     @Test
-    public void testerSetNewPions() {
+    public void testersetNewPions() {
         GroupePions leNouveau = new GroupePions(new Combinaison(new Amazones(),
             new Volants()), TREIZE);
-        this.uneCase.setNewpions(leNouveau);
+        this.uneCase.setNewPions(leNouveau);
         assertTrue(this.uneCase.getGroupePions() == leNouveau);
     }
 
     /**Tester la robustesse du setteur du pions. */
     @Test(expected = IllegalArgumentException.class)
-    public void testerRobustesseSetNewPions() {
-        this.uneCase2.setNewpions(null);
+    public void testerRobustessesetNewPions() {
+        this.uneCase2.setNewPions(null);
     }
 
     /**Tester le setteur du type de Batiment. */
