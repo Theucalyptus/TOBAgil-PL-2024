@@ -49,7 +49,7 @@ public class ImageFactory {
      * @return l'image
      */
     public static final Image peupleLogoImage(TypesPeuples type) {
-        String path = ROOT_ASSETS_PATH + "peuples/" + type.name().toLowerCase() +  ".png";
+        String path = ROOT_ASSETS_PATH + "peuples/" + type.name().toLowerCase() +  ".jpg";
         return readImage(path);
     }
 
@@ -72,7 +72,7 @@ public class ImageFactory {
      */
     public static final Image pouvoirLogoImage(TypesPouvoirs type) {
         String path = ROOT_ASSETS_PATH + "pouvoirs/" + type.name().toLowerCase()
-            + ".png";
+            + ".jpg";
         return readImage(path);
     }
 
