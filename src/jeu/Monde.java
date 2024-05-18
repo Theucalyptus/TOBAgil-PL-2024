@@ -19,6 +19,8 @@ public class Monde {
     /** La grille avec l'ensemble des tuiles. */
     private List<Case> grille;
 
+    private final double probaTribuOubliee = 0.25;
+
     /**
      * Construire un Monde.
      * @param nbJoueurs Le nombre de joueur dans la partie.
@@ -105,7 +107,13 @@ public class Monde {
                     || y == 0 || y == this.dimY - 1;
 
                 // nombre de pions a placer sur la nouvelle case
-                int nbPions = 1;
+                
+                int nbPions;
+                if (Math.random() < probaTribuOubliee) {
+                    nbPions = 1;
+                } else {
+                    nbPions = 0;
+                }
 
 
                 if (coins || centre) { //on traite les cas où on veut la mer ou un lac
@@ -161,6 +169,7 @@ public class Monde {
                 // on pose une tribu oubliée sur la case
                 Combinaison tribuOublieeComb = new Combinaison(
                     new jeu.peuples.TribuOubliee(), new jeu.pouvoirs.TribuOubliee());
+
                 GroupePions newEnsemblePions = new GroupePions(tribuOublieeComb, nbPions);
                 // création de la nouvelle case
                 Case newcase = new Case(x, y, newregion, newEnsemblePions,
