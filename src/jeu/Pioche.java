@@ -67,6 +67,16 @@ public class Pioche {
         return pioche.size();
     }
 
+    /**
+     * Donner la Combinaison attachée à l'indice donnée en argument.
+     * @param indice L'indice de la combinaison voulut.
+     */
+    public Combinaison getCombinaison(int indice) {
+
+        Combinaison combinaison = this.pioche.get(indice);
+        return combinaison;
+    }
+
 
     //===============================================================
     //                          Commandes
@@ -201,15 +211,11 @@ public class Pioche {
     
     
     /**
-     * Donner la Combinaison attachée à l'indice donnée en argument.
-     * @param indice L'indice de la combinaison voulut.
+     * Supprime la combinaison de la pioche
+     * @param combinaison a supprimer de la pioche
      */
-    public Combinaison combinaisonChoisit(int indice) {
-
-        Combinaison combinaison = this.pioche.get(indice);
-        // Remettre l'association au fond de la pioche
-        this.pioche.remove(indice);
-        return combinaison;
+    public void removeCombinaisonChoisit(Combinaison combinaison) {
+        this.pioche.remove(combinaison);
     }
 
 }

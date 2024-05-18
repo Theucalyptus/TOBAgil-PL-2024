@@ -13,6 +13,7 @@ import java.util.Map;
 import jeu.Combinaison;
 import jeu.Jeu;
 import jeu.JoueurState;
+import jeu.JeuState;
 import jeu.peuples.*;
 import jeu.pouvoirs.*;
 import ui.selecteur.Selecteur;
@@ -27,6 +28,8 @@ public class PiocheFenetre {
     /** La vue de la combinaison sélectionnée. */
     private CombinaisonView selectedClass = null;
 
+    private Jeu jeu;
+
 
     /** La fenêtre. */
     private JFrame fenetre;
@@ -38,7 +41,8 @@ public class PiocheFenetre {
     private Selecteur<Combinaison> selecteurCombinaison;
 
     /** Construit une fenêtre affichant la pioche. */
-    public PiocheFenetre(Selecteur<Combinaison> selecteurCombinaison) {
+    public PiocheFenetre(Selecteur<Combinaison> selecteurCombinaison, Jeu jeu) {
+        this.jeu = jeu;
         this.pioche = new Pioche();
         this.fenetre = new JFrame("SmallWorld - Pioche");
         this.fenetre.setMinimumSize(new Dimension(800, 600));
@@ -73,37 +77,29 @@ public class PiocheFenetre {
 
         this.mainPanel.revalidate();
         this.mainPanel.repaint();
-
-        JButton selectButton = new JButton("Selectionner");
-        selectButton.addActionListener(new ActionQuitter());
-        selectButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        mainPanel.add(selectButton);
     }
-
-	public class ActionQuitter implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent evt) {
-			if (selectedClass == null) {
-                System.out.println("AUCUNE CLASSE SELECTIONNE - REESSAYER !");
-            } else {
-                System.out.println("OK - combinaison selectionne");
-                int indiceChoisi = combinaisonIndexMap.get(selectedClass);
-                Combinaison combinaison = pioche.combinaisonChoisit(indiceChoisi);
-                selecteurCombinaison.setSelection(combinaison);
-                updateView();
-            }
-		}
-	}
 
     public class MouseEventHandler extends MouseAdapter {
 
         @Override
         public void mouseEntered(MouseEvent e) {
+
+            if (jeu.getEtat() == JeuState.PAS_COMMENCEE) {
+                return;
+            }
+
+            if (jeu.getJoueurCourant().getEtat() != JoueurState.CHOIX_COMBINAISON) {
+                return;
+            }
+
+            if (selecteurCombinaison.getSelection() != null) {
+                return;
+            }
+
             CombinaisonView entree = (CombinaisonView) e.getSource();
+
             if (selectedClass != entree) {
                 entree.setBackground(Color.BLUE);
-            //    entree.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.BLUE));
             }
         }
 
@@ -118,14 +114,51 @@ public class PiocheFenetre {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            CombinaisonView entree = (CombinaisonView) e.getSource();
-            if (selectedClass != null) {
-                entree.setBackground(Color.WHITE);
-            //    selectedClass.setBorder(BorderFactory.createEmptyBorder());
+
+            if (jeu.getEtat() == JeuState.PAS_COMMENCEE) {
+                System.out.println("La partie n'a pas encore commence");
+                return;
             }
+
+            CombinaisonView entree = (CombinaisonView) e.getSource();
+
+            resetCouleur();
+
+            if (jeu.getJoueurCourant().getEtat() != JoueurState.CHOIX_COMBINAISON) {
+                System.out.println("Vous ne pouvez pas choisir une combinaison");
+                return;
+            }
+
+            if (selecteurCombinaison.getSelection() != null) {
+                System.out.println("Une combinaison a deja ete selectionnee");
+                return;
+            }
+
+            if (selectedClass != null && entree == selectedClass) {
+                processCombinaisonSelection();
+            }
+            
             entree.setBackground(Color.GREEN);
-            //entree.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.GREEN));
             selectedClass = entree;
+        }
+
+        private void resetCouleur() {
+            for (CombinaisonView view : combinaisonIndexMap.keySet()) {
+                view.setBackground(Color.WHITE);
+            }
+        }
+
+        private void processCombinaisonSelection() {
+            Integer indiceChoisi = combinaisonIndexMap.get(selectedClass);
+            if (indiceChoisi != null) {
+                System.out.println("OK - combinaison selectionnee");
+                Combinaison combinaison = pioche.getCombinaison(indiceChoisi);
+                pioche.removeCombinaisonChoisit(combinaison);
+                selecteurCombinaison.setSelection(combinaison);
+                updateView();
+            } else {
+                System.out.println("AUCUNE CLASSE SELECTIONNE - REESSAYER !");
+            }
         }
     }
 }
