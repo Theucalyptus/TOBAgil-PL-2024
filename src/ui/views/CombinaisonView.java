@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.ImageIcon;
+import java.awt.Image;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -27,25 +28,35 @@ public class CombinaisonView extends JPanel {
         super();
         super.setLayout(new FlowLayout());
 
-        if (comb.getDeclin()) {
-            super.setBackground(Color.GRAY);
-        } else {
-            super.setBackground(Color.WHITE);
-        }
-
         Peuple peupleC = comb.getPeuple();
         Pouvoir pouvoirC = comb.getPouvoir();
 
-        this.peupleLbl.setIcon(new ImageIcon(
-            ImageFactory.peupleLogoImage(peupleC.getType())));
+        Image image_peuple = ImageFactory.peupleLogoImage(peupleC.getType(), comb.getDeclin());
 
-        this.peupleLbl.setText(peupleC.getNom());
-        this.pouvoirLbl.setIcon(new ImageIcon(
-            ImageFactory.pouvoirLogoImage(pouvoirC.getType())));
+        ImageIcon imageTemp = new ImageIcon(image_peuple.getScaledInstance(192, 128,
+        java.awt.Image.SCALE_SMOOTH));
 
-        this.pouvoirLbl.setText(pouvoirC.getNom());
+        this.peupleLbl.setIcon(imageTemp);
 
-        super.add(this.peupleLbl);
-        super.add(this.pouvoirLbl);
+        //this.peupleLbl.setText(peupleC.getNom());
+
+        Image image_pouvoirs = ImageFactory.pouvoirLogoImage(pouvoirC.getType(), comb.getDeclin());
+
+        this.pouvoirLbl.setIcon(new ImageIcon(image_pouvoirs.getScaledInstance(128, 128,
+        java.awt.Image.SCALE_SMOOTH)));
+
+        //this.pouvoirLbl.setText(pouvoirC.getNom());
+
+
+        if (comb.getDeclin()) {
+            super.add(this.pouvoirLbl);
+            super.add(this.peupleLbl);
+        } else {
+            super.add(this.peupleLbl);
+            super.add(this.pouvoirLbl);
+        }
+        
     }
+
+    
 }

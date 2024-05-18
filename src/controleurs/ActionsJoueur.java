@@ -4,7 +4,9 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
+import jeu.Combinaison;
 import jeu.Jeu;
+import jeu.Joueur;
 import jeu.JoueurState;
 
 import ui.selecteur.Selecteur;
@@ -22,36 +24,44 @@ public class ActionsJoueur extends JPanel implements Observer {
 
 	/**Le sélecteur de case du jeu. */
 	private Selecteur<CaseView> selecteurCase;
+	private Selecteur<Combinaison> selecteurCombinaison;
 
 	// Les boutons disponibles.
-	// TODO mettre la portée : public, privée, protégée
 	/**Bouton declin. */
-	JButton declinBtn;
+	private JButton declinBtn;
 	/**Bouton ajouterBatiment. */
-	JButton ajouterBatimentBtn;
+	private JButton ajouterBatimentBtn;
 	/**Bouton attaquerCase. */
-	JButton attaquerCase;
+	private JButton attaquerCase;
 	/**Bouton placerPion. */
-	JButton placerPion;
+	private JButton placerPion;
 	/**Bouton redeployement. */
-	JButton redeployement;
-	/**BOuton finTour. */
-	JButton finTourBtn;
+	private JButton redeployement;
+	/**Bouton finTour. */
+	private JButton finTourBtn;
+	/**Bouton piocher. */
+	private JButton piocheBtn;
 
 	/**
 	 * Construire le contrôleur du Joueur.
 	 * @param jeu Le jeu dans lequel on agit.
 	 * @param selecteurCase Le selecteur de Case.
 	 */
-	public ActionsJoueur(Jeu jeu, Selecteur<CaseView> selecteurCase) {
+	public ActionsJoueur(Jeu jeu, Selecteur<CaseView> selecteurCase, Selecteur<Combinaison> selecteurCombinaison) {
 		super();
         jeu.ajouterObservateurJoueurCourant(this);
 
 		this.jeu = jeu;
 		this.selecteurCase = selecteurCase;
+		this.selecteurCombinaison = selecteurCombinaison;
 
 		super.setLayout(new FlowLayout());
 		super.setBorder(BorderFactory.createTitledBorder("Actions du Joueur"));
+
+		piocheBtn = new JButton("Piocher");
+		piocheBtn.addActionListener(new ActionPiocher());
+		piocheBtn.setEnabled(false);
+		super.add(piocheBtn);
 
 		declinBtn = new JButton("Passer en déclin");
 		declinBtn.addActionListener(new ActionDeclin());
@@ -91,6 +101,20 @@ public class ActionsJoueur extends JPanel implements Observer {
 		JFrame fenetre =
 			(JFrame) SwingUtilities.getWindowAncestor((JButton) evt.getSource());
 		JOptionPane.showMessageDialog(fenetre, message);
+	}
+
+	/**Classe déclenchée quand le bouton action piocher est cliqué. */
+	private class ActionPiocher implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent evt) {
+			Combinaison CombinaisonSelectionnee = selecteurCombinaison.getSelection();
+			if (CombinaisonSelectionnee == null) {
+				messageDialogue(evt, "Action Impossible ! Aucune combinaison sélectionnée.");
+			} else {
+				Joueur courant = jeu.getJoueurCourant();
+				courant.changerCombinaisonActive(CombinaisonSelectionnee);
+			}
+		}
 	}
 
 	/**Classe déclenchée quand le bouton action Finir le tour est pressé. */
@@ -202,6 +226,10 @@ public class ActionsJoueur extends JPanel implements Observer {
 			|| etat == JoueurState.REDEPLOYMENT)
 			&& pionsEnMain == 0;
 		this.finTourBtn.setEnabled(finTourBtnActif);
+
+		// Actualisation du bouton Piocher
+		boolean piocheBtnActif = (etat == JoueurState.CHOIX_COMBINAISON);
+		this.piocheBtn.setEnabled(piocheBtnActif);
 
 	}
 }

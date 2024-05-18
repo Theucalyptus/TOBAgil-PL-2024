@@ -9,10 +9,9 @@ import jeu.Combinaison;
 import jeu.JeuReel;
 import jeu.Joueur;
 import jeu.Monde;
-import jeu.peuples.Amazones;
-import jeu.peuples.Elfes;
-import jeu.pouvoirs.Alchimistes;
-import jeu.pouvoirs.Volants;
+import jeu.batiments.TypesBatiments;
+import jeu.peuples.*;
+import jeu.pouvoirs.*;
 
 /**Classe principale de l'application.*/
 public final class Smallworld {
@@ -45,12 +44,13 @@ public final class Smallworld {
 
         //SELECTEUR
         Selecteur<CaseView> selecteurCase = new Selecteur<CaseView>();
+        Selecteur<Combinaison> selecteurCombinaison = new Selecteur<Combinaison>();
 
         // VUES
-        PiocheFenetre piocheF = new PiocheFenetre(jeu);
+        PiocheFenetre piocheF = new PiocheFenetre(selecteurCombinaison);
         MainMondeFenetre mondeF = new MainMondeFenetre(jeu, selecteurCase);
         MainJoueurFenetre joueurF = new MainJoueurFenetre(jeu);
-        ActionsFenetre actionsF = new ActionsFenetre(jeu, selecteurCase);
+        ActionsFenetre actionsF = new ActionsFenetre(jeu, selecteurCase, selecteurCombinaison);
 
     }
 }

@@ -3,7 +3,7 @@ package ui;
 import javax.swing.*;
 import java.awt.*;
 
-
+import jeu.Combinaison;
 import jeu.JeuReel;
 import ui.selecteur.Selecteur;
 import ui.views.CaseView;
@@ -19,7 +19,7 @@ public class ActionsFenetre {
      * @param jeu le jeu à contrôlé
      * @param selecteurCase le sélecteur de case
      */
-    public ActionsFenetre(JeuReel jeu, Selecteur<CaseView> selecteurCase) {
+    public ActionsFenetre(JeuReel jeu, Selecteur<CaseView> selecteurCase, Selecteur<Combinaison> selecteurCombinaison) {
 
         this.fenetre = new JFrame("SmallWorld - Actions");
         Container contentPane = this.fenetre.getContentPane();
@@ -27,7 +27,7 @@ public class ActionsFenetre {
 
         // Ajout du controlleur pour le joueur
         contentPane.add(new ActionsJeu(jeu));
-        contentPane.add(new ActionsJoueur(jeu, selecteurCase));
+        contentPane.add(new ActionsJoueur(jeu, selecteurCase, selecteurCombinaison));
 
         this.fenetre.pack();
         this.fenetre.setVisible(true);

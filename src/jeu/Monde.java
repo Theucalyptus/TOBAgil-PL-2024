@@ -10,6 +10,10 @@ import java.util.HashMap;
 
 import java.util.Random;
 
+import jeu.peuples.*;
+import jeu.peuples.TribuOubliee;
+import jeu.pouvoirs.*;
+
 public class Monde {
 
     /** Le nombre de tuiles en largeurs. */
