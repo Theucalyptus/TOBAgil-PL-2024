@@ -275,7 +275,7 @@ public class Case extends Observable {
     */
     public void ajoutVoisins(Case caseVoisine) {
         if (caseVoisine == null) {
-            throw new IllegalAccessException("CaseVoisine ne doit pas être null.");
+            throw new IllegalArgumentException("CaseVoisine ne doit pas être null.");
         }
         this.voisins.add(caseVoisine);
     }
