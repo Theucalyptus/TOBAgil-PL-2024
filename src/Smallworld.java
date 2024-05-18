@@ -32,11 +32,8 @@ public final class Smallworld {
         // MODELE
         JeuReel jeu = new JeuReel();
         Joueur j1 = new Joueur("Fraise", 0);
-        j1.changerCombinaisonActive(new Combinaison(new Amazones(), new Alchimistes()));
         Joueur j2 = new Joueur("Framboise", 0);
-        j2.changerCombinaisonActive(new Combinaison(new Elfes(), new Alchimistes()));
         Joueur j3 = new Joueur("Pomme", 0);
-        j3.changerCombinaisonActive(new Combinaison(new Amazones(), new Volants()));
         jeu.ajouterJoueur(j1);
         jeu.ajouterJoueur(j2);
         jeu.ajouterJoueur(j3);

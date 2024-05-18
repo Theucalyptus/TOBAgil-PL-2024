@@ -314,16 +314,13 @@ public class JeuReel extends Observable implements Jeu {
     //Se lance au debut du tour d'un joueur
     private void debutTour() {
         System.out.println("Début du tour de " + this.joueurCourant.getNom());
-        if (this.joueurCourant.getEtat() != JoueurState.DEBUT_TOUR) {
-            System.out.println("ERREUR state en début de tours");
-        }
-
-        if (this.joueurCourant.getCombinaisonActive().getDeclin()) {
+        Combinaison activComb = this.joueurCourant.getCombinaisonActive();
+        if (activComb != null && activComb.getDeclin()) {
             this.joueurCourant.setEtat(JoueurState.CHOIX_COMBINAISON);
+        } else if (this.joueurCourant.getEtat() == JoueurState.DEBUT_TOUR) {
+            recupPions();
         }
 
-        // TODO logique màj de l'état du joueur
-        recupPions();
         this.joueurCourantObs.notifierChangement();
     }
 

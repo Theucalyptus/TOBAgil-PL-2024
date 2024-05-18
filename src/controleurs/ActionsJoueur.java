@@ -113,6 +113,7 @@ public class ActionsJoueur extends JPanel implements Observer {
 			} else {
 				Joueur courant = jeu.getJoueurCourant();
 				courant.changerCombinaisonActive(CombinaisonSelectionnee);
+				courant.setEtat(JoueurState.DEBUT_TOUR);
 			}
 		}
 	}
@@ -194,8 +195,12 @@ public class ActionsJoueur extends JPanel implements Observer {
 
 	public void update(java.util.Observable o, Object arg) {
 		JoueurState etat = this.jeu.getJoueurCourant().getEtat();
-		int pionsEnMain =
-			jeu.getJoueurCourant().getCombinaisonActive().getNbPionsEnMain();
+		int pionsEnMain = 0;
+		try {
+			jeu.getJoueurCourant().getCombinaisonActive().getNbPionsEnMain();			
+		} catch (NullPointerException e) {
+			// rien
+		}
 
 		// Actualisation bouton déclin
 		boolean declinBtnActif = etat == JoueurState.DEBUT_TOUR;

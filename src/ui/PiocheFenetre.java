@@ -22,13 +22,11 @@ import jeu.Pioche;
 
 public class PiocheFenetre {
 
-    // TODO : à exporter dans jeu.pioche;
-    public static final int NBCLASSE = 5;
+    /** La pioche du jeu. */
     private Pioche pioche;
+    /** La vue de la combinaison sélectionnée. */
     private CombinaisonView selectedClass = null;
 
-    /** Le jeu affiché. */
-    private final Jeu jeu;
 
     /** La fenêtre. */
     private JFrame fenetre;
@@ -54,28 +52,6 @@ public class PiocheFenetre {
 		this.trace = new MouseEventHandler();
 
         updateView();
-
-        //List<Combinaison> Visible = pioche.getChoix();
-        //for (int i = 0; i <= Math.min(pioche.lengthPioche(), pioche.LONGUEURPIOCHE) ; i++) {
-
-        //    CombinaisonView entree =
-        //        new CombinaisonView(Visible.get(i));
-        //    entree.addMouseListener(trace);
-        //    mainPanel.add(entree);
-        //    combinaisonIndexMap.put(entree, i);
-        // à refactor pour utiliser pioche quand dispo
-        //for(int i=0;i<NBCLASSE;i++){
-        //   CombinaisonView entree =
-        //        new CombinaisonView(new Combinaison(new Elfes(), new Volants()));
-        //   entree.addMouseListener(trace);
-        //   mainPanel.add(entree);
-
-        //   entree =
-        //        new CombinaisonView(new Combinaison(new Amazones(), new Alchimistes()));
-        //   entree.addMouseListener(trace);
-        //   mainPanel.add(entree);
-        //}
-        //}
 
         this.fenetre.pack();
         this.fenetre.setVisible(true);
