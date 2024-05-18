@@ -197,10 +197,12 @@ public class ActionsJoueur extends JPanel implements Observer {
 		JoueurState etat = this.jeu.getJoueurCourant().getEtat();
 		int pionsEnMain = 0;
 		try {
-			jeu.getJoueurCourant().getCombinaisonActive().getNbPionsEnMain();			
+			pionsEnMain = jeu.getJoueurCourant().getCombinaisonActive().getNbPionsEnMain();			
 		} catch (NullPointerException e) {
 			// rien
 		}
+
+		System.out.println("UPDATE UI JOUEUR");
 
 		// Actualisation bouton déclin
 		boolean declinBtnActif = etat == JoueurState.DEBUT_TOUR;
