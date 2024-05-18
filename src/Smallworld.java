@@ -6,7 +6,6 @@ import ui.PiocheFenetre;
 import ui.selecteur.Selecteur;
 import ui.views.CaseView;
 import jeu.Combinaison;
-import jeu.GroupePions;
 import jeu.JeuReel;
 import jeu.Joueur;
 import jeu.Monde;
@@ -15,14 +14,14 @@ import jeu.peuples.*;
 import jeu.pouvoirs.*;
 
 /**Classe principale de l'application.*/
-public /*final*/ class Smallworld {
+public final class Smallworld {
 
-    /*
-     /**Supprimer le Constructeur par défaut. *\/
+
+    /**Supprimer le Constructeur par défaut. */
      private Smallworld() {
         // ne rien faire.
     }
-    */
+
 
     /**Lancer l'application.
      * @param args Les paramètre de la ligne de commandes, ils ne

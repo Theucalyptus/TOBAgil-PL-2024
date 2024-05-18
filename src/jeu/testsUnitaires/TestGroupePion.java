@@ -37,12 +37,13 @@ public class TestGroupePion {
     public void setUp() {
         this.unGroupePions = new GroupePions(new Combinaison(new Amazones(),
             new Volants()), 10);
-        this.uneCase = new Case(1, 1, TypesRegions.MARAIS, null, TypesSymboles.AUCUN, false);
+        this.uneCase = new Case(1, 1, TypesRegions.MARAIS, null,
+            TypesSymboles.AUCUN, false);
     }
 
     /**Tester le Constructeur de la classe. */
     @Test
-    public void testerConstructeur() {
+    public void testerConstructeur() {
         new GroupePions(new Combinaison(new Mages(), new AuxDeuxHeros()), 5);
     }
 
@@ -72,7 +73,7 @@ public class TestGroupePion {
         assertEquals(this.unGroupePions.getNombre(), QUATRE, PRECISION);
     }
 
-    /**Tester la robustesse de setNombre */
+    /**Tester la robustesse de setNombre. */
     @Test(expected = IllegalArgumentException.class)
     public void testerRobustesseSetNombreNegatif() {
         this.unGroupePions.setNombre(NOMBRENEGATIF);

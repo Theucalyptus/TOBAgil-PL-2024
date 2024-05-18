@@ -7,7 +7,7 @@ import jeu.exceptions.OperationInterditeException;
 /**Le proxy du jeu pour éviter toute tentative de triche de la part des joueurs. */
 @SuppressWarnings("deprecation")
 public class JeuProxy implements Jeu {
-    
+
     /**L'implématation du jeu. */
     private Jeu impl;
 
@@ -16,10 +16,11 @@ public class JeuProxy implements Jeu {
      * @param jeu le jeu sur lequel on fait un proxy.
      */
     public JeuProxy(Jeu jeu) {
+        if (jeu == null) {
+            throw new IllegalArgumentException("jeu ne doit pas être null.");
+        }
         this.impl = jeu;
     }
-
-    
 
     /**Envoie une exception car un joueur de peut pas en ajouter un autre.
      * @param joueur Le joueur que l'on veut ajouter.
@@ -49,7 +50,7 @@ public class JeuProxy implements Jeu {
         return this.impl.getNombreTourTotal();
     }
 
-    
+
     /**Lancer une expeption si la méthode est appelée.
      * @param numero Le nouveau numéro du tour.
      * @throws OperationInterditeException Si la méthode est appelée.
@@ -79,7 +80,7 @@ public class JeuProxy implements Jeu {
         throw new OperationInterditeException(
             "Le joueur n'a pas accès à cette méthode.");
     }
-    
+
     // /**Lancer une exeption si le joueur appele cette méthode.
     //  * @param obs l'observer à ajouter.
     //  * @throws OperationInterditeException Si la méthode est appelée.
@@ -89,7 +90,7 @@ public class JeuProxy implements Jeu {
     //     throw new OperationInterditeException(
     //         "Le joueur n' a pas accès à cette méthode.");
     // }
-    
+
     /**Lancer une exepction si le joueur appele la méthode.
      * @param leNouveauMonde le nouveau monde par lequel on remplace l'ancien.
      * @throws OperationInterditeException Si la méthode est appelée.
@@ -128,19 +129,19 @@ public class JeuProxy implements Jeu {
      */
     @Override
     public void placerPions(Case laCase, int nbPions) {
-        throw new OperationInterditeException("Le joueur doit passer par le contrôleur !");
+        throw new OperationInterditeException(
+            "Le joueur doit passer par le contrôleur !");
     }
 
 
     @Override
     public void redeployement() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'redeployement'");
+        this.impl.redeployement();
     }
-    
+
     @Override
     public JeuState getEtat() {
         return this.impl.getEtat();
-    }   
+    }
 
 }

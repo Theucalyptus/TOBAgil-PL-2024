@@ -23,6 +23,8 @@ public class Monde {
     /** La grille avec l'ensemble des tuiles. */
     private List<Case> grille;
 
+    private final double probaTribuOubliee = 0.25;
+
     /**
      * Construire un Monde.
      * @param nbJoueurs Le nombre de joueur dans la partie.
@@ -65,11 +67,7 @@ public class Monde {
                 nombreMaxSymbols = 9;
                 break;
             default:
-                this.dimX = 6;
-                this.dimY = 6;
-                nombreMaxRegion =
-                    Math.round((float) (this.dimX * this.dimY) / nombreTypesRegion);
-                nombreMaxSymbols = 5;
+                throw new IllegalArgumentException("nbJoueurs doit être entre 2 et 5.");
         }
 
         // on associe a chaque type de region, le nombre de cases de ce type
@@ -101,20 +99,26 @@ public class Monde {
                 TypesRegions newregion;
 
                 //on verifie si on veut une mer ou un lac
-                boolean coins;
-                boolean centre;
-                boolean bordure;
-
-                int nbPions = 1; //nombre de pions a placer sur la nouvelle case
-
-                coins = ((x == 0 && y == 0)
-                    || (x == (this.dimX - 1)) && y == (this.dimY - 1));
+                boolean coins = ((x == 0 && y == 0)
+                || (x == (this.dimX - 1)) && y == (this.dimY - 1));
                 //on verifie si on est sur les cases du centre
-                centre = (((x == (this.dimX / 2 - 1)) && (y == (this.dimY / 2 - 1)))
+                boolean centre = (((x == (this.dimX / 2 - 1))
+                        && (y == (this.dimY / 2 - 1)))
                     || ((x == (this.dimX / 2)) && (y == (this.dimY / 2 - 1)))
                     || ((x == (this.dimX / 2)) && (y == (this.dimY / 2)))
                     || ((x == (this.dimX / 2 - 1)) && (y == (this.dimY / 2))));
-                bordure = x == 0 || x == this.dimX-1 || y == 0 || y == this.dimY-1;
+                boolean bordure = x == 0 || x == this.dimX - 1
+                    || y == 0 || y == this.dimY - 1;
+
+                // nombre de pions a placer sur la nouvelle case
+                
+                int nbPions;
+                if (Math.random() < probaTribuOubliee) {
+                    nbPions = 1;
+                } else {
+                    nbPions = 0;
+                }
+
 
                 if (coins || centre) { //on traite les cas où on veut la mer ou un lac
                     newregion = TypesRegions.MER_ET_LAC;
@@ -142,7 +146,8 @@ public class Monde {
                     // choix d'un symbole aleatoire
                     int nombreTotalSymboles = 3 * nombreMaxSymbols;
                     // probabilite de mettre un symbole sur la case
-                    double p = (double)nombreTotalSymboles / (double)(this.getDimX() * this.getDimY());
+                    double p = (double) nombreTotalSymboles
+                        / (double) (this.getDimX() * this.getDimY());
                     Set<TypesSymboles> symbolesSet = nombreSymboles.keySet();
                     TypesSymboles[] symbolesArray =
                         symbolesSet.toArray(new TypesSymboles[0]);
@@ -165,31 +170,35 @@ public class Monde {
                     }
                 }
 
-
                 // on pose une tribu oubliée sur la case
-                Combinaison maCombinaison = new Combinaison(new jeu.peuples.TribuOubliee(), new jeu.pouvoirs.TribuOubliee());
-                GroupePions newEnsemblePions = new GroupePions(maCombinaison, 1);
+                Combinaison tribuOublieeComb = new Combinaison(
+                    new jeu.peuples.TribuOubliee(), new jeu.pouvoirs.TribuOubliee());
+
+                GroupePions newEnsemblePions = new GroupePions(tribuOublieeComb, nbPions);
                 // création de la nouvelle case
-                Case newcase = new Case(x, y, newregion, newEnsemblePions, newsymbole, bordure);
+                Case newcase = new Case(x, y, newregion, newEnsemblePions,
+                    newsymbole, bordure);
                 // ajout de la nouvelle case à la grille
                 this.grille.add(newcase);
             }
         }
 
         // ajout des cases voisines
-        int x, y;
+        int x;
+        int y;
         int[] xOffsets = {1, -1, 0, 0};
         int[] yOffsets = {0, 0, -1, 1};
-        for(Case maCase : this.grille) {
+        for (Case maCase : this.grille) {
             x = maCase.getCoordonnees().get(0);
             y = maCase.getCoordonnees().get(1);
 
 
-            for(int i=0;i<4;i++) {
-                int xVois = x+xOffsets[i];
-                int yVois = y+yOffsets[i];
-                boolean coordValide = xVois >= 0 && xVois < this.dimX && yVois >= 0 && yVois < this.dimY;
-                if(coordValide) {
+            for (int i = 0; i < 4; i++) {
+                int xVois = x + xOffsets[i];
+                int yVois = y + yOffsets[i];
+                boolean coordValide = xVois >= 0 && xVois < this.dimX
+                    && yVois >= 0 && yVois < this.dimY;
+                if (coordValide) {
                     maCase.ajoutVoisins(this.getCase(xVois, yVois));
                 }
             }
@@ -216,6 +225,10 @@ public class Monde {
      * @return la case correspondante
      */
     public Case getCase(int x, int y) {
+        if (x < 0 || x >= this.dimX || y < 0 || y > this.dimY) {
+            throw new IllegalArgumentException("L'appel à la fonction "
+                + "n'est pas conforme.");
+        }
         for (Case maCase : this.grille) {
             List<Integer> coordonnees = maCase.getCoordonnees();
             if ((coordonnees.get(0) == x) && (coordonnees.get(1) == y)) {

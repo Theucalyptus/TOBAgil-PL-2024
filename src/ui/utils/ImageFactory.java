@@ -12,7 +12,12 @@ import jeu.peuples.*;
 import jeu.pouvoirs.*;
 
 /** Classe qui permet de charger des images pour le jeu. */
-public class ImageFactory {
+public final class ImageFactory {
+
+    /**Constructeur privé pour les classes utilitaires. */
+    private ImageFactory() {
+        // ne rien faire
+    }
 
     /** Chemin d'accès aux répertoires des assets. */
     private static final String ROOT_ASSETS_PATH = "./assets/";

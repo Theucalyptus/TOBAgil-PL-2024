@@ -1,7 +1,5 @@
 package ui.views;
 
-import java.awt.BorderLayout;
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -10,7 +8,6 @@ import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -39,6 +36,7 @@ public class MainJoueurView extends JPanel implements Observer {
 
     /**
      * Construit la vue d'un joueur.
+     * @param jeu Le jeu affiché.
      */
     public MainJoueurView(Jeu jeu) {
         super();
@@ -80,9 +78,8 @@ public class MainJoueurView extends JPanel implements Observer {
         this.combinaisonsPnl.add(activeView);
 
         // affichages des combinaisons en déclins
-        System.out.println(joueur.getCombinaisonsDeclins().size());
-        if(joueur.getCombinaisonsDeclins().size() > 0) {
-            for(Combinaison comb : joueur.getCombinaisonsDeclins()) {
+        if (joueur.getCombinaisonsDeclins().size() > 0) {
+            for (Combinaison comb : joueur.getCombinaisonsDeclins()) {
                 CombinaisonView newView = new CombinaisonView(comb);
                 this.combViews.add(newView);
                 this.combinaisonsPnl.add(newView);
@@ -90,7 +87,8 @@ public class MainJoueurView extends JPanel implements Observer {
         }
 
 
-        this.nbPionsAPlacer.setText("Pions à placer : " + joueur.getCombinaisonActive().getNbPionsEnMain());
+        this.nbPionsAPlacer.setText("Pions à placer : "
+            + joueur.getCombinaisonActive().getNbPionsEnMain());
     }
 
     /**
@@ -99,13 +97,13 @@ public class MainJoueurView extends JPanel implements Observer {
     public class PointsView extends JPanel {
 
         /** Classe réalisant l'affichage d'un tas de jeton. */
-        private class JetonView extends JLabel {
+        private final class JetonView extends JLabel {
 
             /**
              * Construit la vue d'un tas de pièce.
              * @param nombre Le chiffre sur les pièces.
              */
-            public JetonView(int nombre) {
+            private JetonView(int nombre) {
                 super();
                 assert (nombre == 1 || nombre == 3 || nombre == 5 || nombre == 10);
                 this.setIcon(new ImageIcon(ImageFactory.pieceImage(nombre)));
@@ -163,8 +161,8 @@ public class MainJoueurView extends JPanel implements Observer {
 
     @Override
     public void update(Observable arg0, Object arg1) {
-        JoueurCourantObs obs = (JoueurCourantObs)arg0;
-        Joueur joueurCourant = (Joueur)arg1;
+        JoueurCourantObs obs = (JoueurCourantObs) arg0;
+        Joueur joueurCourant = (Joueur) arg1;
         this.setJoueur(joueurCourant);
         SwingUtilities.getWindowAncestor(this).pack();
     }

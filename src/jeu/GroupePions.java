@@ -11,7 +11,7 @@ public class GroupePions {
     /** Nombre de pions. */
     private int nombrePions;
 
-    /** Case */
+    /** La case ou le groupe de Point se trouve. */
     private Case laCase;
 
     /** Constructeur à partir d'un peuple et d'un nombre de pions.
@@ -19,6 +19,9 @@ public class GroupePions {
      * @param nombrePions Le nombre de pions dont l'ensemble de pions fait partie.
      */
     public GroupePions(Combinaison combinaison, int nombrePions) {
+        if (combinaison == null || nombrePions < 0) {
+            throw new IllegalArgumentException("L'appel n'est pas conforme.");
+        }
         this.combinaison = combinaison;
         this.nombrePions = nombrePions;
     }
@@ -53,12 +56,26 @@ public class GroupePions {
         return this.laCase;
     }
 
+    /**
+     * Changer la valeur du nombre de Pions.
+     * @param newNombrePions La nouvelle valeur du nombre de pions.
+     */
     public void setNombre(int newNombrePions) {
+        if (newNombrePions < 0) {
+            throw new IllegalArgumentException("Le nombre de pion "
+                + "ne peut pas être positif.");
+        }
         this.nombrePions = newNombrePions;
     }
 
-
+    /**
+     * Changer la case sur laquelle se trouve les pions.
+     * @param newCase la nouvelle case du groupe de pions.
+     */
     public void setCase(Case newCase) {
+        if (newCase == null) {
+            throw new IllegalArgumentException("La nouvelle case ne peut pas être null");
+        }
         this.laCase = newCase;
     }
 

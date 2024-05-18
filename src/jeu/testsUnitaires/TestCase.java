@@ -29,8 +29,10 @@ public class TestCase {
     /**Mise en place du test. */
     @Before
     public void setUp() {
-        this.uneCase = new Case(1, 1, TypesRegions.COLLINE, null, TypesSymboles.AUCUN, false);
-        this.uneCase2 = new Case(1, 1, TypesRegions.COLLINE, null, TypesSymboles.AUCUN, true);
+        this.uneCase = new Case(1, 1, TypesRegions.COLLINE, null,
+            TypesSymboles.AUCUN, false);
+        this.uneCase2 = new Case(1, 1, TypesRegions.COLLINE, null,
+            TypesSymboles.AUCUN, true);
 
     }
 
@@ -66,7 +68,7 @@ public class TestCase {
 
     /**Tester la Robustesse du constructeur sur le deuxième argument. */
     @Test(expected = IllegalArgumentException.class)
-    public void testerRobustesseConstructeurjNégatif() {
+    public void testerRobustesseConstructeurNegatif() {
         new Case(1,
             NOMBRENEGATIF,
             TypesRegions.CHAMP,
@@ -111,17 +113,17 @@ public class TestCase {
 
     /**Tester le setteur du nouveau groue de pions. */
     @Test
-    public void testerSetNewPions() {
+    public void testersetNewPions() {
         GroupePions leNouveau = new GroupePions(new Combinaison(new Amazones(),
             new Volants()), TREIZE);
-        this.uneCase.setNewpions(leNouveau);
+        this.uneCase.setNewPions(leNouveau);
         assertTrue(this.uneCase.getGroupePions() == leNouveau);
     }
 
     /**Tester la robustesse du setteur du pions. */
     @Test(expected = IllegalArgumentException.class)
-    public void testerRobustesseSetNewPions() {
-        this.uneCase2.setNewpions(null);
+    public void testerRobustessesetNewPions() {
+        this.uneCase2.setNewPions(null);
     }
 
     /**Tester le setteur du type de Batiment. */

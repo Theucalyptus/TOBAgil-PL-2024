@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 import jeu.Combinaison;
+import jeu.Jeu;
+import jeu.JoueurState;
 import jeu.peuples.*;
 import jeu.pouvoirs.*;
 import ui.selecteur.Selecteur;
@@ -24,6 +26,9 @@ public class PiocheFenetre {
     public static final int NBCLASSE = 5;
     private Pioche pioche;
     private CombinaisonView selectedClass = null;
+
+    /** Le jeu affiché. */
+    private final Jeu jeu;
 
     /** La fenêtre. */
     private JFrame fenetre;
