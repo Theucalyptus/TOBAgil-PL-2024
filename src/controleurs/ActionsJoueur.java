@@ -164,8 +164,6 @@ public class ActionsJoueur extends JPanel implements Observer {
 			if (selecteurCase.getSelection() == null) {
 				messageDialogue(evt, "Action Impossible ! Aucune case sélectionnée.");
 			} else {
-				System.out.println("Attaque de la case : "
-					+ caseSelectionnee.getVraieCase().getCoordonnees().toString());
 				jeu.attaquerCase(caseSelectionnee.getVraieCase());
 			}
 		}
@@ -201,8 +199,6 @@ public class ActionsJoueur extends JPanel implements Observer {
 		} catch (NullPointerException e) {
 			// rien
 		}
-
-		System.out.println("UPDATE UI JOUEUR");
 
 		// Actualisation bouton déclin
 		boolean declinBtnActif = etat == JoueurState.DEBUT_TOUR;
