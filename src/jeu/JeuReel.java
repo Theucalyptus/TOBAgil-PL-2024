@@ -11,6 +11,8 @@ import jeu.exceptions.NombreJoueurIncorrectException;
 import jeu.exceptions.PartieEnCoursException;
 import jeu.exceptions.PartiePasEnCoursException;
 import jeu.exceptions.PartiePleineException;
+import jeu.peuples.Peuple;
+import jeu.peuples.TribuOubliee;
 
 /**
  * Classe représentant une partie de jeu.
@@ -349,13 +351,13 @@ public class JeuReel extends Observable implements Jeu {
             throw new IllegalArgumentException("maCase ne doit pas être vide.");
         }
 
-        if (joueurCourant.getEtat() == JoueurState.DEBUT_TOUR) {
-            joueurCourant.setEtat(JoueurState.ATTAQUE);
-        }
-
         //checker si la case est atteignable (bordure etc)
         if (maCase.estAtteignable(joueurCourant)) {
             if (maCase.getPrenable()) { // Boolean et pas boolean
+                if (joueurCourant.getEtat() == JoueurState.DEBUT_TOUR) {
+                    joueurCourant.setEtat(JoueurState.ATTAQUE);
+                }
+
                 Combinaison combinaisonActive = joueurCourant.getCombinaisonActive();
                 System.out.println("Pions en main : "
                     + combinaisonActive.getNbPionsEnMain());
@@ -367,12 +369,14 @@ public class JeuReel extends Observable implements Jeu {
                     GroupePions anciensPions = maCase.getGroupePions();
                     if (anciensPions != null) {
                         Combinaison ancienneCombinaison = anciensPions.getCombinaison();
-                        // Le joueur perd son territoire
-                        ancienneCombinaison.getPions().remove(anciensPions);
-                        // Le joueur récupère tout ses pions sauf 1
-                        ancienneCombinaison.setNbPionsEnMain(
-                            ancienneCombinaison.getNbPionsEnMain()
-                            + anciensPions.getNombre() - 1);
+                        if(ancienneCombinaison.getPeuple().equals(new TribuOubliee())) {
+                            // Le joueur perd son territoire
+                            ancienneCombinaison.getPions().remove(anciensPions);
+                            // Le joueur récupère tout ses pions sauf 1
+                            ancienneCombinaison.setNbPionsEnMain(
+                                ancienneCombinaison.getNbPionsEnMain()
+                                + anciensPions.getNombre() - 1);
+                        }
                     }
 
                     // On place nos pions sur la case
