@@ -374,14 +374,15 @@ public class JeuReel extends Observable implements Jeu {
                     GroupePions anciensPions = maCase.getGroupePions();
                     if (anciensPions != null) {
                         Combinaison ancienneCombinaison = anciensPions.getCombinaison();
-                        if (ancienneCombinaison.getPeuple().equals(new TribuOubliee())) {
+                        if (anciensPions.getNombre() > 0) {
 
                             // Le joueur perd son territoire
                             ancienneCombinaison.getPions().remove(anciensPions);
+
                             // Le joueur récupère tout ses pions sauf 1
-                            ancienneCombinaison.setNbPionsEnMain(
-                                ancienneCombinaison.getNbPionsEnMain()
-                                + anciensPions.getNombre() - 1);
+                            int newNbPions = ancienneCombinaison.getNbPionsEnMain()
+                                + anciensPions.getNombre() - 1;
+                            ancienneCombinaison.setNbPionsEnMain(newNbPions);
                                 
                             // Active les effets d'avant conquête de la combinaison.
                             ancienneCombinaison.apresConqueteAdverse(maCase);

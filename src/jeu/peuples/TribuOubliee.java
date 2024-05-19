@@ -15,7 +15,7 @@ public class TribuOubliee extends Peuple {
                 + "encore quelques régions... enfin, pour l'instant !";
 
     /** Le nombre de TribuOubliee sans le nombre associé au pouvoir. */
-    private static final int PIONSSUP = -1;
+    private static final int PIONSSUP = 0;
 
     // Constructeur
 
