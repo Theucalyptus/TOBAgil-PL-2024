@@ -18,7 +18,7 @@ public class DesForets extends Pouvoir {
     private static final int PIONSSUP = 4;
 
     /**Le nombre de forêts conquises. */
-    private int nbForets = 4;
+    private int nbForets = 0;
 
     /**Construire un DesForets. */
     public DesForets() {

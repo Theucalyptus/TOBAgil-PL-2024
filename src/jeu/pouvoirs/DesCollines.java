@@ -18,7 +18,7 @@ public class DesCollines extends Pouvoir {
     private static final int PIONSSUP = 4;
 
     /**Le nombre de collines conquises. */
-    private int nbCollines = 4;
+    private int nbCollines = 0;
 
     /**Construire un Des Collines. */
     public DesCollines() {

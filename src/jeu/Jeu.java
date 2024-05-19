@@ -2,6 +2,8 @@ package jeu;
 
 import java.util.Observer;
 
+import jeu.exceptions.PartieEnCoursException;
+
 /**Interface de modélisation du jeu SmallWorld. */
 @SuppressWarnings("deprecation")
 public interface Jeu {
@@ -90,4 +92,6 @@ public interface Jeu {
      * @return l'état courant de la partie
      */
     JeuState getEtat();
+
+    void debutTour();
 }
