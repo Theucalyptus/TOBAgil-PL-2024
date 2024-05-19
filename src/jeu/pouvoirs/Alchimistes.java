@@ -20,4 +20,12 @@ public class Alchimistes extends Pouvoir {
         super(TypesPouvoirs.ALCHIMISTES, NOM, DESCRIPTION, PIONSSUP);
     }
 
+    @Override
+    public void finTour(boolean enDeclin) {
+        if (!enDeclin) {
+            this.nbJetons = 2;
+        } else {
+            this.nbJetons = 0;
+        }
+    };
 }
