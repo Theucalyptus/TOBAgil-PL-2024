@@ -258,7 +258,6 @@ public class JeuReel extends Observable implements Jeu {
         this.setJoueurCourant(this.joueursIter.next()); // la position est importante !
         this.majNombreToursTotals();
         this.setNumeroTour(1);
-        this.debutTour();
         this.notifierModifs();
     }
 
@@ -305,15 +304,19 @@ public class JeuReel extends Observable implements Jeu {
                 this.setEtat(JeuState.TERMINEE);
                 System.out.println("Fin de la partie !");
             }
-            debutTour();
+            if (joueurCourant.getEtat() != JoueurState.CHOIX_COMBINAISON) {
+                debutTour();                
+            }
         } else {
             System.out.println("Partie non-commencé ou terminée. Abandon !");
             throw new PartiePasEnCoursException();
         }
     }
 
+
+
     //Se lance au debut du tour d'un joueur
-    private void debutTour() {
+    public void debutTour() {
         System.out.println("\nDébut du tour de " + this.joueurCourant.getNom());
         Combinaison activComb = this.joueurCourant.getCombinaisonActive();
         if (activComb != null && activComb.getDeclin()) {
