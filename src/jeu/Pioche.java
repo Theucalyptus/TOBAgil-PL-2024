@@ -2,6 +2,8 @@ package jeu;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+
 import jeu.pouvoirs.*;
 import jeu.peuples.*;
 import java.util.Random;
@@ -10,7 +12,7 @@ import java.util.Random;
 /**
  * Classe d'implémantation de la prioche.
  */
-public class Pioche {
+public class Pioche extends Observable {
 
     /**Le nombre de Combinaison dans la pioche. */
     public static final int LONGUEURPIOCHE = 6;
@@ -218,6 +220,9 @@ public class Pioche {
      */
     public void removeCombinaisonChoisit(Combinaison combinaison) {
         this.pioche.remove(combinaison);
+        setChanged();
+        notifyObservers();
+        System.out.println("Combinaison Supprimer");
     }
 
 }

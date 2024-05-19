@@ -115,6 +115,7 @@ public class ActionsJoueur extends JPanel implements Observer {
 				courant.changerCombinaisonActive(CombinaisonSelectionnee);
 				courant.setEtat(JoueurState.DEBUT_TOUR);
 				selecteurCombinaison.setSelection(null);
+				jeu.getPioche().removeCombinaisonChoisit(CombinaisonSelectionnee);
 				jeu.debutTour();
 			}
 		}

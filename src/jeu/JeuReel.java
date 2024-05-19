@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.PriorityBlockingQueue;
 
 import jeu.exceptions.JoueurDejaDansLaPartieException;
 import jeu.exceptions.NombreJoueurIncorrectException;
@@ -43,6 +44,9 @@ public class JeuReel extends Observable implements Jeu {
     /** Le plateau. */
     private Monde monde;              // Le plateau du monde
 
+    /** La pioche */
+    private Pioche pioche;
+
     /** Indique le statut de la partie. */
     private JeuState etat;
 
@@ -78,6 +82,7 @@ public class JeuReel extends Observable implements Jeu {
         this.nombreJoueurs = nbJoueurs;
         this.etat = JeuState.PAS_COMMENCEE;
         this.joueurCourantObs = new JoueurCourantObs(this);
+        this.pioche = new Pioche();
     }
 
 
@@ -87,6 +92,11 @@ public class JeuReel extends Observable implements Jeu {
     @Override
     public Monde getMonde() {
         return this.monde;
+    }
+
+    @Override
+    public Pioche getPioche() {
+        return this.pioche;
     }
 
     @Override
