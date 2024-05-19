@@ -3,6 +3,7 @@ package ui.views;
 import java.awt.Color;
 import java.awt.FlowLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import javax.swing.JLabel;
@@ -26,14 +27,15 @@ public class CombinaisonView extends JPanel {
      */
     public CombinaisonView(Combinaison comb) {
         super();
-        super.setLayout(new FlowLayout());
+        super.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        super.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         Peuple peupleC = comb.getPeuple();
         Pouvoir pouvoirC = comb.getPouvoir();
 
         Image image_peuple = ImageFactory.peupleLogoImage(peupleC.getType(), comb.getDeclin());
 
-        ImageIcon imageTemp = new ImageIcon(image_peuple.getScaledInstance(192, 128,
+        ImageIcon imageTemp = new ImageIcon(image_peuple.getScaledInstance(256, 128,
         java.awt.Image.SCALE_SMOOTH));
 
         this.peupleLbl.setIcon(imageTemp);

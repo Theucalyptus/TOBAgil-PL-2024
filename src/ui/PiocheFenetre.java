@@ -48,7 +48,7 @@ public class PiocheFenetre implements Observer {
         this.jeu = jeu;
         this.pioche = jeu.getPioche();
         this.fenetre = new JFrame("SmallWorld - Pioche");
-        this.fenetre.setMinimumSize(new Dimension(800, 600));
+        this.fenetre.setMinimumSize(new Dimension(300, 600));
         this.selecteurCombinaison = selecteurCombinaison;
         Container contentPane = this.fenetre.getContentPane();
 
@@ -115,7 +115,6 @@ public class PiocheFenetre implements Observer {
             CombinaisonView entree = (CombinaisonView) e.getSource();
             if (selectedClass != entree) {
                 entree.setBackground(Color.WHITE);
-                entree.setBorder(BorderFactory.createEmptyBorder());
             }
         }
 
