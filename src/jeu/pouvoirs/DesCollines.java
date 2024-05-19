@@ -28,6 +28,7 @@ public class DesCollines extends Pouvoir {
     @Override
     public void apresConquete(Case regionConquise) {
         if (regionConquise.getTypeRegion() == TypesRegions.COLLINE) {
+            System.out.println("Gain d'une colline");
             this.nbCollines++;
         }
     }
@@ -35,6 +36,7 @@ public class DesCollines extends Pouvoir {
     @Override
     public void apresConqueteAdverse(Case regionConquise) {
         if (regionConquise.getTypeRegion() == TypesRegions.COLLINE) {
+            System.out.println("Perte d'une colline");
             this.nbCollines--;
         }
     }
@@ -42,6 +44,7 @@ public class DesCollines extends Pouvoir {
     @Override
     public void finTour(boolean enDeclin) {
         if (!enDeclin) {
+            System.out.println(this.nbCollines + " collines possédées");
             this.nbJetons = this.nbCollines;
         }
     }

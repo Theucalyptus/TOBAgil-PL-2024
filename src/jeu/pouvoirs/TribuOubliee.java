@@ -11,7 +11,7 @@ public class TribuOubliee extends Pouvoir {
 
 
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
-    private static final int PIONSSUP = -1;
+    private static final int PIONSSUP = 0;
 
     /**Construire un Armé. */
     public TribuOubliee() {
