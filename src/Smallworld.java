@@ -45,6 +45,7 @@ public final class Smallworld {
 
         // VUES
         PiocheFenetre piocheF = new PiocheFenetre(selecteurCombinaison, jeu);
+        jeu.getPioche().addObserver(piocheF);
         MainMondeFenetre mondeF = new MainMondeFenetre(jeu, selecteurCase);
         MainJoueurFenetre joueurF = new MainJoueurFenetre(jeu);
         ActionsFenetre actionsF = new ActionsFenetre(jeu, selecteurCase, selecteurCombinaison);

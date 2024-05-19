@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 import jeu.Combinaison;
 import jeu.Jeu;
@@ -21,7 +23,7 @@ import ui.views.CombinaisonView;
 import jeu.Pioche;
 
 
-public class PiocheFenetre {
+public class PiocheFenetre implements Observer {
 
     /** La pioche du jeu. */
     private Pioche pioche;
@@ -41,9 +43,10 @@ public class PiocheFenetre {
     private Selecteur<Combinaison> selecteurCombinaison;
 
     /** Construit une fenêtre affichant la pioche. */
-    public PiocheFenetre(Selecteur<Combinaison> selecteurCombinaison, Jeu jeu) {
+    public PiocheFenetre (Selecteur<Combinaison> selecteurCombinaison, Jeu jeu) {
+
         this.jeu = jeu;
-        this.pioche = new Pioche();
+        this.pioche = jeu.getPioche();
         this.fenetre = new JFrame("SmallWorld - Pioche");
         this.fenetre.setMinimumSize(new Dimension(800, 600));
         this.selecteurCombinaison = selecteurCombinaison;
@@ -55,14 +58,22 @@ public class PiocheFenetre {
 
 		this.trace = new MouseEventHandler();
 
-        updateView();
+        List<Combinaison> visible = pioche.getChoix();
+        int maxIndex = Math.min(pioche.lengthPioche(), Pioche.LONGUEURPIOCHE);
+        for (int i = 0; i < maxIndex; i++) {
+            CombinaisonView entree = new CombinaisonView(visible.get(i));
+            entree.addMouseListener(this.trace);
+            this.mainPanel.add(entree);
+            combinaisonIndexMap.put(entree, i);
+        }
 
         this.fenetre.pack();
         this.fenetre.setVisible(true);
         this.fenetre.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 
-    private void updateView() {
+    @Override
+    public void update(Observable o, Object arg) {
         this.mainPanel.removeAll();
         combinaisonIndexMap.clear();
 
@@ -89,10 +100,6 @@ public class PiocheFenetre {
             }
 
             if (jeu.getJoueurCourant().getEtat() != JoueurState.CHOIX_COMBINAISON) {
-                return;
-            }
-
-            if (selecteurCombinaison.getSelection() != null) {
                 return;
             }
 
@@ -129,15 +136,14 @@ public class PiocheFenetre {
                 return;
             }
 
-            if (selecteurCombinaison.getSelection() != null) {
-                System.out.println("Une combinaison a deja ete selectionnee");
-                return;
+            Integer indiceChoisi = combinaisonIndexMap.get(entree);
+            if (indiceChoisi != null) {
+                Combinaison combinaison = pioche.getCombinaison(indiceChoisi);
+                selecteurCombinaison.setSelection(combinaison);
+            } else {
+                System.out.println("AUCUNE CLASSE SELECTIONNE - REESSAYER !");
             }
 
-            if (selectedClass != null && entree == selectedClass) {
-                processCombinaisonSelection();
-            }
-            
             entree.setBackground(Color.GREEN);
             selectedClass = entree;
         }
@@ -145,19 +151,6 @@ public class PiocheFenetre {
         private void resetCouleur() {
             for (CombinaisonView view : combinaisonIndexMap.keySet()) {
                 view.setBackground(Color.WHITE);
-            }
-        }
-
-        private void processCombinaisonSelection() {
-            Integer indiceChoisi = combinaisonIndexMap.get(selectedClass);
-            if (indiceChoisi != null) {
-                System.out.println("OK - combinaison selectionnee");
-                Combinaison combinaison = pioche.getCombinaison(indiceChoisi);
-                pioche.removeCombinaisonChoisit(combinaison);
-                selecteurCombinaison.setSelection(combinaison);
-                updateView();
-            } else {
-                System.out.println("AUCUNE CLASSE SELECTIONNE - REESSAYER !");
             }
         }
     }

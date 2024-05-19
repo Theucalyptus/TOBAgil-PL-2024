@@ -36,6 +36,11 @@ public class JeuProxy implements Jeu {
     }
 
     @Override
+    public Pioche getPioche() {
+        return this.impl.getPioche();
+    }
+
+    @Override
     public Joueur getJoueurCourant() {
         return this.impl.getJoueurCourant();
     }
