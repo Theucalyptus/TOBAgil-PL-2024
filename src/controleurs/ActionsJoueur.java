@@ -114,6 +114,7 @@ public class ActionsJoueur extends JPanel implements Observer {
 				Joueur courant = jeu.getJoueurCourant();
 				courant.changerCombinaisonActive(CombinaisonSelectionnee);
 				courant.setEtat(JoueurState.DEBUT_TOUR);
+				selecteurCombinaison.setSelection(null);
 			}
 		}
 	}
