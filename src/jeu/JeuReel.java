@@ -276,6 +276,7 @@ public class JeuReel extends Observable implements Jeu {
         int pointsBonus = combinaisonJoueur.finTour();
 
         int totalPoints = combinaisonJoueur.nombreGroupesPions() + pointsBonus;
+        System.out.println(this.joueurCourant.getNom() + " gagne " + totalPoints + " (" + pointsBonus + " bonus)");
         this.joueurCourant.addPoints(totalPoints);
     }
 
@@ -313,12 +314,14 @@ public class JeuReel extends Observable implements Jeu {
 
     //Se lance au debut du tour d'un joueur
     private void debutTour() {
-        System.out.println("Début du tour de " + this.joueurCourant.getNom());
+        System.out.println("\nDébut du tour de " + this.joueurCourant.getNom());
         Combinaison activComb = this.joueurCourant.getCombinaisonActive();
         if (activComb != null && activComb.getDeclin()) {
             this.joueurCourant.setEtat(JoueurState.CHOIX_COMBINAISON);
         } else if (this.joueurCourant.getEtat() == JoueurState.DEBUT_TOUR) {
             recupPions();
+            // Active les effets de début de tour de la combinaison
+            this.joueurCourant.getCombinaisonActive().debutTour();
         }
 
         this.joueurCourantObs.notifierChangement();
@@ -356,23 +359,29 @@ public class JeuReel extends Observable implements Jeu {
                 }
 
                 Combinaison combinaisonActive = joueurCourant.getCombinaisonActive();
-                System.out.println("Pions en main : "
-                    + combinaisonActive.getNbPionsEnMain());
                 int attaquants = maCase.getNombreAttaquantNecessaire();
                 int diff = combinaisonActive.getNbPionsEnMain() - attaquants;
 
                 if (diff >= 0) {
+                                
+                    // Active les effets d'avant conquête de la combinaison.
+                    this.joueurCourant.getCombinaisonActive().avantConquete(maCase);
+
                     // On déloge les pions adverses
                     GroupePions anciensPions = maCase.getGroupePions();
                     if (anciensPions != null) {
                         Combinaison ancienneCombinaison = anciensPions.getCombinaison();
-                        if(ancienneCombinaison.getPeuple().equals(new TribuOubliee())) {
+                        if (ancienneCombinaison.getPeuple().equals(new TribuOubliee())) {
+
                             // Le joueur perd son territoire
                             ancienneCombinaison.getPions().remove(anciensPions);
                             // Le joueur récupère tout ses pions sauf 1
                             ancienneCombinaison.setNbPionsEnMain(
                                 ancienneCombinaison.getNbPionsEnMain()
                                 + anciensPions.getNombre() - 1);
+                                
+                            // Active les effets d'avant conquête de la combinaison.
+                            ancienneCombinaison.apresConqueteAdverse(maCase);
                         }
                     }
 
@@ -381,6 +390,13 @@ public class JeuReel extends Observable implements Jeu {
                         attaquants);
                     maCase.setNewPions(newGroupe);
                     combinaisonActive.setNbPionsEnMain(diff);
+                    System.out.println("Pions en main : "
+                        + combinaisonActive.getNbPionsEnMain());
+
+                                
+                    // Active les effets d'après conquête de la combinaison
+                    this.joueurCourant.getCombinaisonActive().apresConquete(maCase);
+
                 } else if (diff >= -3) {
                     System.out.println("Pas assez de pions !");
                     System.out.println("Possédé : "
@@ -438,6 +454,9 @@ public class JeuReel extends Observable implements Jeu {
 
     @Override
     public void redeployement() {
+        // Active les effets de la combinaison après l'attaque
+        this.joueurCourant.getCombinaisonActive().reDeploiement();
+
         this.recupPions();
         this.joueurCourant.setEtat(JoueurState.REDEPLOYMENT);
         this.joueurCourantObs.notifierChangement();

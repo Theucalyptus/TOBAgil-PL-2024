@@ -136,26 +136,26 @@ public class Pioche {
     public List<Pouvoir> creerListePouvoir() {
         List<Pouvoir> listePouvoirsRetournee = new ArrayList<>();
 
-        listePouvoirsRetournee.add(new Alchimistes());
-        listePouvoirsRetournee.add(new Ancestraux());
-        listePouvoirsRetournee.add(new Armes());
-        listePouvoirsRetournee.add(new AuxDeuxHeros());
-        listePouvoirsRetournee.add(new Batisseurs());
-        listePouvoirsRetournee.add(new Berserks());
-        listePouvoirsRetournee.add(new DesCavernes());
+        // listePouvoirsRetournee.add(new Alchimistes());
+        // listePouvoirsRetournee.add(new Ancestraux());
+        // listePouvoirsRetournee.add(new Armes());
+        // listePouvoirsRetournee.add(new AuxDeuxHeros());
+        // listePouvoirsRetournee.add(new Batisseurs());
+        // listePouvoirsRetournee.add(new Berserks());
+        // listePouvoirsRetournee.add(new DesCavernes());
         listePouvoirsRetournee.add(new DesCollines());
         listePouvoirsRetournee.add(new DesForets());
-        listePouvoirsRetournee.add(new DesMarais());
-        listePouvoirsRetournee.add(new Diplomates());
-        listePouvoirsRetournee.add(new DurACuire());
-        listePouvoirsRetournee.add(new EtLeurDragon());
-        listePouvoirsRetournee.add(new Fortunes());
-        listePouvoirsRetournee.add(new Marchands());
-        listePouvoirsRetournee.add(new Marins());
-        listePouvoirsRetournee.add(new Montes());
-        listePouvoirsRetournee.add(new Pillards());
-        listePouvoirsRetournee.add(new Scouts());
-        listePouvoirsRetournee.add(new Volants());
+        // listePouvoirsRetournee.add(new DesMarais());
+        // listePouvoirsRetournee.add(new Diplomates());
+        // listePouvoirsRetournee.add(new DurACuire());
+        // listePouvoirsRetournee.add(new EtLeurDragon());
+        // listePouvoirsRetournee.add(new Fortunes());
+        // listePouvoirsRetournee.add(new Marchands());
+        // listePouvoirsRetournee.add(new Marins());
+        // listePouvoirsRetournee.add(new Montes());
+        // listePouvoirsRetournee.add(new Pillards());
+        // listePouvoirsRetournee.add(new Scouts());
+        // listePouvoirsRetournee.add(new Volants());
 
 
         /*for (NomClassePouvoirs nomPouvoir : NomClassePouvoirs.values()) {
