@@ -116,6 +116,7 @@ public class ActionsJoueur extends JPanel implements Observer {
 				courant.setEtat(JoueurState.DEBUT_TOUR);
 				selecteurCombinaison.setSelection(null);
 				jeu.getPioche().removeCombinaisonChoisit(CombinaisonSelectionnee);
+				jeu.debutTour();
 			}
 		}
 	}
@@ -132,6 +133,7 @@ public class ActionsJoueur extends JPanel implements Observer {
 	private /*final*/ class ActionDeclin implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
+			jeu.getJoueurCourant().setEtat(JoueurState.CHOIX_COMBINAISON);
 			jeu.getJoueurCourant().getCombinaisonActive().passageDeclin();
 			jeu.passerTour();
 		}

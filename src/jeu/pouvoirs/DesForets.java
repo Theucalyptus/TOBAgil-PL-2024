@@ -18,7 +18,7 @@ public class DesForets extends Pouvoir {
     private static final int PIONSSUP = 4;
 
     /**Le nombre de forêts conquises. */
-    private int nbForets = 4;
+    private int nbForets = 0;
 
     /**Construire un DesForets. */
     public DesForets() {
@@ -28,6 +28,7 @@ public class DesForets extends Pouvoir {
     @Override
     public void apresConquete(Case regionConquise) {
         if (regionConquise.getTypeRegion() == TypesRegions.FORET) {
+            System.out.println("Gain d'une forêt");
             this.nbForets++;
         }
     }
@@ -35,6 +36,7 @@ public class DesForets extends Pouvoir {
     @Override
     public void apresConqueteAdverse(Case regionConquise) {
         if (regionConquise.getTypeRegion() == TypesRegions.FORET) {
+            System.out.println("Perte d'une forêt");
             this.nbForets--;
         }
     }
@@ -42,7 +44,10 @@ public class DesForets extends Pouvoir {
     @Override
     public void finTour(boolean enDeclin) {
         if (!enDeclin) {
+            System.out.println(this.nbForets + " forêts possédées");
             this.nbJetons = this.nbForets;
+        } else {
+            this.nbJetons = 0;
         }
     }
 
