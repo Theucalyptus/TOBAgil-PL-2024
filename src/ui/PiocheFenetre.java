@@ -22,7 +22,7 @@ import ui.selecteur.Selecteur;
 import ui.views.CombinaisonView;
 import jeu.Pioche;
 
-
+@SuppressWarnings("deprecation")
 public class PiocheFenetre implements Observer {
 
     /** La pioche du jeu. */
