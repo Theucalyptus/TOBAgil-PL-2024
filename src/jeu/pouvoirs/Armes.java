@@ -19,6 +19,11 @@ public class Armes extends Pouvoir {
     /**Construire un Armé. */
     public Armes() {
         super(TypesPouvoirs.ARMES, NOM, DESCRIPTION, PIONSSUP);
+        this.reductionAttaque = 1;
     }
+
+    
+
+
 
 }

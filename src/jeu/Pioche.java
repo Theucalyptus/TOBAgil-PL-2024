@@ -136,16 +136,18 @@ public class Pioche {
     public List<Pouvoir> creerListePouvoir() {
         List<Pouvoir> listePouvoirsRetournee = new ArrayList<>();
 
-        // listePouvoirsRetournee.add(new Alchimistes());
+        // Commenté = pas développé
+
+        listePouvoirsRetournee.add(new Alchimistes());
         // listePouvoirsRetournee.add(new Ancestraux());
-        // listePouvoirsRetournee.add(new Armes());
+        listePouvoirsRetournee.add(new Armes());
         // listePouvoirsRetournee.add(new AuxDeuxHeros());
         // listePouvoirsRetournee.add(new Batisseurs());
         // listePouvoirsRetournee.add(new Berserks());
         // listePouvoirsRetournee.add(new DesCavernes());
         listePouvoirsRetournee.add(new DesCollines());
         listePouvoirsRetournee.add(new DesForets());
-        // listePouvoirsRetournee.add(new DesMarais());
+        listePouvoirsRetournee.add(new DesMarais());
         // listePouvoirsRetournee.add(new Diplomates());
         // listePouvoirsRetournee.add(new DurACuire());
         // listePouvoirsRetournee.add(new EtLeurDragon());

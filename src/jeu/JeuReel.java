@@ -361,14 +361,17 @@ public class JeuReel extends Observable implements Jeu {
                     joueurCourant.setEtat(JoueurState.ATTAQUE);
                 }
 
+
+                // Active les effets d'avant conquête de la combinaison.
+                int reductionAttaque = this.joueurCourant.getCombinaisonActive().avantConquete(maCase);
+
                 Combinaison combinaisonActive = joueurCourant.getCombinaisonActive();
-                int attaquants = maCase.getNombreAttaquantNecessaire();
+                int attaquants = maCase.getNombreAttaquantNecessaire() - reductionAttaque;
                 int diff = combinaisonActive.getNbPionsEnMain() - attaquants;
+                
 
                 if (diff >= 0) {
                                 
-                    // Active les effets d'avant conquête de la combinaison.
-                    this.joueurCourant.getCombinaisonActive().avantConquete(maCase);
 
                     // On déloge les pions adverses
                     GroupePions anciensPions = maCase.getGroupePions();

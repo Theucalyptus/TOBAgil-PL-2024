@@ -46,6 +46,8 @@ public class DesCollines extends Pouvoir {
         if (!enDeclin) {
             System.out.println(this.nbCollines + " collines possédées");
             this.nbJetons = this.nbCollines;
+        } else {
+            this.nbJetons = 0;
         }
     }
 
