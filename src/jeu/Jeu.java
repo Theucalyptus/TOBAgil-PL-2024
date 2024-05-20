@@ -2,8 +2,6 @@ package jeu;
 
 import java.util.Observer;
 
-import jeu.exceptions.PartieEnCoursException;
-
 /**Interface de modélisation du jeu SmallWorld. */
 @SuppressWarnings("deprecation")
 public interface Jeu {
@@ -19,7 +17,7 @@ public interface Jeu {
      */
     Monde getMonde();
 
-    /**Obtenir la pioche
+    /**Obtenir la pioche.
      * @return La pioche de la partie.
      */
     Pioche getPioche();
@@ -97,5 +95,6 @@ public interface Jeu {
      */
     JeuState getEtat();
 
+    /** Lancer le début du tour. */
     void debutTour();
 }

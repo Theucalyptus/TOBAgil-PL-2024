@@ -1,8 +1,7 @@
 package jeu;
 
-import jeu.Combinaison;
-import jeu.peuples.*;
-import jeu.pouvoirs.*;
+import jeu.peuples.Peuple;
+import jeu.pouvoirs.Pouvoir;
 
 public class GroupePions {
     /** Type de Combinaison. */
@@ -33,10 +32,18 @@ public class GroupePions {
         return this.combinaison;
     }
 
+    /**
+     * Obtenir le peuple du groupe de pion.
+     * @return Le peuple du groupe de pion.
+     */
     public Peuple getPeuple() {
         return this.combinaison.getPeuple();
     }
 
+    /**
+     * Obtenir le pouvoir du groupe de pion.
+     * @return Le pouvoir du groupe de pion.
+     */
     public Pouvoir getPouvoir() {
         return this.combinaison.getPouvoir();
     }

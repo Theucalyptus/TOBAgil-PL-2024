@@ -1,12 +1,12 @@
 package jeu;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import jeu.pouvoirs.*;
-import jeu.peuples.*;
 import java.util.Random;
+
+import jeu.peuples.*;
+import jeu.pouvoirs.*;
 
 
 /**
@@ -27,6 +27,7 @@ public class Pioche extends Observable {
     /** Liste l'ensemble des Pouvoirs du jeu. */
     private List<Pouvoir> listePouvoirs;
 
+    /**Création d'un Objet aléatoire. */
     private Random rand = new Random();
 
     /**Construire un pioche. */
@@ -66,6 +67,10 @@ public class Pioche extends Observable {
         }
     }
 
+    /**
+     * Obtenir la longueur de la pioche.
+     * @return La longueur de la pioche.
+     */
     public int lengthPioche() {
         return pioche.size();
     }
@@ -73,6 +78,7 @@ public class Pioche extends Observable {
     /**
      * Donner la Combinaison attachée à l'indice donnée en argument.
      * @param indice L'indice de la combinaison voulut.
+     * @return La Combinaison attachée à l'indice donnée en argument.
      */
     public Combinaison getCombinaison(int indice) {
 
@@ -108,25 +114,30 @@ public class Pioche extends Observable {
         listePeuplesRetournee.add(new Trolls());
         listePeuplesRetournee.add(new Zombies());
 
-        /**for (NomClassePeuples nompeuple : NomClassePeuples.values()) {
-            
-            
+        /*for (NomClassePeuples nompeuple : NomClassePeuples.values()) {
+
+
             try {
-                
+
 
             } catch (ClassNotFoundException e) {
-                System.out.println("Classe non trouvée pour : " + "jeu.peuples." + nompeuple.name());
+                System.out.println("Classe non trouvée pour : " + "jeu.peuples."
+                    + nompeuple.name());
                 //e.printStackTrace();
 
             } catch (NoSuchMethodException e) {
-                System.out.println("Constructeur par défaut non trouvé pour : " + "jeu.peuples." + nompeuple.name());
+                System.out.println("Constructeur par défaut non trouvé pour : "
+                    + "jeu.peuples." + nompeuple.name());
                 //e.printStackTrace();
 
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                System.out.println("Erreur lors de l'instanciation pour : " + "jeu.peuples." + nompeuple.name());
+            } catch (InstantiationException
+                    | IllegalAccessException
+                    | InvocationTargetException e) {
+                System.out.println("Erreur lors de l'instanciation pour : "
+                    + "jeu.peuples." + nompeuple.name());
                 //e.printStackTrace();
             }
-            
+
         }*/
         return listePeuplesRetournee;
     }
@@ -163,25 +174,33 @@ public class Pioche extends Observable {
         // listePouvoirsRetournee.add(new Volants());
 
 
-        /*for (NomClassePouvoirs nomPouvoir : NomClassePouvoirs.values()) {
+        /*
+        for (NomClassePouvoirs nomPouvoir : NomClassePouvoirs.values()) {
             try {
-                Class<?> pouvoirClass = Class.forName("jeu.pouvoirs." + nomPouvoir.name());
+                Class<?> pouvoirClass = Class.forName("jeu.pouvoirs."
+                    + nomPouvoir.name());
                 Pouvoir pouvoir =
                     (Pouvoir) pouvoirClass.getDeclaredConstructor().newInstance();
                 listePouvoirsRetournee.add(pouvoir);
             } catch (ClassNotFoundException e) {
-                System.out.println("Classe non trouvée pour : " + "jeu.pouvoirs." + nomPouvoir.name());
+                System.out.println("Classe non trouvée pour : " + "jeu.pouvoirs."
+                    + nomPouvoir.name());
                 //e.printStackTrace();
 
             } catch (NoSuchMethodException e) {
-                System.out.println("Constructeur par défaut non trouvé pour : " + "jeu.pouvoirs." + nomPouvoir.name());
+                System.out.println("Constructeur par défaut non trouvé pour : "
+                    + "jeu.pouvoirs." + nomPouvoir.name());
                 //e.printStackTrace();
 
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                System.out.println("Erreur lors de l'instanciation pour : " + "jeu.pouvoirs." + nomPouvoir.name());
+            } catch (InstantiationException
+                    | IllegalAccessException
+                    | InvocationTargetException e) {
+                System.out.println("Erreur lors de l'instanciation pour : "
+                    + "jeu.pouvoirs." + nomPouvoir.name());
                 //e.printStackTrace();
             }
-        }*/
+        }
+        */
         return listePouvoirsRetournee;
     }
 
@@ -207,17 +226,18 @@ public class Pioche extends Observable {
                                 this.listePeuples.get(num1),
                                 this.listePouvoirs.get(num2));
             listeCombinaisons.add(combinaison);
-            // On pourrait supprimer les peuples et combinaison de la liste afin qu'ils n'apparaisent plus
+            // On pourrait supprimer les peuples et combinaison 
+            // de la liste afin qu'ils n'apparaisent plus
             listePeuples.remove(num1);
             listePouvoirs.remove(num2);
         }
         return listeCombinaisons;
     }
-    
-    
+
+
     /**
-     * Supprime la combinaison de la pioche
-     * @param combinaison a supprimer de la pioche
+     * Supprimer la combinaison de la pioche.
+     * @param combinaison à supprimer de la pioche.
      */
     public void removeCombinaisonChoisit(Combinaison combinaison) {
         this.pioche.remove(combinaison);

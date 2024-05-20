@@ -10,10 +10,6 @@ import java.util.HashMap;
 
 import java.util.Random;
 
-import jeu.peuples.*;
-import jeu.peuples.TribuOubliee;
-import jeu.pouvoirs.*;
-
 public class Monde {
 
     /** Le nombre de tuiles en largeurs. */
@@ -22,7 +18,7 @@ public class Monde {
     private int dimY;
     /** La grille avec l'ensemble des tuiles. */
     private List<Case> grille;
-
+    /** La probabilité de faire apparaître une tribu oubliées sur une case. */
     private final double probaTribuOubliee = 0.25;
 
     /**
@@ -111,7 +107,7 @@ public class Monde {
                     || y == 0 || y == this.dimY - 1;
 
                 // nombre de pions a placer sur la nouvelle case
-                
+
                 int nbPions;
                 if (Math.random() < probaTribuOubliee) {
                     nbPions = 1;

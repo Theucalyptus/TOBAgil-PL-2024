@@ -25,7 +25,7 @@ public class DesMarais extends Pouvoir {
     public DesMarais() {
         super(TypesPouvoirs.DES_MARAIS, NOM, DESCRIPTION, PIONSSUP);
     }
-    
+
     @Override
     public void apresConquete(Case regionConquise) {
         if (regionConquise.getTypeRegion() == TypesRegions.MARAIS) {

@@ -16,10 +16,13 @@ public class ActionsFenetre {
 
     /**
      * Construit une fenêtre des contrôleurs.
-     * @param jeu le jeu à contrôlé
-     * @param selecteurCase le sélecteur de case
+     * @param jeu Le jeu à contrôlé.
+     * @param selecteurCase Le sélecteur de case.
+     * @param selecteurCombinaison Le sélecteur de la combinaisons dans la pioche.
      */
-    public ActionsFenetre(JeuReel jeu, Selecteur<CaseView> selecteurCase, Selecteur<Combinaison> selecteurCombinaison) {
+    public ActionsFenetre(JeuReel jeu,
+                Selecteur<CaseView> selecteurCase,
+                Selecteur<Combinaison> selecteurCombinaison) {
 
         this.fenetre = new JFrame("SmallWorld - Actions");
         Container contentPane = this.fenetre.getContentPane();

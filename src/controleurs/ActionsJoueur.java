@@ -24,6 +24,7 @@ public class ActionsJoueur extends JPanel implements Observer {
 
 	/**Le sélecteur de case du jeu. */
 	private Selecteur<CaseView> selecteurCase;
+	/**Le sélecteur de la Combinaison dans la pioche. */
 	private Selecteur<Combinaison> selecteurCombinaison;
 
 	// Les boutons disponibles.
@@ -46,8 +47,11 @@ public class ActionsJoueur extends JPanel implements Observer {
 	 * Construire le contrôleur du Joueur.
 	 * @param jeu Le jeu dans lequel on agit.
 	 * @param selecteurCase Le selecteur de Case.
+	 * @param selecteurCombinaison Le selecteur de la Combinaison dans la pioche.
 	 */
-	public ActionsJoueur(Jeu jeu, Selecteur<CaseView> selecteurCase, Selecteur<Combinaison> selecteurCombinaison) {
+	public ActionsJoueur(Jeu jeu,
+				Selecteur<CaseView> selecteurCase,
+				Selecteur<Combinaison> selecteurCombinaison) {
 		super();
         jeu.ajouterObservateurJoueurCourant(this);
 
@@ -104,18 +108,19 @@ public class ActionsJoueur extends JPanel implements Observer {
 	}
 
 	/**Classe déclenchée quand le bouton action piocher est cliqué. */
-	private class ActionPiocher implements ActionListener {
+	private final class ActionPiocher implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
-			Combinaison CombinaisonSelectionnee = selecteurCombinaison.getSelection();
-			if (CombinaisonSelectionnee == null) {
-				messageDialogue(evt, "Action Impossible ! Aucune combinaison sélectionnée.");
+			Combinaison combinaisonSelectionnee = selecteurCombinaison.getSelection();
+			if (combinaisonSelectionnee == null) {
+				messageDialogue(evt, "Action Impossible ! Aucune "
+					+ "combinaison sélectionnée.");
 			} else {
 				Joueur courant = jeu.getJoueurCourant();
-				courant.changerCombinaisonActive(CombinaisonSelectionnee);
+				courant.changerCombinaisonActive(combinaisonSelectionnee);
 				courant.setEtat(JoueurState.DEBUT_TOUR);
 				selecteurCombinaison.setSelection(null);
-				jeu.getPioche().removeCombinaisonChoisit(CombinaisonSelectionnee);
+				jeu.getPioche().removeCombinaisonChoisit(combinaisonSelectionnee);
 				jeu.debutTour();
 			}
 		}
@@ -130,7 +135,7 @@ public class ActionsJoueur extends JPanel implements Observer {
 	}
 
 	/**Classe déclenchée quand le bouton action déclin est cliqué. */
-	private /*final*/ class ActionDeclin implements ActionListener {
+	private final class ActionDeclin implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			jeu.getJoueurCourant().setEtat(JoueurState.CHOIX_COMBINAISON);
@@ -148,12 +153,12 @@ public class ActionsJoueur extends JPanel implements Observer {
 			if (caseSelectionnee == null) {
 				System.out.println("Aucune case n'est sélectionnée");
 			} else {
-				// Créez et affichez la fenêtre de dialogue
-				// 'SwingUtilities' prend un composant Swing en paramètre et renvoie la fenêtre
-				// parente de ce composant
-				// 'this' fait référence à l'élément graphique actuel
-				// spécifie que la fenêtre parente est de type JFrame
-				JFrame fenetre = (JFrame) SwingUtilities.getWindowAncestor((JButton) evt.getSource());
+				/* Créez et affichez la fenêtre de dialogue 'SwingUtilities' prend un
+				 * composant Swing en paramètre et renvoie la fenêtre parente de ce
+				 * composant 'this' fait référence à l'élément graphique actuel spécifie
+				 * que la fenêtre parente est de type JFrame. */
+				JFrame fenetre =
+					(JFrame) SwingUtilities.getWindowAncestor((JButton) evt.getSource());
 				BatimentsDialog dialog = new BatimentsDialog(fenetre, caseSelectionnee);
 				dialog.setVisible(true);
 			}
@@ -199,7 +204,8 @@ public class ActionsJoueur extends JPanel implements Observer {
 		JoueurState etat = this.jeu.getJoueurCourant().getEtat();
 		int pionsEnMain = 0;
 		try {
-			pionsEnMain = jeu.getJoueurCourant().getCombinaisonActive().getNbPionsEnMain();			
+			pionsEnMain =
+				jeu.getJoueurCourant().getCombinaisonActive().getNbPionsEnMain();		
 		} catch (NullPointerException e) {
 			// rien
 		}
