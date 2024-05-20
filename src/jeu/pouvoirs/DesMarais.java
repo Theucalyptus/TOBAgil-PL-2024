@@ -19,7 +19,7 @@ public class DesMarais extends Pouvoir {
     private static final int PIONSSUP = 4;
 
     /**Le nombre de marais conquis. */
-    private int nbMarais = 4;
+    private int nbMarais = 0;
 
     /**Construire un DesMarais. */
     public DesMarais() {
