@@ -22,8 +22,5 @@ public class Armes extends Pouvoir {
         this.reductionAttaque = 1;
     }
 
-    
-
-
 
 }

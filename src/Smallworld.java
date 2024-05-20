@@ -9,11 +9,9 @@ import jeu.Combinaison;
 import jeu.JeuReel;
 import jeu.Joueur;
 import jeu.Monde;
-import jeu.batiments.TypesBatiments;
-import jeu.peuples.*;
-import jeu.pouvoirs.*;
 
 /**Classe principale de l'application.*/
+@SuppressWarnings("deprecation")
 public final class Smallworld {
 
 
@@ -48,7 +46,8 @@ public final class Smallworld {
         jeu.getPioche().addObserver(piocheF);
         MainMondeFenetre mondeF = new MainMondeFenetre(jeu, selecteurCase);
         MainJoueurFenetre joueurF = new MainJoueurFenetre(jeu);
-        ActionsFenetre actionsF = new ActionsFenetre(jeu, selecteurCase, selecteurCombinaison);
+        ActionsFenetre actionsF = new ActionsFenetre(jeu, selecteurCase,
+            selecteurCombinaison);
 
     }
 }

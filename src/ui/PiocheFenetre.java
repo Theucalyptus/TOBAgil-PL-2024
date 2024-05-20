@@ -1,11 +1,9 @@
 package ui;
 
-import java.lang.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,8 +14,6 @@ import jeu.Combinaison;
 import jeu.Jeu;
 import jeu.JoueurState;
 import jeu.JeuState;
-import jeu.peuples.*;
-import jeu.pouvoirs.*;
 import ui.selecteur.Selecteur;
 import ui.views.CombinaisonView;
 import jeu.Pioche;
@@ -42,8 +38,11 @@ public class PiocheFenetre implements Observer {
 
     private Selecteur<Combinaison> selecteurCombinaison;
 
-    /** Construit une fenêtre affichant la pioche. */
-    public PiocheFenetre (Selecteur<Combinaison> selecteurCombinaison, Jeu jeu) {
+    /** Construit une fenêtre affichant la pioche.
+     * @param selecteurCombinaison Le selecteur de la Combinaison choisi dans la pioche.
+     * @param jeu Le jeu.
+     */
+    public PiocheFenetre(Selecteur<Combinaison> selecteurCombinaison, Jeu jeu) {
 
         this.jeu = jeu;
         this.pioche = jeu.getPioche();

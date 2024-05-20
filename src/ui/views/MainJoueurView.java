@@ -73,11 +73,12 @@ public class MainJoueurView extends JPanel implements Observer {
         this.points.setScore(joueur.getPoints());
 
         // affichage de la combinaison active
-        if(joueur.getCombinaisonActive() != null) {
-            CombinaisonView activeView = new CombinaisonView(joueur.getCombinaisonActive());
+        if (joueur.getCombinaisonActive() != null) {
+            CombinaisonView activeView =
+                new CombinaisonView(joueur.getCombinaisonActive());
             this.combViews.add(activeView);
             this.combinaisonsPnl.add(activeView);
-            
+
             this.nbPionsAPlacer.setText("Pions à placer : "
             + joueur.getCombinaisonActive().getNbPionsEnMain());
         }

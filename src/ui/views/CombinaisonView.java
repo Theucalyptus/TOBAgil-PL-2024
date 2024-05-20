@@ -1,6 +1,6 @@
 package ui.views;
 
-import java.awt.Color;
+// import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
@@ -33,18 +33,20 @@ public class CombinaisonView extends JPanel {
         Peuple peupleC = comb.getPeuple();
         Pouvoir pouvoirC = comb.getPouvoir();
 
-        Image image_peuple = ImageFactory.peupleLogoImage(peupleC.getType(), comb.getDeclin());
+        Image imagePeuple =
+            ImageFactory.peupleLogoImage(peupleC.getType(), comb.getDeclin());
 
-        ImageIcon imageTemp = new ImageIcon(image_peuple.getScaledInstance(256, 128,
+        ImageIcon imageTemp = new ImageIcon(imagePeuple.getScaledInstance(256, 128,
         java.awt.Image.SCALE_SMOOTH));
 
         this.peupleLbl.setIcon(imageTemp);
 
         //this.peupleLbl.setText(peupleC.getNom());
 
-        Image image_pouvoirs = ImageFactory.pouvoirLogoImage(pouvoirC.getType(), comb.getDeclin());
+        Image imagePouvoirs =
+            ImageFactory.pouvoirLogoImage(pouvoirC.getType(), comb.getDeclin());
 
-        this.pouvoirLbl.setIcon(new ImageIcon(image_pouvoirs.getScaledInstance(128, 128,
+        this.pouvoirLbl.setIcon(new ImageIcon(imagePouvoirs.getScaledInstance(128, 128,
         java.awt.Image.SCALE_SMOOTH)));
 
         //this.pouvoirLbl.setText(pouvoirC.getNom());
@@ -57,8 +59,8 @@ public class CombinaisonView extends JPanel {
             super.add(this.peupleLbl);
             super.add(this.pouvoirLbl);
         }
-        
+
     }
 
-    
+
 }

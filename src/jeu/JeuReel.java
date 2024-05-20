@@ -5,15 +5,12 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.concurrent.PriorityBlockingQueue;
 
 import jeu.exceptions.JoueurDejaDansLaPartieException;
 import jeu.exceptions.NombreJoueurIncorrectException;
 import jeu.exceptions.PartieEnCoursException;
 import jeu.exceptions.PartiePasEnCoursException;
 import jeu.exceptions.PartiePleineException;
-import jeu.peuples.Peuple;
-import jeu.peuples.TribuOubliee;
 
 /**
  * Classe représentant une partie de jeu.
@@ -42,9 +39,9 @@ public class JeuReel extends Observable implements Jeu {
     private int nombreJoueurs;
 
     /** Le plateau. */
-    private Monde monde;              // Le plateau du monde
+    private Monde monde;
 
-    /** La pioche */
+    /** La pioche. */
     private Pioche pioche;
 
     /** Indique le statut de la partie. */
@@ -285,7 +282,8 @@ public class JeuReel extends Observable implements Jeu {
         int pointsBonus = combinaisonJoueur.finTour();
 
         int totalPoints = combinaisonJoueur.nombreGroupesPions() + pointsBonus;
-        System.out.println(this.joueurCourant.getNom() + " gagne " + totalPoints + " (" + pointsBonus + " bonus)");
+        System.out.println(this.joueurCourant.getNom() + " gagne " + totalPoints + " ("
+            + pointsBonus + " bonus)");
         this.joueurCourant.addPoints(totalPoints);
     }
 
@@ -315,7 +313,7 @@ public class JeuReel extends Observable implements Jeu {
                 System.out.println("Fin de la partie !");
             }
             if (joueurCourant.getEtat() != JoueurState.CHOIX_COMBINAISON) {
-                debutTour();                
+                debutTour();
             }
         } else {
             System.out.println("Partie non-commencé ou terminée. Abandon !");
@@ -326,6 +324,7 @@ public class JeuReel extends Observable implements Jeu {
 
 
     //Se lance au debut du tour d'un joueur
+    @Override
     public void debutTour() {
         System.out.println("\nDébut du tour de " + this.joueurCourant.getNom());
         Combinaison activComb = this.joueurCourant.getCombinaisonActive();
@@ -373,16 +372,15 @@ public class JeuReel extends Observable implements Jeu {
 
 
                 // Active les effets d'avant conquête de la combinaison.
-                int reductionAttaque = this.joueurCourant.getCombinaisonActive().avantConquete(maCase);
+                int reductionAttaque =
+                    this.joueurCourant.getCombinaisonActive().avantConquete(maCase);
 
                 Combinaison combinaisonActive = joueurCourant.getCombinaisonActive();
                 int attaquants = maCase.getNombreAttaquantNecessaire() - reductionAttaque;
                 int diff = combinaisonActive.getNbPionsEnMain() - attaquants;
-                
+
 
                 if (diff >= 0) {
-                                
-
                     // On déloge les pions adverses
                     GroupePions anciensPions = maCase.getGroupePions();
                     if (anciensPions != null) {
@@ -396,7 +394,7 @@ public class JeuReel extends Observable implements Jeu {
                             int newNbPions = ancienneCombinaison.getNbPionsEnMain()
                                 + anciensPions.getNombre() - 1;
                             ancienneCombinaison.setNbPionsEnMain(newNbPions);
-                                
+
                             // Active les effets d'avant conquête de la combinaison.
                             ancienneCombinaison.apresConqueteAdverse(maCase);
                         }
@@ -410,7 +408,7 @@ public class JeuReel extends Observable implements Jeu {
                     System.out.println("Pions en main : "
                         + combinaisonActive.getNbPionsEnMain());
 
-                                
+
                     // Active les effets d'après conquête de la combinaison
                     this.joueurCourant.getCombinaisonActive().apresConquete(maCase);
 
