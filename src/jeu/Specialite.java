@@ -27,10 +27,10 @@ public abstract class Specialite {
      * @param pionsSup Le nombre de pions suplémentaires qu'apporte la spécialité.
     */
     public Specialite(String nom, String description, int pionsSup) {
-        if (nom == null || nom.equals("") || description == null
+        /* if (nom == null || nom.equals("") || description == null
                 || description.equals("") || pionsSup < 0) {
-            throw new IllegalArgumentException("L'appel n'es pas correct.");
-        }
+            throw new IllegalArgumentException("L'appel n'est pas correct.");
+        } */
         this.nom = nom;
         this.description = description;
         this.nbPions = pionsSup;

@@ -18,6 +18,7 @@ public class DesMarais extends Pouvoir {
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
     private static final int PIONSSUP = 4;
 
+
     /**Le nombre de marais conquis. */
     private int nbMarais = 0;
 
@@ -29,6 +30,7 @@ public class DesMarais extends Pouvoir {
     @Override
     public void apresConquete(Case regionConquise) {
         if (regionConquise.getTypeRegion() == TypesRegions.MARAIS) {
+            System.out.println("Gain d'un marais");
             this.nbMarais++;
         }
     }
@@ -36,6 +38,7 @@ public class DesMarais extends Pouvoir {
     @Override
     public void apresConqueteAdverse(Case regionConquise) {
         if (regionConquise.getTypeRegion() == TypesRegions.MARAIS) {
+            System.out.println("Perte d'un marais");
             this.nbMarais--;
         }
     }
@@ -43,7 +46,10 @@ public class DesMarais extends Pouvoir {
     @Override
     public void finTour(boolean enDeclin) {
         if (!enDeclin) {
+            System.out.println(this.nbMarais + " marais possédés");
             this.nbJetons = this.nbMarais;
+        } else {
+            this.nbJetons = 0;
         }
     }
 }

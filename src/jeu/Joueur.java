@@ -37,8 +37,7 @@ public class Joueur extends Observable {
         this.nom = name;
         this.pointsVictoire = pointsVictoire;
         this.combinaisonsDeclins = new ArrayList<>();
-        // TODO : CHANGER en JoueurState.CHOIX_COMBINAISON
-        this.etat = JoueurState.DEBUT_TOUR;
+        this.etat = JoueurState.CHOIX_COMBINAISON;
     }
 
     /**Obtenir le nom du joueur .

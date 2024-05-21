@@ -9,12 +9,9 @@ import jeu.Combinaison;
 import jeu.JeuReel;
 import jeu.Joueur;
 import jeu.Monde;
-import jeu.peuples.Amazones;
-import jeu.peuples.Elfes;
-import jeu.pouvoirs.Alchimistes;
-import jeu.pouvoirs.Volants;
 
 /**Classe principale de l'application.*/
+@SuppressWarnings("deprecation")
 public final class Smallworld {
 
 
@@ -33,11 +30,8 @@ public final class Smallworld {
         // MODELE
         JeuReel jeu = new JeuReel();
         Joueur j1 = new Joueur("Fraise", 0);
-        j1.changerCombinaisonActive(new Combinaison(new Amazones(), new Alchimistes()));
         Joueur j2 = new Joueur("Framboise", 0);
-        j2.changerCombinaisonActive(new Combinaison(new Elfes(), new Alchimistes()));
         Joueur j3 = new Joueur("Pomme", 0);
-        j3.changerCombinaisonActive(new Combinaison(new Amazones(), new Volants()));
         jeu.ajouterJoueur(j1);
         jeu.ajouterJoueur(j2);
         jeu.ajouterJoueur(j3);
@@ -45,12 +39,15 @@ public final class Smallworld {
 
         //SELECTEUR
         Selecteur<CaseView> selecteurCase = new Selecteur<CaseView>();
+        Selecteur<Combinaison> selecteurCombinaison = new Selecteur<Combinaison>();
 
         // VUES
-        PiocheFenetre piocheF = new PiocheFenetre(jeu);
+        PiocheFenetre piocheF = new PiocheFenetre(selecteurCombinaison, jeu);
+        jeu.getPioche().addObserver(piocheF);
         MainMondeFenetre mondeF = new MainMondeFenetre(jeu, selecteurCase);
         MainJoueurFenetre joueurF = new MainJoueurFenetre(jeu);
-        ActionsFenetre actionsF = new ActionsFenetre(jeu, selecteurCase);
+        ActionsFenetre actionsF = new ActionsFenetre(jeu, selecteurCase,
+            selecteurCombinaison);
 
     }
 }

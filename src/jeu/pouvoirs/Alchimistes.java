@@ -16,7 +16,7 @@ public class Alchimistes extends Pouvoir {
     private static final int PIONSSUP = 4;
 
     /**Le nombre de point gagné à chaque fin de tour. */
-    private int nmb_gagne = 2;
+    private final int GAIN = 2;
 
     /**Construire un Alchimiste. */
     public Alchimistes() {
@@ -26,8 +26,9 @@ public class Alchimistes extends Pouvoir {
     @Override
     public void finTour(boolean enDeclin) {
         if (!enDeclin) {
-            this.nbJetons = this.nmb_gagne;
+            this.nbJetons = GAIN;
+        } else {
+            this.nbJetons = 0;
         }
-    }
-
+    };
 }

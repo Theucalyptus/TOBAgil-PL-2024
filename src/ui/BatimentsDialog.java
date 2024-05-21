@@ -11,6 +11,7 @@ import ui.utils.ImageFactory;
 
 public class BatimentsDialog extends JDialog {
 
+    /** La case de la page de dialogue. */
     private CaseView caseSelectionnee;
 
     public BatimentsDialog(JFrame parent, CaseView caseSelect) {
@@ -27,9 +28,9 @@ public class BatimentsDialog extends JDialog {
 
         // Ajouter un bouton pour chaque type de bâtiment
         for (TypesBatiments typeBat : TypesBatiments.values()) {
-            if (typeBat != TypesBatiments.AUCUN){
+            if (typeBat != TypesBatiments.AUCUN) {
                 JButton button = new JButton(typeBat.toString());
-			    button.setIcon(new ImageIcon( ImageFactory.batimentsImage(typeBat)));
+			    button.setIcon(new ImageIcon(ImageFactory.batimentsImage(typeBat)));
                 button.addActionListener(new ActionListener() {
 				    //Permet de mettre une action différente pour chaque boutons
                     @Override

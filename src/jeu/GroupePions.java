@@ -1,7 +1,8 @@
 package jeu;
 
-/**Classe qui représente un groupe de pions. Un groupe de pions est un
- * nombre de pions d'une certaine combinaison Peuple-Pouvoir. */
+import jeu.peuples.Peuple;
+import jeu.pouvoirs.Pouvoir;
+
 public class GroupePions {
     /** Type de Combinaison. */
     private Combinaison combinaison;
@@ -29,6 +30,22 @@ public class GroupePions {
      */
     public Combinaison getCombinaison() {
         return this.combinaison;
+    }
+
+    /**
+     * Obtenir le peuple du groupe de pion.
+     * @return Le peuple du groupe de pion.
+     */
+    public Peuple getPeuple() {
+        return this.combinaison.getPeuple();
+    }
+
+    /**
+     * Obtenir le pouvoir du groupe de pion.
+     * @return Le pouvoir du groupe de pion.
+     */
+    public Pouvoir getPouvoir() {
+        return this.combinaison.getPouvoir();
     }
 
 

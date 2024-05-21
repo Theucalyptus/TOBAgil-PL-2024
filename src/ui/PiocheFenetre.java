@@ -4,89 +4,108 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
+
 import jeu.Combinaison;
 import jeu.Jeu;
 import jeu.JoueurState;
-import jeu.peuples.Amazones;
-import jeu.peuples.Elfes;
-import jeu.pouvoirs.Alchimistes;
-import jeu.pouvoirs.Volants;
+import jeu.JeuState;
+import ui.selecteur.Selecteur;
 import ui.views.CombinaisonView;
+import jeu.Pioche;
 
+@SuppressWarnings("deprecation")
+public class PiocheFenetre implements Observer {
 
-public class PiocheFenetre {
-
-    // TODO : à exporter dans jeu.pioche;
-    public static final int NBCLASSE = 2;
-
-    /** La vue de la combinaison sélectionner de la pioche. */
+    /** La pioche du jeu. */
+    private Pioche pioche;
+    /** La vue de la combinaison sélectionnée. */
     private CombinaisonView selectedClass = null;
 
-    /** Le jeu affiché. */
-    private final Jeu jeu;
+    private Jeu jeu;
+
 
     /** La fenêtre. */
     private JFrame fenetre;
+    private Map<CombinaisonView, Integer> combinaisonIndexMap = new HashMap<>();
+
+    private JPanel mainPanel;
+    private MouseEventHandler trace;
+
+    private Selecteur<Combinaison> selecteurCombinaison;
 
     /** Construit une fenêtre affichant la pioche.
-     * @param jeu Le jeu dans lequel on joue.
+     * @param selecteurCombinaison Le selecteur de la Combinaison choisi dans la pioche.
+     * @param jeu Le jeu.
      */
-    public PiocheFenetre(Jeu jeu) {
+    public PiocheFenetre(Selecteur<Combinaison> selecteurCombinaison, Jeu jeu) {
+
         this.jeu = jeu;
+        this.pioche = jeu.getPioche();
         this.fenetre = new JFrame("SmallWorld - Pioche");
-        this.fenetre.setMinimumSize(new Dimension(800, 600));
+        this.fenetre.setMinimumSize(new Dimension(300, 600));
+        this.selecteurCombinaison = selecteurCombinaison;
         Container contentPane = this.fenetre.getContentPane();
 
-        JPanel mainPanel = new JPanel();
+        this.mainPanel = new JPanel();
         contentPane.add(mainPanel);
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 
-		MouseEventHandler trace = new MouseEventHandler();
+		this.trace = new MouseEventHandler();
 
-        // à refactor pour utiliser pioche quand dispo
-        //for(int i=0;i<NBCLASSE;i++){
-           CombinaisonView entree =
-                new CombinaisonView(new Combinaison(new Elfes(), new Volants()));
-           entree.addMouseListener(trace);
-           mainPanel.add(entree);
-
-           entree =
-                new CombinaisonView(new Combinaison(new Amazones(), new Alchimistes()));
-           entree.addMouseListener(trace);
-           mainPanel.add(entree);
-        //}
-
-        JButton selectButton = new JButton("Selectionner");
-        selectButton.addActionListener(new ActionQuitter());
-        selectButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        mainPanel.add(selectButton);
+        List<Combinaison> visible = pioche.getChoix();
+        int maxIndex = Math.min(pioche.lengthPioche(), Pioche.LONGUEURPIOCHE);
+        for (int i = 0; i < maxIndex; i++) {
+            CombinaisonView entree = new CombinaisonView(visible.get(i));
+            entree.addMouseListener(this.trace);
+            this.mainPanel.add(entree);
+            combinaisonIndexMap.put(entree, i);
+        }
 
         this.fenetre.pack();
         this.fenetre.setVisible(true);
-        this.fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.fenetre.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 
-	public class ActionQuitter implements ActionListener {
+    @Override
+    public void update(Observable o, Object arg) {
+        this.mainPanel.removeAll();
+        combinaisonIndexMap.clear();
 
-        @Override
-        public void actionPerformed(ActionEvent evt) {
-			if (selectedClass == null) {
-                System.out.println("AUCUNE CLASSE SELECTIONNE - REESSAYER !");
-            } else {
-                System.out.println("OK - combinaison selectionne");
-                jeu.getJoueurCourant().setEtat(JoueurState.DEBUT_TOUR);
-                fenetre.dispose();
-            }
-		}
-	}
+        List<Combinaison> visible = pioche.getChoix();
+        int maxIndex = Math.min(pioche.lengthPioche(), Pioche.LONGUEURPIOCHE);
+        for (int i = 0; i < maxIndex; i++) {
+            CombinaisonView entree = new CombinaisonView(visible.get(i));
+            entree.addMouseListener(this.trace);
+            this.mainPanel.add(entree);
+            combinaisonIndexMap.put(entree, i);
+        }
+
+        this.mainPanel.revalidate();
+        this.mainPanel.repaint();
+    }
 
     public class MouseEventHandler extends MouseAdapter {
 
         @Override
         public void mouseEntered(MouseEvent e) {
+
+            if (jeu.getEtat() == JeuState.PAS_COMMENCEE) {
+                return;
+            }
+
+            if (jeu.getJoueurCourant().getEtat() != JoueurState.CHOIX_COMBINAISON) {
+                return;
+            }
+
             CombinaisonView entree = (CombinaisonView) e.getSource();
+
             if (selectedClass != entree) {
-                entree.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.BLUE));
+                entree.setBackground(Color.BLUE);
             }
         }
 
@@ -94,19 +113,43 @@ public class PiocheFenetre {
         public void mouseExited(MouseEvent e) {
             CombinaisonView entree = (CombinaisonView) e.getSource();
             if (selectedClass != entree) {
-                entree.setBorder(BorderFactory.createEmptyBorder());
+                entree.setBackground(Color.WHITE);
             }
         }
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            CombinaisonView entree = (CombinaisonView) e.getSource();
-            if (selectedClass != null) {
-                selectedClass.setBorder(BorderFactory.createEmptyBorder());
+
+            if (jeu.getEtat() == JeuState.PAS_COMMENCEE) {
+                System.out.println("La partie n'a pas encore commence");
+                return;
             }
 
-            entree.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.GREEN));
+            CombinaisonView entree = (CombinaisonView) e.getSource();
+
+            resetCouleur();
+
+            if (jeu.getJoueurCourant().getEtat() != JoueurState.CHOIX_COMBINAISON) {
+                System.out.println("Vous ne pouvez pas choisir une combinaison");
+                return;
+            }
+
+            Integer indiceChoisi = combinaisonIndexMap.get(entree);
+            if (indiceChoisi != null) {
+                Combinaison combinaison = pioche.getCombinaison(indiceChoisi);
+                selecteurCombinaison.setSelection(combinaison);
+            } else {
+                System.out.println("AUCUNE CLASSE SELECTIONNE - REESSAYER !");
+            }
+
+            entree.setBackground(Color.GREEN);
             selectedClass = entree;
+        }
+
+        private void resetCouleur() {
+            for (CombinaisonView view : combinaisonIndexMap.keySet()) {
+                view.setBackground(Color.WHITE);
+            }
         }
     }
 }

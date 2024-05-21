@@ -275,7 +275,7 @@ public class Case extends Observable {
     */
     public void ajoutVoisins(Case caseVoisine) {
         if (caseVoisine == null) {
-            throw new IllegalAccessException("CaseVoisine ne doit pas être null.");
+            throw new IllegalArgumentException("CaseVoisine ne doit pas être null.");
         }
         this.voisins.add(caseVoisine);
     }
@@ -297,7 +297,6 @@ public class Case extends Observable {
 
         //checker si la case est atteignable par un joueur déjà déployé ?
         for (Case voisine : this.getVoisins()) {
-            System.out.println("Case voisine : " + voisine.getCoordonnees().toString());
             if (voisine.getGroupePions().getCombinaison()
                     == joueur.getCombinaisonActive()) {
                 return true;
