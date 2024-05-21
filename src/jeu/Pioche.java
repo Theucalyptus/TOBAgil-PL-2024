@@ -226,7 +226,7 @@ public class Pioche extends Observable {
                                 this.listePeuples.get(num1),
                                 this.listePouvoirs.get(num2));
             listeCombinaisons.add(combinaison);
-            // On pourrait supprimer les peuples et combinaison 
+            // On pourrait supprimer les peuples et combinaison
             // de la liste afin qu'ils n'apparaisent plus
             listePeuples.remove(num1);
             listePouvoirs.remove(num2);

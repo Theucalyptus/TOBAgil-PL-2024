@@ -16,7 +16,7 @@ public class Alchimistes extends Pouvoir {
     private static final int PIONSSUP = 4;
 
     /**Le nombre de point gagné à chaque fin de tour. */
-    private final int GAIN = 2;
+    private static final int GAIN = 2;
 
     /**Construire un Alchimiste. */
     public Alchimistes() {

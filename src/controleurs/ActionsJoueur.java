@@ -199,13 +199,13 @@ public class ActionsJoueur extends JPanel implements Observer {
 		}
 	}
 
-
+	@Override
 	public void update(java.util.Observable o, Object arg) {
 		JoueurState etat = this.jeu.getJoueurCourant().getEtat();
 		int pionsEnMain = 0;
 		try {
 			pionsEnMain =
-				jeu.getJoueurCourant().getCombinaisonActive().getNbPionsEnMain();		
+				jeu.getJoueurCourant().getCombinaisonActive().getNbPionsEnMain();
 		} catch (NullPointerException e) {
 			// rien
 		}
