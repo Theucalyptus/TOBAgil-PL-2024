@@ -18,7 +18,8 @@ public class DesMarais extends Pouvoir {
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
     private static final int PIONSSUP = 4;
 
-    /**Le nombre de collines conquises. */
+
+    /**Le nombre de marais conquis. */
     private int nbMarais = 0;
 
     /**Construire un DesMarais. */
@@ -51,6 +52,4 @@ public class DesMarais extends Pouvoir {
             this.nbJetons = 0;
         }
     }
-
-
 }
