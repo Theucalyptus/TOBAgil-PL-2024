@@ -99,20 +99,20 @@ public class Pioche extends Observable {
     public List<Peuple> creerListePeuple() {
         List<Peuple> listePeuplesRetournee = new ArrayList<>();
 
-        listePeuplesRetournee.add(new Amazones());
-        listePeuplesRetournee.add(new Elfes());
-        listePeuplesRetournee.add(new Geants());
+        // listePeuplesRetournee.add(new Amazones());
+        // listePeuplesRetournee.add(new Elfes());
+        // listePeuplesRetournee.add(new Geants());
         listePeuplesRetournee.add(new HommesRats());
         listePeuplesRetournee.add(new Humains());
         listePeuplesRetournee.add(new Mages());
-        listePeuplesRetournee.add(new MiPortions());
+        // listePeuplesRetournee.add(new MiPortions());
         listePeuplesRetournee.add(new Nains());
         listePeuplesRetournee.add(new Orcs());
-        listePeuplesRetournee.add(new Sorciers());
-        listePeuplesRetournee.add(new Squelettes());
-        listePeuplesRetournee.add(new Tritons());
-        listePeuplesRetournee.add(new Trolls());
-        listePeuplesRetournee.add(new Zombies());
+        // listePeuplesRetournee.add(new Sorciers());
+        // listePeuplesRetournee.add(new Squelettes());
+        // listePeuplesRetournee.add(new Tritons());
+        // listePeuplesRetournee.add(new Trolls());
+        // listePeuplesRetournee.add(new Zombies());
 
         /*for (NomClassePeuples nompeuple : NomClassePeuples.values()) {
 
