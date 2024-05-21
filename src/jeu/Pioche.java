@@ -165,8 +165,8 @@ public class Pioche extends Observable {
         // listePouvoirsRetournee.add(new Diplomates());
         // listePouvoirsRetournee.add(new DurACuire());
         // listePouvoirsRetournee.add(new EtLeurDragon());
-        // listePouvoirsRetournee.add(new Fortunes());
-        // listePouvoirsRetournee.add(new Marchands());
+        listePouvoirsRetournee.add(new Fortunes());
+        listePouvoirsRetournee.add(new Marchands());
         // listePouvoirsRetournee.add(new Marins());
         // listePouvoirsRetournee.add(new Montes());
         // listePouvoirsRetournee.add(new Pillards());
