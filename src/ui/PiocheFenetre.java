@@ -26,6 +26,7 @@ public class PiocheFenetre implements Observer {
     /** La vue de la combinaison sélectionnée. */
     private CombinaisonView selectedClass = null;
 
+    /**Le jeu dans lequel on joue. */
     private Jeu jeu;
 
 

@@ -1,7 +1,6 @@
 package jeu.pouvoirs;
 
 import jeu.Case;
-import jeu.TypesRegions;
 
 /**Classe Marchands. L'Marchands est un pouvoir qui rend plus riche.*/
 public class Marchands extends Pouvoir {

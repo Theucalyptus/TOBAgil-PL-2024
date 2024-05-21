@@ -376,7 +376,8 @@ public class JeuReel extends Observable implements Jeu {
                     this.joueurCourant.getCombinaisonActive().avantConquete(maCase);
 
                 Combinaison combinaisonActive = joueurCourant.getCombinaisonActive();
-                int attaquants = Math.max(maCase.getNombreAttaquantNecessaire() - reductionAttaque, 1);
+                int attaquants = Math.max(
+                    maCase.getNombreAttaquantNecessaire() - reductionAttaque, 1);
                 int diff = combinaisonActive.getNbPionsEnMain() - attaquants;
 
 

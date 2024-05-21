@@ -1,7 +1,6 @@
 package jeu.pouvoirs;
 
 import jeu.Case;
-import jeu.TypesRegions;
 import jeu.TypesSymboles;
 
 /**Classe DesCavernes. Les Cavernes est un pouvoir qui permet de prendre plus facilement
