@@ -31,6 +31,8 @@ public class Fortunes extends Pouvoir {
         if (!enDeclin && no_points) {
             this.nbJetons = this.nmb_gagne;
             this.no_points = false;
+        } else {
+            this.nbJetons = 0;
         }
     }
 }

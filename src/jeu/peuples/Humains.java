@@ -46,6 +46,8 @@ public class Humains extends Peuple {
     public void finTour(boolean enDeclin) {
     	if (!enDeclin) {
         	this.nbJetons = this.nbChamps;
-    	}
+    	} else {
+            this.nbJetons = 0;
+        }
     }
 }

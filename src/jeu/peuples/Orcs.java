@@ -55,6 +55,8 @@ public class Orcs extends Peuple {
     public void finTour(boolean enDeclin) {
     	if (!enDeclin) {
         	this.nbJetons = this.nbRegionsConquises;
-    	}
+    	} else {
+            this.nbJetons = 0;
+        }
     }
 }

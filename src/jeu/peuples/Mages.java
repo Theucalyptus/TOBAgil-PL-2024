@@ -45,7 +45,9 @@ public class Mages extends Peuple {
     public void finTour(boolean enDeclin) {
     	if (!enDeclin) {
         	this.nbJetons = this.nbSources;
-    	}
+    	} else {
+            this.nbJetons = 0;
+        }
     }
 
 }
