@@ -168,8 +168,8 @@ public class Pioche extends Observable {
         listePouvoirsRetournee.add(new Fortunes());
         listePouvoirsRetournee.add(new Marchands());
         // listePouvoirsRetournee.add(new Marins());
-        // listePouvoirsRetournee.add(new Montes());
-        // listePouvoirsRetournee.add(new Pillards());
+        listePouvoirsRetournee.add(new Montes());
+        listePouvoirsRetournee.add(new Pillards());
         // listePouvoirsRetournee.add(new Scouts());
         // listePouvoirsRetournee.add(new Volants());
 
@@ -219,8 +219,8 @@ public class Pioche extends Observable {
                 this.listePouvoirs = creerListePouvoir();
             }
 
-            int num1 = this.rand.nextInt(taille - i);
-            int num2 = this.rand.nextInt(taille - i);
+            int num1 = this.rand.nextInt(this.listePeuples.size());
+            int num2 = this.rand.nextInt(this.listePouvoirs.size());
 
             Combinaison combinaison = new Combinaison(
                                 this.listePeuples.get(num1),
