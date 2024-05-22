@@ -21,21 +21,30 @@ public final class Smallworld {
     }
 
 
-    /**Lancer l'application.
+    /**Lancer le menu de l'application.
      * @param args Les paramètre de la ligne de commandes, ils ne
      * sont pas utilisés dans notre application.
      */
     public static void main(String[] args) {
+    	
+    	LanceurSmallworld menuJeu = new LanceurSmallworld();
 
+    }
+    
+    /**Lancer le jeu Smallworld à partir du nombre de joueurs.
+     * @param nbJoueurs Le nombre de joueurs jouant au jeu.
+     */
+    public static void lancerSmallworld(int nbJoueurs) {
+    	
         // MODELE
         JeuReel jeu = new JeuReel();
-        Joueur j1 = new Joueur("Fraise", 0);
-        Joueur j2 = new Joueur("Framboise", 0);
-        Joueur j3 = new Joueur("Pomme", 0);
-        jeu.ajouterJoueur(j1);
-        jeu.ajouterJoueur(j2);
-        jeu.ajouterJoueur(j3);
-        jeu.setMonde(new Monde(jeu.getNombreJoueur()));
+        
+        for(int i = 1; i <= nbJoueurs; i++) {
+        	Joueur joueur = new Joueur("Joueur " + i, 0);
+        	jeu.ajouterJoueur(joueur);
+        }
+        
+        jeu.setMonde(new Monde(nbJoueurs));
 
         //SELECTEUR
         Selecteur<CaseView> selecteurCase = new Selecteur<CaseView>();
@@ -48,6 +57,5 @@ public final class Smallworld {
         MainJoueurFenetre joueurF = new MainJoueurFenetre(jeu);
         ActionsFenetre actionsF = new ActionsFenetre(jeu, selecteurCase,
             selecteurCombinaison);
-
     }
 }
