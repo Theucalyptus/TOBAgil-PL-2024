@@ -5,9 +5,14 @@ import java.awt.*;
 import javax.swing.*;
 
 import jeu.batiments.TypesBatiments;
+import jeu.peuples.*;
+import jeu.pouvoirs.*;
+import jeu.Combinaison;
+import jeu.JeuProxy;
 
 import ui.views.CaseView;
 import ui.utils.ImageFactory;
+
 
 public class BatimentsDialog extends JDialog {
 
@@ -19,7 +24,7 @@ public class BatimentsDialog extends JDialog {
      * @param parent La frame qui a appelé cette fenêtre.
      * @param caseSelect La case sur laquelle on souhaite mettre un batiment.
      */
-    public BatimentsDialog(JFrame parent, CaseView caseSelect) {
+    public BatimentsDialog(JFrame parent, CaseView caseSelect, TypesPeuples peuple, TypesPouvoirs pouvoir) {
         super(parent, "Choix du bâtiment à poser", true);
         if (parent == null)
             throw new IllegalArgumentException("parent ne doit pas être null.");
@@ -36,23 +41,68 @@ public class BatimentsDialog extends JDialog {
         JPanel fenetrePanel = new JPanel(new GridLayout(4, 1));
 
         // Ajouter un bouton pour chaque type de bâtiment
-        for (TypesBatiments typeBat : TypesBatiments.values()) {
-            if (typeBat != TypesBatiments.AUCUN) {
-                JButton button = new JButton(typeBat.toString());
-			    button.setIcon(new ImageIcon(ImageFactory.batimentsImage(typeBat)));
-                button.addActionListener(new ActionListener() {
-				    //Permet de mettre une action différente pour chaque boutons
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-					    // Placez le bâtiment sélectionné sur la case sélectionnée
-                        placerBatiment(typeBat);
-                    }
-                });
-                fenetrePanel.add(button);
+        // Bouton pour CAMPEMENT
+        JButton buttonCampement = new JButton(TypesBatiments.CAMPEMENT.toString());
+        buttonCampement.setIcon(new ImageIcon(ImageFactory.batimentsImage(TypesBatiments.CAMPEMENT)));
+        buttonCampement.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                placerBatiment(TypesBatiments.CAMPEMENT);
             }
-            getContentPane().add(fenetrePanel, BorderLayout.CENTER);
+        });
+        buttonCampement.setEnabled(false);
+
+        // Bouton pour FORTERESSE
+        JButton buttonForteresse = new JButton(TypesBatiments.FORTERESSE.toString());
+        buttonForteresse.setIcon(new ImageIcon(ImageFactory.batimentsImage(TypesBatiments.FORTERESSE)));
+        buttonForteresse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                placerBatiment(TypesBatiments.FORTERESSE);
+            }
+        });
+        buttonForteresse.setEnabled(false);
+
+        // Bouton pour ANTRE_DE_TROLL
+        JButton buttonAntreDeTroll = new JButton(TypesBatiments.ANTRE_DE_TROLL.toString());
+        buttonAntreDeTroll.setIcon(new ImageIcon(ImageFactory.batimentsImage(TypesBatiments.ANTRE_DE_TROLL)));
+        buttonAntreDeTroll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                placerBatiment(TypesBatiments.ANTRE_DE_TROLL);
+            }
+        });
+        buttonAntreDeTroll.setEnabled(false);
+
+        // Bouton pour TANIERE
+        JButton buttonTaniere = new JButton(TypesBatiments.TANIERE.toString());
+        buttonTaniere.setIcon(new ImageIcon(ImageFactory.batimentsImage(TypesBatiments.TANIERE)));
+        buttonTaniere.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                placerBatiment(TypesBatiments.TANIERE);
+            }
+        });
+        buttonTaniere.setEnabled(false);
+
+        //Condition de qui peut placer quel batiment
+        if (peuple == TypesPeuples.MIPORTIONS){
+            buttonTaniere.setEnabled(true);
+        } else if (peuple == TypesPeuples.TROLLS){
+            buttonAntreDeTroll.setEnabled(true);
+        } else if (pouvoir == TypesPouvoirs.BATISSEURS){
+            buttonForteresse.setEnabled(true);
+        } else if (pouvoir == TypesPouvoirs.SCOUTS){
+            buttonCampement.setEnabled(true);
         }
-    }
+
+        fenetrePanel.add(buttonAntreDeTroll);
+        fenetrePanel.add(buttonTaniere);
+        fenetrePanel.add(buttonForteresse);
+        fenetrePanel.add(buttonCampement);
+        getContentPane().add(fenetrePanel, BorderLayout.CENTER);
+
+    } 
 
 	/**
      * Place le batiment sélectionné sur la Case.

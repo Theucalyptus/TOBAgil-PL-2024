@@ -4,10 +4,18 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
-import jeu.Combinaison;
+import jeu.Case;
 import jeu.Jeu;
+import jeu.batiments.TypesBatiments;
+import jeu.exceptions.CoupInvalideException;
+import jeu.Monde;
+import jeu.peuples.Peuple;
+import jeu.pouvoirs.Pouvoir;
+import jeu.Combinaison;
 import jeu.Joueur;
 import jeu.JoueurState;
+import jeu.peuples.TypesPeuples;
+import jeu.pouvoirs.TypesPouvoirs;
 
 import ui.selecteur.Selecteur;
 import ui.views.CaseView;
@@ -155,18 +163,24 @@ public class ActionsJoueur extends JPanel implements Observer {
 
 		@Override
 		public void actionPerformed(ActionEvent evt) {
+			//Combinaison du joueur actuel
+			Pouvoir pouvoir = jeu.getJoueurCourant().getCombinaisonActive().getPouvoir();
+        	Peuple peuple = jeu.getJoueurCourant().getCombinaisonActive().getPeuple();
+			Boolean poserBat;
+			poserBat = (pouvoir.getType() == TypesPouvoirs.SCOUTS ) || (pouvoir.getType() == TypesPouvoirs.BATISSEURS)
+				||	(peuple.getType() == TypesPeuples.MIPORTIONS)|| (peuple.getType() == TypesPeuples.TROLLS) ;
 			CaseView caseSelectionnee = selecteurCase.getSelection();
 			if (caseSelectionnee == null) {
 				System.out.println("Aucune case n'est sélectionnée");
 			} else {
-				/* Créez et affichez la fenêtre de dialogue 'SwingUtilities' prend un
-				 * composant Swing en paramètre et renvoie la fenêtre parente de ce
-				 * composant 'this' fait référence à l'élément graphique actuel spécifie
-				 * que la fenêtre parente est de type JFrame. */
-				JFrame fenetre =
-					(JFrame) SwingUtilities.getWindowAncestor((JButton) evt.getSource());
-				BatimentsDialog dialog = new BatimentsDialog(fenetre, caseSelectionnee);
-				dialog.setVisible(true);
+				// Créez et affichez la fenêtre de dialogue
+				if (poserBat){
+					JFrame fenetre =(JFrame) SwingUtilities.getWindowAncestor((JButton) evt.getSource());
+					BatimentsDialog dialog = new BatimentsDialog(fenetre, caseSelectionnee, peuple.getType(), pouvoir.getType());
+					dialog.setVisible(true);
+				} else{
+					messageDialogue(evt, "Aucun batiment ne peut etre placé avec votre combinaison !");
+				} 	
 			}
 		}
 	}
