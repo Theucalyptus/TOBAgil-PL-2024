@@ -73,9 +73,16 @@ public class MainJoueurView extends JPanel implements Observer {
         this.points.setScore(joueur.getPoints());
 
         // affichage de la combinaison active
-        CombinaisonView activeView = new CombinaisonView(joueur.getCombinaisonActive());
-        this.combViews.add(activeView);
-        this.combinaisonsPnl.add(activeView);
+        if (joueur.getCombinaisonActive() != null) {
+            CombinaisonView activeView =
+                new CombinaisonView(joueur.getCombinaisonActive());
+            this.combViews.add(activeView);
+            this.combinaisonsPnl.add(activeView);
+
+            this.nbPionsAPlacer.setText("Pions à placer : "
+            + joueur.getCombinaisonActive().getNbPionsEnMain());
+        }
+
 
         // affichages des combinaisons en déclins
         if (joueur.getCombinaisonsDeclins().size() > 0) {
@@ -86,9 +93,6 @@ public class MainJoueurView extends JPanel implements Observer {
             }
         }
 
-
-        this.nbPionsAPlacer.setText("Pions à placer : "
-            + joueur.getCombinaisonActive().getNbPionsEnMain());
     }
 
     /**
@@ -97,13 +101,13 @@ public class MainJoueurView extends JPanel implements Observer {
     public class PointsView extends JPanel {
 
         /** Classe réalisant l'affichage d'un tas de jeton. */
-        private class JetonView extends JLabel {
+        private final class JetonView extends JLabel {
 
             /**
              * Construit la vue d'un tas de pièce.
              * @param nombre Le chiffre sur les pièces.
              */
-            public JetonView(int nombre) {
+            private JetonView(int nombre) {
                 super();
                 assert (nombre == 1 || nombre == 3 || nombre == 5 || nombre == 10);
                 this.setIcon(new ImageIcon(ImageFactory.pieceImage(nombre)));

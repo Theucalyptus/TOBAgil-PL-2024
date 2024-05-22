@@ -18,6 +18,8 @@ public class Monde {
     private int dimY;
     /** La grille avec l'ensemble des tuiles. */
     private List<Case> grille;
+    /** La probabilité de faire apparaître une tribu oubliées sur une case. */
+    private final double probaTribuOubliee = 0.25;
 
     /**
      * Construire un Monde.
@@ -61,11 +63,7 @@ public class Monde {
                 nombreMaxSymbols = 9;
                 break;
             default:
-                this.dimX = 6;
-                this.dimY = 6;
-                nombreMaxRegion =
-                    Math.round((float) (this.dimX * this.dimY) / nombreTypesRegion);
-                nombreMaxSymbols = 5;
+                throw new IllegalArgumentException("nbJoueurs doit être entre 2 et 5.");
         }
 
         // on associe a chaque type de region, le nombre de cases de ce type
@@ -109,7 +107,13 @@ public class Monde {
                     || y == 0 || y == this.dimY - 1;
 
                 // nombre de pions a placer sur la nouvelle case
-                int nbPions = 1;
+
+                int nbPions;
+                if (Math.random() < probaTribuOubliee) {
+                    nbPions = 1;
+                } else {
+                    nbPions = 0;
+                }
 
 
                 if (coins || centre) { //on traite les cas où on veut la mer ou un lac
@@ -165,6 +169,7 @@ public class Monde {
                 // on pose une tribu oubliée sur la case
                 Combinaison tribuOublieeComb = new Combinaison(
                     new jeu.peuples.TribuOubliee(), new jeu.pouvoirs.TribuOubliee());
+
                 GroupePions newEnsemblePions = new GroupePions(tribuOublieeComb, nbPions);
                 // création de la nouvelle case
                 Case newcase = new Case(x, y, newregion, newEnsemblePions,
@@ -216,13 +221,23 @@ public class Monde {
      * @return la case correspondante
      */
     public Case getCase(int x, int y) {
+        if (x < 0)
+            throw new IllegalArgumentException("x doit être positif.");
+        else if (x >= this.dimX)
+            throw new IllegalArgumentException("x doit être inférieur à la dimension "
+                + "du plateau.");
+        else if (y < 0)
+            throw new IllegalArgumentException("y doit être positif.");
+        else if (y > this.dimY) {
+            throw new IllegalArgumentException("y doit être inférieur à la dimension "
+                + "du plateau");
+        }
         for (Case maCase : this.grille) {
             List<Integer> coordonnees = maCase.getCoordonnees();
             if ((coordonnees.get(0) == x) && (coordonnees.get(1) == y)) {
                 return maCase;
             }
         }
-
         // Si tout est bien développé, ne devrait jamais arriver !
         throw new RuntimeErrorException(null);
     }

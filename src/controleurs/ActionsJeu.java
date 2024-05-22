@@ -25,6 +25,8 @@ public class ActionsJeu extends JPanel implements Observer {
 	 */
 	public ActionsJeu(JeuReel jeu) {
 		super();
+		if (jeu == null)
+			throw new IllegalArgumentException("jeu ne doit pas être null.");
 		super.setName("Actions du Jeu");
 		this.jeu = jeu;
 		jeu.addObserver(this);
@@ -38,16 +40,12 @@ public class ActionsJeu extends JPanel implements Observer {
 	}
 
 	/** On définit une action concernant le joueur dans la classe du contrôleur
-	 * correspondant
-	 * Je suis pas sûr que ce soit la meilleure option, un refactor est probable car on
-	 * risque
-	 * de très vite avoir énormément de code dans ces fichiers.
+	 * correspondant. Je suis pas sûr que ce soit la meilleure option, un refactor est
+	 * probable car on risque de très vite avoir énormément de code dans ces fichiers.
 	 *
 	 * En attendant, voici en gros comment on réalise la partie "Active" du controlleur,
-	 * celle
-	 * qui fait vraiment avancer le jeu.
-	 * La méthode actionPerformed est appelé par un widget graphique, comme un bouton
-	 * ou autre.
+	 * celle qui fait vraiment avancer le jeu. La méthode actionPerformed est appelé par
+	 * un widget graphique, comme un bouton ou autre.
 	 */
 	private final class ActionLancerPartie implements ActionListener {
 		@Override

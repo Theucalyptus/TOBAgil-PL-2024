@@ -1,17 +1,19 @@
 package jeu;
 import java.util.ArrayList;
 import java.util.List;
-import jeu.pouvoirs.Pouvoir;
-import jeu.peuples.Peuple;
-import jeu.peuples.TypesPeuples;
-import jeu.pouvoirs.TypesPouvoirs;
+import java.util.Observable;
+
 import java.util.Random;
+
+import jeu.peuples.*;
+import jeu.pouvoirs.*;
 
 
 /**
- * Classe d'implémantation de la prioche.
+ * Classe d'implémentation de la prioche.
  */
-public class Pioche {
+@SuppressWarnings("deprecation")
+public class Pioche extends Observable {
 
     /**Le nombre de Combinaison dans la pioche. */
     public static final int LONGUEURPIOCHE = 6;
@@ -25,12 +27,15 @@ public class Pioche {
     /** Liste l'ensemble des Pouvoirs du jeu. */
     private List<Pouvoir> listePouvoirs;
 
+    /**Création d'un Objet aléatoire. */
+    private Random rand = new Random();
+
     /**Construire un pioche. */
     public Pioche() {
         this.pioche = new ArrayList<Combinaison>();
         this.listePeuples = creerListePeuple();
         this.listePouvoirs = creerListePouvoir();
-        this.pioche = creerListeCombinaisons(this.listePeuples, this.listePouvoirs);
+        this.pioche = creerListeCombinaisons();
     }
 
 
@@ -51,9 +56,34 @@ public class Pioche {
         } else if (lengthPioche > 0) {
             return pioche.subList(0, lengthPioche);
         } else {
+            if (this.listePeuples.size() == 0) {
+                this.listePeuples = creerListePeuple();
+            }
+            if (this.listePouvoirs.size() == 0) {
+                this.listePouvoirs = creerListePouvoir();
+            }
             this.pioche = creerListeCombinaisons();
             return getChoix();
         }
+    }
+
+    /**
+     * Obtenir la longueur de la pioche.
+     * @return La longueur de la pioche.
+     */
+    public int lengthPioche() {
+        return pioche.size();
+    }
+
+    /**
+     * Donner la Combinaison attachée à l'indice donnée en argument.
+     * @param indice L'indice de la combinaison voulut.
+     * @return La Combinaison attachée à l'indice donnée en argument.
+     */
+    public Combinaison getCombinaison(int indice) {
+
+        Combinaison combinaison = this.pioche.get(indice);
+        return combinaison;
     }
 
 
@@ -69,18 +99,46 @@ public class Pioche {
     public List<Peuple> creerListePeuple() {
         List<Peuple> listePeuplesRetournee = new ArrayList<>();
 
-        for (TypesPeuples nompeuple : TypesPeuples.values()) {
-            try {
-                Class<?> peupleClass = Class.forName("jeu.peuple." + nompeuple.name());
-                Peuple peuple =
-                    (Peuple) peupleClass.getDeclaredConstructor().newInstance();
+        // listePeuplesRetournee.add(new Amazones());
+        // listePeuplesRetournee.add(new Elfes());
+        // listePeuplesRetournee.add(new Geants());
+        listePeuplesRetournee.add(new HommesRats());
+        listePeuplesRetournee.add(new Humains());
+        listePeuplesRetournee.add(new Mages());
+        // listePeuplesRetournee.add(new MiPortions());
+        listePeuplesRetournee.add(new Nains());
+        listePeuplesRetournee.add(new Orcs());
+        // listePeuplesRetournee.add(new Sorciers());
+        // listePeuplesRetournee.add(new Squelettes());
+        listePeuplesRetournee.add(new Tritons());
+        // listePeuplesRetournee.add(new Trolls());
+        // listePeuplesRetournee.add(new Zombies());
 
-                listePeuplesRetournee.add(peuple);
-            } catch (Exception e) {
-                System.out.println("Error creating instance for: " + type.name());
-                e.printStackTrace();
+        /*for (NomClassePeuples nompeuple : NomClassePeuples.values()) {
+
+
+            try {
+
+
+            } catch (ClassNotFoundException e) {
+                System.out.println("Classe non trouvée pour : " + "jeu.peuples."
+                    + nompeuple.name());
+                //e.printStackTrace();
+
+            } catch (NoSuchMethodException e) {
+                System.out.println("Constructeur par défaut non trouvé pour : "
+                    + "jeu.peuples." + nompeuple.name());
+                //e.printStackTrace();
+
+            } catch (InstantiationException
+                    | IllegalAccessException
+                    | InvocationTargetException e) {
+                System.out.println("Erreur lors de l'instanciation pour : "
+                    + "jeu.peuples." + nompeuple.name());
+                //e.printStackTrace();
             }
-        }
+
+        }*/
         return listePeuplesRetournee;
     }
 
@@ -92,17 +150,57 @@ public class Pioche {
     public List<Pouvoir> creerListePouvoir() {
         List<Pouvoir> listePouvoirsRetournee = new ArrayList<>();
 
-        for (TypesPouvoirs nomPouvoir : TypesPouvoirs.values()) {
+        // Commenté = pas développé
+
+        listePouvoirsRetournee.add(new Alchimistes());
+        // listePouvoirsRetournee.add(new Ancestraux());
+        listePouvoirsRetournee.add(new Armes());
+        // listePouvoirsRetournee.add(new AuxDeuxHeros());
+        // listePouvoirsRetournee.add(new Batisseurs());
+        // listePouvoirsRetournee.add(new Berserks());
+        listePouvoirsRetournee.add(new DesCavernes());
+        listePouvoirsRetournee.add(new DesCollines());
+        listePouvoirsRetournee.add(new DesForets());
+        listePouvoirsRetournee.add(new DesMarais());
+        // listePouvoirsRetournee.add(new Diplomates());
+        // listePouvoirsRetournee.add(new DurACuire());
+        // listePouvoirsRetournee.add(new EtLeurDragon());
+        listePouvoirsRetournee.add(new Fortunes());
+        listePouvoirsRetournee.add(new Marchands());
+        // listePouvoirsRetournee.add(new Marins());
+        listePouvoirsRetournee.add(new Montes());
+        listePouvoirsRetournee.add(new Pillards());
+        // listePouvoirsRetournee.add(new Scouts());
+        // listePouvoirsRetournee.add(new Volants());
+
+
+        /*
+        for (NomClassePouvoirs nomPouvoir : NomClassePouvoirs.values()) {
             try {
-                Class<?> peupleClass = Class.forName("jeu.peuple." + nomPouvoir.name());
+                Class<?> pouvoirClass = Class.forName("jeu.pouvoirs."
+                    + nomPouvoir.name());
                 Pouvoir pouvoir =
-                    (Pouvoir) peupleClass.getDeclaredConstructor().newInstance();
+                    (Pouvoir) pouvoirClass.getDeclaredConstructor().newInstance();
                 listePouvoirsRetournee.add(pouvoir);
-            } catch (Exception e) {
-                System.out.println("Erreur pour : " + type.name());
-                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                System.out.println("Classe non trouvée pour : " + "jeu.pouvoirs."
+                    + nomPouvoir.name());
+                //e.printStackTrace();
+
+            } catch (NoSuchMethodException e) {
+                System.out.println("Constructeur par défaut non trouvé pour : "
+                    + "jeu.pouvoirs." + nomPouvoir.name());
+                //e.printStackTrace();
+
+            } catch (InstantiationException
+                    | IllegalAccessException
+                    | InvocationTargetException e) {
+                System.out.println("Erreur lors de l'instanciation pour : "
+                    + "jeu.pouvoirs." + nomPouvoir.name());
+                //e.printStackTrace();
             }
         }
+        */
         return listePouvoirsRetournee;
     }
 
@@ -112,34 +210,40 @@ public class Pioche {
      */
     public List<Combinaison> creerListeCombinaisons() {
         List<Combinaison> listeCombinaisons = new ArrayList<>();
-        Random rand = new Random();
         int taille = Math.min(this.listePeuples.size(), this.listePouvoirs.size());
         for (int i = 0; i < taille; i++) {
+            if (this.listePeuples.size() == 0) {
+                this.listePeuples = creerListePeuple();
+            }
+            if (this.listePouvoirs.size() == 0) {
+                this.listePouvoirs = creerListePouvoir();
+            }
 
-            int num1 = rand.nextInt(taille - i);
-            int num2 = rand.nextInt(taille - i);
+            int num1 = this.rand.nextInt(this.listePeuples.size());
+            int num2 = this.rand.nextInt(this.listePouvoirs.size());
 
             Combinaison combinaison = new Combinaison(
                                 this.listePeuples.get(num1),
                                 this.listePouvoirs.get(num2));
             listeCombinaisons.add(combinaison);
-
+            // On pourrait supprimer les peuples et combinaison
+            // de la liste afin qu'ils n'apparaisent plus
             listePeuples.remove(num1);
             listePouvoirs.remove(num2);
         }
         return listeCombinaisons;
     }
 
-    /**
-     * Donner la Combinaison attachée à l'indice donnée en argument.
-     * @param indice L'indice de la combinaison voulut.
-     */
-    public void combinaisonChoisit(int indice) {
 
-        Peuple peuple = this.pioche.get(indice).getPeuple();
-        Pouvoir pouvoir = this.pioche.get(indice).getPouvoir();
-        // ils faudraient les rajouter que si ils ne sont plus utiliser
-        this.pioche.remove(indice);
+    /**
+     * Supprimer la combinaison de la pioche.
+     * @param combinaison à supprimer de la pioche.
+     */
+    public void removeCombinaisonChoisit(Combinaison combinaison) {
+        this.pioche.remove(combinaison);
+        setChanged();
+        notifyObservers();
+        System.out.println("Combinaison Supprimer");
     }
 
 }

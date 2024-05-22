@@ -1,7 +1,8 @@
 package jeu;
 
-/**Classe qui représente un groupe de pions. Un groupe de pions est un
- * nombre de pions d'une certaine combinaison Peuple-Pouvoir. */
+import jeu.peuples.Peuple;
+import jeu.pouvoirs.Pouvoir;
+
 public class GroupePions {
     /** Type de Combinaison. */
     private Combinaison combinaison;
@@ -17,6 +18,9 @@ public class GroupePions {
      * @param nombrePions Le nombre de pions dont l'ensemble de pions fait partie.
      */
     public GroupePions(Combinaison combinaison, int nombrePions) {
+        if (combinaison == null || nombrePions < 0) {
+            throw new IllegalArgumentException("L'appel n'est pas conforme.");
+        }
         this.combinaison = combinaison;
         this.nombrePions = nombrePions;
     }
@@ -26,6 +30,22 @@ public class GroupePions {
      */
     public Combinaison getCombinaison() {
         return this.combinaison;
+    }
+
+    /**
+     * Obtenir le peuple du groupe de pion.
+     * @return Le peuple du groupe de pion.
+     */
+    public Peuple getPeuple() {
+        return this.combinaison.getPeuple();
+    }
+
+    /**
+     * Obtenir le pouvoir du groupe de pion.
+     * @return Le pouvoir du groupe de pion.
+     */
+    public Pouvoir getPouvoir() {
+        return this.combinaison.getPouvoir();
     }
 
 
@@ -48,6 +68,10 @@ public class GroupePions {
      * @param newNombrePions La nouvelle valeur du nombre de pions.
      */
     public void setNombre(int newNombrePions) {
+        if (newNombrePions < 0) {
+            throw new IllegalArgumentException("Le nombre de pion "
+                + "ne peut pas être positif.");
+        }
         this.nombrePions = newNombrePions;
     }
 
@@ -56,6 +80,9 @@ public class GroupePions {
      * @param newCase la nouvelle case du groupe de pions.
      */
     public void setCase(Case newCase) {
+        if (newCase == null) {
+            throw new IllegalArgumentException("La nouvelle case ne peut pas être null");
+        }
         this.laCase = newCase;
     }
 

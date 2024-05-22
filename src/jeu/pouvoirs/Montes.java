@@ -1,5 +1,8 @@
 package jeu.pouvoirs;
 
+import jeu.Case;
+import jeu.TypesRegions;
+
 /**Classe Montes. L'Montes est un pouvoir qui rend plus riche.*/
 public class Montes extends Pouvoir {
 
@@ -20,6 +23,15 @@ public class Montes extends Pouvoir {
     /**Construire un Montes. */
     public Montes() {
         super(TypesPouvoirs.MONTES, NOM, DESCRIPTION, PIONSSUP);
+    }
+
+    public void avantConquete(Case regionAConquerir) {
+        if (regionAConquerir.getTypeRegion() == TypesRegions.CHAMP 
+            || regionAConquerir.getTypeRegion() == TypesRegions.COLLINE) {
+            reductionAttaque = 1;
+        } else {
+            reductionAttaque = 0;
+        }
     }
 
 }

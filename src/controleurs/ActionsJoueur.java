@@ -10,20 +10,14 @@ import jeu.batiments.TypesBatiments;
 import jeu.exceptions.CoupInvalideException;
 import jeu.Monde;
 import jeu.Combinaison;
+import jeu.Jeu;
 import jeu.Joueur;
 import jeu.JoueurState;
-import jeu.peuples.Peuple;
-import jeu.pouvoirs.Pouvoir;
-import jeu.peuples.TypesPeuples;
-import jeu.pouvoirs.TypesPouvoirs;
-import jeu.TypesRegions;
-import jeu.TypesSymboles;
 
 import ui.selecteur.Selecteur;
 import ui.views.CaseView;
 
 import java.util.Observer;
-import java.util.Scanner;
 import javax.swing.SwingUtilities;
 import ui.BatimentsDialog;
 
@@ -35,36 +29,54 @@ public class ActionsJoueur extends JPanel implements Observer {
 
 	/**Le sélecteur de case du jeu. */
 	private Selecteur<CaseView> selecteurCase;
+	/**Le sélecteur de la Combinaison dans la pioche. */
+	private Selecteur<Combinaison> selecteurCombinaison;
 
 	// Les boutons disponibles.
-	// TODO mettre la portée : public, privée, protégée
 	/**Bouton declin. */
-	JButton declinBtn;
+	private JButton declinBtn;
 	/**Bouton ajouterBatiment. */
-	JButton ajouterBatimentBtn;
+	private JButton ajouterBatimentBtn;
 	/**Bouton attaquerCase. */
-	JButton attaquerCase;
+	private JButton attaquerCase;
 	/**Bouton placerPion. */
-	JButton placerPion;
+	private JButton placerPion;
 	/**Bouton redeployement. */
-	JButton redeployement;
-	/**BOuton finTour. */
-	JButton finTourBtn;
+	private JButton redeployement;
+	/**Bouton finTour. */
+	private JButton finTourBtn;
+	/**Bouton piocher. */
+	private JButton piocheBtn;
 
 	/**
 	 * Construire le contrôleur du Joueur.
 	 * @param jeu Le jeu dans lequel on agit.
 	 * @param selecteurCase Le selecteur de Case.
+	 * @param selecteurCombinaison Le selecteur de la Combinaison dans la pioche.
 	 */
-	public ActionsJoueur(Jeu jeu, Selecteur<CaseView> selecteurCase) {
+	public ActionsJoueur(Jeu jeu,
+				Selecteur<CaseView> selecteurCase,
+				Selecteur<Combinaison> selecteurCombinaison) {
 		super();
+		if (jeu == null)
+			throw new IllegalArgumentException("Jeu ne doit pas être null.");
+		else if (selecteurCase == null)
+			throw new IllegalArgumentException("selecteurCase ne doit pas être null.");
+		else if (selecteurCombinaison == null)
+			throw new IllegalArgumentException("selecteurCombinaison ne doit pas être null.");
         jeu.ajouterObservateurJoueurCourant(this);
 
 		this.jeu = jeu;
 		this.selecteurCase = selecteurCase;
+		this.selecteurCombinaison = selecteurCombinaison;
 
 		super.setLayout(new FlowLayout());
 		super.setBorder(BorderFactory.createTitledBorder("Actions du Joueur"));
+
+		piocheBtn = new JButton("Piocher");
+		piocheBtn.addActionListener(new ActionPiocher());
+		piocheBtn.setEnabled(false);
+		super.add(piocheBtn);
 
 		declinBtn = new JButton("Passer en déclin");
 		declinBtn.addActionListener(new ActionDeclin());
@@ -106,8 +118,27 @@ public class ActionsJoueur extends JPanel implements Observer {
 		JOptionPane.showMessageDialog(fenetre, message);
 	}
 
+	/**Classe déclenchée quand le bouton action piocher est cliqué. */
+	private final class ActionPiocher implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent evt) {
+			Combinaison combinaisonSelectionnee = selecteurCombinaison.getSelection();
+			if (combinaisonSelectionnee == null) {
+				messageDialogue(evt, "Action Impossible ! Aucune "
+					+ "combinaison sélectionnée.");
+			} else {
+				Joueur courant = jeu.getJoueurCourant();
+				courant.changerCombinaisonActive(combinaisonSelectionnee);
+				courant.setEtat(JoueurState.DEBUT_TOUR);
+				selecteurCombinaison.setSelection(null);
+				jeu.getPioche().removeCombinaisonChoisit(combinaisonSelectionnee);
+				jeu.debutTour();
+			}
+		}
+	}
+
 	/**Classe déclenchée quand le bouton action Finir le tour est pressé. */
-	private /*final*/ class ActionFinirTour implements ActionListener {
+	private final class ActionFinirTour implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			jeu.passerTour();
@@ -115,9 +146,10 @@ public class ActionsJoueur extends JPanel implements Observer {
 	}
 
 	/**Classe déclenchée quand le bouton action déclin est cliqué. */
-	private /*final*/ class ActionDeclin implements ActionListener {
+	private final class ActionDeclin implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
+			jeu.getJoueurCourant().setEtat(JoueurState.CHOIX_COMBINAISON);
 			jeu.getJoueurCourant().getCombinaisonActive().passageDeclin();
 			jeu.passerTour();
 		}
@@ -151,22 +183,20 @@ public class ActionsJoueur extends JPanel implements Observer {
 	}
 
 	/**Classe déclenchée quand le bouton attaquer case est cliqué. */
-	private class ActionAttaquerCase implements ActionListener {
+	private final class ActionAttaquerCase implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			CaseView caseSelectionnee = selecteurCase.getSelection();
 			if (selecteurCase.getSelection() == null) {
 				messageDialogue(evt, "Action Impossible ! Aucune case sélectionnée.");
 			} else {
-				System.out.println("Attaque de la case : "
-					+ caseSelectionnee.getVraieCase().getCoordonnees().toString());
 				jeu.attaquerCase(caseSelectionnee.getVraieCase());
 			}
 		}
 	}
 
 	/**Classe déclenchée quand le bouton placer pion est cliqué. */
-	private /*final*/ class ActionPlacerPion implements ActionListener {
+	private final class ActionPlacerPion implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			CaseView caseSelectionnee = selecteurCase.getSelection();
@@ -186,11 +216,16 @@ public class ActionsJoueur extends JPanel implements Observer {
 		}
 	}
 
-
+	@Override
 	public void update(java.util.Observable o, Object arg) {
 		JoueurState etat = this.jeu.getJoueurCourant().getEtat();
-		int pionsEnMain =
-			jeu.getJoueurCourant().getCombinaisonActive().getNbPionsEnMain();
+		int pionsEnMain = 0;
+		try {
+			pionsEnMain =
+				jeu.getJoueurCourant().getCombinaisonActive().getNbPionsEnMain();
+		} catch (NullPointerException e) {
+			// rien
+		}
 
 		// Actualisation bouton déclin
 		boolean declinBtnActif = etat == JoueurState.DEBUT_TOUR;
@@ -221,6 +256,10 @@ public class ActionsJoueur extends JPanel implements Observer {
 			|| etat == JoueurState.REDEPLOYMENT)
 			&& pionsEnMain == 0;
 		this.finTourBtn.setEnabled(finTourBtnActif);
+
+		// Actualisation du bouton Piocher
+		boolean piocheBtnActif = (etat == JoueurState.CHOIX_COMBINAISON);
+		this.piocheBtn.setEnabled(piocheBtnActif);
 
 	}
 }

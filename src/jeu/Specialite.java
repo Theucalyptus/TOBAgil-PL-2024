@@ -27,6 +27,10 @@ public abstract class Specialite {
      * @param pionsSup Le nombre de pions suplémentaires qu'apporte la spécialité.
     */
     public Specialite(String nom, String description, int pionsSup) {
+        /* if (nom == null || nom.equals("") || description == null
+                || description.equals("") || pionsSup < 0) {
+            throw new IllegalArgumentException("L'appel n'est pas correct.");
+        } */
         this.nom = nom;
         this.description = description;
         this.nbPions = pionsSup;
@@ -70,18 +74,27 @@ public abstract class Specialite {
      * @param regionAConquerir La région à conquérir.
      */
     public void avantConquete(Case regionAConquerir) {
+        if (regionAConquerir == null) {
+            throw new IllegalArgumentException("regionAConquerir ne doit pas être null.");
+        }
     }
 
     /**Procédure à appeler après la conquête d'une région.
      * @param regionConquise La région qui a été conquise.
      */
     public void apresConquete(Case regionConquise) {
+        if (regionConquise == null) {
+            throw new IllegalArgumentException("regionConquise ne doit pas être null.");
+        }
     }
 
     /**Procédure à appeler après la conquête d'une région du joueur par un autre joueur.
      * @param regionConquise La région qui a été conquise.
      */
     public void apresConqueteAdverse(Case regionConquise) {
+        if (regionConquise == null) {
+            throw new IllegalArgumentException("regionConquise ne doit pas être null.");
+        }
     }
 
     /**Procédure à appeler une fois la phase d'attaque terminée.

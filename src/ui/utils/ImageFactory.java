@@ -8,11 +8,16 @@ import javax.imageio.ImageIO;
 import jeu.TypesRegions;
 import jeu.TypesSymboles;
 import jeu.batiments.TypesBatiments;
-import jeu.peuples.*;
-import jeu.pouvoirs.*;
+import jeu.peuples.TypesPeuples;
+import jeu.pouvoirs.TypesPouvoirs;
 
 /** Classe qui permet de charger des images pour le jeu. */
-public class ImageFactory {
+public final class ImageFactory {
+
+    /**Constructeur privé pour les classes utilitaires. */
+    private ImageFactory() {
+        // ne rien faire
+    }
 
     /** Chemin d'accès aux répertoires des assets. */
     private static final String ROOT_ASSETS_PATH = "./assets/";
@@ -37,7 +42,7 @@ public class ImageFactory {
      * @param type le type de la région
      * @return l'image
      */
-    public static final Image regionImage(TypesRegions type) {
+    public static Image regionImage(TypesRegions type) {
         String path = ROOT_ASSETS_PATH + "regions/" + type.name().toLowerCase() + ".png";
         return readImage(path);
 
@@ -45,21 +50,23 @@ public class ImageFactory {
 
     /**
      * Renvoie l'image du logo d'un peuple.
-     * @param type le type du peuple
-     * @return l'image
+     * @param type Le type du peuple.
+     * @param enDeclin Si le peuple est en déclin.
+     * @return l'image.
      */
-    public static final Image peupleLogoImage(TypesPeuples type) {
-        String path = ROOT_ASSETS_PATH + "peuples/" + type.name().toLowerCase() +  ".png";
+    public static Image peupleLogoImage(TypesPeuples type, Boolean enDeclin) {
+        String path = ROOT_ASSETS_PATH + "peuples/" + type.name().toLowerCase()
+            + (enDeclin ? "_declin" : "") +  ".png";
         return readImage(path);
     }
 
     /**
      * Renvoie l'image des troupes d'un peuple.
-     * @param type le type du peuple
-     * @param enDeclin si le peuple est en déclin
-     * @return l'image
+     * @param type Le type du peuple.
+     * @param enDeclin Si le peuple est en déclin.
+     * @return l'image.
      */
-    public static final Image peupleTroupeImage(TypesPeuples type, Boolean enDeclin) {
+    public static Image peupleTroupeImage(TypesPeuples type, Boolean enDeclin) {
         String path = ROOT_ASSETS_PATH + "troupes/" + type.name().toLowerCase()
             + (enDeclin ? "_declin" : "") + ".png";
         return readImage(path);
@@ -67,12 +74,13 @@ public class ImageFactory {
 
     /**
      * Renvoie l'image d'un pouvoir.
-     * @param type le type du pouvoir
-     * @return l'image
+     * @param type Le type du pouvoir.
+     * @param enDeclin Si le peuple est en déclin.
+     * @return L'image.
      */
-    public static final Image pouvoirLogoImage(TypesPouvoirs type) {
+    public static Image pouvoirLogoImage(TypesPouvoirs type, Boolean enDeclin) {
         String path = ROOT_ASSETS_PATH + "pouvoirs/" + type.name().toLowerCase()
-            + ".png";
+            + (enDeclin ? "_declin" : "") +  ".png";
         return readImage(path);
     }
 
@@ -81,7 +89,7 @@ public class ImageFactory {
      * @param type le type du batiment
      * @return l'image
      */
-    public static final Image batimentsImage(TypesBatiments type) {
+    public static Image batimentsImage(TypesBatiments type) {
         String path = ROOT_ASSETS_PATH + "batiments/" + type.name().toLowerCase()
             + ".png";
         return readImage(path);
@@ -92,7 +100,7 @@ public class ImageFactory {
      * @param type le type du symbole
      * @return l'image
      */
-    public static final Image symboleImage(TypesSymboles type) {
+    public static Image symboleImage(TypesSymboles type) {
         String path = ROOT_ASSETS_PATH + "symboles/" + type.name().toLowerCase()
             + ".png";
         return readImage(path);
@@ -103,10 +111,18 @@ public class ImageFactory {
      * @param nombre le nombre sur la pièce
      * @return l'image
      */
-    public static final Image pieceImage(int nombre) {
+    public static Image pieceImage(int nombre) {
         String path = ROOT_ASSETS_PATH + "jetons/" + Integer.toString(nombre)
             + ".png";
         return readImage(path);
+    }
+    
+    /**
+     * Renvoie le logo Smallworld.
+     * @return l'image
+     */
+    public static final Image logoSmallworld() {
+    	return readImage(ROOT_ASSETS_PATH + "logoSW.png");
     }
 }
 

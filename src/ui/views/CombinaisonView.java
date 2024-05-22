@@ -1,9 +1,11 @@
 package ui.views;
 
-import java.awt.Color;
+// import java.awt.Color;
 import java.awt.FlowLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import java.awt.Image;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -25,27 +27,40 @@ public class CombinaisonView extends JPanel {
      */
     public CombinaisonView(Combinaison comb) {
         super();
-        super.setLayout(new FlowLayout());
-
-        if (comb.getDeclin()) {
-            super.setBackground(Color.GRAY);
-        } else {
-            super.setBackground(Color.WHITE);
-        }
+        super.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        super.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         Peuple peupleC = comb.getPeuple();
         Pouvoir pouvoirC = comb.getPouvoir();
 
-        this.peupleLbl.setIcon(new ImageIcon(
-            ImageFactory.peupleLogoImage(peupleC.getType())));
+        Image imagePeuple =
+            ImageFactory.peupleLogoImage(peupleC.getType(), comb.getDeclin());
 
-        this.peupleLbl.setText(peupleC.getNom());
-        this.pouvoirLbl.setIcon(new ImageIcon(
-            ImageFactory.pouvoirLogoImage(pouvoirC.getType())));
+        ImageIcon imageTemp = new ImageIcon(imagePeuple.getScaledInstance(256, 128,
+        java.awt.Image.SCALE_SMOOTH));
 
-        this.pouvoirLbl.setText(pouvoirC.getNom());
+        this.peupleLbl.setIcon(imageTemp);
 
-        super.add(this.peupleLbl);
-        super.add(this.pouvoirLbl);
+        //this.peupleLbl.setText(peupleC.getNom());
+
+        Image imagePouvoirs =
+            ImageFactory.pouvoirLogoImage(pouvoirC.getType(), comb.getDeclin());
+
+        this.pouvoirLbl.setIcon(new ImageIcon(imagePouvoirs.getScaledInstance(128, 128,
+        java.awt.Image.SCALE_SMOOTH)));
+
+        //this.pouvoirLbl.setText(pouvoirC.getNom());
+
+
+        if (comb.getDeclin()) {
+            super.add(this.pouvoirLbl);
+            super.add(this.peupleLbl);
+        } else {
+            super.add(this.peupleLbl);
+            super.add(this.pouvoirLbl);
+        }
+
     }
+
+
 }

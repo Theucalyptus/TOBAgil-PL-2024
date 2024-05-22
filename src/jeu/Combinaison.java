@@ -38,6 +38,11 @@ public class Combinaison {
      * @param pouvoir Le pouvoir constituant la combinaison.
      */
     public Combinaison(Peuple peuple, Pouvoir pouvoir) {
+        // robustesse
+        if (peuple == null || pouvoir == null) {
+            throw new IllegalArgumentException("L'appel au Constructeur "
+                + "ne peut pas être fait avec des argument vide.");
+        }
         this.peuple = peuple;
         this.pouvoir = pouvoir;
         this.declin = false;
@@ -98,6 +103,9 @@ public class Combinaison {
      * @param newNbPions Le nouveau nombre de pion en mains.
      */
     public void setNbPionsEnMain(int newNbPions) {
+        if (newNbPions < 0) {
+            throw new IllegalArgumentException("NewNbPions doit être positif.");
+        }
         this.nbPionsEnMain = newNbPions;
     }
 
@@ -106,6 +114,9 @@ public class Combinaison {
      * @param groupe le groupe de pion a ajouter.
      */
     public void addGroupe(GroupePions groupe) {
+        if (groupe == null) {
+            throw new IllegalArgumentException("le groupe ne doit pas être null.");
+        }
         this.pions.add(groupe);
     }
 
@@ -114,6 +125,9 @@ public class Combinaison {
      * @param groupe le groupe de pion a ajouter.
      */
     public void supprGroupe(GroupePions groupe) {
+        if (groupe == null) {
+            throw new IllegalArgumentException("groupe ne doit pas être null.");
+        }
         this.pions.remove(groupe);
     }
 
@@ -139,9 +153,13 @@ public class Combinaison {
      * @return la redution obtenu.
      */
     public int avantConquete(Case regionAConquerir) {
+        if (regionAConquerir == null) {
+            throw new IllegalArgumentException("regionAConquerir ne doit "
+                + "pas être null.");
+        }
         this.peuple.avantConquete(regionAConquerir);
         this.pouvoir.avantConquete(regionAConquerir);
-        return (this.peuple.reductionAttaque + this.pouvoir.reductionAttaque);
+        return this.peuple.reductionAttaque + this.pouvoir.reductionAttaque;
     }
 
     /**
@@ -149,6 +167,9 @@ public class Combinaison {
      * @param regionConquise La case correspondant à la région conquise.
      */
     public void apresConquete(Case regionConquise) {
+        if (regionConquise == null) {
+            throw new IllegalArgumentException("regionConquise ne doit pas être null.");
+        }
         this.peuple.apresConquete(regionConquise);
         this.pouvoir.apresConquete(regionConquise);
     }
@@ -158,6 +179,10 @@ public class Combinaison {
      * @param regionConquise La case correspondant à la région perdu.
      */
     public void apresConqueteAdverse(Case regionConquise) {
+        if (regionConquise == null) {
+            throw new IllegalArgumentException("regionConquise ne doit pas "
+                + "être conquise.");
+        }
         this.peuple.apresConqueteAdverse(regionConquise);
         this.pouvoir.apresConqueteAdverse(regionConquise);
     }
@@ -183,8 +208,13 @@ public class Combinaison {
 
     /** Permetre d'ajouter un ensemble de pion dans le groupe d'ensemble de pions.
      * @param lesPions L'ensemble de pions que l'on ajoute.
+     * @throws IllegalArgumentException Si l'argument 1 est null.
+     * @throws RuntimeException si Les pions n'ont pas été ajouté.
      */
     public void ajoutGroupesPions(GroupePions lesPions) {
+        if (lesPions == null) {
+            throw new IllegalArgumentException("les Pions ne doit pas être null.");
+        }
         //on peut relever une erreur si il y a un problème au niveau de l'ajout
         if (!this.pions.add(lesPions)) {
             // List retourne toujours vrai donc cet environnement ne sera

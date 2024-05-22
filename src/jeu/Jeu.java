@@ -12,11 +12,15 @@ public interface Jeu {
      */
     void ajouterJoueur(Joueur joueur);
 
-
     /**Obtenir le monde.
      * @return Le monde de la partie.
      */
     Monde getMonde();
+
+    /**Obtenir la pioche.
+     * @return La pioche de la partie.
+     */
+    Pioche getPioche();
 
     /** Permet d'obtenir le joueur qui est en train de jouer.
      * @return Le Joueur courant.
@@ -71,6 +75,7 @@ public interface Jeu {
     /**
      * Attaquer une case.
      * @param laCase La case à attaquer.
+     * @throws IllegalArgumentException Si la case est null.
      */
     void attaquerCase(Case laCase);
 
@@ -89,4 +94,7 @@ public interface Jeu {
      * @return l'état courant de la partie
      */
     JeuState getEtat();
+
+    /** Lancer le début du tour. */
+    void debutTour();
 }

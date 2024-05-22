@@ -13,6 +13,9 @@ public class JoueurCourantObs extends Observable implements Observer {
     private boolean attache = false;
 
     public JoueurCourantObs(Jeu jeu) {
+        if (jeu == null) {
+            throw new IllegalArgumentException("Le jeu ne doit pas null.");
+        }
         this.jeu = jeu;
     }
 

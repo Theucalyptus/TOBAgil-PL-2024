@@ -9,7 +9,7 @@ import jeu.Specialite;
  */
 public abstract class Peuple extends Specialite {
 
-    /**Le Type du Pueple, utile pour l'affichage. */
+    /**Le Type du Peuple, utile pour l'affichage. */
     private TypesPeuples typePeuple;
 
     /**Construire un peuple à partir de son nom, de sa description et de

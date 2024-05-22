@@ -15,9 +15,24 @@ public class Fortunes extends Pouvoir {
     /**Le nombre d'unité suplémentaire qu'offre le jeu. */
     private static final int PIONSSUP = 4;
 
+    /**Booléen informant si le pouvoir à bien donné les points. */
+    private boolean NoPoints = true;
+
+    /**Le nombre de point gagné à la première expension. */
+    private int nombreGagne = 7;
+
     /**Construire un Fortunes. */
     public Fortunes() {
         super(TypesPouvoirs.FORTUNES, NOM, DESCRIPTION, PIONSSUP);
     }
 
+    @Override
+    public void finTour(boolean enDeclin) {
+        if (!enDeclin && NoPoints) {
+            this.nbJetons = this.nombreGagne;
+            this.NoPoints = false;
+        } else {
+            this.nbJetons = 0;
+        }
+    }
 }

@@ -4,27 +4,32 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
-import jeu.Case;
-import jeu.Jeu;
 import jeu.batiments.TypesBatiments;
 import jeu.peuples.*;
 import jeu.pouvoirs.*;
-import jeu.Monde;
-import jeu.Joueur;
 import jeu.Combinaison;
 import jeu.JeuProxy;
 
-import ui.selecteur.Selecteur;
 import ui.views.CaseView;
 import ui.utils.ImageFactory;
 
 
 public class BatimentsDialog extends JDialog {
 
+    /** La case de la page de dialogue. */
     private CaseView caseSelectionnee;
 
-    public BatimentsDialog(JFrame parent, CaseView caseSelect, Peuple peuple, Pouvoir pouvoir) {
+    /**
+     * Construire le dialogue du choix du batiment à mettre sur la case.
+     * @param parent La frame qui a appelé cette fenêtre.
+     * @param caseSelect La case sur laquelle on souhaite mettre un batiment.
+     */
+    public BatimentsDialog(JFrame parent, CaseView caseSelect) {
         super(parent, "Choix du bâtiment à poser", true);
+        if (parent == null)
+            throw new IllegalArgumentException("parent ne doit pas être null.");
+        else if (caseSelect == null)
+            throw new IllegalArgumentException("caseSelect ne doit pas être null.");
         this.caseSelectionnee = caseSelect;
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		//largeur			//hauteur
@@ -104,6 +109,8 @@ public class BatimentsDialog extends JDialog {
      * @param typeBat Batiment à placé sur la case
      */
     private void placerBatiment(TypesBatiments typeBat) {
+        if (typeBat == null)
+            throw new IllegalArgumentException("le type de Batiment ne doit pas être null.");
         caseSelectionnee.getVraieCase().setTypeBatiment(typeBat, 1);
 		// Ferme la fenêtre de dialogue après avoir placé le bâtiment
         dispose();

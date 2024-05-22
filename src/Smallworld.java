@@ -6,53 +6,56 @@ import ui.PiocheFenetre;
 import ui.selecteur.Selecteur;
 import ui.views.CaseView;
 import jeu.Combinaison;
-import jeu.GroupePions;
 import jeu.JeuReel;
 import jeu.Joueur;
 import jeu.Monde;
-import jeu.batiments.TypesBatiments;
-import jeu.peuples.Amazones;
-import jeu.peuples.Elfes;
-import jeu.pouvoirs.Alchimistes;
-import jeu.pouvoirs.Volants;
 
 /**Classe principale de l'application.*/
-public /*final*/ class Smallworld {
+@SuppressWarnings("deprecation")
+public final class Smallworld {
 
-    /*
-     /**Supprimer le Constructeur par défaut. *\/
+
+    /**Supprimer le Constructeur par défaut. */
      private Smallworld() {
         // ne rien faire.
     }
-    */
 
-    /**Lancer l'application.
+
+    /**Lancer le menu de l'application.
      * @param args Les paramètre de la ligne de commandes, ils ne
      * sont pas utilisés dans notre application.
      */
     public static void main(String[] args) {
+    	
+    	LanceurSmallworld menuJeu = new LanceurSmallworld();
 
+    }
+    
+    /**Lancer le jeu Smallworld à partir du nombre de joueurs.
+     * @param nbJoueurs Le nombre de joueurs jouant au jeu.
+     */
+    public static void lancerSmallworld(int nbJoueurs) {
+    	
         // MODELE
         JeuReel jeu = new JeuReel();
-        Joueur j1 = new Joueur("Fraise", 0);
-        j1.changerCombinaisonActive(new Combinaison(new Amazones(), new Alchimistes()));
-        Joueur j2 = new Joueur("Framboise", 0);
-        j2.changerCombinaisonActive(new Combinaison(new Elfes(), new Alchimistes()));
-        Joueur j3 = new Joueur("Pomme", 0);
-        j3.changerCombinaisonActive(new Combinaison(new Amazones(), new Volants()));
-        jeu.ajouterJoueur(j1);
-        jeu.ajouterJoueur(j2);
-        jeu.ajouterJoueur(j3);
-        jeu.setMonde(new Monde(jeu.getNombreJoueur()));
+        
+        for(int i = 1; i <= nbJoueurs; i++) {
+        	Joueur joueur = new Joueur("Joueur " + i, 0);
+        	jeu.ajouterJoueur(joueur);
+        }
+        
+        jeu.setMonde(new Monde(nbJoueurs));
 
         //SELECTEUR
         Selecteur<CaseView> selecteurCase = new Selecteur<CaseView>();
+        Selecteur<Combinaison> selecteurCombinaison = new Selecteur<Combinaison>();
 
         // VUES
-        PiocheFenetre piocheF = new PiocheFenetre(jeu);
+        PiocheFenetre piocheF = new PiocheFenetre(selecteurCombinaison, jeu);
+        jeu.getPioche().addObserver(piocheF);
         MainMondeFenetre mondeF = new MainMondeFenetre(jeu, selecteurCase);
         MainJoueurFenetre joueurF = new MainJoueurFenetre(jeu);
-        ActionsFenetre actionsF = new ActionsFenetre(jeu, selecteurCase);
-
+        ActionsFenetre actionsF = new ActionsFenetre(jeu, selecteurCase,
+            selecteurCombinaison);
     }
 }

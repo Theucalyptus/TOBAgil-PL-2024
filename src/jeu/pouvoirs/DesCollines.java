@@ -18,7 +18,7 @@ public class DesCollines extends Pouvoir {
     private static final int PIONSSUP = 4;
 
     /**Le nombre de collines conquises. */
-    private int nbCollines = 4;
+    private int nbCollines = 0;
 
     /**Construire un Des Collines. */
     public DesCollines() {
@@ -28,6 +28,7 @@ public class DesCollines extends Pouvoir {
     @Override
     public void apresConquete(Case regionConquise) {
         if (regionConquise.getTypeRegion() == TypesRegions.COLLINE) {
+            System.out.println("Gain d'une colline");
             this.nbCollines++;
         }
     }
@@ -35,6 +36,7 @@ public class DesCollines extends Pouvoir {
     @Override
     public void apresConqueteAdverse(Case regionConquise) {
         if (regionConquise.getTypeRegion() == TypesRegions.COLLINE) {
+            System.out.println("Perte d'une colline");
             this.nbCollines--;
         }
     }
@@ -42,7 +44,10 @@ public class DesCollines extends Pouvoir {
     @Override
     public void finTour(boolean enDeclin) {
         if (!enDeclin) {
+            System.out.println(this.nbCollines + " collines possédées");
             this.nbJetons = this.nbCollines;
+        } else {
+            this.nbJetons = 0;
         }
     }
 
