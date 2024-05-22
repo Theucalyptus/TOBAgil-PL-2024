@@ -13,6 +13,8 @@ function build() {
     cd src/
     echo "COMPILATION"
     javac Smallworld.java
+    javac jeu/peuples/*.java
+    javac jeu/pouvoirs/*.java
     echo "DONE"
     cd ..
 }
