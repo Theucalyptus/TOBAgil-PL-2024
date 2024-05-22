@@ -53,6 +53,12 @@ public class ActionsJoueur extends JPanel implements Observer {
 				Selecteur<CaseView> selecteurCase,
 				Selecteur<Combinaison> selecteurCombinaison) {
 		super();
+		if (jeu == null)
+			throw new IllegalArgumentException("Jeu ne doit pas être null.");
+		else if (selecteurCase == null)
+			throw new IllegalArgumentException("selecteurCase ne doit pas être null.");
+		else if (selecteurCombinaison == null)
+			throw new IllegalArgumentException("selecteurCombinaison ne doit pas être null.");
         jeu.ajouterObservateurJoueurCourant(this);
 
 		this.jeu = jeu;

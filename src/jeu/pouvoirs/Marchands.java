@@ -27,12 +27,16 @@ public class Marchands extends Pouvoir {
 
     @Override
 public void apresConquete(Case regionConquise) {
+        if (regionConquise == null)
+            throw new IllegalArgumentException("regionConquise ne doit pas être null.");
         System.out.println("Gain d'une région");
         this.nbRegions++;
     }
 
     @Override
     public void apresConqueteAdverse(Case regionConquise) {
+        if (regionConquise == null)
+            throw new IllegalArgumentException("regionConquise ne doit pas être null.");
         System.out.println("Perte d'une région");
         this.nbRegions--;
     }

@@ -25,6 +25,8 @@ public class ActionsJeu extends JPanel implements Observer {
 	 */
 	public ActionsJeu(JeuReel jeu) {
 		super();
+		if (jeu == null)
+			throw new IllegalArgumentException("jeu ne doit pas être null.");
 		super.setName("Actions du Jeu");
 		this.jeu = jeu;
 		jeu.addObserver(this);
