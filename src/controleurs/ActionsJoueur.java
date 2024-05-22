@@ -9,10 +9,13 @@ import jeu.Jeu;
 import jeu.batiments.TypesBatiments;
 import jeu.exceptions.CoupInvalideException;
 import jeu.Monde;
+import jeu.peuples.Peuple;
+import jeu.pouvoirs.Pouvoir;
 import jeu.Combinaison;
-import jeu.Jeu;
 import jeu.Joueur;
 import jeu.JoueurState;
+import jeu.peuples.TypesPeuples;
+import jeu.pouvoirs.TypesPouvoirs;
 
 import ui.selecteur.Selecteur;
 import ui.views.CaseView;
@@ -173,7 +176,7 @@ public class ActionsJoueur extends JPanel implements Observer {
 				// Créez et affichez la fenêtre de dialogue
 				if (poserBat){
 					JFrame fenetre =(JFrame) SwingUtilities.getWindowAncestor((JButton) evt.getSource());
-					BatimentsDialog dialog = new BatimentsDialog(fenetre, caseSelectionnee, peuple, pouvoir);
+					BatimentsDialog dialog = new BatimentsDialog(fenetre, caseSelectionnee, peuple.getType(), pouvoir.getType());
 					dialog.setVisible(true);
 				} else{
 					messageDialogue(evt, "Aucun batiment ne peut etre placé avec votre combinaison !");

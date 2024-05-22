@@ -24,7 +24,7 @@ public class BatimentsDialog extends JDialog {
      * @param parent La frame qui a appelé cette fenêtre.
      * @param caseSelect La case sur laquelle on souhaite mettre un batiment.
      */
-    public BatimentsDialog(JFrame parent, CaseView caseSelect) {
+    public BatimentsDialog(JFrame parent, CaseView caseSelect, TypesPeuples peuple, TypesPouvoirs pouvoir) {
         super(parent, "Choix du bâtiment à poser", true);
         if (parent == null)
             throw new IllegalArgumentException("parent ne doit pas être null.");
@@ -86,13 +86,13 @@ public class BatimentsDialog extends JDialog {
         buttonTaniere.setEnabled(false);
 
         //Condition de qui peut placer quel batiment
-        if (peuple.getType() == TypesPeuples.MIPORTIONS){
+        if (peuple == TypesPeuples.MIPORTIONS){
             buttonTaniere.setEnabled(true);
-        } else if (peuple.getType() == TypesPeuples.TROLLS){
+        } else if (peuple == TypesPeuples.TROLLS){
             buttonAntreDeTroll.setEnabled(true);
-        } else if (pouvoir.getType() == TypesPouvoirs.BATISSEURS){
+        } else if (pouvoir == TypesPouvoirs.BATISSEURS){
             buttonForteresse.setEnabled(true);
-        } else if (pouvoir.getType() == TypesPouvoirs.SCOUTS){
+        } else if (pouvoir == TypesPouvoirs.SCOUTS){
             buttonCampement.setEnabled(true);
         }
 
