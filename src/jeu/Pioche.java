@@ -110,7 +110,7 @@ public class Pioche extends Observable {
         listePeuplesRetournee.add(new Orcs());
         // listePeuplesRetournee.add(new Sorciers());
         // listePeuplesRetournee.add(new Squelettes());
-        // listePeuplesRetournee.add(new Tritons());
+        listePeuplesRetournee.add(new Tritons());
         // listePeuplesRetournee.add(new Trolls());
         // listePeuplesRetournee.add(new Zombies());
 
