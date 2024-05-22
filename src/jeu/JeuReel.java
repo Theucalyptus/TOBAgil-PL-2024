@@ -441,8 +441,10 @@ public class JeuReel extends Observable implements Jeu {
     @Override
     public void placerPions(Case maCase, int nbPions) {
         // robustesse
-        if (maCase == null || nbPions < 0) {
-            throw new IllegalArgumentException("L'appel n'est pas correct.");
+        if (maCase == null)
+            throw new IllegalArgumentException("maCase ne doit pas être null.");
+        else if (nbPions < 0) {
+            throw new IllegalArgumentException("Le nombre de pions ne doit pas null.");
         }
 
         // On vérifie que la case appartient bien au joueur dont c'est le tour.

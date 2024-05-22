@@ -37,6 +37,8 @@ public class Orcs extends Peuple {
 
     @Override
     public void avantConquete(Case regionAConquerir) {
+        if (regionAConquerir == null)
+            throw new IllegalArgumentException("regionAConquerir ne doit pas être null.");
     	if (regionAConquerir.getNombrepions() != 0) {
     		this.estNonVide = true;
     	} else {

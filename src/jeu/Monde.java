@@ -221,9 +221,16 @@ public class Monde {
      * @return la case correspondante
      */
     public Case getCase(int x, int y) {
-        if (x < 0 || x >= this.dimX || y < 0 || y > this.dimY) {
-            throw new IllegalArgumentException("L'appel à la fonction "
-                + "n'est pas conforme.");
+        if (x < 0)
+            throw new IllegalArgumentException("x doit être positif.");
+        else if (x >= this.dimX)
+            throw new IllegalArgumentException("x doit être inférieur à la dimension "
+                + "du plateau.");
+        else if (y < 0)
+            throw new IllegalArgumentException("y doit être positif.");
+        else if (y > this.dimY) {
+            throw new IllegalArgumentException("y doit être inférieur à la dimension "
+                + "du plateau");
         }
         for (Case maCase : this.grille) {
             List<Integer> coordonnees = maCase.getCoordonnees();
@@ -231,7 +238,6 @@ public class Monde {
                 return maCase;
             }
         }
-
         // Si tout est bien développé, ne devrait jamais arriver !
         throw new RuntimeErrorException(null);
     }

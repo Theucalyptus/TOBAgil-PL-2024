@@ -44,6 +44,11 @@ public class PiocheFenetre implements Observer {
      * @param jeu Le jeu.
      */
     public PiocheFenetre(Selecteur<Combinaison> selecteurCombinaison, Jeu jeu) {
+        if (selecteurCombinaison == null)
+            throw new IllegalArgumentException("selecteurCombinaisons ne doit pas "
+                + "être null.");
+        else if (jeu == null)
+            throw new IllegalArgumentException("jeu ne doit pas être null.");
 
         this.jeu = jeu;
         this.pioche = jeu.getPioche();
