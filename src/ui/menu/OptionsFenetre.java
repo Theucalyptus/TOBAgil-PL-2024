@@ -40,22 +40,33 @@ public class OptionsFenetre {
     	
     	JPanel mainPanel = new JPanel();
     	mainPanel.setLayout(new GridBagLayout());
-    	this.fenetre.getContentPane().add(mainPanel);
     	
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(30, 15, 30, 15);
+        GridBagConstraints gbcMain = new GridBagConstraints();
+        gbcMain.insets = new Insets(30, 30, 30, 30);
+        
+    	this.fenetre.add(mainPanel);
+    	
+    	JPanel sliderPanel = new JPanel();
+    	sliderPanel.setLayout(new GridLayout(1,2));
     	
         this.titreSlider = new JLabel("Nombre de joueurs : ");
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        mainPanel.add(titreSlider, gbc);
+        sliderPanel.add(titreSlider);
         
         this.slider = new JSlider(2,5,3);
         this.slider.setPaintLabels(true);
         this.slider.setMajorTickSpacing(1);
-        gbc.gridx = 2;
-        gbc.gridy = 0;
-        mainPanel.add(slider, gbc);
+        sliderPanel.add(slider);
+        
+        gbcMain.gridy = 0;
+        mainPanel.add(sliderPanel, gbcMain);
+        
+    	JPanel champsPanel = new JPanel();
+    	champsPanel.setLayout(new GridBagLayout());
+    	
+        GridBagConstraints gbcChamps = new GridBagConstraints();
+        gbcChamps.insets = new Insets(0, 30, 0, 30);
+        gbcChamps.ipadx = 30;
+        gbcChamps.ipady = 15;
         
         Set<String> nomsJoueurs = lanceur.getNomsJoueurs();
         
@@ -68,37 +79,41 @@ public class OptionsFenetre {
         	slider.addChangeListener(champ);
         	this.champsJoueurs.add(champ);
         	
-        	gbc.gridx = numeroJoueur-1;
-        	gbc.gridy = 1;
-        	mainPanel.add(champ, gbc);
+        	champsPanel.add(champ, gbcChamps);
         	numeroJoueur++;
         }
         
         while(numeroJoueur <= 5) {
         	ChampJoueur champ = new ChampJoueur(numeroJoueur);
-        	champ.setText("- - - - -");
+        	champ.setText("- - -");
         	champ.setEditable(false);
         	
         	slider.addChangeListener(champ);
         	this.champsJoueurs.add(champ);
         	
-        	gbc.gridx = numeroJoueur-1;
-        	gbc.gridy = 1;
-        	mainPanel.add(champ, gbc);
+        	champsPanel.add(champ, gbcChamps);
         	numeroJoueur++;
         }
         
+        gbcMain.gridy = 1;
+        mainPanel.add(champsPanel, gbcMain);
+        
+    	JPanel boutonsPanel = new JPanel();
+    	boutonsPanel.setLayout(new GridBagLayout());
+    	
+        GridBagConstraints gbcBtn = new GridBagConstraints();
+        gbcBtn.insets = new Insets(0, 30, 0, 30);
+        
         this.enregistrerBtn = new JButton("Enregistrer");
         this.enregistrerBtn.addActionListener(new ActionEnregistrer());
-        gbc.gridy = 2;
-        gbc.gridx = 2;
-        mainPanel.add(enregistrerBtn, gbc);
+        boutonsPanel.add(enregistrerBtn, gbcBtn);
         
         this.annulerBtn = new JButton("Annuler");
         this.annulerBtn.addActionListener(new ActionAnnuler());
-        gbc.gridy = 2;
-        gbc.gridx = 1;
-        mainPanel.add(annulerBtn, gbc);
+        boutonsPanel.add(annulerBtn, gbcBtn);
+        
+        gbcMain.gridy = 2;
+        mainPanel.add(boutonsPanel, gbcMain);
     	
         this.fenetre.pack();
         this.fenetre.setVisible(true);
@@ -110,6 +125,7 @@ public class OptionsFenetre {
     	
     	public ChampJoueur(int numeroJoueur) {
     		super();
+    		this.setHorizontalAlignment(JTextField.CENTER);
     		this.numeroJoueur = numeroJoueur;
     	}
 
@@ -118,7 +134,6 @@ public class OptionsFenetre {
 				this.setEditable(true);
 			} else {
 				this.setEditable(false);
-				this.setText("-  -  -");
 			}
 		}
     }

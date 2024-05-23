@@ -1,4 +1,5 @@
 package ui.menu;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,20 +41,22 @@ public class LanceurSmallworld {
     public LanceurSmallworld() {
         this.fenetre = new JFrame("SmallWorld - Menu Principal");
         this.fenetre.setSize(new Dimension(1000, 750));
-        Container contenu = this.fenetre.getContentPane();
 
         JPanel mainPanel = new JPanel();
-        contenu.add(mainPanel);
+        fenetre.add(mainPanel);
         mainPanel.setLayout(new GridBagLayout());
         
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(30, 30, 30, 30);
-
+        
         this.logo = new JLabel();
         this.logo.setIcon(new ImageIcon(ImageFactory.logoSmallworld()));
         gbc.gridy = 0;
         mainPanel.add(logo, gbc);
 
+        gbc.ipadx = 100;
+        gbc.ipady = 15;
+        
         this.jouerBtn = new JButton("Jouer");
         this.jouerBtn.addActionListener(new ActionJouer());
         gbc.gridy = 1;
