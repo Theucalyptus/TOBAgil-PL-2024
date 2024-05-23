@@ -140,8 +140,8 @@ public class JeuProxy implements Jeu {
 
 
     @Override
-    public void redeployement() {
-        this.impl.redeployement();
+    public void redeploiment() {
+        this.impl.redeploiment();
     }
 
     @Override

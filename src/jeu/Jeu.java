@@ -87,7 +87,7 @@ public interface Jeu {
     void placerPions(Case laCase, int nbPions);
 
     /**Lancer le redéploiement des troupe du Joueur. */
-    void redeployement();
+    void redeploiment();
 
     /**
      * Obtenir l'état de la partie.

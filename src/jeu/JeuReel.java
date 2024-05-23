@@ -474,7 +474,7 @@ public class JeuReel extends Observable implements Jeu {
     }
 
     @Override
-    public void redeployement() {
+    public void redeploiment() {
         // Active les effets de la combinaison après l'attaque
         this.joueurCourant.getCombinaisonActive().reDeploiement();
 

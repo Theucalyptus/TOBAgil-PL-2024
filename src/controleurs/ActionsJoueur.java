@@ -40,8 +40,8 @@ public class ActionsJoueur extends JPanel implements Observer {
 	private JButton attaquerCase;
 	/**Bouton placerPion. */
 	private JButton placerPion;
-	/**Bouton redeployement. */
-	private JButton redeployement;
+	/**Bouton redeploiment. */
+	private JButton redeploiment;
 	/**Bouton finTour. */
 	private JButton finTourBtn;
 	/**Bouton piocher. */
@@ -100,10 +100,10 @@ public class ActionsJoueur extends JPanel implements Observer {
 		super.add(placerPion);
 
 		// A mettre à part avec les boutons pour changer d'état
-		redeployement = new JButton("Redéployement");
-		redeployement.addActionListener(new ActionRedeployement());
-		redeployement.setEnabled(false);
-		super.add(redeployement);
+		redeploiment = new JButton("Redéploiment");
+		redeploiment.addActionListener(new Actionredeploiment());
+		redeploiment.setEnabled(false);
+		super.add(redeploiment);
 
 		// A mettre à part avec les boutons pour changer d'état
 		finTourBtn = new JButton("Fin du Tour");
@@ -218,11 +218,11 @@ public class ActionsJoueur extends JPanel implements Observer {
 		}
 	}
 
-	/**Classe déclenchée quand le bouton redéployement est cliqué. */
-	private final class ActionRedeployement implements ActionListener {
+	/**Classe déclenchée quand le bouton Redéploiment est cliqué. */
+	private final class Actionredeploiment implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
-			jeu.redeployement();
+			jeu.redeploiment();
 		}
 	}
 
@@ -250,10 +250,10 @@ public class ActionsJoueur extends JPanel implements Observer {
 			|| etat == JoueurState.DEBUT_TOUR) && (pionsEnMain >= 2);
 		this.attaquerCase.setEnabled(conquerirBtnActif);
 
-		// Actualisation bouton Redeployement
-		boolean redeployementBtnActif = (etat == JoueurState.ATTAQUE)
+		// Actualisation bouton redeploiment
+		boolean redeploimentBtnActif = (etat == JoueurState.ATTAQUE)
 			|| (etat == JoueurState.REDEPLOYMENT);
-		this.redeployement.setEnabled(redeployementBtnActif);
+		this.redeploiment.setEnabled(redeploimentBtnActif);
 
 		// Actualisation bouton placer pion
 		boolean placerPionBtnActif = ((etat == JoueurState.ATTAQUE)
