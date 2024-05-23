@@ -3,9 +3,9 @@ package ui.menu;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.swing.*;
 
@@ -34,7 +34,7 @@ public class LanceurSmallworld {
     private JButton jouerBtn, optionsBtn, quitterBtn;
     
     /** Ensemble de nom des joueurs de la partie. */
-    private Set<String> nomsJoueurs;
+    private List<String> nomsJoueurs;
     
     /** Construit une fenêtre affichant le menu.
      */
@@ -72,18 +72,18 @@ public class LanceurSmallworld {
         gbc.gridy = 3;
         mainPanel.add(quitterBtn, gbc);
         
-        this.nomsJoueurs = new HashSet<String>(Arrays.asList("Fraise", "Framboise","Pomme"));
+        this.nomsJoueurs = new ArrayList<String>(Arrays.asList("Fraise", "Framboise","Pomme"));
         
         this.fenetre.pack();
         this.fenetre.setVisible(true);
         this.fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
-    public Set<String> getNomsJoueurs() {
+    public List<String> getNomsJoueurs() {
     	return this.nomsJoueurs;
     }
     
-    public void setNomsJoueurs(Set<String> nomsJoueurs) {
+    public void setNomsJoueurs(List<String> nomsJoueurs) {
     	this.nomsJoueurs = nomsJoueurs;
     }
 
@@ -117,7 +117,7 @@ public class LanceurSmallworld {
     /**Lancer le jeu Smallworld à partir de l'ensemble de nom de ses joueurs.
      * @param nbJoueurs Le nombre de joueurs jouant au jeu.
      */
-    private static void lancerSmallworld(Set<String> nomsJoueurs) {
+    private static void lancerSmallworld(List<String> nomsJoueurs) {
     	
         // MODELE
         JeuReel jeu = new JeuReel();
@@ -126,7 +126,7 @@ public class LanceurSmallworld {
         	Joueur joueur = new Joueur(nom, 0);
         	jeu.ajouterJoueur(joueur);
         }
-        
+
         jeu.setMonde(new Monde(nomsJoueurs.size()));
 
         //SELECTEUR
@@ -138,8 +138,7 @@ public class LanceurSmallworld {
         jeu.getPioche().addObserver(piocheF);
         MainMondeFenetre mondeF = new MainMondeFenetre(jeu, selecteurCase);
         MainJoueurFenetre joueurF = new MainJoueurFenetre(jeu);
-        ActionsFenetre actionsF = new ActionsFenetre(jeu, selecteurCase,
-            selecteurCombinaison);
+        ActionsFenetre actionsF = new ActionsFenetre(jeu, selecteurCase, selecteurCombinaison);
         
         jeu.lancerPartie();
     }
