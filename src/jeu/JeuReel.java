@@ -441,9 +441,9 @@ public class JeuReel extends Observable implements Jeu {
     @Override
     public void placerPions(Case maCase, int nbPions) {
         // robustesse
-        if (maCase == null)
+        if (maCase == null) {
             throw new IllegalArgumentException("maCase ne doit pas être null.");
-        else if (nbPions < 0) {
+        } else if (nbPions < 0) {
             throw new IllegalArgumentException("Le nombre de pions ne doit pas null.");
         }
 

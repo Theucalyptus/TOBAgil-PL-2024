@@ -25,6 +25,7 @@ public class Tritons extends Peuple {
         super(TypesPeuples.TRITONS, NOM, DESCRIPTION, PIONSSUP);
     }
 
+    @Override
     public void avantConquete(Case regionAConquerir) {
         boolean estCotiere = false;
         for (Case voisin : regionAConquerir.getVoisins()) {

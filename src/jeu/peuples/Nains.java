@@ -29,8 +29,9 @@ public class Nains extends Peuple {
 
     @Override
     public void apresConquete(Case regionConquise) {
-        if (regionConquise == null)
+        if (regionConquise == null) {
             throw new IllegalArgumentException("regionConquise ne doit pas être null.");
+        }
     	if (regionConquise.getTypeRessource() == TypesSymboles.MINE) {
     		this.nbMines++;
     	}
@@ -38,8 +39,9 @@ public class Nains extends Peuple {
 
     @Override
     public void apresConqueteAdverse(Case regionConquise) {
-        if (regionConquise == null)
+        if (regionConquise == null) {
             throw new IllegalArgumentException("regionConquise ne doit pas être null.");
+        }
     	if (regionConquise.getTypeRessource() == TypesSymboles.MINE) {
     		this.nbMines--;
     	}

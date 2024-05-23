@@ -4,11 +4,7 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
-import jeu.Case;
 import jeu.Jeu;
-import jeu.batiments.TypesBatiments;
-import jeu.exceptions.CoupInvalideException;
-import jeu.Monde;
 import jeu.peuples.Peuple;
 import jeu.pouvoirs.Pouvoir;
 import jeu.Combinaison;
@@ -61,12 +57,14 @@ public class ActionsJoueur extends JPanel implements Observer {
 				Selecteur<CaseView> selecteurCase,
 				Selecteur<Combinaison> selecteurCombinaison) {
 		super();
-		if (jeu == null)
+		if (jeu == null) {
 			throw new IllegalArgumentException("Jeu ne doit pas être null.");
-		else if (selecteurCase == null)
+		} else if (selecteurCase == null) {
 			throw new IllegalArgumentException("selecteurCase ne doit pas être null.");
-		else if (selecteurCombinaison == null)
-			throw new IllegalArgumentException("selecteurCombinaison ne doit pas être null.");
+		} else if (selecteurCombinaison == null) {
+			throw new IllegalArgumentException("selecteurCombinaison ne doit "
+				+ "pas être null.");
+		}
         jeu.ajouterObservateurJoueurCourant(this);
 
 		this.jeu = jeu;
@@ -166,21 +164,30 @@ public class ActionsJoueur extends JPanel implements Observer {
 			//Combinaison du joueur actuel
 			Pouvoir pouvoir = jeu.getJoueurCourant().getCombinaisonActive().getPouvoir();
         	Peuple peuple = jeu.getJoueurCourant().getCombinaisonActive().getPeuple();
-			Boolean poserBat;
-			poserBat = (pouvoir.getType() == TypesPouvoirs.SCOUTS ) || (pouvoir.getType() == TypesPouvoirs.BATISSEURS)
-				||	(peuple.getType() == TypesPeuples.MIPORTIONS)|| (peuple.getType() == TypesPeuples.TROLLS) ;
+			Boolean poserBat = (pouvoir.getType() == TypesPouvoirs.SCOUTS)
+				|| (pouvoir.getType() == TypesPouvoirs.BATISSEURS)
+				|| (peuple.getType() == TypesPeuples.MIPORTIONS)
+				|| (peuple.getType() == TypesPeuples.TROLLS);
+
 			CaseView caseSelectionnee = selecteurCase.getSelection();
 			if (caseSelectionnee == null) {
 				System.out.println("Aucune case n'est sélectionnée");
 			} else {
 				// Créez et affichez la fenêtre de dialogue
-				if (poserBat){
-					JFrame fenetre =(JFrame) SwingUtilities.getWindowAncestor((JButton) evt.getSource());
-					BatimentsDialog dialog = new BatimentsDialog(fenetre, caseSelectionnee, peuple.getType(), pouvoir.getType());
+				if (poserBat) {
+					JFrame fenetre = (JFrame) SwingUtilities.getWindowAncestor(
+						(JButton) evt.getSource());
+
+					BatimentsDialog dialog = new BatimentsDialog(fenetre,
+						caseSelectionnee,
+						peuple.getType(),
+						pouvoir.getType());
+
 					dialog.setVisible(true);
-				} else{
-					messageDialogue(evt, "Aucun batiment ne peut etre placé avec votre combinaison !");
-				} 	
+				} else {
+					messageDialogue(evt, "Aucun batiment ne peut etre placé "
+						+ "avec votre combinaison !");
+				}
 			}
 		}
 	}

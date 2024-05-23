@@ -16,7 +16,7 @@ public class Fortunes extends Pouvoir {
     private static final int PIONSSUP = 4;
 
     /**Booléen informant si le pouvoir à bien donné les points. */
-    private boolean NoPoints = true;
+    private boolean noPoints = true;
 
     /**Le nombre de point gagné à la première expension. */
     private int nombreGagne = 7;
@@ -28,9 +28,9 @@ public class Fortunes extends Pouvoir {
 
     @Override
     public void finTour(boolean enDeclin) {
-        if (!enDeclin && NoPoints) {
+        if (!enDeclin && this.noPoints) {
             this.nbJetons = this.nombreGagne;
-            this.NoPoints = false;
+            this.noPoints = false;
         } else {
             this.nbJetons = 0;
         }
