@@ -7,7 +7,7 @@ import jeu.Combinaison;
 import jeu.JeuReel;
 import ui.selecteur.Selecteur;
 import ui.views.CaseView;
-import controleurs.*;
+import ui.ActionsJoueur;
 
 public class ActionsFenetre {
 

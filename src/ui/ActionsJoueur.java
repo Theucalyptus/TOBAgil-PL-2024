@@ -1,4 +1,4 @@
-package controleurs;
+package ui;
 
 import java.awt.event.*;
 import java.awt.*;
@@ -18,7 +18,6 @@ import ui.views.CaseView;
 
 import java.util.Observer;
 import javax.swing.SwingUtilities;
-import ui.BatimentsDialog;
 
 @SuppressWarnings("deprecation")
 public class ActionsJoueur extends JPanel implements Observer {
