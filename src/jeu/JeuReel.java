@@ -220,7 +220,7 @@ public class JeuReel extends Observable implements Jeu {
                 break;
             case 4:
                 this.nbToursTotals = 8;
-                break;	
+                break;
             case 5:
                 this.nbToursTotals = 8;
                 break;

@@ -39,10 +39,10 @@ public class OptionsFenetre {
     public OptionsFenetre(LanceurSmallworld lanceur) {
     	this.fenetre = new JFrame("SmallWorld - Options");
     	this.fenetre.setSize(new Dimension(500, 375));
-    	
+
     	this.champsJoueurs = new ArrayList<>();
     	List<String> nomsJoueurs = lanceur.getNomsJoueurs();
-      
+
     	this.lanceur = lanceur;
 
     	JPanel mainPanel = new JPanel();
@@ -59,7 +59,7 @@ public class OptionsFenetre {
         this.titreSlider = new JLabel("Nombre de joueurs : ");
         sliderPanel.add(titreSlider);
 
-        this.slider = new JSlider(2,5,nomsJoueurs.size());
+        this.slider = new JSlider(2, 5, nomsJoueurs.size());
 
         this.slider.setPaintLabels(true);
         this.slider.setMajorTickSpacing(1);
@@ -144,7 +144,7 @@ public class OptionsFenetre {
 			}
 		}
   }
-    
+
 	private void messageDialogue(ActionEvent evt, String message) {
 		JFrame fenetre =
 			(JFrame) SwingUtilities.getWindowAncestor((JButton) evt.getSource());
@@ -166,21 +166,21 @@ public class OptionsFenetre {
 
 		public void actionPerformed(ActionEvent evt) {
 			List<String> nomsJoueurs = new ArrayList<>();
-			for(ChampJoueur champ : champsJoueurs) {
-				if(champ.isEditable()) {
+			for (ChampJoueur champ : champsJoueurs) {
+				if (champ.isEditable()) {
 					nomsJoueurs.add(champ.getText());
 				}
 			}
-			
+
 			boolean peutEnregistrer = true;
-			
-			for(String nom : nomsJoueurs) {
-				if(nom.isEmpty()) {
+
+			for (String nom : nomsJoueurs) {
+				if (nom.isEmpty()) {
 					peutEnregistrer = false;
 				}
 			}
-			
-			if(peutEnregistrer) {
+
+			if (peutEnregistrer) {
 				lanceur.setNomsJoueurs(nomsJoueurs);
 				fenetre.dispose();
 			} else {

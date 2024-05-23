@@ -38,9 +38,9 @@ public class LanceurSmallworld {
     private JButton quitterBtn;
 
     /** Ensemble de nom des joueurs de la partie. */
-  
+
     private List<String> nomsJoueurs;
-   
+
     /** Construit une fenêtre affichant le menu.
      */
     public LanceurSmallworld() {
@@ -76,18 +76,19 @@ public class LanceurSmallworld {
         this.quitterBtn.addActionListener(new ActionQuitter());
         gbc.gridy = 3;
         mainPanel.add(quitterBtn, gbc);
-        
-        this.nomsJoueurs = new ArrayList<String>(Arrays.asList("Fraise", "Framboise","Pomme"));
+
+        this.nomsJoueurs =
+            new ArrayList<String>(Arrays.asList("Fraise", "Framboise", "Pomme"));
 
         this.fenetre.pack();
         this.fenetre.setVisible(true);
         this.fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
-    
+
     public List<String> getNomsJoueurs() {
     	return this.nomsJoueurs;
     }
-    
+
     public void setNomsJoueurs(List<String> nomsJoueurs) {
 
     	this.nomsJoueurs = nomsJoueurs;
@@ -102,7 +103,7 @@ public class LanceurSmallworld {
 			fenetre.dispose();
 		}
 	}
-	
+
 	/** Action lancée lorsque le bouton Options est enclenché.
 	 */
 	private final class ActionOptions implements ActionListener {
@@ -124,7 +125,7 @@ public class LanceurSmallworld {
      * @param nomsJoueurs L'ensemble des noms de joueurs jouant au jeu.
      */
     private static void lancerSmallworld(List<String> nomsJoueurs) {
-    	
+
         // MODELE
         JeuReel jeu = new JeuReel();
 
@@ -146,7 +147,7 @@ public class LanceurSmallworld {
         MainMondeFenetre mondeF = new MainMondeFenetre(jeu, selecteurCase);
         MainJoueurFenetre joueurF = new MainJoueurFenetre(jeu);
         ActionsFenetre actionsF = new ActionsFenetre(jeu, selecteurCase, selecteurCombinaison);
-        
+
         jeu.lancerPartie();
     }
 }
