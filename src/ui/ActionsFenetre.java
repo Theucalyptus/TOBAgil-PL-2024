@@ -29,7 +29,6 @@ public class ActionsFenetre {
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
 
         // Ajout du controlleur pour le joueur
-        contentPane.add(new ActionsJeu(jeu));
         contentPane.add(new ActionsJoueur(jeu, selecteurCase, selecteurCombinaison));
 
         this.fenetre.pack();
