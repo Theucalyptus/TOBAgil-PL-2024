@@ -92,8 +92,7 @@ public class PiocheFenetre implements Observer {
             combinaisonIndexMap.put(entree, i);
         }
 
-        this.mainPanel.revalidate();
-        this.mainPanel.repaint();
+        this.fenetre.pack();
     }
 
     public class MouseEventHandler extends MouseAdapter {

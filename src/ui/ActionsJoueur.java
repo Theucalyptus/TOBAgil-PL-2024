@@ -170,7 +170,8 @@ public class ActionsJoueur extends JPanel implements Observer {
 
 			CaseView caseSelectionnee = selecteurCase.getSelection();
 			if (caseSelectionnee == null) {
-				System.out.println("Aucune case n'est sélectionnée");
+					messageDialogue(evt, "Action Impossible ! Aucune "
+						+ "case sélectionnée.");
 			} else {
 				// Créez et affichez la fenêtre de dialogue
 				if (poserBat) {
