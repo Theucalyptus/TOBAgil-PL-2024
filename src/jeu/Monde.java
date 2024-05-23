@@ -221,14 +221,14 @@ public class Monde {
      * @return la case correspondante
      */
     public Case getCase(int x, int y) {
-        if (x < 0)
+        if (x < 0) {
             throw new IllegalArgumentException("x doit être positif.");
-        else if (x >= this.dimX)
+        } else if (x >= this.dimX) {
             throw new IllegalArgumentException("x doit être inférieur à la dimension "
-                + "du plateau.");
-        else if (y < 0)
+            + "du plateau.");
+        } else if (y < 0) {
             throw new IllegalArgumentException("y doit être positif.");
-        else if (y > this.dimY) {
+        } else if (y > this.dimY) {
             throw new IllegalArgumentException("y doit être inférieur à la dimension "
                 + "du plateau");
         }

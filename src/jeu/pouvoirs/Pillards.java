@@ -35,8 +35,9 @@ public class Pillards extends Pouvoir {
 
     @Override
     public void avantConquete(Case regionAConquerir) {
-        if (regionAConquerir == null)
+        if (regionAConquerir == null) {
             throw new IllegalArgumentException("regionAConquerir ne doit pas être null.");
+        }
     	if (regionAConquerir.getNombrepions() != 0) {
     		this.estNonVide = true;
     	} else {

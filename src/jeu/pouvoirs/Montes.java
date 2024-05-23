@@ -25,8 +25,9 @@ public class Montes extends Pouvoir {
         super(TypesPouvoirs.MONTES, NOM, DESCRIPTION, PIONSSUP);
     }
 
+    @Override
     public void avantConquete(Case regionAConquerir) {
-        if (regionAConquerir.getTypeRegion() == TypesRegions.CHAMP 
+        if (regionAConquerir.getTypeRegion() == TypesRegions.CHAMP
             || regionAConquerir.getTypeRegion() == TypesRegions.COLLINE) {
             reductionAttaque = 1;
         } else {
