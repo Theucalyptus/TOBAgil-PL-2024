@@ -29,8 +29,9 @@ public class Mages extends Peuple {
 
     @Override
     public void apresConquete(Case regionConquise) {
-        if (regionConquise == null)
+        if (regionConquise == null) {
             throw new IllegalArgumentException("regionConquise ne doit pas être null.");
+        }
     	if (regionConquise.getTypeRessource() == TypesSymboles.SOURCE_MAGIQUE) {
     		this.nbSources++;
     	}
@@ -38,8 +39,9 @@ public class Mages extends Peuple {
 
     @Override
     public void apresConqueteAdverse(Case regionConquise) {
-        if (regionConquise == null)
+        if (regionConquise == null) {
             throw new IllegalArgumentException("regionConquise ne doit pas être null.");
+        }
     	if (regionConquise.getTypeRessource() == TypesSymboles.SOURCE_MAGIQUE) {
     		this.nbSources--;
     	}

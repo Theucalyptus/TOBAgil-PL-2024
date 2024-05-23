@@ -116,12 +116,12 @@ public final class ImageFactory {
             + ".png";
         return readImage(path);
     }
-    
+
     /**
      * Renvoie le logo Smallworld.
      * @return l'image
      */
-    public static final Image logoSmallworld() {
+    public static Image logoSmallworld() {
     	return readImage(ROOT_ASSETS_PATH + "logoSW.png");
     }
 }

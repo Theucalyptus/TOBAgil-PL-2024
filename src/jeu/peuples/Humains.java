@@ -30,8 +30,9 @@ public class Humains extends Peuple {
 
     @Override
     public void apresConquete(Case regionConquise) {
-        if (regionConquise == null)
+        if (regionConquise == null) {
             throw new IllegalArgumentException("regionConquise ne doit pas être null.");
+        }
     	if (regionConquise.getTypeRegion() == TypesRegions.CHAMP) {
     		this.nbChamps++;
     	}
@@ -39,8 +40,9 @@ public class Humains extends Peuple {
 
     @Override
     public void apresConqueteAdverse(Case regionConquise) {
-        if (regionConquise == null)
+        if (regionConquise == null) {
             throw new IllegalArgumentException("regionConquise ne doit pas être null.");
+        }
     	if (regionConquise.getTypeRegion() == TypesRegions.CHAMP) {
     		this.nbChamps--;
     	}

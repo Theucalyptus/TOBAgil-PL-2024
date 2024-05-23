@@ -7,8 +7,6 @@ import javax.swing.*;
 import jeu.batiments.TypesBatiments;
 import jeu.peuples.*;
 import jeu.pouvoirs.*;
-import jeu.Combinaison;
-import jeu.JeuProxy;
 
 import ui.views.CaseView;
 import ui.utils.ImageFactory;
@@ -23,13 +21,19 @@ public class BatimentsDialog extends JDialog {
      * Construire le dialogue du choix du batiment à mettre sur la case.
      * @param parent La frame qui a appelé cette fenêtre.
      * @param caseSelect La case sur laquelle on souhaite mettre un batiment.
+     * @param peuple Le type de peuple associé au batiments.
+     * @param pouvoir Le type de pouvoir associé au batiments.
      */
-    public BatimentsDialog(JFrame parent, CaseView caseSelect, TypesPeuples peuple, TypesPouvoirs pouvoir) {
+    public BatimentsDialog(JFrame parent,
+            CaseView caseSelect,
+            TypesPeuples peuple,
+            TypesPouvoirs pouvoir) {
         super(parent, "Choix du bâtiment à poser", true);
-        if (parent == null)
+        if (parent == null) {
             throw new IllegalArgumentException("parent ne doit pas être null.");
-        else if (caseSelect == null)
+        } else if (caseSelect == null) {
             throw new IllegalArgumentException("caseSelect ne doit pas être null.");
+        }
         this.caseSelectionnee = caseSelect;
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		//largeur			//hauteur
@@ -43,7 +47,8 @@ public class BatimentsDialog extends JDialog {
         // Ajouter un bouton pour chaque type de bâtiment
         // Bouton pour CAMPEMENT
         JButton buttonCampement = new JButton(TypesBatiments.CAMPEMENT.toString());
-        buttonCampement.setIcon(new ImageIcon(ImageFactory.batimentsImage(TypesBatiments.CAMPEMENT)));
+        buttonCampement.setIcon(
+            new ImageIcon(ImageFactory.batimentsImage(TypesBatiments.CAMPEMENT)));
         buttonCampement.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -54,7 +59,8 @@ public class BatimentsDialog extends JDialog {
 
         // Bouton pour FORTERESSE
         JButton buttonForteresse = new JButton(TypesBatiments.FORTERESSE.toString());
-        buttonForteresse.setIcon(new ImageIcon(ImageFactory.batimentsImage(TypesBatiments.FORTERESSE)));
+        buttonForteresse.setIcon(
+            new ImageIcon(ImageFactory.batimentsImage(TypesBatiments.FORTERESSE)));
         buttonForteresse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -64,8 +70,10 @@ public class BatimentsDialog extends JDialog {
         buttonForteresse.setEnabled(false);
 
         // Bouton pour ANTRE_DE_TROLL
-        JButton buttonAntreDeTroll = new JButton(TypesBatiments.ANTRE_DE_TROLL.toString());
-        buttonAntreDeTroll.setIcon(new ImageIcon(ImageFactory.batimentsImage(TypesBatiments.ANTRE_DE_TROLL)));
+        JButton buttonAntreDeTroll =
+            new JButton(TypesBatiments.ANTRE_DE_TROLL.toString());
+        buttonAntreDeTroll.setIcon(
+            new ImageIcon(ImageFactory.batimentsImage(TypesBatiments.ANTRE_DE_TROLL)));
         buttonAntreDeTroll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -76,7 +84,8 @@ public class BatimentsDialog extends JDialog {
 
         // Bouton pour TANIERE
         JButton buttonTaniere = new JButton(TypesBatiments.TANIERE.toString());
-        buttonTaniere.setIcon(new ImageIcon(ImageFactory.batimentsImage(TypesBatiments.TANIERE)));
+        buttonTaniere.setIcon(
+            new ImageIcon(ImageFactory.batimentsImage(TypesBatiments.TANIERE)));
         buttonTaniere.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -86,13 +95,13 @@ public class BatimentsDialog extends JDialog {
         buttonTaniere.setEnabled(false);
 
         //Condition de qui peut placer quel batiment
-        if (peuple == TypesPeuples.MIPORTIONS){
+        if (peuple == TypesPeuples.MIPORTIONS) {
             buttonTaniere.setEnabled(true);
-        } else if (peuple == TypesPeuples.TROLLS){
+        } else if (peuple == TypesPeuples.TROLLS) {
             buttonAntreDeTroll.setEnabled(true);
-        } else if (pouvoir == TypesPouvoirs.BATISSEURS){
+        } else if (pouvoir == TypesPouvoirs.BATISSEURS) {
             buttonForteresse.setEnabled(true);
-        } else if (pouvoir == TypesPouvoirs.SCOUTS){
+        } else if (pouvoir == TypesPouvoirs.SCOUTS) {
             buttonCampement.setEnabled(true);
         }
 
@@ -102,15 +111,17 @@ public class BatimentsDialog extends JDialog {
         fenetrePanel.add(buttonCampement);
         getContentPane().add(fenetrePanel, BorderLayout.CENTER);
 
-    } 
+    }
 
 	/**
      * Place le batiment sélectionné sur la Case.
      * @param typeBat Batiment à placé sur la case
      */
     private void placerBatiment(TypesBatiments typeBat) {
-        if (typeBat == null)
-            throw new IllegalArgumentException("le type de Batiment ne doit pas être null.");
+        if (typeBat == null) {
+            throw new IllegalArgumentException("le type de Batiment ne "
+               + "doit pas être null.");
+        }
         caseSelectionnee.getVraieCase().setTypeBatiment(typeBat, 1);
 		// Ferme la fenêtre de dialogue après avoir placé le bâtiment
         dispose();
