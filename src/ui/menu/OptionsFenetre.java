@@ -3,8 +3,8 @@ package ui.menu;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -30,18 +30,19 @@ public class OptionsFenetre {
 	private JButton annulerBtn;
 
     /** Champs de texte pour inscrire le nom des joueurs. */
-    private Set<ChampJoueur> champsJoueurs;
+    private List<ChampJoueur> champsJoueurs;
 
-	/**
-	 * Construire la fenêtre des options.
-	 * @param lanceur Le lanceur de la fenêtre.
-	 */
+  	/**
+	  * Construire la fenêtre des options.
+	  * @param lanceur Le lanceur de la fenêtre.
+	  */
     public OptionsFenetre(LanceurSmallworld lanceur) {
     	this.fenetre = new JFrame("SmallWorld - Options");
     	this.fenetre.setSize(new Dimension(500, 375));
-
-    	this.champsJoueurs = new HashSet<>();
-
+    	
+    	this.champsJoueurs = new ArrayList<>();
+    	List<String> nomsJoueurs = lanceur.getNomsJoueurs();
+      
     	this.lanceur = lanceur;
 
     	JPanel mainPanel = new JPanel();
@@ -58,7 +59,8 @@ public class OptionsFenetre {
         this.titreSlider = new JLabel("Nombre de joueurs : ");
         sliderPanel.add(titreSlider);
 
-        this.slider = new JSlider(2, 5, 3);
+        this.slider = new JSlider(2,5,nomsJoueurs.size());
+
         this.slider.setPaintLabels(true);
         this.slider.setMajorTickSpacing(1);
         sliderPanel.add(slider);
@@ -73,8 +75,6 @@ public class OptionsFenetre {
         gbcChamps.insets = new Insets(0, 30, 0, 30);
         gbcChamps.ipadx = 30;
         gbcChamps.ipady = 15;
-
-        Set<String> nomsJoueurs = lanceur.getNomsJoueurs();
 
         int numeroJoueur = 1;
 
@@ -143,7 +143,13 @@ public class OptionsFenetre {
 				this.setEditable(false);
 			}
 		}
-    }
+  }
+    
+	private void messageDialogue(ActionEvent evt, String message) {
+		JFrame fenetre =
+			(JFrame) SwingUtilities.getWindowAncestor((JButton) evt.getSource());
+		JOptionPane.showMessageDialog(fenetre, message);
+	}
 
 	/** Action lancée lorsque le bouton Annuler est enclenché.
 	 */
@@ -159,17 +165,27 @@ public class OptionsFenetre {
 	private final class ActionEnregistrer implements ActionListener {
 
 		public void actionPerformed(ActionEvent evt) {
-
-			Set<String> nomsJoueurs = new HashSet<>();
-			for (ChampJoueur champ : champsJoueurs) {
-				if (champ.isEditable()) {
+			List<String> nomsJoueurs = new ArrayList<>();
+			for(ChampJoueur champ : champsJoueurs) {
+				if(champ.isEditable()) {
 					nomsJoueurs.add(champ.getText());
 				}
 			}
-
-			lanceur.setNomsJoueurs(nomsJoueurs);
-
-			fenetre.dispose();
+			
+			boolean peutEnregistrer = true;
+			
+			for(String nom : nomsJoueurs) {
+				if(nom.isEmpty()) {
+					peutEnregistrer = false;
+				}
+			}
+			
+			if(peutEnregistrer) {
+				lanceur.setNomsJoueurs(nomsJoueurs);
+				fenetre.dispose();
+			} else {
+				messageDialogue(evt, "Tous les noms de joueurs ne sont pas renseignés.");
+			}
 		}
 	}
 
