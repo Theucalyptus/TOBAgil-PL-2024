@@ -10,8 +10,9 @@ import java.util.Random;
 
 
 /**
- * Classe d'implémantation de la prioche.
+ * Classe d'implémentation de la pioche.
  */
+@SuppressWarnings("deprecation")
 public class Pioche extends Observable {
 
     /**Le nombre de Combinaison dans la pioche. */
