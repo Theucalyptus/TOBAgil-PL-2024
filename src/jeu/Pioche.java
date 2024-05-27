@@ -10,7 +10,7 @@ import jeu.pouvoirs.*;
 
 
 /**
- * Classe d'implémentation de la prioche.
+ * Classe d'implémentation de la pioche.
  */
 @SuppressWarnings("deprecation")
 public class Pioche extends Observable {
