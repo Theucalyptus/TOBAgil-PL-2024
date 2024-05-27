@@ -1,5 +1,8 @@
 package jeu.peuples;
 
+import jeu.Case;
+import jeu.TypesRegions;
+
 /**Classe d'implémantation du peuple des Tritons. */
 public class Tritons extends Peuple {
 
@@ -20,5 +23,21 @@ public class Tritons extends Peuple {
     /** Construire les Tritons. */
     public Tritons() {
         super(TypesPeuples.TRITONS, NOM, DESCRIPTION, PIONSSUP);
+    }
+
+    @Override
+    public void avantConquete(Case regionAConquerir) {
+        boolean estCotiere = false;
+        for (Case voisin : regionAConquerir.getVoisins()) {
+            if (voisin.getTypeRegion() == TypesRegions.MER_ET_LAC) {
+                estCotiere = true;
+            }
+        }
+
+        if (estCotiere) {
+            reductionAttaque = 1;
+        } else {
+            reductionAttaque = 0;
+        }
     }
 }

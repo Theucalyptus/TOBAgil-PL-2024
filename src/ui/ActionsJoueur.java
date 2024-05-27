@@ -1,20 +1,23 @@
-package controleurs;
+package ui;
 
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
-import jeu.Combinaison;
 import jeu.Jeu;
+import jeu.peuples.Peuple;
+import jeu.pouvoirs.Pouvoir;
+import jeu.Combinaison;
 import jeu.Joueur;
 import jeu.JoueurState;
+import jeu.peuples.TypesPeuples;
+import jeu.pouvoirs.TypesPouvoirs;
 
 import ui.selecteur.Selecteur;
 import ui.views.CaseView;
 
 import java.util.Observer;
 import javax.swing.SwingUtilities;
-import ui.BatimentsDialog;
 
 @SuppressWarnings("deprecation")
 public class ActionsJoueur extends JPanel implements Observer {
@@ -24,6 +27,7 @@ public class ActionsJoueur extends JPanel implements Observer {
 
 	/**Le sélecteur de case du jeu. */
 	private Selecteur<CaseView> selecteurCase;
+	/**Le sélecteur de la Combinaison dans la pioche. */
 	private Selecteur<Combinaison> selecteurCombinaison;
 
 	// Les boutons disponibles.
@@ -35,8 +39,8 @@ public class ActionsJoueur extends JPanel implements Observer {
 	private JButton attaquerCase;
 	/**Bouton placerPion. */
 	private JButton placerPion;
-	/**Bouton redeployement. */
-	private JButton redeployement;
+	/**Bouton redeploiment. */
+	private JButton redeploiment;
 	/**Bouton finTour. */
 	private JButton finTourBtn;
 	/**Bouton piocher. */
@@ -46,9 +50,20 @@ public class ActionsJoueur extends JPanel implements Observer {
 	 * Construire le contrôleur du Joueur.
 	 * @param jeu Le jeu dans lequel on agit.
 	 * @param selecteurCase Le selecteur de Case.
+	 * @param selecteurCombinaison Le selecteur de la Combinaison dans la pioche.
 	 */
-	public ActionsJoueur(Jeu jeu, Selecteur<CaseView> selecteurCase, Selecteur<Combinaison> selecteurCombinaison) {
+	public ActionsJoueur(Jeu jeu,
+				Selecteur<CaseView> selecteurCase,
+				Selecteur<Combinaison> selecteurCombinaison) {
 		super();
+		if (jeu == null) {
+			throw new IllegalArgumentException("Jeu ne doit pas être null.");
+		} else if (selecteurCase == null) {
+			throw new IllegalArgumentException("selecteurCase ne doit pas être null.");
+		} else if (selecteurCombinaison == null) {
+			throw new IllegalArgumentException("selecteurCombinaison ne doit "
+				+ "pas être null.");
+		}
         jeu.ajouterObservateurJoueurCourant(this);
 
 		this.jeu = jeu;
@@ -84,10 +99,10 @@ public class ActionsJoueur extends JPanel implements Observer {
 		super.add(placerPion);
 
 		// A mettre à part avec les boutons pour changer d'état
-		redeployement = new JButton("Redéployement");
-		redeployement.addActionListener(new ActionRedeployement());
-		redeployement.setEnabled(false);
-		super.add(redeployement);
+		redeploiment = new JButton("Redéploiment");
+		redeploiment.addActionListener(new Actionredeploiment());
+		redeploiment.setEnabled(false);
+		super.add(redeploiment);
 
 		// A mettre à part avec les boutons pour changer d'état
 		finTourBtn = new JButton("Fin du Tour");
@@ -104,18 +119,19 @@ public class ActionsJoueur extends JPanel implements Observer {
 	}
 
 	/**Classe déclenchée quand le bouton action piocher est cliqué. */
-	private class ActionPiocher implements ActionListener {
+	private final class ActionPiocher implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
-			Combinaison CombinaisonSelectionnee = selecteurCombinaison.getSelection();
-			if (CombinaisonSelectionnee == null) {
-				messageDialogue(evt, "Action Impossible ! Aucune combinaison sélectionnée.");
+			Combinaison combinaisonSelectionnee = selecteurCombinaison.getSelection();
+			if (combinaisonSelectionnee == null) {
+				messageDialogue(evt, "Action Impossible ! Aucune "
+					+ "combinaison sélectionnée.");
 			} else {
 				Joueur courant = jeu.getJoueurCourant();
-				courant.changerCombinaisonActive(CombinaisonSelectionnee);
+				courant.changerCombinaisonActive(combinaisonSelectionnee);
 				courant.setEtat(JoueurState.DEBUT_TOUR);
 				selecteurCombinaison.setSelection(null);
-				jeu.getPioche().removeCombinaisonChoisit(CombinaisonSelectionnee);
+				jeu.getPioche().removeCombinaisonChoisit(combinaisonSelectionnee);
 				jeu.debutTour();
 			}
 		}
@@ -130,7 +146,7 @@ public class ActionsJoueur extends JPanel implements Observer {
 	}
 
 	/**Classe déclenchée quand le bouton action déclin est cliqué. */
-	private /*final*/ class ActionDeclin implements ActionListener {
+	private final class ActionDeclin implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			jeu.getJoueurCourant().setEtat(JoueurState.CHOIX_COMBINAISON);
@@ -144,18 +160,34 @@ public class ActionsJoueur extends JPanel implements Observer {
 
 		@Override
 		public void actionPerformed(ActionEvent evt) {
+			//Combinaison du joueur actuel
+			Pouvoir pouvoir = jeu.getJoueurCourant().getCombinaisonActive().getPouvoir();
+        	Peuple peuple = jeu.getJoueurCourant().getCombinaisonActive().getPeuple();
+			Boolean poserBat = (pouvoir.getType() == TypesPouvoirs.SCOUTS)
+				|| (pouvoir.getType() == TypesPouvoirs.BATISSEURS)
+				|| (peuple.getType() == TypesPeuples.MIPORTIONS)
+				|| (peuple.getType() == TypesPeuples.TROLLS);
+
 			CaseView caseSelectionnee = selecteurCase.getSelection();
 			if (caseSelectionnee == null) {
-				System.out.println("Aucune case n'est sélectionnée");
+					messageDialogue(evt, "Action Impossible ! Aucune "
+						+ "case sélectionnée.");
 			} else {
 				// Créez et affichez la fenêtre de dialogue
-				// 'SwingUtilities' prend un composant Swing en paramètre et renvoie la fenêtre
-				// parente de ce composant
-				// 'this' fait référence à l'élément graphique actuel
-				// spécifie que la fenêtre parente est de type JFrame
-				JFrame fenetre = (JFrame) SwingUtilities.getWindowAncestor((JButton) evt.getSource());
-				BatimentsDialog dialog = new BatimentsDialog(fenetre, caseSelectionnee);
-				dialog.setVisible(true);
+				if (poserBat) {
+					JFrame fenetre = (JFrame) SwingUtilities.getWindowAncestor(
+						(JButton) evt.getSource());
+
+					BatimentsDialog dialog = new BatimentsDialog(fenetre,
+						caseSelectionnee,
+						peuple.getType(),
+						pouvoir.getType());
+
+					dialog.setVisible(true);
+				} else {
+					messageDialogue(evt, "Aucun batiment ne peut etre placé "
+						+ "avec votre combinaison !");
+				}
 			}
 		}
 	}
@@ -186,20 +218,21 @@ public class ActionsJoueur extends JPanel implements Observer {
 		}
 	}
 
-	/**Classe déclenchée quand le bouton redéployement est cliqué. */
-	private final class ActionRedeployement implements ActionListener {
+	/**Classe déclenchée quand le bouton Redéploiment est cliqué. */
+	private final class Actionredeploiment implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
-			jeu.redeployement();
+			jeu.redeploiment();
 		}
 	}
 
-
+	@Override
 	public void update(java.util.Observable o, Object arg) {
 		JoueurState etat = this.jeu.getJoueurCourant().getEtat();
 		int pionsEnMain = 0;
 		try {
-			pionsEnMain = jeu.getJoueurCourant().getCombinaisonActive().getNbPionsEnMain();			
+			pionsEnMain =
+				jeu.getJoueurCourant().getCombinaisonActive().getNbPionsEnMain();
 		} catch (NullPointerException e) {
 			// rien
 		}
@@ -217,10 +250,10 @@ public class ActionsJoueur extends JPanel implements Observer {
 			|| etat == JoueurState.DEBUT_TOUR) && (pionsEnMain >= 2);
 		this.attaquerCase.setEnabled(conquerirBtnActif);
 
-		// Actualisation bouton Redeployement
-		boolean redeployementBtnActif = (etat == JoueurState.ATTAQUE)
+		// Actualisation bouton redeploiment
+		boolean redeploimentBtnActif = (etat == JoueurState.ATTAQUE)
 			|| (etat == JoueurState.REDEPLOYMENT);
-		this.redeployement.setEnabled(redeployementBtnActif);
+		this.redeploiment.setEnabled(redeploimentBtnActif);
 
 		// Actualisation bouton placer pion
 		boolean placerPionBtnActif = ((etat == JoueurState.ATTAQUE)

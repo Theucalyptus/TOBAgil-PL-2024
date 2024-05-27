@@ -7,7 +7,7 @@ import jeu.Combinaison;
 import jeu.JeuReel;
 import ui.selecteur.Selecteur;
 import ui.views.CaseView;
-import controleurs.*;
+import ui.ActionsJoueur;
 
 public class ActionsFenetre {
 
@@ -16,17 +16,19 @@ public class ActionsFenetre {
 
     /**
      * Construit une fenêtre des contrôleurs.
-     * @param jeu le jeu à contrôlé
-     * @param selecteurCase le sélecteur de case
+     * @param jeu Le jeu à contrôlé.
+     * @param selecteurCase Le sélecteur de case.
+     * @param selecteurCombinaison Le sélecteur de la combinaisons dans la pioche.
      */
-    public ActionsFenetre(JeuReel jeu, Selecteur<CaseView> selecteurCase, Selecteur<Combinaison> selecteurCombinaison) {
+    public ActionsFenetre(JeuReel jeu,
+                Selecteur<CaseView> selecteurCase,
+                Selecteur<Combinaison> selecteurCombinaison) {
 
         this.fenetre = new JFrame("SmallWorld - Actions");
         Container contentPane = this.fenetre.getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
 
         // Ajout du controlleur pour le joueur
-        contentPane.add(new ActionsJeu(jeu));
         contentPane.add(new ActionsJoueur(jeu, selecteurCase, selecteurCombinaison));
 
         this.fenetre.pack();

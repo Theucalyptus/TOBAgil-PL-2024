@@ -140,13 +140,19 @@ public class JeuProxy implements Jeu {
 
 
     @Override
-    public void redeployement() {
-        this.impl.redeployement();
+    public void redeploiment() {
+        this.impl.redeploiment();
     }
 
     @Override
     public JeuState getEtat() {
         return this.impl.getEtat();
+    }
+
+    @Override
+    public void debutTour() {
+        throw new OperationInterditeException(
+            "Le joueur n'a pas les droits de lancer le tour.");
     }
 
 }

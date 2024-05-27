@@ -1,5 +1,8 @@
 package jeu.pouvoirs;
 
+import jeu.Case;
+import jeu.TypesSymboles;
+
 /**Classe DesCavernes. Les Cavernes est un pouvoir qui permet de prendre plus facilement
  * les territoires
  * avec des cavernes. Et les territoires avec des Cavernes sont adjacente au votre.*/
@@ -20,6 +23,18 @@ public class DesCavernes extends Pouvoir {
     /**Construire un DesCavernes. */
     public DesCavernes() {
         super(TypesPouvoirs.DES_CAVERNES, NOM, DESCRIPTION, PIONSSUP);
+    }
+
+    @Override
+    public void avantConquete(Case regionAConquerir) {
+        if (regionAConquerir == null) {
+            throw new IllegalArgumentException("regionAConquérir ne doit pas être null.");
+        }
+        if (regionAConquerir.getTypeRessource() == TypesSymboles.CAVERNES) {
+            this.reductionAttaque = 1;
+        } else {
+            this.reductionAttaque = 0;
+        }
     }
 
 }

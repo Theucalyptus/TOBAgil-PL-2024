@@ -112,6 +112,7 @@ public class Combinaison {
     /**
      * Ajouter un groupe de pions à la liste de la combinaison.
      * @param groupe le groupe de pion a ajouter.
+     * @throws IllegalArgumentException Si l'argument 1 est null.
      */
     public void addGroupe(GroupePions groupe) {
         if (groupe == null) {
@@ -204,23 +205,6 @@ public class Combinaison {
         this.pouvoir.finTour(this.declin);
         this.premierTour = false;
         return (this.peuple.getNbJetons() + this.pouvoir.getNbJetons());
-    }
-
-    /** Permetre d'ajouter un ensemble de pion dans le groupe d'ensemble de pions.
-     * @param lesPions L'ensemble de pions que l'on ajoute.
-     * @throws IllegalArgumentException Si l'argument 1 est null.
-     * @throws RuntimeException si Les pions n'ont pas été ajouté.
-     */
-    public void ajoutGroupesPions(GroupePions lesPions) {
-        if (lesPions == null) {
-            throw new IllegalArgumentException("les Pions ne doit pas être null.");
-        }
-        //on peut relever une erreur si il y a un problème au niveau de l'ajout
-        if (!this.pions.add(lesPions)) {
-            // List retourne toujours vrai donc cet environnement ne sera
-            // jamais appelé
-            throw new RuntimeException("Les pions n'ont pas été ajouté.");
-        }
     }
 
     /** Permet d'obtenir le nombre de pions en main.
